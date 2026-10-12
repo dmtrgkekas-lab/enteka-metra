@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>Ένδεκα Μέτρα</title>
+  <meta name="description" content="Παιχνίδι πέναλτι σε HTML, CSS και JavaScript. Πέντε πέναλτι ανά γύρο, τέσσερις εκτελέσεις και ένας αμυντικός που πετάγεται μπροστά.">
+  <meta name="theme-color" content="#04060c">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:ital,wght@0,600;0,800;0,900;1,800;1,900&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ο καμβάς όπου ζωγραφίζεται όλο το γήπεδο -->
+  <canvas id="game-canvas" aria-label="Γήπεδο"></canvas>
+
+  <!-- ===== HUD ===== -->
+  <header class="hud" id="hud" aria-live="polite">
+    <div class="hud__side hud__side--left">
+      <div class="hud__level">
+        <span class="hud__label">Επίπεδο</span>
+        <strong id="hud-level">1</strong>
+      </div>
+      <span class="hud__diff" id="hud-diff">Κανονικό</span>
+    </div>
+
+    <div class="hud__center">
+      <div class="dots" id="hud-dots"></div>
+      <span class="hud__need" id="hud-need">Βάλε 4 στα 5</span>
+    </div>
+
+    <div class="hud__side hud__side--right">
+      <div class="hud__stat"><span class="hud__label">Γκολ</span><strong id="hud-goals">0</strong></div>
+      <div class="hud__stat"><span class="hud__label">Σερί</span><strong id="hud-streak">0</strong></div>
+      <button class="icon-btn" id="btn-sound" type="button" aria-label="Ήχος on/off">
+        <svg class="ico-on" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>
+        <svg class="ico-off" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M4 9v6h4l5 4V5L8 9H4zm15.6 3 2.2-2.2-1.4-1.4-2.2 2.2-2.2-2.2-1.4 1.4 2.2 2.2-2.2 2.2 1.4 1.4 2.2-2.2 2.2 2.2 1.4-1.4z"/></svg>
+      </button>
+      <button class="icon-btn" id="btn-menu" type="button" aria-label="Μενού">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M8 5h3v14H8zm5 0h3v14h-3z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== Επιλογή εκτέλεσης ===== -->
+  <nav class="shots" id="shot-bar" aria-label="Τρόπος εκτέλεσης">
+    <button class="shot is-active" type="button" data-shot="πλασε">
+      <span class="shot__key">1</span>
+      <span class="shot__name">Πλασέ</span>
+      <span class="shot__hint">Ακρίβεια</span>
+    </button>
+    <button class="shot" type="button" data-shot="κανονια">
+      <span class="shot__key">2</span>
+      <span class="shot__name">Κανονιά</span>
+      <span class="shot__hint">Δύναμη, ρίσκο</span>
+    </button>
+    <button class="shot" type="button" data-shot="φαλτσο">
+      <span class="shot__key">3</span>
+      <span class="shot__name">Φάλτσο</span>
+      <span class="shot__hint">Καμπύλη</span>
+    </button>
+    <button class="shot" type="button" data-shot="πανενκα">
+      <span class="shot__key">4</span>
+      <span class="shot__name">Πανένκα</span>
+      <span class="shot__hint">Για τολμηρούς</span>
+    </button>
+  </nav>
+
+  <!-- Μεγάλο μήνυμα αποτελέσματος -->
+  <div class="callout" id="callout" aria-live="assertive">
+    <div class="callout__title" id="callout-title">ΓΚΟΛ!</div>
+    <div class="callout__sub" id="callout-sub"></div>
+  </div>
+
+  <!-- Banner για εισόδους / ανακοινώσεις -->
+  <div class="banner" id="banner"><span id="banner-text"></span></div>
+
+  <!-- ===== Αρχική οθόνη ===== -->
+  <section class="screen screen--start is-visible" id="screen-start">
+    <div class="panel">
+      <p class="eyebrow">Νύχτα τελικού · Κεραυνοί εναντίον Φρουρών</p>
+      <h1 class="title"><span>Ένδεκα</span><span>Μέτρα</span></h1>
+      <p class="lead">Πέντε πέναλτι ανά γύρο. Βάλε <strong>4</strong> για να περάσεις στο επόμενο επίπεδο.
+        Από το επίπεδο <strong>3</strong> μπαίνει στο γήπεδο κι ο Τοίχος.</p>
+
+      <div class="cast" id="cast">
+        <figure class="cast__card" data-role="εκτελεστής">
+          <canvas width="160" height="200"></canvas>
+          <figcaption><strong>Ο Σπίθας</strong><span>#21 · Εκτελεστής</span></figcaption>
+        </figure>
+        <figure class="cast__card" data-role="τερματοφύλακας">
+          <canvas width="160" height="200"></canvas>
+          <figcaption><strong>Ο Χταπόδης</strong><span>#1 · Τερματοφύλακας</span></figcaption>
+        </figure>
+        <figure class="cast__card" data-role="αμυντικός">
+          <canvas width="160" height="200"></canvas>
+          <figcaption><strong>Ο Τοίχος</strong><span>#4 · Αμυντικός</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="difficulty" role="radiogroup" aria-label="Δυσκολία">
+        <button type="button" role="radio" data-diff="ευκολο" aria-checked="false">Εύκολο</button>
+        <button type="button" role="radio" data-diff="κανονικο" aria-checked="true" class="is-active">Κανονικό</button>
+        <button type="button" role="radio" data-diff="δυσκολο" aria-checked="false">Δύσκολο</button>
+      </div>
+
+      <button class="cta" id="btn-start" type="button">
+        <span>Στην άσπρη βούλα</span>
+        <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M13 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.2l-4.6-4.6z"/></svg>
+      </button>
+
+      <p class="controls">Κλικ ή tap στο τέρμα για σουτ · <kbd>1</kbd>–<kbd>4</kbd> αλλάζουν εκτέλεση</p>
+      <p class="best" id="best-level"></p>
+    </div>
+  </section>
+
+  <!-- ===== Τέλος γύρου ===== -->
+  <section class="screen screen--round" id="screen-round">
+    <div class="panel panel--compact">
+      <p class="eyebrow" id="round-eyebrow">Τέλος γύρου</p>
+      <h2 class="round-title" id="round-title">ΠΡΟΚΡΙΣΗ!</h2>
+      <div class="dots dots--big" id="round-dots"></div>
+      <p class="lead" id="round-text"></p>
+      <div class="round-actions">
+        <button class="cta" id="btn-next" type="button"><span>Επόμενο επίπεδο</span></button>
+        <button class="ghost" id="btn-to-menu" type="button">Μενού</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- GSAP για τα animations του UI -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
