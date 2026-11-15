@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="el" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Η Εταιρεία: Ανάπτυξη Ακινήτων στην Αθήνα | GP Development</title>
+  <meta name="description" content="Η GP Real Estate Development είναι οικογενειακή εταιρεία ανάπτυξης ακινήτων στο Νέο Ψυχικό, με 30+ χρόνια συνολικής εμπειρίας. Κάθε έργο είναι Α++.">
+  <link rel="canonical" href="https://gpdevelopment.gr/el/about/">
+  <link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/about/">
+  <link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/about/">
+  <link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/about/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GP Real Estate Development">
+  <meta property="og:locale" content="el_GR">
+  <meta property="og:title" content="Η Εταιρεία: Ανάπτυξη Ακινήτων στην Αθήνα | GP Development">
+  <meta property="og:description" content="Η GP Real Estate Development είναι οικογενειακή εταιρεία ανάπτυξης ακινήτων στο Νέο Ψυχικό, με 30+ χρόνια συνολικής εμπειρίας. Κάθε έργο είναι Α++.">
+  <meta property="og:url" content="https://gpdevelopment.gr/el/about/">
+  <meta property="og:image" content="https://gpdevelopment.gr/assets/og/about.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#1e1c1a">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/manrope-greek-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-greek-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/img/doors/v5-corner-1600.webp" imagesrcset="/assets/img/doors/v5-corner-900.webp 900w, /assets/img/doors/v5-corner-1600.webp 1440w" imagesizes="(max-width: 760px) 120vw, 66vw" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/home.css?v=202611151626">
+  <link rel="stylesheet" href="/assets/css/sections.css?v=202611151626">
+  <link rel="stylesheet" href="/assets/css/projects.css?v=202611151626">
+  <script>document.documentElement.classList.replace('no-js', 'js'); if (!('onpagereveal' in window) && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('μετάβαση-js');</script>
+  <script>(function () {
+    var Ο = 'project-image', ΚΛ = 'gp-vt-εικόνα', ρ = document.documentElement;
+    function εικόναΓια(διαδρομή) {
+      var σ = document.querySelector('.κάρτα-έργου__σύνδεσμος[href="' + διαδρομή + '"]');
+      return σ && σ.querySelector('img');
+    }
+    // Κανένα όνομα από προηγούμενη μετάβαση: η σελίδα μπορεί να επιστρέψει από την cache του browser
+    // («Πίσω») με το όνομα ακόμη πάνω της, και δύο ίδια ονόματα ακυρώνουν όλη τη μετάβαση.
+    function καθάρισε() {
+      document.querySelectorAll('img').forEach(function (im) { if (im.style.viewTransitionName) im.style.viewTransitionName = ''; });
+      ρ.classList.remove('vt-παλιά');
+    }
+    // Φεύγοντας: όνομα μόνο στην εικόνα του συνδέσμου που πατήθηκε (αλλιώς μένει ο ήρωας, όταν υπάρχει).
+    // Κρατάμε το σχήμα της, για να διαλέξει η νέα σελίδα ποιο στιγμιότυπο δείχνει όσο μεγαλώνει.
+    addEventListener('pageswap', function (ε) {
+      καθάρισε();
+      if (!ε.viewTransition || !ε.activation || !ε.activation.entry) return;
+      var im = εικόναΓια(new URL(ε.activation.entry.url).pathname), ήρωας = document.querySelector('.ήρωας__εικόνα'), όνομα = im || ήρωας;
+      if (im) {
+        if (ήρωας) ήρωας.style.viewTransitionName = 'none';
+        im.style.viewTransitionName = Ο;
+        // Κάρτα που δεν έχει ολοκληρώσει την εμφάνισή της (γρήγορο scroll και πάτημα): στην τελική κατάσταση
+        // αμέσως, αλλιώς το στιγμιότυπο θα ήταν διάφανο και η εικόνα θα έλειπε από τη μετάβαση
+        var εμφ = im.closest('[data-αποκάλυψη]');
+        if (εμφ) { εμφ.style.transition = 'none'; εμφ.classList.add('is-in'); }
+      }
+      try {
+        if (όνομα) { var r = όνομα.getBoundingClientRect(); sessionStorage.setItem(ΚΛ, JSON.stringify([r.width, r.height, !!im, όνομα.complete && όνομα.naturalWidth > 0])); }
+        else sessionStorage.removeItem(ΚΛ);
+      } catch (x) {}
+      ε.viewTransition.finished.then(καθάρισε, καθάρισε);
+    });
+    addEventListener('pagereveal', function (ε) {
+      καθάρισε();
+      if (!ε.viewTransition) return;
+      var α = window.navigation && navigation.activation, νέα = document.querySelector('.ήρωας__εικόνα');
+      // Στη λίστα με «Πίσω»: η κάρτα του έργου από το οποίο ερχόμαστε
+      if (!νέα && α && α.from && α.navigationType === 'traverse') {
+        νέα = εικόναΓια(new URL(α.from.url).pathname);
+        if (νέα) νέα.style.viewTransitionName = Ο;
+      }
+      // Ποιο στιγμιότυπο μένει από πάνω όσο αλλάζει το σχήμα: όποιο δείχνει περισσότερη φωτογραφία
+      // (σχήμα πιο κοντά στην αναλογία της). Στο κινητό αυτό είναι η κάρτα, στο desktop ο ήρωας.
+      try {
+        var π = JSON.parse(sessionStorage.getItem(ΚΛ) || 'null'); sessionStorage.removeItem(ΚΛ);
+        // Από κάρτα σε σελίδα έργου: η κεφαλίδα δεν εμφανίζεται ούτε στη μετάβαση ούτε μετά
+        if (π && π[2] && νέα && νέα.classList.contains('ήρωας__εικόνα')) ρ.classList.add('κεφαλίδα-κρυφή');
+        if (π && νέα) {
+          var r = νέα.getBoundingClientRect(), φ = (+νέα.getAttribute('width')) / (+νέα.getAttribute('height'));
+          var απόσταση = function (w, h) { return Math.abs(Math.log((w / h) / φ)); };
+          // (μόνο αν η παλιά εικόνα είχε φορτώσει· αλλιώς το στιγμιότυπό της είναι άδειο)
+          if (π[3] && απόσταση(π[0], π[1]) < απόσταση(r.width, r.height)) ρ.classList.add('vt-παλιά');
+        }
+      } catch (x) {}
+      ε.viewTransition.finished.then(καθάρισε, καθάρισε);
+    });
+  })();</script>
+  <script type="speculationrules">{"prerender": [{"where": {"selector_matches": ".κάρτα-έργου__σύνδεσμος"}, "eagerness": "moderate"}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "AboutPage", "@id": "https://gpdevelopment.gr/el/about/#webpage", "url": "https://gpdevelopment.gr/el/about/", "name": "Η Εταιρεία: Ανάπτυξη Ακινήτων στην Αθήνα | GP Development", "description": "Η GP Real Estate Development είναι οικογενειακή εταιρεία ανάπτυξης ακινήτων στο Νέο Ψυχικό, με 30+ χρόνια συνολικής εμπειρίας. Κάθε έργο είναι Α++.", "inLanguage": "el", "isPartOf": {"@id": "https://gpdevelopment.gr/#website"}, "about": {"@id": "https://gpdevelopment.gr/#organization"}, "mainEntity": {"@id": "https://gpdevelopment.gr/#organization"}, "breadcrumb": {"@id": "https://gpdevelopment.gr/el/about/#breadcrumb"}, "primaryImageOfPage": "https://gpdevelopment.gr/assets/projects/about/corner-1600.webp"}, {"@type": "BreadcrumbList", "@id": "https://gpdevelopment.gr/el/about/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Αρχική", "item": "https://gpdevelopment.gr/el/"}, {"@type": "ListItem", "position": 2, "name": "Η εταιρεία", "item": "https://gpdevelopment.gr/el/about/"}]}]}</script>
+</head>
+<body>
+  <a class="παράκαμψη" href="#main">Μετάβαση στο περιεχόμενο</a>
+  <header class="κεφαλίδα">
+    <div class="κεφαλίδα__μέσα">
+      <a class="λογότυπο" href="/el/" aria-label="GP Real Estate Development"><svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="5.5"><path d="M73.14 22.42 A36 36 0 1 0 86 50"/><path d="M86 50 H50 L32 81.18"/></g></svg><b aria-hidden="true">GP</b><small aria-hidden="true">Real Estate<br>Development</small></a>
+      <nav class="πλοήγηση" aria-label="Main"><ul><li><a href="/el/projects/">Έργα</a></li><li><a href="/el/design-build/">Design & Build</a></li><li><a href="/el/antiparochi/">Αντιπαροχή</a></li><li><a href="/el/about/" aria-current="page">Η εταιρεία</a></li><li><a href="/el/contact/">Επικοινωνία</a></li></ul></nav>
+      <div class="κεφαλίδα__δεξιά">
+        <a class="γλώσσα" href="/about/" hreflang="en" title="English">EN</a>
+        <a class="κουμπί κεφαλίδα__cta" href="/el/contact/#booking"><span class="κουμπί__ετ">Κλείστε επίσκεψη</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+        <button class="μενού-κουμπί" type="button" aria-label="Μενού" aria-expanded="false" aria-controls="menou"><i></i><i></i><i></i></button>
+      </div>
+    </div>
+  </header>
+  
+  <div class="μενού" id="menou" hidden>
+    <nav class="μενού__πλοήγηση" aria-label="Μενού"><ol><li><a href="/el/projects/"><span>Έργα</span></a></li><li><a href="/el/design-build/"><span>Design & Build</span></a></li><li><a href="/el/antiparochi/"><span>Αντιπαροχή</span></a></li><li><a href="/el/about/" aria-current="page"><span>Η εταιρεία</span></a></li><li><a href="/el/contact/"><span>Επικοινωνία</span></a></li></ol></nav>
+    <div class="μενού__κάτω">
+      <a class="κουμπί κουμπί--σκούρο" href="/el/contact/#booking"><span class="κουμπί__ετ">Κλείστε επίσκεψη</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+      <p><a href="tel:+302109761163">+30 210 976 1163</a><a href="mailto:sales@gpdevelopment.gr">sales@gpdevelopment.gr</a><a href="/about/" hreflang="en">English</a></p>
+    </div>
+  </div>
+  <main id="main" class="σχετικά">
+    <section class="σχ-ήρωας" data-τόνος="ανοιχτό" aria-labelledby="sxetika-t" data-βύθιση>
+      <div class="σχ-ήρωας__νέφη" aria-hidden="true"><img src="/assets/clouds/wisp-0-soft.webp" alt="" width="1400" height="455"><img src="/assets/clouds/wisp-1-soft.webp" alt="" width="1400" height="455"></div>
+      <div class="σχ-ήρωας__πάνω"><nav class="ψίχουλα" aria-label="Διαδρομή"><ol><li><a href="/el/">Αρχική</a></li><li aria-current="page">Η εταιρεία</li></ol></nav></div>
+      <h1 class="σχ-ήρωας__τίτλος" id="sxetika-t" data-βύθιση-τίτλος>Η εταιρεία</h1>
+      <figure class="σχ-ήρωας__εικόνα" data-βύθιση-κτίριο><img class="σχ-ήρωας__κτίριο" src="/assets/img/doors/v5-corner-1600.webp" srcset="/assets/img/doors/v5-corner-900.webp 900w, /assets/img/doors/v5-corner-1600.webp 1440w" sizes="(max-width: 760px) 120vw, 66vw" width="1440" height="1053" alt="V5 Residences, Νέο Ψυχικό: η γωνία του ρετιρέ με τον πρόβολο της στέγης το σούρουπο" fetchpriority="high" decoding="async"></figure>
+    </section>
+
+    <section class="σχ-δήλωση" data-τόνος="ανοιχτό" aria-label="Η εταιρεία">
+      <p class="σχ-δήλωση__κύρια" data-αποκάλυψη>Μια οικογένεια που σχεδιάζει κάθε σπίτι ξεχωριστά.</p>
+      <p class="σχ-δήλωση__κείμενο" data-αποκάλυψη>Η GP Real Estate Development είναι εταιρεία ανάπτυξης και επένδυσης σε ακίνητα με έδρα το Νέο Ψυχικό. Χτίζουμε λίγα κτίρια κατοικιών κάθε φορά και σχεδιάζουμε κάθε σπίτι μέσα σε αυτά ξεχωριστά.</p>
+      <dl class="γεγονότα"><div class="γεγονός"><dt>Χρόνια συνολικής εμπειρίας</dt><dd data-μετρητής>30+</dd></div><div class="γεγονός"><dt>Κατοικίες σε τρεις γειτονιές της Αθήνας</dt><dd data-μετρητής>20</dd></div><div class="γεγονός"><dt>Κατοικίες του V5 πωλήθηκαν</dt><dd data-μετρητής>9/9</dd></div><div class="γεγονός γεγονός--ζωντανό"><span class="γεγονός__ζωντανά" aria-hidden="true"><i></i>Διαθεσιμότητα τώρα</span><dt>Διαθέσιμες κατοικίες τώρα</dt><dd data-μετρητής>11</dd><a class="υπογράμμιση" href="/el/projects/"><span>Δείτε ποιες</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div></dl>
+    </section>
+
+    <section class="περιγραφή σχ-ποιοι" data-τόνος="ανοιχτό" aria-labelledby="poioi-t">
+      <h2 class="περιγραφή__τίτλος" id="poioi-t" data-αποκάλυψη>Ποιοι είμαστε.</h2>
+      <div class="περιγραφή__κείμενο" data-αποκάλυψη><p>Με περισσότερα από 30 χρόνια συνολικής εμπειρίας, αναπτύσσουμε έργα κατοικίας και μικτής χρήσης, από την πρώτη ματιά σε ένα οικόπεδο ως την παράδοση των κλειδιών. Τα τρέχοντα έργα μας είναι το Mareterra στη Γλυφάδα και η Σαχτούρη 44–46 στο Χαλάνδρι. Το V5 Residences στο Νέο Ψυχικό ολοκληρώθηκε τον Ιανουάριο 2025 και έχει πωληθεί ολόκληρο.</p><p>Οι ίδιοι άνθρωποι μένουν σε κάθε έργο από την αρχή ως το τέλος. Σχεδιάζουμε κάθε σπίτι γύρω από το φως, τον χώρο και τον τρόπο που ζουν πραγματικά οι άνθρωποι, και το χτίζουμε πιστά στα σχέδια, με υλικά που διαρκούν.</p><p class="περιγραφή__διεύθυνση">Δημ. Βασιλείου 20, Ψυχικό 154 51</p></div>
+    </section>
+
+    <section class="σχ-τρόπος" data-τόνος="ανοιχτό" aria-labelledby="tropos-t">
+      <div class="σχ-τρόπος__πλάι">
+        <h2 class="ενότητα-τίτλος" id="tropos-t">Πώς δουλεύουμε.</h2>
+        <p>Κάθε έργο ξεκινά ακούγοντας: πώς ζουν οι αγοραστές μας και σε ποιο περιβάλλον θέλουν να ζήσουν.</p>
+        <figure class="σχ-τρόπος__εικόνα"><img class="" src="/assets/projects/about/interior-1600.webp" srcset="/assets/projects/about/interior-960.webp 960w, /assets/projects/about/interior-1600.webp 1600w, /assets/projects/about/interior-1700.webp 1700w" sizes="(max-width: 960px) 90vw, 36vw" width="1700" height="1133" alt="Σαλόνι στον 7ο όροφο του V5 Residences, με τοίχο από πηχάκια δρυός και γραμμή LED" loading="lazy" decoding="async"></figure>
+      </div>
+      <ol class="σχ-τρόπος__λίστα"><li class="αρχή" data-αποκάλυψη><span class="αρχή__αρ" aria-hidden="true">01</span><h3>Πρώτα ακούμε</h3><p>Πριν σχεδιάσουμε, μαθαίνουμε πώς ζουν οι αγοραστές μας και τι χρειάζονται από ένα σπίτι.</p></li><li class="αρχή" data-αποκάλυψη><span class="αρχή__αρ" aria-hidden="true">02</span><h3>Ο χώρος, από την αρχή</h3><p>Κάθε κατοικία έχει τη δική της κάτοψη, με αποθηκευτικούς χώρους σχεδιασμένους μέσα της από την αρχή.</p></li><li class="αρχή" data-αποκάλυψη><span class="αρχή__αρ" aria-hidden="true">03</span><h3>Το φως ως κανόνας</h3><p>Ο προσανατολισμός, τα ανοίγματα και η διάταξη αποφασίζονται γύρω από το φυσικό φως.</p></li><li class="αρχή" data-αποκάλυψη><span class="αρχή__αρ" aria-hidden="true">04</span><h3>Υλικά που αγγίζεις</h3><p>Εσωτερικοί χώροι με πέτρα, ξύλο και ποιοτικά φινιρίσματα που γερνούν όμορφα.</p></li><li class="αρχή" data-αποκάλυψη><span class="αρχή__αρ" aria-hidden="true">05</span><h3>Α++ σε κάθε έργο</h3><p>Κάθε έργο που χτίζουμε είναι ενεργειακής κλάσης Α++.</p></li></ol>
+    </section>
+
+    <section class="επαφή-έργου" id="epikoinonia" data-τόνος="ανοιχτό" aria-labelledby="epafi-t">
+      <div class="επαφή-έργου__μέσα">
+        <div class="επαφή-έργου__πλάι" data-αποκάλυψη>
+          <h2 class="επαφή-έργου__τίτλος" id="epafi-t"><span>Μιλήστε μαζί μας</span> <em>για το επόμενο σπίτι σας.</em></h2>
+          <p>Αφήστε τα στοιχεία σας. Σας καλούμε μέσα σε μία εργάσιμη.</p>
+          <ul class="επαφή-έργου__στοιχεία">
+            <li><small>Τηλέφωνο</small><a href="tel:+302109761163">+30 210 976 1163</a></li>
+            <li><small>Email</small><a href="mailto:sales@gpdevelopment.gr">sales@gpdevelopment.gr</a></li>
+            <li><small>Γραφείο</small><span>Δημ. Βασιλείου 20, Ψυχικό 154 51<br>Δευ–Παρ, 10:00–18:00</span></li>
+          </ul>
+        </div>
+        <div class="επαφή-έργου__φόρμα" data-αποκάλυψη>
+          <form class="φόρμα" novalidate data-φόρμα>
+            <script type="application/json" class="φόρμα__μηνύματα">{"f_err_req": "Συμπληρώστε αυτό το πεδίο.", "f_err_email": "Γράψτε ένα έγκυρο email.", "f_err_phone": "Γράψτε τουλάχιστον 8 ψηφία.", "f_err_consent": "Αποδεχθείτε την πολιτική απορρήτου.", "f_mail_subject": "Αίτημα από το gpdevelopment.gr", "f_intent": "Με ενδιαφέρει", "f_plot": "Πού βρίσκεται το οικόπεδο;", "f_name": "Ονοματεπώνυμο", "f_phone": "Τηλέφωνο", "f_email": "Email", "f_msg": "Μήνυμα (προαιρετικά)", "f_project": "Έργο:", "f_residence": "Κατοικία:"}</script>
+            <div class="πεδίο πεδίο--λίστα"><label for="f-project">Ποιο έργο;</label><select id="f-project" name="project"><option value="">Δεν ξέρω ακόμα</option><option value="Mareterra · Γλυφάδα">Mareterra · Γλυφάδα</option><option value="Σαχτούρη 44–46 · Χαλάνδρι">Σαχτούρη 44–46 · Χαλάνδρι</option></select></div>
+            <div class="πεδίο"><input id="f-name" name="name" type="text" placeholder=" " autocomplete="name" required><label for="f-name">Ονοματεπώνυμο</label><small class="πεδίο__λάθος"></small></div>
+            <div class="πεδίο"><input id="f-phone" name="phone" type="tel" placeholder=" " autocomplete="tel" inputmode="tel" required><label for="f-phone">Τηλέφωνο</label><small class="πεδίο__λάθος"></small></div>
+            <div class="πεδίο"><input id="f-email" name="email" type="email" placeholder=" " autocomplete="email" required><label for="f-email">Email</label><small class="πεδίο__λάθος"></small></div>
+            <div class="πεδίο"><textarea id="f-msg" name="message" rows="1" placeholder=" "></textarea><label for="f-msg">Μήνυμα (προαιρετικά)</label></div>
+            <label class="συναίνεση"><input type="checkbox" name="consent" required><i aria-hidden="true"></i><span>Συμφωνώ με την επεξεργασία των στοιχείων μου όπως περιγράφεται στην <a href="/el/privacy-policy/">πολιτική απορρήτου</a>.</span></label>
+            <small class="πεδίο__λάθος φόρμα__λάθος-συναίνεσης"></small>
+            <input type="text" name="website" class="φόρμα__παγίδα" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="φόρμα__κάτω">
+              <button class="κουμπί κουμπί--σκούρο φόρμα__αποστολή" type="submit"><span class="κουμπί__ετ">Αποστολή</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></button>
+              <a class="φόρμα__κράτηση" href="tel:+302109761163"><small>ή καλέστε</small><span>+30 210 976 1163</span></a>
+            </div>
+          </form>
+          <div class="φόρμα__ευχαριστώ" hidden tabindex="-1"><h3>Ευχαριστούμε.</h3><p>Λάβαμε το αίτημά σας. Θα σας καλέσουμε μέσα σε μία εργάσιμη.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="υποσέλιδο" data-τόνος="σκούρο">
+    <div class="υποσέλιδο__πάνω">
+      <p class="υποσέλιδο__δήλωση">Σπίτια σχεδιασμένα <em>ένα-ένα.</em></p>
+      <a class="υποσέλιδο__πάνω-κουμπί" href="#main"><span>Επιστροφή στην αρχή</span><svg viewBox="0 0 14 46" aria-hidden="true"><path d="M7 45V1M1 8l6-7 6 7" fill="none" stroke="currentColor"/></svg></a>
+    </div>
+    <div class="υποσέλιδο__πλέγμα">
+      <div class="υποσέλιδο__σήμα"><svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="5.5"><path d="M73.14 22.42 A36 36 0 1 0 86 50"/><path d="M86 50 H50 L32 81.18"/></g></svg><p>GP Real Estate Development<br><span>Real Estate Development · Athens</span></p></div>
+      <div class="υποσέλιδο__στήλη"><h3>Έργα</h3><ul><li><a href="/el/chalandri/">Σαχτούρη · Χαλάνδρι</a></li><li><a href="/el/mareterra/">Mareterra · Γλυφάδα</a></li><li><a href="/el/v5residences/">V5 Residences · Νέο Ψυχικό</a></li></ul></div><div class="υποσέλιδο__στήλη"><h3>Εταιρεία</h3><ul><li><a href="/el/about/">Η εταιρεία</a></li><li><a href="/el/design-build/">Design & Build</a></li><li><a href="/el/antiparochi/">Αντιπαροχή</a></li><li><a href="/el/contact/">Επικοινωνία</a></li></ul></div>
+      <div class="υποσέλιδο__στήλη"><h3>Επικοινωνία</h3><ul>
+        <li><a href="tel:+302109761163">+30 210 976 1163</a></li><li><a href="mailto:sales@gpdevelopment.gr">sales@gpdevelopment.gr</a></li><li>Δημ. Βασιλείου 20, Ψυχικό 154 51</li><li>Δευ–Παρ, 10:00–18:00</li></ul></div>
+    </div>
+    <div class="υποσέλιδο__λέξη" aria-hidden="true">GP Development</div>
+    <div class="υποσέλιδο__βάση">
+      <span>© 2026 GP Real Estate Development. Με την επιφύλαξη παντός δικαιώματος.</span>
+      <a href="/el/privacy-policy/">Πολιτική απορρήτου</a>
+    </div>
+  </footer>
+
+
+  <script src="/assets/js/sections.js?v=202611151626" defer></script>
+  <script src="/assets/js/projects.js?v=202611151626" defer></script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+/* ==========================================================================
+   GP Development — Αρχική, ενότητες 4–9
+   4 Τρεις αφετηρίες · 5 Πώς χτίζουμε · 6 Ερωτήσεις · 7 Άνοδος · 8 Φόρμα · 9 Υποσέλιδο
+   Λευκό, πολύς αέρας, και μια διαδρομή που τελειώνει ψηλά στον ουρανό.
+   ========================================================================== */
+
+
+/* Κοινά: τίτλοι που μπαίνουν γραμμή-γραμμή */
+[data-γραμμές] > span { display: block; }
+.js [data-γραμμές] > span { clip-path: inset(0 0 -.2em 0); }
+.js [data-γραμμές] > span > i { display: block; font-style: inherit; will-change: transform; }
+
+.υπογράμμιση { display: inline-flex; align-items: center; gap: 10px; font-size: .7rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; }
+.υπογράμμιση span { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 4px; transition: background-size .55s var(--καμπύλη); }
+.υπογράμμιση:hover span { background-size: 0 1px; background-position: 100% 100%; }
+.υπογράμμιση svg { width: 15px; height: 15px; transition: transform .5s var(--καμπύλη); }
+.υπογράμμιση:hover svg { transform: translateX(4px); }
+
+/* ==========================================================================
+   4. ΤΡΕΙΣ ΑΦΕΤΗΡΙΕΣ — αγοραστές, οικοπεδούχοι, μεσίτες
+   ========================================================================== */
+.αφετηρίες { position: relative; background: var(--λευκό); overflow: hidden; isolation: isolate; }
+
+/* Αυγή: η νύχτα ανοίγει σε λευκό, με δύο θολά νήματα σύννεφου */
+/* Συνεχίζει ακριβώς από το χρώμα που τελειώνει το τρέχον έργο της νύχτας (night.js) */
+.αφετηρίες__αυγή { --νύχτα-κάτω: #121115; transition: --νύχτα-κάτω 1.2s var(--καμπύλη); position: relative; height: clamp(260px, 48vh, 520px); background: linear-gradient(180deg, var(--νύχτα-κάτω) 0%, color-mix(in srgb, var(--νύχτα-κάτω) 60%, #26252b) 18%, #5f5c62 38%, #b6b1ad 60%, #ece9e5 80%, var(--λευκό) 100%); overflow: hidden; }
+/* Τα σύννεφα είναι ψηλότερα από το κουτί: σβήνουν προς τα πάνω, αλλιώς κόβονται σε ευθεία γραμμή */
+.αφετηρίες__νέφη { position: absolute; inset: 0; -webkit-mask-image: linear-gradient(180deg, transparent 22%, rgba(0, 0, 0, .25) 50%, #000 92%); mask-image: linear-gradient(180deg, transparent 22%, rgba(0, 0, 0, .25) 50%, #000 92%); }
+.αφετηρίες__αυγή img { position: absolute; left: 50%; width: max(150vw, 1300px); height: auto; max-width: none; opacity: .8; will-change: transform; }  /* το θόλωμα είναι ψημένο στην εικόνα (soft_wisps.py): ένα CSS filter σε κινούμενη εικόνα τρεμόπαιζε στο κινητό */
+.αφετηρίες__αυγή img:nth-child(1) { bottom: -10%; transform: translateX(-56%); }
+.αφετηρίες__αυγή img:nth-child(2) { bottom: -28%; transform: translateX(-44%) scaleX(-1); opacity: .95; }
+
+.αφετηρίες__κέντρο { position: relative; z-index: 2; text-align: center; padding: clamp(20px, 4vw, 60px) var(--περιθώριο) 0; }
+.αφετηρίες__τίτλος { font-family: var(--σερίφ); font-weight: 350; font-size: clamp(2.6rem, 1.1rem + 5.6vw, 7.4rem); line-height: 1; letter-spacing: var(--διάκενο-τίτλων); text-wrap: balance; }
+.αφετηρίες__κείμενο { max-width: 50ch; min-height: 3.3em; margin: clamp(22px, 2.6vw, 34px) auto 0; color: var(--γκρι); font-size: clamp(1rem, .94rem + .3vw, 1.2rem); line-height: 1.6; transition: opacity .35s ease, filter .35s ease, transform .35s ease; }
+.αφετηρίες__κείμενο.is-changing { opacity: 0; filter: blur(6px); transform: translateY(6px); }
+
+/* Οι ρόλοι: τμηματικός έλεγχος σε τριχοειδές πλαίσιο. Ο δείκτης είναι μια γραμμή φωτός
+   που γλιστρά κάτω από την επιλογή, και το κουμπί ενέργειας «κουμπώνει» δεξιά. */
+.κάψουλα { display: inline-flex; align-items: stretch; gap: 18px; margin-top: clamp(30px, 3.4vw, 46px); }
+.κάψουλα__καρτέλες { position: relative; display: flex; border: 1px solid var(--γραμμή); }
+.κάψουλα__δείκτης { position: absolute; left: 0; bottom: -1px; height: 2px; width: var(--δ-πλάτος, 0); transform: translateX(var(--δ-x, 0)); background: var(--γραφίτης); transition: transform .6s var(--καμπύλη), width .6s var(--καμπύλη); }
+.αφετηρίες__καρτέλα { position: relative; z-index: 1; display: grid; place-items: center; min-height: 3.25rem; padding: .9rem 1.4rem; font-size: .68rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--γκρι); white-space: nowrap; transition: color .4s, background-color .4s; }
+.αφετηρίες__καρτέλα + .αφετηρίες__καρτέλα { border-left: 1px solid var(--γραμμή); }
+.αφετηρίες__καρτέλα[aria-selected="true"] { color: var(--γραφίτης); background: rgba(30, 28, 26, .035); }
+.αφετηρίες__καρτέλα:hover { color: var(--γραφίτης); }
+.κάψουλα__cta span { transition: opacity .3s; }
+.κάψουλα__cta.is-changing span { opacity: 0; }
+
+/* Το κομμάτι του V5: γωνία ρετιρέ που σβήνει σε λευκό θόλωμα */
+.αφετηρίες__κτίριο { position: relative; margin: clamp(-30px, -2vw, 0px) 0 0; width: min(1180px, 72vw); }
+.αφετηρίες__κτίριο img { width: 100%; height: auto; will-change: transform; transform-origin: 30% 100%; }
+.αφετηρίες__κτίριο::after { content: ""; position: absolute; left: -10vw; right: -30vw; bottom: -2px; height: 42%; background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .85) 55%, var(--λευκό)); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); -webkit-mask-image: linear-gradient(180deg, transparent, #000 40%); mask-image: linear-gradient(180deg, transparent, #000 40%); pointer-events: none; }
+.αφετηρίες__κτίριο figcaption { position: absolute; z-index: 2; left: calc(100% + clamp(12px, 3vw, 48px)); bottom: 40%; display: grid; gap: 4px; width: max-content; }
+.αφετηρίες__κτίριο figcaption b { font-family: var(--σερίφ); font-weight: 350; font-size: clamp(1.2rem, 1rem + .6vw, 1.6rem); letter-spacing: var(--διάκενο-τίτλων); }
+.αφετηρίες__κτίριο figcaption span { font-family: var(--σερίφ); font-style: normal; color: var(--γκρι); font-size: .98rem; font-weight: 350; }
+.αφετηρίες__κτίριο figcaption::before { content: ""; width: 34px; height: 1px; margin-bottom: 12px; background: var(--γραφίτης); }
+
+/* ==========================================================================
+   5. ΠΩΣ ΧΤΙΖΟΥΜΕ — ακορντεόν που αλλάζει την εικόνα
+   ========================================================================== */
+.τρόπος { position: relative; background: var(--λευκό); padding: clamp(70px, 9vw, 150px) max(var(--περιθώριο), env(safe-area-inset-left, 0px)) clamp(90px, 11vw, 170px); }
+.τρόπος__κεφαλή { text-align: center; max-width: 1100px; margin-inline: auto; }
+.τρόπος__τίτλος { font-family: var(--σερίφ); font-weight: 350; font-size: clamp(2.4rem, 1.1rem + 4.6vw, 6.2rem); line-height: 1.02; letter-spacing: var(--διάκενο-τίτλων); }
+.τρόπος__εισαγωγή { margin-top: 22px; color: var(--γκρι); font-size: clamp(1rem, .94rem + .3vw, 1.2rem); }
+
+.τρόπος__πλέγμα { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 110px); align-items: start; max-width: 1400px; margin: clamp(56px, 7vw, 110px) auto 0; }
+
+.ακορντεόν { border-top: 1px solid var(--γραμμή); }
+.ακορντεόν__στοιχείο { position: relative; border-bottom: 1px solid var(--γραμμή); }
+.ακορντεόν__στοιχείο::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--γραφίτης); transform: scaleX(0); transform-origin: 0 50%; transition: transform 1.1s var(--καμπύλη); }
+.ακορντεόν__στοιχείο.is-open::after { transform: scaleX(1); }
+.ακορντεόν h3 { font: inherit; }
+.ακορντεόν button { display: grid; grid-template-columns: minmax(0, 1fr) 22px; gap: 16px; align-items: baseline; width: 100%; padding: clamp(22px, 2.2vw, 32px) 0; text-align: left; }
+.ακορντεόν__τίτλος { font-family: var(--σερίφ); font-weight: 350; font-size: clamp(1.45rem, 1.05rem + 1.35vw, 2.45rem); line-height: 1.1; letter-spacing: var(--διάκενο-τίτλων); color: rgba(30, 28, 26, .4); transition: color .45s; }
+.ακορντεόν button:hover .ακορντεόν__τίτλος, .is-open .ακορντεόν__τίτλος { color: var(--γραφίτης); }
+.ακορντεόν__σύμβολο { position: relative; width: 14px; height: 14px; align-self: center; }
+.ακορντεόν__σύμβολο::before, .ακορντεόν__σύμβολο::after { content: ""; position: absolute; left: 0; top: 50%; width: 14px; height: 1px; background: currentColor; transition: transform .5s var(--καμπύλη); }
+.ακορντεόν__σύμβολο::after { transform: rotate(90deg); }
+.is-open .ακορντεόν__σύμβολο::after { transform: rotate(0); }
+
+.ακορντεόν__πάνελ { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .75s var(--καμπύλη); }
+.is-open > .ακορντεόν__πάνελ { grid-template-rows: 1fr; }
+.ακορντεόν__μέσα { min-height: 0; overflow: hidden; opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .7s var(--καμπύλη); }
+.is-open .ακορντεόν__μέσα { opacity: 1; transform: none; transition-delay: .15s; }
+.ακορντεόν__μέσα p { max-width: 52ch; color: var(--γκρι); }
+.ακορντεόν__μέσα p { padding-bottom: clamp(26px, 2.6vw, 36px); }
+.ακορντεόν__κινητό { display: none; }
+
+/* Πλαίσιο εικόνας: η νέα εικόνα «ανεβαίνει» πάνω από την προηγούμενη */
+/* Αψίδα: το κάδρο κόβεται σαν αρχιτεκτονικό άνοιγμα (ημικύκλιο πάνω, ίσια βάση).
+   Μια λεπτή γραμμή «σχεδίου» ακολουθεί το περίγραμμα σε απόσταση, όπως οι γραμμές των κουμπιών. */
+.πλαίσιο { position: sticky; top: calc(var(--κεφαλίδα) + 28px); width: min(100%, 520px); justify-self: center; }
+.πλαίσιο::after { content: ""; position: absolute; inset: -12px -12px 0; border: 1px solid var(--γραμμή); border-bottom: 0; border-radius: 999px 999px 0 0; pointer-events: none; }
+.πλαίσιο__μέσα { position: relative; aspect-ratio: 4 / 5.2; border-radius: 999px 999px 0 0; overflow: hidden; background: var(--ασβέστης); transform: translateZ(0); }
+/* Η εικόνα αλλάζει αμέσως: σύντομο crossfade (όλες είναι ήδη φορτωμένες) και απαλό «κάθισμα» */
+.πλαίσιο__εικόνα { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.025); transition: opacity .28s ease-out, transform 1.2s var(--καμπύλη); }
+.πλαίσιο__εικόνα.is-active { z-index: 2; opacity: 1; transform: scale(1); }
+.πλαίσιο__εικόνα[data-κλειδί="energy"] { object-position: 50% 40%; }
+
+/* ==========================================================================
+   6. ΕΡΩΤΗΣΕΙΣ
+   ========================================================================== */
+.ερωτήσεις { position: relative; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(40px, 6vw, 120px); max-width: 1400px; margin-inline: auto; padding: clamp(40px, 5vw, 80px) max(var(--περιθώριο), env(safe-area-inset-left, 0px)) clamp(60px, 6vw, 100px); background: var(--λευκό); box-shadow: 0 0 0 100vmax var(--λευκό); clip-path: inset(0 -100vmax); }
+.ερωτήσεις__πλάι { position: sticky; top: calc(var(--κεφαλίδα) + 28px); align-self: start; display: grid; gap: 22px; justify-items: start; }
+.ερωτήσεις__τίτλος { font-family: var(--σερίφ); font-weight: 350; font-size: clamp(2.2rem, 1.2rem + 3vw, 4.4rem); line-height: 1.02; letter-spacing: var(--διάκενο-τίτλων); }
+.ερωτήσεις__πλάι p { color: var(--γκρι); max-width: 34ch; }
+
+.ερώτηση { border-top: 1px solid var(--γραμμή); }
+.ερώτηση:last-child { border-bottom: 1px solid var(--γραμμή); }
+.ερώτηση summary { display: grid; grid-template-columns: minmax(0, 1fr) 40px; gap: 24px; align-items: center; padding: clamp(20px, 2vw, 28px) 0; cursor: pointer; list-style: none; font-family: var(--σερίφ); font-size: clamp(1.1rem, .98rem + .5vw, 1.45rem); line-height: 1.3; letter-spacing: var(--διάκενο-τίτλων); font-weight: 350; }
+.ερώτηση summary::-webkit-details-marker { display: none; }
+.ερώτηση summary:focus-visible { outline-offset: 6px; }
+.ερώτηση summary i { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid var(--γραμμή); transition: transform .6s var(--καμπύλη), background .4s, color .4s, border-color .4s; }
+.ερώτηση summary i svg { width: 14px; height: 14px; }
+.ερώτηση summary:hover i { border-color: var(--γραφίτης); }
+.ερώτηση.is-open summary i, .no-js .ερώτηση[open] summary i { transform: rotate(135deg); background: var(--γραφίτης); border-color: var(--γραφίτης); color: var(--λευκό); }
+.ερώτηση__απάντηση { overflow: hidden; }
+.ερώτηση__απάντηση p { padding: 0 64px clamp(22px, 2.2vw, 30px) 0; max-width: 66ch; color: var(--γκρι); }
+
+/* ==========================================================================
+   7. ΑΝΟΔΟΣ — το drone ανεβαίνει με το scroll · 8. Φόρμα πάνω στον ουρανό
+   ========================================================================== */
+.άνοδος { position: relative; background: var(--λευκό); }
+.άνοδος__σκηνή { position: sticky; top: 0; height: 100vh; height: 100lvh; overflow: hidden; isolation: isolate; background: #7fa7d8; }
+.άνοδος__καμβάς { position: absolute; inset: 0; width: 100%; height: 100%; }
+.άνοδος__διαδρομή { height: 320vh; height: 320svh; }
+
+/* Σύννεφο εισόδου: λευκό, απαλό, σε όλο το πλάτος */
+.άνοδος__σύννεφο { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+/* Χωρίς μόνιμο will-change: το sections.js το δίνει μόνο όσο κινούνται (λιγότερα στρώματα GPU στο κινητό) */
+.άνοδος__σύννεφο img { position: absolute; left: 50%; top: 0; width: max(180vw, 1500px); height: auto; max-width: none; }
+.άνοδος__σύννεφο img:nth-child(1) { transform: translate(-46%, -30%) scaleY(-1); }
+.άνοδος__σύννεφο img:nth-child(2) { transform: translate(-54%, -20%) scaleY(-1); }
+.άνοδος__σύννεφο img:nth-child(3) { transform: translate(-50%, -10%) scaleY(-1); }
+.άνοδος__πέπλο { position: absolute; inset: 0; background: linear-gradient(180deg, var(--λευκό) 0%, var(--λευκό) var(--πέπλο-γεμάτο, 100%), rgba(255, 255, 255, 0) var(--πέπλο-άκρη, 100%)); }
+
+.άνοδος__λεζάντες { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; padding: 0 var(--περιθώριο); pointer-events: none; }
+.άνοδος__λεζάντα { grid-area: 1 / 1; display: grid; justify-items: center; gap: clamp(14px, 1.6vw, 22px); text-align: center; color: #fffdf8; font-family: var(--σερίφ); font-size: clamp(2rem, 1.1rem + 3.4vw, 4.6rem); line-height: 1; letter-spacing: var(--διάκενο-τίτλων); text-shadow: 0 0 34px rgba(14, 30, 58, .3), 0 1px 10px rgba(14, 30, 58, .22); opacity: 0; will-change: transform, opacity, filter; font-weight: 300; }
+.άνοδος__λεζάντα small { display: block; font-family: var(--σώμα); font-size: clamp(.62rem, .56rem + .2vw, .74rem); font-weight: 500; letter-spacing: .34em; text-transform: uppercase; padding-left: .34em; }
+
+/* Η φόρμα: αναδύεται σταδιακά από τον ουρανό καθώς τελειώνει η άνοδος (η JS δίνει το --εμφ 0→1).
+   Μικρή, ουσιαστική κάρτα από θολό γυαλί, ευθείες γραμμές. */
+.επαφή { position: relative; z-index: 4; margin-top: -100vh; margin-top: -100lvh; min-height: 100vh; min-height: 100lvh; display: grid; place-items: center; padding: calc(var(--κεφαλίδα) + 24px) max(var(--περιθώριο), 16px) clamp(48px, 7vw, 96px); pointer-events: none; }
+.επαφή__κάρτα { --εμφ: 0; position: relative; width: min(600px, 100%); display: grid; gap: 26px; padding: clamp(26px, 3.6vw, 44px); background: rgba(250, 248, 244, .78); -webkit-backdrop-filter: blur(22px) saturate(1.2); backdrop-filter: blur(22px) saturate(1.2); box-shadow: 0 40px 80px -40px rgba(20, 45, 90, .4);
+  opacity: var(--εμφ); transform: translate3d(0, calc((1 - var(--εμφ)) * 46px), 0) scale(calc(.97 + var(--εμφ) * .03)); filter: blur(calc((1 - var(--εμφ)) * 10px)); visibility: hidden; }
+.επαφή.is-visible .επαφή__κάρτα { visibility: visible; pointer-events: auto; }
+.επαφή.is-settled .επαφή__κάρτα { filter: none; }
+/* Γωνίες σχεδίου στο γυαλί */
+.επαφή__κάρτα::before { content: ""; position: absolute; inset: 0; pointer-events: none; border: 1px solid rgba(255, 255, 255, .9); outline: 1px solid rgba(30, 28, 26, .08); outline-offset: 6px; }
+.no-js .επαφή__κάρτα { --εμφ: 1; visibility: visible; pointer-events: auto; }
+
+.επαφή__κεφαλή { display: grid; gap: 8px; }
+.επαφή__τίτλος { font-family: var(--σερίφ); font-weight: 350; font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.3rem); line-height: 1.1; letter-spacing: var(--διάκενο-τίτλων); }
+.επαφή__τίτλος span, .επαφή__τίτλος em { display: block; }
+.επαφή__κεφαλή p { color: var(--γκρι); font-size: .95rem; }
+
+.φόρμα { display: grid; gap: 14px; min-width: 0; }
+.φόρμα__ομάδα { border: 0; margin: 0 0 4px; padding: 0; min-width: 0; }
+.φόρμα__ομάδα legend { padding: 0; margin-bottom: 10px; font-size: .6rem; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; color: var(--γκρι); }
+/* Προθέσεις: τμηματικός έλεγχος, ίδια γλώσσα με τους ρόλους */
+.τσιπ-σειρά { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid rgba(30, 28, 26, .16); }
+.τσιπ { position: relative; display: grid; }
+.τσιπ + .τσιπ { border-left: 1px solid rgba(30, 28, 26, .16); }
+.τσιπ input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.τσιπ span { display: grid; place-items: center; min-height: 2.9rem; padding: .55rem .4rem; text-align: center; font-size: .7rem; font-weight: 450; letter-spacing: .03em; line-height: 1.25; color: var(--γκρι); cursor: pointer; transition: background-color .35s, color .35s; }
+.τσιπ:hover span { color: var(--γραφίτης); }
+.τσιπ input:checked + span { background: var(--γραφίτης); color: #fbf8f2; }
+.τσιπ input:focus-visible + span { outline: 2px solid var(--γραφίτης); outline-offset: -2px; }
+[data-για] { transition: opacity .35s; }
+
+.φόρμα__σειρά { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 22px; }
+.πεδίο { position: relative; }
+.πεδίο input, .πεδίο textarea { display: block; width: 100%; padding: 20px 0 9px; border: 0; border-bottom: 1px solid rgba(30, 28, 26, .22); border-radius: 0; background: transparent; color: var(--γραφίτης); font: inherit; font-size: 1rem; font-weight: 350; outline: none; resize: none; overflow: hidden; }
+.πεδίο label { position: absolute; left: 0; top: 20px; color: var(--γκρι); font-size: .95rem; pointer-events: none; transform-origin: 0 0; transition: transform .4s var(--καμπύλη), color .3s; white-space: nowrap; }
+.πεδίο input:focus + label, .πεδίο input:not(:placeholder-shown) + label,
+.πεδίο textarea:focus + label, .πεδίο textarea:not(:placeholder-shown) + label { transform: translateY(-19px) scale(.74); color: var(--γραφίτης); }
+.πεδίο input, .πεδίο textarea { background-image: linear-gradient(var(--γραφίτης), var(--γραφίτης)); background-repeat: no-repeat; background-position: 0 100%; background-size: 0 1px; transition: background-size .6s var(--καμπύλη), border-color .3s; }
+.πεδίο input:focus, .πεδίο textarea:focus { background-size: 100% 1px; }
+.πεδίο__λάθος { display: block; min-height: 0; color: #a2392f; font-size: .72rem; line-height: 1.4; }
+.πεδίο__λάθος:not(:empty) { margin-top: 6px; }
+.πεδίο.is-error input { border-bottom-color: #a2392f; }
+
+.συναίνεση { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 12px; align-items: start; margin-top: 6px; font-size: .78rem; line-height: 1.5; color: var(--γκρι); cursor: pointer; }
+.συναίνεση input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.συναίνεση i { position: relative; width: 16px; height: 16px; margin-top: 2px; border: 1px solid rgba(30, 28, 26, .4); background: rgba(255, 255, 255, .6); transition: background .3s, border-color .3s; }
+.συναίνεση i::after { content: ""; position: absolute; left: 4.5px; top: 1px; width: 4.5px; height: 9px; border: solid #fff; border-width: 0 1.2px 1.2px 0; transform: rotate(45deg) scale(0); transition: transform .3s var(--καμπύλη); }
+.συναίνεση input:checked + i { background: var(--γραφίτης); border-color: var(--γραφίτης); }
+.συναίνεση input:checked + i::after { transform: rotate(45deg) scale(1); }
+.συναίνεση input:focus-visible + i { outline: 2px solid var(--γραφίτης); outline-offset: 2px; }
+.συναίνεση a { text-decoration: underline; text-underline-offset: 3px; color: var(--γραφίτης); }
+.φόρμα__λάθος-συναίνεσης { margin-top: -8px; }
+.φόρμα__παγίδα { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.φόρμα__κάτω { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 26px; margin-top: 10px; padding-left: 7px; }
+.φόρμα__αποστολή[disabled] { opacity: .6; cursor: progress; }
+.φόρμα__κράτηση { display: inline-flex; align-items: baseline; gap: 8px; font-size: .9rem; }
+.φόρμα__κράτηση small { font-size: .8rem; color: var(--γκρι); }
+.φόρμα__κράτηση span { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; transition: background-size .5s var(--καμπύλη); }
+.φόρμα__κράτηση:hover span { background-size: 0 1px; background-position: 100% 100%; }
+.φόρμα__ευχαριστώ { align-self: center; display: grid; gap: 10px; padding: 12px 0; outline: none; }
+.φόρμα__ευχαριστώ h3 { letter-spacing: var(--διάκενο-τίτλων); font-family: var(--σερίφ); font-weight: 350; font-size: clamp(1.6rem, 1.3rem + 1vw, 2.2rem); line-height: 1.1; }
+.φόρμα__ευχαριστώ p { color: var(--γκρι); max-width: 40ch; }
+
+.επαφή__στοιχεία { display: flex; flex-wrap: wrap; gap: 6px 20px; padding-top: 18px; border-top: 1px solid rgba(30, 28, 26, .12); font-size: .8rem; color: var(--γκρι); }
+.επαφή__στοιχεία a { color: var(--γραφίτης); transition: color .3s; }
+.επαφή__στοιχεία a:hover { color: var(--γκρι); }
+
+/* Τελευταίο απαλό fade προς το υποσέλιδο */
+.άνοδος__τέλος { position: relative; z-index: 3; height: 55vh; height: 55svh; background: linear-gradient(180deg, rgba(30, 28, 26, 0) 0%, rgba(30, 28, 26, .35) 45%, rgba(30, 28, 26, .82) 78%, var(--γραφίτης) 100%); }
+
+/* ==========================================================================
+   9. ΥΠΟΣΕΛΙΔΟ
+   ========================================================================== */
+.υποσέλιδο { position: relative; background: var(--γραφίτης); color: #f1ece3; padding: clamp(30px, 4vw, 60px) max(var(--περιθώριο), env(safe-area-inset-left, 0px)) max(26px, env(safe-area-inset-bottom, 0px)); overflow: hidden; }
+.υποσέλιδο__πάνω { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; max-width: 1560px; margin-inline: auto; padding-bottom: clamp(50px, 6vw, 90px); border-bottom: 1px solid rgba(241, 236, 227, .14); }
+.υποσέλιδο__δήλωση { font-family: var(--σερίφ); font-size: clamp(2.4rem, 1.3rem + 4.2vw, 6.4rem); line-height: 1; letter-spacing: var(--διάκενο-τίτλων); font-weight: 350; }
+.υποσέλιδο__δήλωση em { display: block; }
+.υποσέλιδο__πάνω-κουμπί { display: grid; justify-items: center; gap: 14px; font-size: .62rem; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: rgba(241, 236, 227, .7); white-space: nowrap; transition: color .4s; }
+.υποσέλιδο__πάνω-κουμπί svg { width: 14px; height: 46px; transition: transform .6s var(--καμπύλη); }
+.υποσέλιδο__πάνω-κουμπί:hover { color: #fff; }
+.υποσέλιδο__πάνω-κουμπί:hover svg { transform: translateY(-6px); }
+.υποσέλιδο__πλέγμα { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)); gap: 40px; max-width: 1560px; margin: clamp(46px, 5vw, 80px) auto 0; }
+.υποσέλιδο__σήμα { display: grid; gap: 18px; align-content: start; }
+.υποσέλιδο__σήμα svg { width: 42px; height: 42px; }
+.υποσέλιδο__σήμα p { font-family: var(--σερίφ); font-size: 1.15rem; line-height: 1.4; font-weight: 350; }
+.υποσέλιδο__σήμα span { font-family: var(--σώμα); font-size: .62rem; letter-spacing: .24em; text-transform: uppercase; color: rgba(241, 236, 227, .5); }
+.υποσέλιδο__στήλη h3 { margin-bottom: 18px; font-size: .62rem; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; color: rgba(241, 236, 227, .5); }
+.υποσέλιδο__στήλη ul { display: grid; gap: 10px; font-size: .95rem; color: rgba(241, 236, 227, .86); }
+.υποσέλιδο__στήλη a { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; padding-bottom: 2px; transition: background-size .5s var(--καμπύλη), color .3s; }
+.υποσέλιδο__στήλη a:hover { background-size: 100% 1px; color: #fff; }
+.υποσέλιδο__λέξη { margin: clamp(40px, 6vw, 90px) calc(var(--περιθώριο) * -1) 0; font-family: var(--σερίφ); font-size: clamp(3rem, 10.4vw, 12.6rem); line-height: .86; letter-spacing: var(--διάκενο-τίτλων); text-align: center; white-space: nowrap; color: transparent; background: linear-gradient(180deg, rgba(241, 236, 227, .16), rgba(241, 236, 227, .02) 85%); -webkit-background-clip: text; background-clip: text; user-select: none; font-weight: 350; }
+.υποσέλιδο__βάση { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 30px; max-width: 1560px; margin: 26px auto 0; padding-top: 22px; border-top: 1px solid rgba(241, 236, 227, .12); font-size: .74rem; color: rgba(241, 236, 227, .5); }
+.υποσέλιδο__βάση a:hover { color: #fff; }
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 1100px) {
+  .υποσέλιδο__πλέγμα { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .υποσέλιδο__σήμα { grid-column: 1 / -1; }
+}
+@media (max-width: 960px) {
+  .τρόπος__πλέγμα { grid-template-columns: minmax(0, 1fr); }
+  .πλαίσιο { display: none; }
+  .ακορντεόν__κινητό { display: block; width: min(100%, 440px); margin: 6px 0 22px; aspect-ratio: 5 / 4; border-radius: 50% 50% 0 0 / 40% 40% 0 0; overflow: hidden; background: var(--ασβέστης); transform: translateZ(0); }
+  .ακορντεόν__κινητό img { width: 100%; height: 100%; object-fit: cover; }
+  .ερωτήσεις { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .ερωτήσεις__πλάι { position: static; }
+}
+@media (max-width: 760px) {
+  .κάψουλα { display: grid; width: 100%; max-width: 420px; gap: 22px; justify-items: center; }
+  .κάψουλα__καρτέλες { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; }
+  .αφετηρίες__καρτέλα { padding: .8rem .3rem; font-size: .6rem; letter-spacing: .1em; white-space: normal; line-height: 1.3; }
+  .αφετηρίες__κείμενο { min-height: 5em; }
+  .αφετηρίες__κτίριο { width: 128vw; margin: 10px 0 0 -10vw; }
+  .αφετηρίες__κτίριο figcaption { left: auto; right: calc(18vw + 20px); bottom: 6%; text-align: right; justify-items: end; }
+  .ακορντεόν button { grid-template-columns: minmax(0, 1fr) 18px; }
+  .φόρμα__σειρά { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .τσιπ-σειρά { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .τσιπ:nth-child(3) { border-left: 0; }
+  .τσιπ:nth-child(n+3) { border-top: 1px solid rgba(30, 28, 26, .16); }
+  .επαφή { padding-top: calc(var(--κεφαλίδα) + 8px); }
+  .επαφή__κάρτα { gap: 22px; }
+  .ερώτηση__απάντηση p { padding-right: 0; }
+  .ερώτηση summary { grid-template-columns: minmax(0, 1fr) 36px; gap: 16px; }
+  .ερώτηση summary i { width: 36px; height: 36px; }
+  .υποσέλιδο__πάνω { flex-direction: column; align-items: flex-start; }
+  .υποσέλιδο__πλέγμα { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 34px; }
+  .υποσέλιδο__λέξη { font-size: 10.6vw; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .πλαίσιο__εικόνα, .ακορντεόν__πάνελ, .ακορντεόν__μέσα, .κάψουλα__δείκτης, .μενού, .μενού__πλοήγηση a { transition: none !important; }
+  .επαφή__κάρτα { --εμφ: 1 !important; filter: none !important; }
+}
+/* Χωρίς JS: η άνοδος γίνεται στατική εικόνα και η φόρμα φαίνεται κανονικά */
+.no-js .άνοδος__διαδρομή { height: 0; }
+.no-js .άνοδος__σκηνή { position: relative; background: url(/assets/drone/v2/d/120.webp) center / cover; }
+.no-js .άνοδος__σύννεφο, .no-js .άνοδος__λεζάντες { display: none; }

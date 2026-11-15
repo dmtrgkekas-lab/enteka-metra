@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Contact GP Real Estate Development | Book a Visit in Athens</title>
+  <meta name="description" content="Call +30 210 976 1163, email sales@gpdevelopment.gr or send us a message. Office at Dim. Vasiliou 20, Psychiko, Monday to Friday, 10:00–18:00.">
+  <link rel="canonical" href="https://gpdevelopment.gr/contact/">
+  <link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/contact/">
+  <link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/contact/">
+  <link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/contact/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GP Real Estate Development">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="Contact GP Real Estate Development | Book a Visit in Athens">
+  <meta property="og:description" content="Call +30 210 976 1163, email sales@gpdevelopment.gr or send us a message. Office at Dim. Vasiliou 20, Psychiko, Monday to Friday, 10:00–18:00.">
+  <meta property="og:url" content="https://gpdevelopment.gr/contact/">
+  <meta property="og:image" content="https://gpdevelopment.gr/assets/og/gp-home.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#1e1c1a">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/home.css?v=202611151626">
+  <link rel="stylesheet" href="/assets/css/sections.css?v=202611151626">
+  <link rel="stylesheet" href="/assets/css/projects.css?v=202611151626">
+  <script>document.documentElement.classList.replace('no-js', 'js'); if (!('onpagereveal' in window) && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('μετάβαση-js');</script>
+  <script>(function () {
+    var Ο = 'project-image', ΚΛ = 'gp-vt-εικόνα', ρ = document.documentElement;
+    function εικόναΓια(διαδρομή) {
+      var σ = document.querySelector('.κάρτα-έργου__σύνδεσμος[href="' + διαδρομή + '"]');
+      return σ && σ.querySelector('img');
+    }
+    // Κανένα όνομα από προηγούμενη μετάβαση: η σελίδα μπορεί να επιστρέψει από την cache του browser
+    // («Πίσω») με το όνομα ακόμη πάνω της, και δύο ίδια ονόματα ακυρώνουν όλη τη μετάβαση.
+    function καθάρισε() {
+      document.querySelectorAll('img').forEach(function (im) { if (im.style.viewTransitionName) im.style.viewTransitionName = ''; });
+      ρ.classList.remove('vt-παλιά');
+    }
+    // Φεύγοντας: όνομα μόνο στην εικόνα του συνδέσμου που πατήθηκε (αλλιώς μένει ο ήρωας, όταν υπάρχει).
+    // Κρατάμε το σχήμα της, για να διαλέξει η νέα σελίδα ποιο στιγμιότυπο δείχνει όσο μεγαλώνει.
+    addEventListener('pageswap', function (ε) {
+      καθάρισε();
+      if (!ε.viewTransition || !ε.activation || !ε.activation.entry) return;
+      var im = εικόναΓια(new URL(ε.activation.entry.url).pathname), ήρωας = document.querySelector('.ήρωας__εικόνα'), όνομα = im || ήρωας;
+      if (im) {
+        if (ήρωας) ήρωας.style.viewTransitionName = 'none';
+        im.style.viewTransitionName = Ο;
+        // Κάρτα που δεν έχει ολοκληρώσει την εμφάνισή της (γρήγορο scroll και πάτημα): στην τελική κατάσταση
+        // αμέσως, αλλιώς το στιγμιότυπο θα ήταν διάφανο και η εικόνα θα έλειπε από τη μετάβαση
+        var εμφ = im.closest('[data-αποκάλυψη]');
+        if (εμφ) { εμφ.style.transition = 'none'; εμφ.classList.add('is-in'); }
+      }
+      try {
+        if (όνομα) { var r = όνομα.getBoundingClientRect(); sessionStorage.setItem(ΚΛ, JSON.stringify([r.width, r.height, !!im, όνομα.complete && όνομα.naturalWidth > 0])); }
+        else sessionStorage.removeItem(ΚΛ);
+      } catch (x) {}
+      ε.viewTransition.finished.then(καθάρισε, καθάρισε);
+    });
+    addEventListener('pagereveal', function (ε) {
+      καθάρισε();
+      if (!ε.viewTransition) return;
+      var α = window.navigation && navigation.activation, νέα = document.querySelector('.ήρωας__εικόνα');
+      // Στη λίστα με «Πίσω»: η κάρτα του έργου από το οποίο ερχόμαστε
+      if (!νέα && α && α.from && α.navigationType === 'traverse') {
+        νέα = εικόναΓια(new URL(α.from.url).pathname);
+        if (νέα) νέα.style.viewTransitionName = Ο;
+      }
+      // Ποιο στιγμιότυπο μένει από πάνω όσο αλλάζει το σχήμα: όποιο δείχνει περισσότερη φωτογραφία
+      // (σχήμα πιο κοντά στην αναλογία της). Στο κινητό αυτό είναι η κάρτα, στο desktop ο ήρωας.
+      try {
+        var π = JSON.parse(sessionStorage.getItem(ΚΛ) || 'null'); sessionStorage.removeItem(ΚΛ);
+        // Από κάρτα σε σελίδα έργου: η κεφαλίδα δεν εμφανίζεται ούτε στη μετάβαση ούτε μετά
+        if (π && π[2] && νέα && νέα.classList.contains('ήρωας__εικόνα')) ρ.classList.add('κεφαλίδα-κρυφή');
+        if (π && νέα) {
+          var r = νέα.getBoundingClientRect(), φ = (+νέα.getAttribute('width')) / (+νέα.getAttribute('height'));
+          var απόσταση = function (w, h) { return Math.abs(Math.log((w / h) / φ)); };
+          // (μόνο αν η παλιά εικόνα είχε φορτώσει· αλλιώς το στιγμιότυπό της είναι άδειο)
+          if (π[3] && απόσταση(π[0], π[1]) < απόσταση(r.width, r.height)) ρ.classList.add('vt-παλιά');
+        }
+      } catch (x) {}
+      ε.viewTransition.finished.then(καθάρισε, καθάρισε);
+    });
+  })();</script>
+  <script type="speculationrules">{"prerender": [{"where": {"selector_matches": ".κάρτα-έργου__σύνδεσμος"}, "eagerness": "moderate"}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "ContactPage", "@id": "https://gpdevelopment.gr/contact/#webpage", "url": "https://gpdevelopment.gr/contact/", "name": "Contact GP Real Estate Development | Book a Visit in Athens", "description": "Call +30 210 976 1163, email sales@gpdevelopment.gr or send us a message. Office at Dim. Vasiliou 20, Psychiko, Monday to Friday, 10:00–18:00.", "inLanguage": "en", "isPartOf": {"@id": "https://gpdevelopment.gr/#website"}, "about": {"@id": "https://gpdevelopment.gr/#organization"}, "breadcrumb": {"@id": "https://gpdevelopment.gr/contact/#breadcrumb"}}, {"@type": "BreadcrumbList", "@id": "https://gpdevelopment.gr/contact/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://gpdevelopment.gr/"}, {"@type": "ListItem", "position": 2, "name": "Contact", "item": "https://gpdevelopment.gr/contact/"}]}, {"@id": "https://gpdevelopment.gr/#organization", "contactPoint": {"@type": "ContactPoint", "contactType": "sales", "telephone": "+30 210 976 1163", "email": "sales@gpdevelopment.gr", "availableLanguage": ["en", "el"], "hoursAvailable": {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "10:00", "closes": "18:00"}}}]}</script>
+</head>
+<body>
+  <a class="παράκαμψη" href="#main">Skip to content</a>
+  <header class="κεφαλίδα">
+    <div class="κεφαλίδα__μέσα">
+      <a class="λογότυπο" href="/" aria-label="GP Real Estate Development"><svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="5.5"><path d="M73.14 22.42 A36 36 0 1 0 86 50"/><path d="M86 50 H50 L32 81.18"/></g></svg><b aria-hidden="true">GP</b><small aria-hidden="true">Real Estate<br>Development</small></a>
+      <nav class="πλοήγηση" aria-label="Main"><ul><li><a href="/projects/">Projects</a></li><li><a href="/design-build/">Design & Build</a></li><li><a href="/land/">Land</a></li><li><a href="/about/">About</a></li><li><a href="/contact/" aria-current="page">Contact</a></li></ul></nav>
+      <div class="κεφαλίδα__δεξιά">
+        <a class="γλώσσα" href="/el/contact/" hreflang="el" title="Ελληνικά">EL</a>
+        <a class="κουμπί κεφαλίδα__cta" href="#booking"><span class="κουμπί__ετ">Book a visit</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+        <button class="μενού-κουμπί" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menou"><i></i><i></i><i></i></button>
+      </div>
+    </div>
+  </header>
+  
+  <div class="μενού" id="menou" hidden>
+    <nav class="μενού__πλοήγηση" aria-label="Menu"><ol><li><a href="/projects/"><span>Projects</span></a></li><li><a href="/design-build/"><span>Design & Build</span></a></li><li><a href="/land/"><span>Land</span></a></li><li><a href="/about/"><span>About</span></a></li><li><a href="/contact/" aria-current="page"><span>Contact</span></a></li></ol></nav>
+    <div class="μενού__κάτω">
+      <a class="κουμπί κουμπί--σκούρο" href="#booking"><span class="κουμπί__ετ">Book a visit</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+      <p><a href="tel:+302109761163">+30 210 976 1163</a><a href="mailto:sales@gpdevelopment.gr">sales@gpdevelopment.gr</a><a href="/el/contact/" hreflang="el">Ελληνικά</a></p>
+    </div>
+  </div>
+  <main id="main" class="επικοινωνία">
+    <section class="ευρ-κεφαλή" data-τόνος="ανοιχτό" aria-labelledby="epikoinonia-t">
+      <nav class="ψίχουλα" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li aria-current="page">Contact</li></ol></nav>
+      <h1 class="ευρ-κεφαλή__τίτλος" id="epikoinonia-t"><span>Contact</span> <em>Visit, call, or book a time.</em></h1>
+      <p class="ευρ-κεφαλή__κείμενο">Whether you are looking for a home or have a plot to discuss, send us a message and we will call you back within one working day, or book a visit directly in the calendar.</p>
+    </section>
+
+    <div class="επ-πλέγμα" data-τόνος="ανοιχτό">
+      <section class="επ-κράτηση επ-κράτηση--cal" id="booking" aria-labelledby="kratisi-t">
+        <h2 class="ενότητα-τίτλος" id="kratisi-t">Book a visit</h2>
+          <p>Choose a day and time to see one of our projects or to meet us at our office.</p>
+          <div class="ημερολόγιο" id="cal-embed" data-cal-link="enprisma/30min" data-cal-lang="en"></div>
+      </section>
+      <section class="επ-φόρμα" id="epikoinonia" aria-labelledby="forma-t">
+        <h2 class="ενότητα-τίτλος" id="forma-t">Send us a message</h2>
+        <p class="επ-φόρμα__κείμενο">Leave your details. We call back within one working day.</p>
+          <form class="φόρμα" novalidate data-φόρμα>
+            <script type="application/json" class="φόρμα__μηνύματα">{"f_err_req": "Please fill in this field.", "f_err_email": "Please enter a valid email.", "f_err_phone": "Please enter at least 8 digits.", "f_err_consent": "Please accept the privacy policy.", "f_mail_subject": "Request from gpdevelopment.gr", "f_intent": "I am interested in", "f_project": "Which project?", "f_plot": "Where is the plot?", "f_name": "Full name", "f_phone": "Phone", "f_email": "Email", "f_msg": "Message (optional)"}</script>
+            <fieldset class="φόρμα__ομάδα">
+              <legend>I am interested in</legend>
+              <div class="τσιπ-σειρά"><label class="τσιπ"><input type="radio" name="intent" value="buy" checked><span>A home</span></label><label class="τσιπ"><input type="radio" name="intent" value="land"><span>My plot</span></label><label class="τσιπ"><input type="radio" name="intent" value="broker"><span>A client</span></label><label class="τσιπ"><input type="radio" name="intent" value="other"><span>Something else</span></label></div>
+            </fieldset>
+            <div class="πεδίο" data-για="land" hidden>
+              <input id="f-plot" name="plot" type="text" placeholder=" " autocomplete="off"><label for="f-plot">Where is the plot?</label><small class="πεδίο__λάθος"></small>
+            </div>
+            <div class="πεδίο"><input id="f-name" name="name" type="text" placeholder=" " autocomplete="name" required><label for="f-name">Full name</label><small class="πεδίο__λάθος"></small></div>
+            <div class="φόρμα__σειρά">
+              <div class="πεδίο"><input id="f-phone" name="phone" type="tel" placeholder=" " autocomplete="tel" inputmode="tel" required><label for="f-phone">Phone</label><small class="πεδίο__λάθος"></small></div>
+              <div class="πεδίο"><input id="f-email" name="email" type="email" placeholder=" " autocomplete="email" required><label for="f-email">Email</label><small class="πεδίο__λάθος"></small></div>
+            </div>
+            <div class="πεδίο"><textarea id="f-msg" name="message" rows="1" placeholder=" "></textarea><label for="f-msg">Message (optional)</label></div>
+            <label class="συναίνεση"><input type="checkbox" name="consent" required><i aria-hidden="true"></i><span>I agree to the processing of my details as described in the <a href="/privacy-policy/">privacy policy</a>.</span></label>
+            <small class="πεδίο__λάθος φόρμα__λάθος-συναίνεσης"></small>
+            <input type="text" name="website" class="φόρμα__παγίδα" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="φόρμα__κάτω">
+              <button class="κουμπί κουμπί--σκούρο φόρμα__αποστολή" type="submit"><span class="κουμπί__ετ">Send</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></button>
+              
+            </div>
+          </form>
+          <div class="φόρμα__ευχαριστώ" hidden tabindex="-1">
+            <h3>Thank you.</h3><p>Your request is with us. We will call you within one working day.</p>
+          </div>
+      </section>
+    </div>
+
+    <section class="επ-στοιχεία" data-τόνος="ανοιχτό" aria-label="Contact">
+      <dl class="επ-στοιχεία__λίστα">
+        <div><dt>Phone</dt><dd><a href="tel:+302109761163">+30 210 976 1163</a></dd></div>
+        <div><dt>Mobile</dt><dd><a href="tel:+306944272701">+30 6944 272 701</a></dd></div>
+        <div><dt>Email</dt><dd><a href="mailto:sales@gpdevelopment.gr">sales@gpdevelopment.gr</a></dd></div>
+        <div><dt>Office</dt><dd>Dim. Vasiliou 20, Psychiko 154 51<br><a class="υπογράμμιση επ-στοιχεία__χάρτης" href="https://www.google.com/maps/search/?api=1&amp;query=Dim.+Vasiliou+20%2C+Psychiko+154+51%2C+Greece" target="_blank" rel="noopener"><span>Open in Google Maps</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></dd></div>
+        <div><dt>Opening hours</dt><dd>Mon–Fri, 10:00–18:00</dd></div>
+      </dl>
+    </section>
+  </main>
+
+  <footer class="υποσέλιδο" data-τόνος="σκούρο">
+    <div class="υποσέλιδο__πάνω">
+      <p class="υποσέλιδο__δήλωση">Homes designed <em>one by one.</em></p>
+      <a class="υποσέλιδο__πάνω-κουμπί" href="#main"><span>Back to top</span><svg viewBox="0 0 14 46" aria-hidden="true"><path d="M7 45V1M1 8l6-7 6 7" fill="none" stroke="currentColor"/></svg></a>
+    </div>
+    <div class="υποσέλιδο__πλέγμα">
+      <div class="υποσέλιδο__σήμα"><svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="5.5"><path d="M73.14 22.42 A36 36 0 1 0 86 50"/><path d="M86 50 H50 L32 81.18"/></g></svg><p>GP Real Estate Development<br><span>Real Estate Development · Athens</span></p></div>
+      <div class="υποσέλιδο__στήλη"><h3>Projects</h3><ul><li><a href="/chalandri/">Sachtouri · Chalandri</a></li><li><a href="/mareterra/">Mareterra · Glyfada</a></li><li><a href="/v5residences/">V5 Residences · Neo Psychiko</a></li></ul></div><div class="υποσέλιδο__στήλη"><h3>Company</h3><ul><li><a href="/about/">About</a></li><li><a href="/design-build/">Design & Build</a></li><li><a href="/land/">Antiparochi</a></li><li><a href="/contact/">Contact</a></li></ul></div>
+      <div class="υποσέλιδο__στήλη"><h3>Contact</h3><ul>
+        <li><a href="tel:+302109761163">+30 210 976 1163</a></li><li><a href="mailto:sales@gpdevelopment.gr">sales@gpdevelopment.gr</a></li><li>Dim. Vasiliou 20, Psychiko 154 51</li><li>Mon–Fri, 10:00–18:00</li></ul></div>
+    </div>
+    <div class="υποσέλιδο__λέξη" aria-hidden="true">GP Development</div>
+    <div class="υποσέλιδο__βάση">
+      <span>© 2026 GP Real Estate Development. All rights reserved.</span>
+      <a href="/privacy-policy/">Privacy policy</a>
+    </div>
+  </footer>
+
+
+  <script src="/assets/js/sections.js?v=202611151626" defer></script>
+  <script src="/assets/js/projects.js?v=202611151626" defer></script>
+</body>
+</html>

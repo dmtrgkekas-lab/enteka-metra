@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mareterra: New Homes Near the Golf in Glyfada | GP Development</title>
+  <meta name="description" content="Six A++ maisonettes, duplexes and penthouses 250 m from Glyfada Golf Course, with private pools, sea views and two-car garages.">
+  <link rel="canonical" href="https://gpdevelopment.gr/mareterra/">
+  <link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/mareterra/">
+  <link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/mareterra/">
+  <link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/mareterra/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GP Real Estate Development">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="Mareterra: New Homes Near the Golf in Glyfada | GP Development">
+  <meta property="og:description" content="Six A++ maisonettes, duplexes and penthouses 250 m from Glyfada Golf Course, with private pools, sea views and two-car garages.">
+  <meta property="og:url" content="https://gpdevelopment.gr/mareterra/">
+  <meta property="og:image" content="https://gpdevelopment.gr/assets/og/mareterra.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#1e1c1a">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/projects/mareterra/cover-1600.webp" imagesrcset="/assets/projects/mareterra/cover-960.webp 960w, /assets/projects/mareterra/cover-1600.webp 1600w" imagesizes="100vw" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/home.css?v=202611151626">
+  <link rel="stylesheet" href="/assets/css/sections.css?v=202611151626">
+  <link rel="stylesheet" href="/assets/css/projects.css?v=202611151626">
+  <script>document.documentElement.classList.replace('no-js', 'js'); if (!('onpagereveal' in window) && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('μετάβαση-js');</script>
+  <script>(function () {
+    var Ο = 'project-image', ΚΛ = 'gp-vt-εικόνα', ρ = document.documentElement;
+    function εικόναΓια(διαδρομή) {
+      var σ = document.querySelector('.κάρτα-έργου__σύνδεσμος[href="' + διαδρομή + '"]');
+      return σ && σ.querySelector('img');
+    }
+    // Κανένα όνομα από προηγούμενη μετάβαση: η σελίδα μπορεί να επιστρέψει από την cache του browser
+    // («Πίσω») με το όνομα ακόμη πάνω της, και δύο ίδια ονόματα ακυρώνουν όλη τη μετάβαση.
+    function καθάρισε() {
+      document.querySelectorAll('img').forEach(function (im) { if (im.style.viewTransitionName) im.style.viewTransitionName = ''; });
+      ρ.classList.remove('vt-παλιά');
+    }
+    // Φεύγοντας: όνομα μόνο στην εικόνα του συνδέσμου που πατήθηκε (αλλιώς μένει ο ήρωας, όταν υπάρχει).
+    // Κρατάμε το σχήμα της, για να διαλέξει η νέα σελίδα ποιο στιγμιότυπο δείχνει όσο μεγαλώνει.
+    addEventListener('pageswap', function (ε) {
+      καθάρισε();
+      if (!ε.viewTransition || !ε.activation || !ε.activation.entry) return;
+      var im = εικόναΓια(new URL(ε.activation.entry.url).pathname), ήρωας = document.querySelector('.ήρωας__εικόνα'), όνομα = im || ήρωας;
+      if (im) {
+        if (ήρωας) ήρωας.style.viewTransitionName = 'none';
+        im.style.viewTransitionName = Ο;
+        // Κάρτα που δεν έχει ολοκληρώσει την εμφάνισή της (γρήγορο scroll και πάτημα): στην τελική κατάσταση
+        // αμέσως, αλλιώς το στιγμιότυπο θα ήταν διάφανο και η εικόνα θα έλειπε από τη μετάβαση
+        var εμφ = im.closest('[data-αποκάλυψη]');
+        if (εμφ) { εμφ.style.transition = 'none'; εμφ.classList.add('is-in'); }
+      }
+      try {
+        if (όνομα) { var r = όνομα.getBoundingClientRect(); sessionStorage.setItem(ΚΛ, JSON.stringify([r.width, r.height, !!im, όνομα.complete && όνομα.naturalWidth > 0])); }
+        else sessionStorage.removeItem(ΚΛ);
+      } catch (x) {}
+      ε.viewTransition.finished.then(καθάρισε, καθάρισε);
+    });
+    addEventListener('pagereveal', function (ε) {
+      καθάρισε();
+      if (!ε.viewTransition) return;
+      var α = window.navigation && navigation.activation, νέα = document.querySelector('.ήρωας__εικόνα');
+      // Στη λίστα με «Πίσω»: η κάρτα του έργου από το οποίο ερχόμαστε
+      if (!νέα && α && α.from && α.navigationType === 'traverse') {
+        νέα = εικόναΓια(new URL(α.from.url).pathname);
+        if (νέα) νέα.style.viewTransitionName = Ο;
+      }
+      // Ποιο στιγμιότυπο μένει από πάνω όσο αλλάζει το σχήμα: όποιο δείχνει περισσότερη φωτογραφία
+      // (σχήμα πιο κοντά στην αναλογία της). Στο κινητό αυτό είναι η κάρτα, στο desktop ο ήρωας.
+      try {
+        var π = JSON.parse(sessionStorage.getItem(ΚΛ) || 'null'); sessionStorage.removeItem(ΚΛ);
+        // Από κάρτα σε σελίδα έργου: η κεφαλίδα δεν εμφανίζεται ούτε στη μετάβαση ούτε μετά
+        if (π && π[2] && νέα && νέα.classList.contains('ήρωας__εικόνα')) ρ.classList.add('κεφαλίδα-κρυφή');
+        if (π && νέα) {
+          var r = νέα.getBoundingClientRect(), φ = (+νέα.getAttribute('width')) / (+νέα.getAttribute('height'));
+          var απόσταση = function (w, h) { return Math.abs(Math.log((w / h) / φ)); };
+          // (μόνο αν η παλιά εικόνα είχε φορτώσει· αλλιώς το στιγμιότυπό της είναι άδειο)
+          if (π[3] && απόσταση(π[0], π[1]) < απόσταση(r.width, r.height)) ρ.classList.add('vt-παλιά');
+        }
+      } catch (x) {}
+      ε.viewTransition.finished.then(καθάρισε, καθάρισε);
+    });
+  })();</script>
+  <script type="speculationrules">{"prerender": [{"where": {"selector_matches": ".κάρτα-έργου__σύνδεσμος"}, "eagerness": "moderate"}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://gpdevelopment.gr/mareterra/#webpage", "url": "https://gpdevelopment.gr/mareterra/", "name": "Mareterra: New Homes Near the Golf in Glyfada | GP Development", "description": "Six A++ maisonettes, duplexes and penthouses 250 m from Glyfada Golf Course, with private pools, sea views and two-car garages.", "inLanguage": "en", "isPartOf": {"@id": "https://gpdevelopment.gr/#website"}, "publisher": {"@id": "https://gpdevelopment.gr/#organization"}, "about": {"@id": "https://gpdevelopment.gr/mareterra/#place"}, "breadcrumb": {"@id": "https://gpdevelopment.gr/mareterra/#breadcrumb"}, "primaryImageOfPage": "https://gpdevelopment.gr/assets/projects/mareterra/cover-1600.webp"}, {"@type": "BreadcrumbList", "@id": "https://gpdevelopment.gr/mareterra/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://gpdevelopment.gr/"}, {"@type": "ListItem", "position": 2, "name": "Projects", "item": "https://gpdevelopment.gr/projects/"}, {"@type": "ListItem", "position": 3, "name": "Mareterra", "item": "https://gpdevelopment.gr/mareterra/"}]}, {"@type": "ApartmentComplex", "@id": "https://gpdevelopment.gr/mareterra/#place", "name": "Mareterra", "description": "Six A++ maisonettes, duplexes and penthouses 250 m from Glyfada Golf Course, with private pools, sea views and two-car garages.", "url": "https://gpdevelopment.gr/mareterra/", "image": ["https://gpdevelopment.gr/assets/projects/mareterra/cover-1600.webp", "https://gpdevelopment.gr/assets/projects/mareterra/sunset-1280.webp", "https://gpdevelopment.gr/assets/projects/mareterra/rooftop-1700.webp", "https://gpdevelopment.gr/assets/projects/mareterra/living-1700.webp"], "address": {"@type": "PostalAddress", "streetAddress": "Saki Karagiorga 77 & Lykourgou", "addressLocality": "Glyfada", "addressRegion": "Attica", "addressCountry": "GR"}, "numberOfAccommodationUnits": 6, "numberOfAvailableAccommodationUnits": 6, "containsPlace": [{"@type": "Accommodation", "name": "Maisonette I & II · Semi-basement, ground & 1st floor · 192 m²", "floorSize": {"@type": "QuantitativeValue", "value": 192, "unitCode": "MTK"}, "numberOfBedrooms": 3, "numberOfBathroomsTotal": 3}, {"@type": "Accommodation", "name": "Duplex I & II · 2nd & 3rd floor · 162 m²", "floorSize": {"@type": "QuantitativeValue", "value": 162, "unitCode": "MTK"}, "numberOfBedrooms": 3, "numberOfBathroomsTotal": 3}, {"@type": "Accommodation", "name": "Penthouse I & II · 4th & 5th floor · 144 m²", "floorSize": {"@type": "QuantitativeValue", "value": 144, "unitCode": "MTK"}, "numberOfBedrooms": 3, "numberOfBathroomsTotal": 3}]}]}</script>
+</head>
+<body>
+  <a class="παράκαμψη" href="#main">Skip to content</a>
+  <header class="κεφαλίδα">
+    <div class="κεφαλίδα__μέσα">
+      <a class="λογότυπο" href="/" aria-label="GP Real Estate Development"><svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="5.5"><path d="M73.14 22.42 A36 36 0 1 0 86 50"/><path d="M86 50 H50 L32 81.18"/></g></svg><b aria-hidden="true">GP</b><small aria-hidden="true">Real Estate<br>Development</small></a>
+      <nav class="πλοήγηση" aria-label="Main"><ul><li><a href="/projects/" aria-current="true">Projects</a></li><li><a href="/design-build/">Design & Build</a></li><li><a href="/land/">Land</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></nav>
+      <div class="κεφαλίδα__δεξιά">
+        <a class="γλώσσα" href="/el/mareterra/" hreflang="el" title="Ελληνικά">EL</a>
+        <a class="κουμπί κεφαλίδα__cta" href="/contact/#booking"><span class="κουμπί__ετ">Book a visit</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+        <button class="μενού-κουμπί" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menou"><i></i><i></i><i></i></button>
+      </div>
+    </div>
+  </header>
+  
+  <div class="μενού" id="menou" hidden>
+    <nav class="μενού__πλοήγηση" aria-label="Menu"><ol><li><a href="/projects/" aria-current="true"><span>Projects</span></a></li><li><a href="/design-build/"><span>Design & Build</span></a></li><li><a href="/land/"><span>Land</span></a></li><li><a href="/about/"><span>About</span></a></li><li><a href="/contact/"><span>Contact</span></a></li></ol></nav>
+    <div class="μενού__κάτω">
+      <a class="κουμπί κουμπί--σκούρο" href="/contact/#booking"><span class="κουμπί__ετ">Book a visit</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+      <p><a href="tel:+302109761163">+30 210 976 1163</a><a href="mailto:sales@gpdevelopment.gr">sales@gpdevelopment.gr</a><a href="/el/mareterra/" hreflang="el">Ελληνικά</a></p>
+    </div>
+  </div>
+  <main id="main" class="έργο έργο--selling">
+    <section class="ήρωας" data-τόνος="σκούρο" aria-labelledby="ergo-t">
+      <img class="ήρωας__εικόνα" src="/assets/projects/mareterra/cover-1600.webp" srcset="/assets/projects/mareterra/cover-960.webp 960w, /assets/projects/mareterra/cover-1600.webp 1600w" sizes="100vw" width="1600" height="860" alt="Mareterra, Glyfada: maisonette garden with private pool" fetchpriority="high" decoding="sync">
+      <div class="ήρωας__μέσα">
+        <nav class="ψίχουλα" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/projects/">Projects</a></li><li aria-current="page">Mareterra</li></ol></nav>
+        <p class="ήρωας__πάνω"><span>Glyfada</span><span class="διαθεσιμότητα"><i aria-hidden="true"></i>6 of 6 homes available</span></p>
+        <h1 class="ήρωας__τίτλος" id="ergo-t">Mareterra</h1>
+        <p class="ήρωας__κείμενο">Six homes 250 metres from the Glyfada Golf Course, with private pools and views to the sea.</p>
+        <div class="ήρωας__ενέργειες">
+          <a class="κουμπί " href="#residences"><span class="κουμπί__ετ">Available residences</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+          <a class="ήρωας__τηλ" href="tel:+302109761163"><small>Call</small><span>+30 210 976 1163</span></a>
+        </div>
+      </div>
+    </section>
+
+    <div class="έργο__σώμα">
+
+    <aside class="μονάδες" id="residences" aria-labelledby="residences-t" data-μονάδες>
+      <div class="μονάδες__κάρτα">
+        <header class="μονάδες__κεφαλή">
+          <h2 class="μονάδες__τίτλος" id="residences-t">Available residences</h2>
+          <p class="μονάδες__σύνολο"><i aria-hidden="true"></i>6 of 6 available</p>
+        </header>
+        <div class="μονάδες__επιλογή">
+          <button class="μονάδες__βέλος" type="button" data-προηγούμενη aria-label="Previous residence"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button>
+          <div class="μονάδες__καρτέλες" role="tablist" aria-label="Residences"><button class="μονάδες__καρτέλα" type="button" role="tab" id="residence-maisonette-tab" aria-controls="residence-maisonette" aria-selected="true">Maisonette</button><button class="μονάδες__καρτέλα" type="button" role="tab" id="residence-duplex-tab" aria-controls="residence-duplex" aria-selected="false" tabindex="-1">Duplex</button><button class="μονάδες__καρτέλα" type="button" role="tab" id="residence-penthouse-tab" aria-controls="residence-penthouse" aria-selected="false" tabindex="-1">Penthouse</button></div>
+          <button class="μονάδες__βέλος" type="button" data-επόμενη aria-label="Next residence"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button>
+        </div>
+        <div class="μονάδες__πάνελ">
+          <div class="μονάδα" role="tabpanel" id="residence-maisonette" aria-labelledby="residence-maisonette-tab" tabindex="0" data-μονάδα>
+            <h3 class="μονάδα__όνομα"><span>Maisonette I &amp; II</span><small>Semi-basement, ground &amp; 1st floor</small></h3>
+            <dl class="μονάδα__στοιχεία"><div><dt>Size</dt><dd>192 m²</dd></div><div><dt>Bedrooms</dt><dd>3</dd></div><div><dt>Bathrooms</dt><dd>3</dd></div><div><dt>Highlights</dt><dd>Private garden and pool, study</dd></div><div><dt>Price</dt><dd>Price on request</dd></div></dl><p class="μονάδα__κατάσταση">Available</p><div class="μονάδα__ενέργειες"><a class="κουμπί κουμπί--σκούρο" href="#epikoinonia" data-κατοικία="Maisonette I &amp; II · Semi-basement, ground &amp; 1st floor · 192 m²" aria-label="Enquire about Maisonette I &amp; II · Semi-basement, ground &amp; 1st floor · 192 m²"><span class="κουμπί__ετ">Enquire</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a><a class="υπογράμμιση" href="/contact/#booking"><span>Book a visit</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div><details class="μονάδα__περισσότερα"><summary><span>More about this home</span><i aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h16M10 2v16" fill="none" stroke="currentColor" stroke-width="1"/></svg></i></summary><p>A corner maisonette on three levels: a semi-basement with a cour anglaise, the ground floor and the first floor. Three bedrooms with built-in wardrobes, three bathrooms, a study, and a basement that works as a playroom, service room or fourth bedroom. Private garden, pool and a two-car garage.</p></details>
+          </div>
+          <div class="μονάδα" role="tabpanel" id="residence-duplex" aria-labelledby="residence-duplex-tab" tabindex="0" data-μονάδα hidden>
+            <h3 class="μονάδα__όνομα"><span>Duplex I &amp; II</span><small>2nd &amp; 3rd floor</small></h3>
+            <dl class="μονάδα__στοιχεία"><div><dt>Size</dt><dd>162 m²</dd></div><div><dt>Bedrooms</dt><dd>3</dd></div><div><dt>Bathrooms</dt><dd>3</dd></div><div><dt>Highlights</dt><dd>Sea views</dd></div><div><dt>Price</dt><dd>Price on request</dd></div></dl><p class="μονάδα__κατάσταση">Available</p><div class="μονάδα__ενέργειες"><a class="κουμπί κουμπί--σκούρο" href="#epikoinonia" data-κατοικία="Duplex I &amp; II · 2nd &amp; 3rd floor · 162 m²" aria-label="Enquire about Duplex I &amp; II · 2nd &amp; 3rd floor · 162 m²"><span class="κουμπί__ετ">Enquire</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a><a class="υπογράμμιση" href="/contact/#booking"><span>Book a visit</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div><details class="μονάδα__περισσότερα"><summary><span>More about this home</span><i aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h16M10 2v16" fill="none" stroke="currentColor" stroke-width="1"/></svg></i></summary><p>Two levels: 92 m² on the 2nd floor and 70 m² on the 3rd, with views to the sea. Three bedrooms, three bathrooms, a bright living room, a fully equipped kitchen, generous storage and a two-car garage.</p></details>
+          </div>
+          <div class="μονάδα" role="tabpanel" id="residence-penthouse" aria-labelledby="residence-penthouse-tab" tabindex="0" data-μονάδα hidden>
+            <h3 class="μονάδα__όνομα"><span>Penthouse I &amp; II</span><small>4th &amp; 5th floor</small></h3>
+            <dl class="μονάδα__στοιχεία"><div><dt>Size</dt><dd>144 m² <small>+ 40 m² rooftop</small></dd></div><div><dt>Bedrooms</dt><dd>3</dd></div><div><dt>Bathrooms</dt><dd>3</dd></div><div><dt>Highlights</dt><dd>Private rooftop pool</dd></div><div><dt>Price</dt><dd>Price on request</dd></div></dl><p class="μονάδα__κατάσταση">Available</p><div class="μονάδα__ενέργειες"><a class="κουμπί κουμπί--σκούρο" href="#epikoinonia" data-κατοικία="Penthouse I &amp; II · 4th &amp; 5th floor · 144 m²" aria-label="Enquire about Penthouse I &amp; II · 4th &amp; 5th floor · 144 m²"><span class="κουμπί__ετ">Enquire</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a><a class="υπογράμμιση" href="/contact/#booking"><span>Book a visit</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div><details class="μονάδα__περισσότερα"><summary><span>More about this home</span><i aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h16M10 2v16" fill="none" stroke="currentColor" stroke-width="1"/></svg></i></summary><p>95 m² on the 4th floor and 49 m² on the 5th, plus a 40 m² open rooftop with a private pool. Three bedrooms, three bathrooms, a fully equipped kitchen, storage and a two-car garage.</p></details>
+          </div>
+        </div>
+        <div class="μονάδες__φυλλάδια"><a class="υπογράμμιση φυλλάδιο" href="/brochure/Mareterra%20Residences_ENG.pdf" download><span>Brochure (EN) · PDF</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v13m-6-6 6 6 6-6M5 20h14" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a><a class="υπογράμμιση φυλλάδιο" href="/brochure/Mareterra%20Residences_GR.pdf" download><span>Brochure (ΕΛ) · PDF</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v13m-6-6 6 6 6-6M5 20h14" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div>
+      </div>
+    </aside>
+      <div class="έργο__κύριο">
+        <a class="υπογράμμιση έργο__πίσω" href="/projects/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>All projects</span></a>
+
+        <section class="περιγραφή" data-τόνος="ανοιχτό" aria-labelledby="perigrafi-t">
+          <h2 class="περιγραφή__τίτλος" id="perigrafi-t" data-αποκάλυψη>Between the golf course and the sea.</h2>
+          <div class="περιγραφή__κείμενο" data-αποκάλυψη><p>Mareterra is a five-storey residential building at Saki Karagiorga 77 and Lykourgou, in the golf area of Glyfada. It holds six homes in three types: two maisonettes with a private garden and pool, two duplexes with sea views, and two duplex penthouses with a private rooftop pool.</p><p>The Glyfada Golf Course is 250 metres away and Ellinikon Park is a short walk. The building is rated energy class A++, with net metering photovoltaics, a 12 cm thermal façade, underfloor heating and EV charging in the underground garage.</p><p class="περιγραφή__διεύθυνση">Saki Karagiorga 77 &amp; Lykourgou, Glyfada</p></div>
+        </section>
+
+        <section class="στοιχεία" data-τόνος="ανοιχτό" aria-label="Key facts">
+          <dl class="στοιχεία__λίστα"><div class="στοιχεία__γεγονός"><dt>Homes</dt><dd>6</dd></div><div class="στοιχεία__γεγονός"><dt>Interior sizes</dt><dd>144–192 m²</dd></div><div class="στοιχεία__γεγονός"><dt>To the golf course</dt><dd>250 m</dd></div><div class="στοιχεία__γεγονός"><dt>Energy class</dt><dd>A++</dd></div></dl>
+        </section>
+
+        <section class="γκαλερί" data-τόνος="ανοιχτό" aria-labelledby="gallery-t">
+          <h2 class="οπτικά-κρυφό" id="gallery-t">Gallery</h2>
+          <ul class="γκαλερί__πλέγμα"><li><button class="γκαλερί__κουμπί" type="button" data-μεγάλη="/assets/projects/mareterra/sunset-1280.webp" data-λεζάντα="Mareterra façade at sunset" aria-label="Open image: Mareterra façade at sunset"><img class="" src="/assets/projects/mareterra/sunset-1280.webp" srcset="/assets/projects/mareterra/sunset-720.webp 720w, /assets/projects/mareterra/sunset-1280.webp 1280w" sizes="(max-width: 760px) 86vw, 48vw" width="1280" height="748" alt="Mareterra façade at sunset" loading="lazy" decoding="async"></button></li><li><button class="γκαλερί__κουμπί" type="button" data-μεγάλη="/assets/projects/mareterra/rooftop-1700.webp" data-λεζάντα="Penthouse rooftop with private pool and sea view" aria-label="Open image: Penthouse rooftop with private pool and sea view"><img class="" src="/assets/projects/mareterra/rooftop-1400.webp" srcset="/assets/projects/mareterra/rooftop-720.webp 720w, /assets/projects/mareterra/rooftop-1400.webp 1400w, /assets/projects/mareterra/rooftop-1700.webp 1700w" sizes="(max-width: 760px) 86vw, 24vw" width="1700" height="1101" alt="Penthouse rooftop with private pool and sea view" loading="lazy" decoding="async"></button></li><li><button class="γκαλερί__κουμπί" type="button" data-μεγάλη="/assets/projects/mareterra/living-1700.webp" data-λεζάντα="Double-height living room opening to the garden" aria-label="Open image: Double-height living room opening to the garden"><img class="" src="/assets/projects/mareterra/living-1400.webp" srcset="/assets/projects/mareterra/living-720.webp 720w, /assets/projects/mareterra/living-1400.webp 1400w, /assets/projects/mareterra/living-1700.webp 1700w" sizes="(max-width: 760px) 86vw, 24vw" width="1700" height="1002" alt="Double-height living room opening to the garden" loading="lazy" decoding="async"></button></li><li><button class="γκαλερί__κουμπί" type="button" data-μεγάλη="/assets/projects/mareterra/kitchen-1600.webp" data-λεζάντα="Kitchen and dining area with marble island" aria-label="Open image: Kitchen and dining area with marble island"><img class="" src="/assets/projects/mareterra/kitchen-1400.webp" srcset="/assets/projects/mareterra/kitchen-720.webp 720w, /assets/projects/mareterra/kitchen-1400.webp 1400w, /assets/projects/mareterra/kitchen-1600.webp 1600w" sizes="(max-width: 760px) 86vw, 24vw" width="1600" height="846" alt="Kitchen and dining area with marble island" loading="lazy" decoding="async"></button></li><li><button class="γκαλερί__κουμπί" type="button" data-μεγάλη="/assets/projects/mareterra/bedroom-1700.webp" data-λεζάντα="Penthouse bedroom" aria-label="Open image: Penthouse bedroom"><img class="" src="/assets/projects/mareterra/bedroom-1400.webp" srcset="/assets/projects/mareterra/bedroom-720.webp 720w, /assets/projects/mareterra/bedroom-1400.webp 1400w, /assets/projects/mareterra/bedroom-1700.webp 1700w" sizes="(max-width: 760px) 86vw, 24vw" width="1700" height="1156" alt="Penthouse bedroom" loading="lazy" decoding="async"></button></li><li><button class="γκαλερί__κουμπί" type="button" data-μεγάλη="/assets/projects/mareterra/bath-1700.webp" data-λεζάντα="Marble bathroom with walk-in shower" aria-label="Open image: Marble bathroom with walk-in shower"><img class="" src="/assets/projects/mareterra/bath-1400.webp" srcset="/assets/projects/mareterra/bath-720.webp 720w, /assets/projects/mareterra/bath-1400.webp 1400w, /assets/projects/mareterra/bath-1700.webp 1700w" sizes="(max-width: 760px) 86vw, 24vw" width="1700" height="1082" alt="Marble bathroom with walk-in shower" loading="lazy" decoding="async"></button></li></ul>
+          <p class="γκαλερί__σημείωση">Renderings are indicative.</p>
+        </section>
+
+        <section class="προδιαγραφές" data-τόνος="ανοιχτό" aria-labelledby="specs-t">
+          <h2 class="ενότητα-τίτλος" id="specs-t">Specifications</h2>
+          <ul class="προδιαγραφές__λίστα"><li>Energy class A++</li><li>Net metering photovoltaic system</li><li>Thermal façade with 12 cm insulation</li><li>Electric and hybrid vehicle charging</li><li>Underground parking and storage</li><li>Individual VRV ducted air conditioning</li><li>Underfloor heating</li><li>Energy fireplace</li><li>Private swimming pools</li><li>Floor-to-ceiling windows</li><li>Smart home</li><li>Sea-view residences</li><li>Generator for common areas and parking</li></ul>
+        </section>
+
+        <section class="τοποθεσία" data-τόνος="ανοιχτό" id="location" aria-labelledby="location-t">
+          <div class="τοποθεσία__κείμενο">
+            <h2 class="ενότητα-τίτλος" id="location-t">Location</h2>
+            <p class="τοποθεσία__διεύθυνση">Saki Karagiorga 77 &amp; Lykourgou, Glyfada</p>
+            <p>In the golf area of Glyfada: 250 metres from the Glyfada Golf Course, a short walk from Ellinikon Park, and close to the shops, restaurants, marinas and beaches of the Athens Riviera.</p>
+            
+          </div>
+          <div class="τοποθεσία__χάρτης">
+            <div class="χάρτης" data-χάρτης="https://www.google.com/maps?q=Saki+Karagiorga+77%2C+Glyfada%2C+Greece&amp;output=embed" data-τίτλος="Mareterra, Glyfada">
+            <button class="χάρτης__κουμπί" type="button"><span class="υπογράμμιση"><span>Show map</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span><small>The map loads from Google Maps.</small></button>
+          </div>
+          <a class="υπογράμμιση χάρτης__έξω" href="https://www.google.com/maps/search/?api=1&amp;query=Saki+Karagiorga+77%2C+Glyfada%2C+Greece" target="_blank" rel="noopener"><span>Open in Google Maps</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <section class="επαφή-έργου" id="epikoinonia" data-τόνος="ανοιχτό" aria-labelledby="epafi-t">
+      <div class="επαφή-έργου__μέσα">
+        <div class="επαφή-έργου__πλάι" data-αποκάλυψη>
+          <h2 class="επαφή-έργου__τίτλος" id="epafi-t"><span>Visit Mareterra</span> <em>or ask us anything.</em></h2>
+          <p>Leave your details. We call back within one working day.</p>
+          <ul class="επαφή-έργου__στοιχεία">
+            <li><small>Phone</small><a href="tel:+302109761163">+30 210 976 1163</a></li>
+            <li><small>Email</small><a href="mailto:sales@gpdevelopment.gr">sales@gpdevelopment.gr</a></li>
+            <li><small>Office</small><span>Dim. Vasiliou 20, Psychiko 154 51<br>Mon–Fri, 10:00–18:00</span></li>
+          </ul>
+        </div>
+        <div class="επαφή-έργου__φόρμα" data-αποκάλυψη>
+          <form class="φόρμα" novalidate data-φόρμα>
+            <script type="application/json" class="φόρμα__μηνύματα">{"f_err_req": "Please fill in this field.", "f_err_email": "Please enter a valid email.", "f_err_phone": "Please enter at least 8 digits.", "f_err_consent": "Please accept the privacy policy.", "f_mail_subject": "Request from gpdevelopment.gr", "f_intent": "I am interested in", "f_plot": "Where is the plot?", "f_name": "Full name", "f_phone": "Phone", "f_email": "Email", "f_msg": "Message (optional)", "f_project": "Project:", "f_residence": "Home:"}</script>
+            <input type="hidden" name="project" value="Mareterra"><div class="πεδίο πεδίο--λίστα"><label for="f-residence">Which home?</label><select id="f-residence" name="residence"><option value="">Not sure yet</option><option value="Maisonette I &amp; II · Semi-basement, ground &amp; 1st floor · 192 m²">Maisonette I &amp; II · Semi-basement, ground &amp; 1st floor · 192 m²</option><option value="Duplex I &amp; II · 2nd &amp; 3rd floor · 162 m²">Duplex I &amp; II · 2nd &amp; 3rd floor · 162 m²</option><option value="Penthouse I &amp; II · 4th &amp; 5th floor · 144 m²">Penthouse I &amp; II · 4th &amp; 5th floor · 144 m²</option></select></div>
+            <div class="πεδίο"><input id="f-name" name="name" type="text" placeholder=" " autocomplete="name" required><label for="f-name">Full name</label><small class="πεδίο__λάθος"></small></div>
+            <div class="πεδίο"><input id="f-phone" name="phone" type="tel" placeholder=" " autocomplete="tel" inputmode="tel" required><label for="f-phone">Phone</label><small class="πεδίο__λάθος"></small></div>
+            <div class="πεδίο"><input id="f-email" name="email" type="email" placeholder=" " autocomplete="email" required><label for="f-email">Email</label><small class="πεδίο__λάθος"></small></div>
+            <div class="πεδίο"><textarea id="f-msg" name="message" rows="1" placeholder=" "></textarea><label for="f-msg">Message (optional)</label></div>
+            <label class="συναίνεση"><input type="checkbox" name="consent" required><i aria-hidden="true"></i><span>I agree to the processing of my details as described in the <a href="/privacy-policy/">privacy policy</a>.</span></label>
+            <small class="πεδίο__λάθος φόρμα__λάθος-συναίνεσης"></small>
+            <input type="text" name="website" class="φόρμα__παγίδα" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="φόρμα__κάτω">
+              <button class="κουμπί κουμπί--σκούρο φόρμα__αποστολή" type="submit"><span class="κουμπί__ετ">Send</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></button>
+              <a class="φόρμα__κράτηση" href="tel:+302109761163"><small>or call</small><span>+30 210 976 1163</span></a>
+            </div>
+          </form>
+          <div class="φόρμα__ευχαριστώ" hidden tabindex="-1"><h3>Thank you.</h3><p>Your request is with us. We will call you within one working day.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="υποσέλιδο" data-τόνος="σκούρο">
+    <div class="υποσέλιδο__πάνω">
+      <p class="υποσέλιδο__δήλωση">Homes designed <em>one by one.</em></p>
+      <a class="υποσέλιδο__πάνω-κουμπί" href="#main"><span>Back to top</span><svg viewBox="0 0 14 46" aria-hidden="true"><path d="M7 45V1M1 8l6-7 6 7" fill="none" stroke="currentColor"/></svg></a>
+    </div>
+    <div class="υποσέλιδο__πλέγμα">
+      <div class="υποσέλιδο__σήμα"><svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="5.5"><path d="M73.14 22.42 A36 36 0 1 0 86 50"/><path d="M86 50 H50 L32 81.18"/></g></svg><p>GP Real Estate Development<br><span>Real Estate Development · Athens</span></p></div>
+      <div class="υποσέλιδο__στήλη"><h3>Projects</h3><ul><li><a href="/chalandri/">Sachtouri · Chalandri</a></li><li><a href="/mareterra/">Mareterra · Glyfada</a></li><li><a href="/v5residences/">V5 Residences · Neo Psychiko</a></li></ul></div><div class="υποσέλιδο__στήλη"><h3>Company</h3><ul><li><a href="/about/">About</a></li><li><a href="/design-build/">Design & Build</a></li><li><a href="/land/">Antiparochi</a></li><li><a href="/contact/">Contact</a></li></ul></div>
+      <div class="υποσέλιδο__στήλη"><h3>Contact</h3><ul>
+        <li><a href="tel:+302109761163">+30 210 976 1163</a></li><li><a href="mailto:sales@gpdevelopment.gr">sales@gpdevelopment.gr</a></li><li>Dim. Vasiliou 20, Psychiko 154 51</li><li>Mon–Fri, 10:00–18:00</li></ul></div>
+    </div>
+    <div class="υποσέλιδο__λέξη" aria-hidden="true">GP Development</div>
+    <div class="υποσέλιδο__βάση">
+      <span>© 2026 GP Real Estate Development. All rights reserved.</span>
+      <a href="/privacy-policy/">Privacy policy</a>
+    </div>
+  </footer>
+
+  <dialog class="προβολή" aria-label="Gallery: Mareterra">
+    <figure class="προβολή__εικόνα"><img alt=""><figcaption><span data-λεζάντα></span><small data-μετρητής></small></figcaption></figure>
+    <button class="προβολή__κλείσιμο" type="button" aria-label="Close"><i></i><i></i></button>
+    <button class="προβολή__βέλος προβολή__βέλος--πίσω" type="button" aria-label="Previous image"><svg viewBox="0 0 46 14" aria-hidden="true"><path d="M46 7H1M8 1 1 7l7 6"/></svg></button>
+    <button class="προβολή__βέλος προβολή__βέλος--εμπρός" type="button" aria-label="Next image"><svg viewBox="0 0 46 14" aria-hidden="true"><path d="M0 7h45M38 1l7 6-7 6"/></svg></button>
+  </dialog>
+  <script src="/assets/js/sections.js?v=202611151626" defer></script>
+  <script src="/assets/js/projects.js?v=202611151626" defer></script>
+</body>
+</html>

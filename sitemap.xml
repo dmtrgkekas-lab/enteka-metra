@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://gpdevelopment.gr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/"/>
+  </url>
+  <url>
+    <loc>https://gpdevelopment.gr/el/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/"/>
+  </url>
+  <url>
+    <loc>https://gpdevelopment.gr/projects/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/projects/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/projects/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/projects/"/>
+  </url>
+  <url>
+    <loc>https://gpdevelopment.gr/el/projects/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/projects/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/projects/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/projects/"/>
+  </url>
+  <url>
+    <loc>https://gpdevelopment.gr/mareterra/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/mareterra/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/mareterra/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/mareterra/"/>
+  </url>
+  <url>
+    <loc>https://gpdevelopment.gr/el/mareterra/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/mareterra/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/mareterra/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/mareterra/"/>
+  </url>
+  <url>
+    <loc>https://gpdevelopment.gr/chalandri/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/chalandri/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/chalandri/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/chalandri/"/>
+  </url>
+  <url>
+    <loc>https://gpdevelopment.gr/el/chalandri/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/chalandri/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/chalandri/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/chalandri/"/>
+  </url>
+  <url>
+    <loc>https://gpdevelopment.gr/v5residences/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/v5residences/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/v5residences/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/v5residences/"/>
+  </url>
+  <url>
+    <loc>https://gpdevelopment.gr/el/v5residences/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/v5residences/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/v5residences/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/v5residences/"/>
+  </url>
+  <url>
+    <loc>https://gpdevelopment.gr/about/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/about/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/about/"/>
+  </url>
+  <url>
+    <loc>https://gpdevelopment.gr/el/about/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/about/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/about/"/>
+  </url>
+  <url>
+    <loc>https://gpdevelopment.gr/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/contact/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/contact/"/>
+  </url>
+  <url>
+    <loc>https://gpdevelopment.gr/el/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/contact/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/contact/"/>
+  </url>
+</urlset>

@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="el" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Σαχτούρη 44–46: Νέα Διαμερίσματα στο Χαλάνδρι | GP Development</title>
+  <meta name="description" content="Πέντε νέες κατοικίες Α++ από 62 έως 138 m² στη Σαχτούρη 44–46, Χαλάνδρι, μαζί με μεζονέτα με ιδιωτική πισίνα στο δώμα. Παράδοση Δεκέμβριος 2027.">
+  <link rel="canonical" href="https://gpdevelopment.gr/el/chalandri/">
+  <link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/chalandri/">
+  <link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/chalandri/">
+  <link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/chalandri/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GP Real Estate Development">
+  <meta property="og:locale" content="el_GR">
+  <meta property="og:title" content="Σαχτούρη 44–46: Νέα Διαμερίσματα στο Χαλάνδρι | GP Development">
+  <meta property="og:description" content="Πέντε νέες κατοικίες Α++ από 62 έως 138 m² στη Σαχτούρη 44–46, Χαλάνδρι, μαζί με μεζονέτα με ιδιωτική πισίνα στο δώμα. Παράδοση Δεκέμβριος 2027.">
+  <meta property="og:url" content="https://gpdevelopment.gr/el/chalandri/">
+  <meta property="og:image" content="https://gpdevelopment.gr/assets/og/chalandri.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#1e1c1a">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/manrope-greek-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-greek-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/projects/chalandri/cover-1536.webp" imagesrcset="/assets/projects/chalandri/cover-960.webp 960w, /assets/projects/chalandri/cover-1536.webp 1536w" imagesizes="100vw" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/home.css?v=202611151626">
+  <link rel="stylesheet" href="/assets/css/sections.css?v=202611151626">
+  <link rel="stylesheet" href="/assets/css/projects.css?v=202611151626">
+  <script>document.documentElement.classList.replace('no-js', 'js'); if (!('onpagereveal' in window) && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('μετάβαση-js');</script>
+  <script>(function () {
+    var Ο = 'project-image', ΚΛ = 'gp-vt-εικόνα', ρ = document.documentElement;
+    function εικόναΓια(διαδρομή) {
+      var σ = document.querySelector('.κάρτα-έργου__σύνδεσμος[href="' + διαδρομή + '"]');
+      return σ && σ.querySelector('img');
+    }
+    // Κανένα όνομα από προηγούμενη μετάβαση: η σελίδα μπορεί να επιστρέψει από την cache του browser
+    // («Πίσω») με το όνομα ακόμη πάνω της, και δύο ίδια ονόματα ακυρώνουν όλη τη μετάβαση.
+    function καθάρισε() {
+      document.querySelectorAll('img').forEach(function (im) { if (im.style.viewTransitionName) im.style.viewTransitionName = ''; });
+      ρ.classList.remove('vt-παλιά');
+    }
+    // Φεύγοντας: όνομα μόνο στην εικόνα του συνδέσμου που πατήθηκε (αλλιώς μένει ο ήρωας, όταν υπάρχει).
+    // Κρατάμε το σχήμα της, για να διαλέξει η νέα σελίδα ποιο στιγμιότυπο δείχνει όσο μεγαλώνει.
+    addEventListener('pageswap', function (ε) {
+      καθάρισε();
+      if (!ε.viewTransition || !ε.activation || !ε.activation.entry) return;
+      var im = εικόναΓια(new URL(ε.activation.entry.url).pathname), ήρωας = document.querySelector('.ήρωας__εικόνα'), όνομα = im || ήρωας;
+      if (im) {
+        if (ήρωας) ήρωας.style.viewTransitionName = 'none';
+        im.style.viewTransitionName = Ο;
+        // Κάρτα που δεν έχει ολοκληρώσει την εμφάνισή της (γρήγορο scroll και πάτημα): στην τελική κατάσταση
+        // αμέσως, αλλιώς το στιγμιότυπο θα ήταν διάφανο και η εικόνα θα έλειπε από τη μετάβαση
+        var εμφ = im.closest('[data-αποκάλυψη]');
+        if (εμφ) { εμφ.style.transition = 'none'; εμφ.classList.add('is-in'); }
+      }
+      try {
+        if (όνομα) { var r = όνομα.getBoundingClientRect(); sessionStorage.setItem(ΚΛ, JSON.stringify([r.width, r.height, !!im, όνομα.complete && όνομα.naturalWidth > 0])); }
+        else sessionStorage.removeItem(ΚΛ);
+      } catch (x) {}
+      ε.viewTransition.finished.then(καθάρισε, καθάρισε);
+    });
+    addEventListener('pagereveal', function (ε) {
+      καθάρισε();
+      if (!ε.viewTransition) return;
+      var α = window.navigation && navigation.activation, νέα = document.querySelector('.ήρωας__εικόνα');
+      // Στη λίστα με «Πίσω»: η κάρτα του έργου από το οποίο ερχόμαστε
+      if (!νέα && α && α.from && α.navigationType === 'traverse') {
+        νέα = εικόναΓια(new URL(α.from.url).pathname);
+        if (νέα) νέα.style.viewTransitionName = Ο;
+      }
+      // Ποιο στιγμιότυπο μένει από πάνω όσο αλλάζει το σχήμα: όποιο δείχνει περισσότερη φωτογραφία
+      // (σχήμα πιο κοντά στην αναλογία της). Στο κινητό αυτό είναι η κάρτα, στο desktop ο ήρωας.
+      try {
+        var π = JSON.parse(sessionStorage.getItem(ΚΛ) || 'null'); sessionStorage.removeItem(ΚΛ);
+        // Από κάρτα σε σελίδα έργου: η κεφαλίδα δεν εμφανίζεται ούτε στη μετάβαση ούτε μετά
+        if (π && π[2] && νέα && νέα.classList.contains('ήρωας__εικόνα')) ρ.classList.add('κεφαλίδα-κρυφή');
+        if (π && νέα) {
+          var r = νέα.getBoundingClientRect(), φ = (+νέα.getAttribute('width')) / (+νέα.getAttribute('height'));
+          var απόσταση = function (w, h) { return Math.abs(Math.log((w / h) / φ)); };
+          // (μόνο αν η παλιά εικόνα είχε φορτώσει· αλλιώς το στιγμιότυπό της είναι άδειο)
+          if (π[3] && απόσταση(π[0], π[1]) < απόσταση(r.width, r.height)) ρ.classList.add('vt-παλιά');
+        }
+      } catch (x) {}
+      ε.viewTransition.finished.then(καθάρισε, καθάρισε);
+    });
+  })();</script>
+  <script type="speculationrules">{"prerender": [{"where": {"selector_matches": ".κάρτα-έργου__σύνδεσμος"}, "eagerness": "moderate"}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://gpdevelopment.gr/el/chalandri/#webpage", "url": "https://gpdevelopment.gr/el/chalandri/", "name": "Σαχτούρη 44–46: Νέα Διαμερίσματα στο Χαλάνδρι | GP Development", "description": "Πέντε νέες κατοικίες Α++ από 62 έως 138 m² στη Σαχτούρη 44–46, Χαλάνδρι, μαζί με μεζονέτα με ιδιωτική πισίνα στο δώμα. Παράδοση Δεκέμβριος 2027.", "inLanguage": "el", "isPartOf": {"@id": "https://gpdevelopment.gr/#website"}, "publisher": {"@id": "https://gpdevelopment.gr/#organization"}, "about": {"@id": "https://gpdevelopment.gr/el/chalandri/#place"}, "breadcrumb": {"@id": "https://gpdevelopment.gr/el/chalandri/#breadcrumb"}, "primaryImageOfPage": "https://gpdevelopment.gr/assets/projects/chalandri/cover-1536.webp"}, {"@type": "BreadcrumbList", "@id": "https://gpdevelopment.gr/el/chalandri/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Αρχική", "item": "https://gpdevelopment.gr/el/"}, {"@type": "ListItem", "position": 2, "name": "Έργα", "item": "https://gpdevelopment.gr/el/projects/"}, {"@type": "ListItem", "position": 3, "name": "Σαχτούρη 44–46", "item": "https://gpdevelopment.gr/el/chalandri/"}]}, {"@type": "ApartmentComplex", "@id": "https://gpdevelopment.gr/el/chalandri/#place", "name": "Σαχτούρη 44–46", "description": "Πέντε νέες κατοικίες Α++ από 62 έως 138 m² στη Σαχτούρη 44–46, Χαλάνδρι, μαζί με μεζονέτα με ιδιωτική πισίνα στο δώμα. Παράδοση Δεκέμβριος 2027.", "url": "https://gpdevelopment.gr/el/chalandri/", "image": ["https://gpdevelopment.gr/assets/projects/chalandri/cover-1536.webp", "https://gpdevelopment.gr/assets/projects/chalandri/facade-1536.webp", "https://gpdevelopment.gr/assets/projects/chalandri/fireplace-1536.webp", "https://gpdevelopment.gr/assets/projects/chalandri/dining-1536.webp"], "address": {"@type": "PostalAddress", "streetAddress": "Sachtouri 44–46", "addressLocality": "Chalandri", "postalCode": "152 32", "addressRegion": "Attica", "addressCountry": "GR"}, "numberOfAccommodationUnits": 5, "numberOfAvailableAccommodationUnits": 5, "containsPlace": [{"@type": "Accommodation", "name": "1ος όροφος · Διαμέρισμα · 62 m²", "floorSize": {"@type": "QuantitativeValue", "value": 62, "unitCode": "MTK"}, "numberOfBedrooms": 1}, {"@type": "Accommodation", "name": "1ος όροφος · Διαμέρισμα · 102 m²", "floorSize": {"@type": "QuantitativeValue", "value": 102, "unitCode": "MTK"}, "numberOfBedrooms": 2}, {"@type": "Accommodation", "name": "2ος όροφος · Διαμέρισμα · 102 m²", "floorSize": {"@type": "QuantitativeValue", "value": 102, "unitCode": "MTK"}, "numberOfBedrooms": 2}, {"@type": "Accommodation", "name": "3ος όροφος · Διαμέρισμα · 124 m²", "floorSize": {"@type": "QuantitativeValue", "value": 124, "unitCode": "MTK"}, "numberOfBedrooms": 3}, {"@type": "Accommodation", "name": "4ος & 5ος όροφος · Μεζονέτα · 138 m²", "floorSize": {"@type": "QuantitativeValue", "value": 138, "unitCode": "MTK"}, "numberOfBedrooms": 3}]}]}</script>
+</head>
+<body>
+  <a class="παράκαμψη" href="#main">Μετάβαση στο περιεχόμενο</a>
+  <header class="κεφαλίδα">
+    <div class="κεφαλίδα__μέσα">
+      <a class="λογότυπο" href="/el/" aria-label="GP Real Estate Development"><svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="5.5"><path d="M73.14 22.42 A36 36 0 1 0 86 50"/><path d="M86 50 H50 L32 81.18"/></g></svg><b aria-hidden="true">GP</b><small aria-hidden="true">Real Estate<br>Development</small></a>
+      <nav class="πλοήγηση" aria-label="Main"><ul><li><a href="/el/projects/" aria-current="true">Έργα</a></li><li><a href="/el/design-build/">Design & Build</a></li><li><a href="/el/antiparochi/">Αντιπαροχή</a></li><li><a href="/el/about/">Η εταιρεία</a></li><li><a href="/el/contact/">Επικοινωνία</a></li></ul></nav>
+      <div class="κεφαλίδα__δεξιά">
+        <a class="γλώσσα" href="/chalandri/" hreflang="en" title="English">EN</a>
+        <a class="κουμπί κεφαλίδα__cta" href="/el/contact/#booking"><span class="κουμπί__ετ">Κλείστε επίσκεψη</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+        <button class="μενού-κουμπί" type="button" aria-label="Μενού" aria-expanded="false" aria-controls="menou"><i></i><i></i><i></i></button>
+      </div>
+    </div>
+  </header>
+  
+  <div class="μενού" id="menou" hidden>
+    <nav class="μενού__πλοήγηση" aria-label="Μενού"><ol><li><a href="/el/projects/" aria-current="true"><span>Έργα</span></a></li><li><a href="/el/design-build/"><span>Design & Build</span></a></li><li><a href="/el/antiparochi/"><span>Αντιπαροχή</span></a></li><li><a href="/el/about/"><span>Η εταιρεία</span></a></li><li><a href="/el/contact/"><span>Επικοινωνία</span></a></li></ol></nav>
+    <div class="μενού__κάτω">
+      <a class="κουμπί κουμπί--σκούρο" href="/el/contact/#booking"><span class="κουμπί__ετ">Κλείστε επίσκεψη</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+      <p><a href="tel:+302109761163">+30 210 976 1163</a><a href="mailto:sales@gpdevelopment.gr">sales@gpdevelopment.gr</a><a href="/chalandri/" hreflang="en">English</a></p>
+    </div>
+  </div>
+  <main id="main" class="έργο έργο--selling">
+    <section class="ήρωας" data-τόνος="σκούρο" aria-labelledby="ergo-t">
+      <img class="ήρωας__εικόνα" src="/assets/projects/chalandri/cover-1536.webp" srcset="/assets/projects/chalandri/cover-960.webp 960w, /assets/projects/chalandri/cover-1536.webp 1536w" sizes="100vw" width="1536" height="1024" alt="Σαχτούρη 44–46, Χαλάνδρι: δώμα μεζονέτας με πέργκολα και ιδιωτική πισίνα" fetchpriority="high" decoding="sync">
+      <div class="ήρωας__μέσα">
+        <nav class="ψίχουλα" aria-label="Διαδρομή"><ol><li><a href="/el/">Αρχική</a></li><li><a href="/el/projects/">Έργα</a></li><li aria-current="page">Σαχτούρη 44–46</li></ol></nav>
+        <p class="ήρωας__πάνω"><span>Χαλάνδρι</span><span class="διαθεσιμότητα"><i aria-hidden="true"></i>5 από 5 κατοικίες διαθέσιμες</span></p>
+        <h1 class="ήρωας__τίτλος" id="ergo-t">Σαχτούρη 44–46</h1>
+        <p class="ήρωας__κείμενο">Πέντε κατοικίες στο Χαλάνδρι, η καθεμία σχεδιασμένη γύρω από τη δική της ιδέα.</p>
+        <div class="ήρωας__ενέργειες">
+          <a class="κουμπί " href="#residences"><span class="κουμπί__ετ">Διαθέσιμες κατοικίες</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+          <a class="ήρωας__τηλ" href="tel:+302109761163"><small>Καλέστε</small><span>+30 210 976 1163</span></a>
+        </div>
+      </div>
+    </section>
+
+    <div class="έργο__σώμα">
+
+    <aside class="μονάδες" id="residences" aria-labelledby="residences-t" data-μονάδες>
+      <div class="μονάδες__κάρτα">
+        <header class="μονάδες__κεφαλή">
+          <h2 class="μονάδες__τίτλος" id="residences-t">Διαθέσιμες κατοικίες</h2>
+          <p class="μονάδες__σύνολο"><i aria-hidden="true"></i>5 από 5 διαθέσιμες</p>
+        </header>
+        <div class="μονάδες__επιλογή">
+          <button class="μονάδες__βέλος" type="button" data-προηγούμενη aria-label="Προηγούμενη κατοικία"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button>
+          <div class="μονάδες__καρτέλες" role="tablist" aria-label="Κατοικίες"><button class="μονάδες__καρτέλα" type="button" role="tab" id="residence-1st-floor-62-tab" aria-controls="residence-1st-floor-62" aria-selected="true">1ος · 62</button><button class="μονάδες__καρτέλα" type="button" role="tab" id="residence-1st-floor-102-tab" aria-controls="residence-1st-floor-102" aria-selected="false" tabindex="-1">1ος · 102</button><button class="μονάδες__καρτέλα" type="button" role="tab" id="residence-2nd-floor-tab" aria-controls="residence-2nd-floor" aria-selected="false" tabindex="-1">2ος</button><button class="μονάδες__καρτέλα" type="button" role="tab" id="residence-3rd-floor-tab" aria-controls="residence-3rd-floor" aria-selected="false" tabindex="-1">3ος</button><button class="μονάδες__καρτέλα" type="button" role="tab" id="residence-maisonette-tab" aria-controls="residence-maisonette" aria-selected="false" tabindex="-1">4ος–5ος</button></div>
+          <button class="μονάδες__βέλος" type="button" data-επόμενη aria-label="Επόμενη κατοικία"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button>
+        </div>
+        <div class="μονάδες__πάνελ">
+          <div class="μονάδα" role="tabpanel" id="residence-1st-floor-62" aria-labelledby="residence-1st-floor-62-tab" tabindex="0" data-μονάδα>
+            <h3 class="μονάδα__όνομα"><span>1ος όροφος</span><small>Διαμέρισμα</small></h3>
+            <dl class="μονάδα__στοιχεία"><div><dt>Επιφάνεια</dt><dd>62 m²</dd></div><div><dt>Υπνοδωμάτια</dt><dd>1</dd></div><div><dt>Χαρακτηριστικά</dt><dd>Φωτεινό, μεγάλες βεράντες</dd></div><div><dt>Τιμή</dt><dd>Τιμή κατόπιν επικοινωνίας</dd></div></dl><p class="μονάδα__κατάσταση">Διαθέσιμο</p><div class="μονάδα__ενέργειες"><a class="κουμπί κουμπί--σκούρο" href="#epikoinonia" data-κατοικία="1ος όροφος · Διαμέρισμα · 62 m²" aria-label="Ενδιαφέρομαι για 1ος όροφος · Διαμέρισμα · 62 m²"><span class="κουμπί__ετ">Ενδιαφέρομαι</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a><a class="υπογράμμιση" href="/el/contact/#booking"><span>Κλείστε επίσκεψη</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div>
+          </div>
+          <div class="μονάδα" role="tabpanel" id="residence-1st-floor-102" aria-labelledby="residence-1st-floor-102-tab" tabindex="0" data-μονάδα hidden>
+            <h3 class="μονάδα__όνομα"><span>1ος όροφος</span><small>Διαμέρισμα</small></h3>
+            <dl class="μονάδα__στοιχεία"><div><dt>Επιφάνεια</dt><dd>102 m²</dd></div><div><dt>Υπνοδωμάτια</dt><dd>2</dd></div><div><dt>Χαρακτηριστικά</dt><dd>Master suite, σαλόνι 38 m²</dd></div><div><dt>Τιμή</dt><dd>Τιμή κατόπιν επικοινωνίας</dd></div></dl><p class="μονάδα__κατάσταση">Διαθέσιμο</p><div class="μονάδα__ενέργειες"><a class="κουμπί κουμπί--σκούρο" href="#epikoinonia" data-κατοικία="1ος όροφος · Διαμέρισμα · 102 m²" aria-label="Ενδιαφέρομαι για 1ος όροφος · Διαμέρισμα · 102 m²"><span class="κουμπί__ετ">Ενδιαφέρομαι</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a><a class="υπογράμμιση" href="/el/contact/#booking"><span>Κλείστε επίσκεψη</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div>
+          </div>
+          <div class="μονάδα" role="tabpanel" id="residence-2nd-floor" aria-labelledby="residence-2nd-floor-tab" tabindex="0" data-μονάδα hidden>
+            <h3 class="μονάδα__όνομα"><span>2ος όροφος</span><small>Διαμέρισμα</small></h3>
+            <dl class="μονάδα__στοιχεία"><div><dt>Επιφάνεια</dt><dd>102 m²</dd></div><div><dt>Υπνοδωμάτια</dt><dd>2</dd></div><div><dt>Χαρακτηριστικά</dt><dd>Master suite, walk-in closet</dd></div><div><dt>Τιμή</dt><dd>Τιμή κατόπιν επικοινωνίας</dd></div></dl><p class="μονάδα__κατάσταση">Διαθέσιμο</p><div class="μονάδα__ενέργειες"><a class="κουμπί κουμπί--σκούρο" href="#epikoinonia" data-κατοικία="2ος όροφος · Διαμέρισμα · 102 m²" aria-label="Ενδιαφέρομαι για 2ος όροφος · Διαμέρισμα · 102 m²"><span class="κουμπί__ετ">Ενδιαφέρομαι</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a><a class="υπογράμμιση" href="/el/contact/#booking"><span>Κλείστε επίσκεψη</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div>
+          </div>
+          <div class="μονάδα" role="tabpanel" id="residence-3rd-floor" aria-labelledby="residence-3rd-floor-tab" tabindex="0" data-μονάδα hidden>
+            <h3 class="μονάδα__όνομα"><span>3ος όροφος</span><small>Διαμέρισμα</small></h3>
+            <dl class="μονάδα__στοιχεία"><div><dt>Επιφάνεια</dt><dd>124 m²</dd></div><div><dt>Υπνοδωμάτια</dt><dd>3</dd></div><div><dt>Χαρακτηριστικά</dt><dd>Ενεργειακό τζάκι, άριστος προσανατολισμός</dd></div><div><dt>Τιμή</dt><dd>Τιμή κατόπιν επικοινωνίας</dd></div></dl><p class="μονάδα__κατάσταση">Διαθέσιμο</p><div class="μονάδα__ενέργειες"><a class="κουμπί κουμπί--σκούρο" href="#epikoinonia" data-κατοικία="3ος όροφος · Διαμέρισμα · 124 m²" aria-label="Ενδιαφέρομαι για 3ος όροφος · Διαμέρισμα · 124 m²"><span class="κουμπί__ετ">Ενδιαφέρομαι</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a><a class="υπογράμμιση" href="/el/contact/#booking"><span>Κλείστε επίσκεψη</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div>
+          </div>
+          <div class="μονάδα" role="tabpanel" id="residence-maisonette" aria-labelledby="residence-maisonette-tab" tabindex="0" data-μονάδα hidden>
+            <h3 class="μονάδα__όνομα"><span>4ος &amp; 5ος όροφος</span><small>Μεζονέτα</small></h3>
+            <dl class="μονάδα__στοιχεία"><div><dt>Επιφάνεια</dt><dd>138 m²</dd></div><div><dt>Υπνοδωμάτια</dt><dd>3</dd></div><div><dt>Χαρακτηριστικά</dt><dd>Ιδιωτικό δώμα 42 m² με πισίνα</dd></div><div><dt>Τιμή</dt><dd>Τιμή κατόπιν επικοινωνίας</dd></div></dl><p class="μονάδα__κατάσταση">Διαθέσιμο</p><div class="μονάδα__ενέργειες"><a class="κουμπί κουμπί--σκούρο" href="#epikoinonia" data-κατοικία="4ος &amp; 5ος όροφος · Μεζονέτα · 138 m²" aria-label="Ενδιαφέρομαι για 4ος &amp; 5ος όροφος · Μεζονέτα · 138 m²"><span class="κουμπί__ετ">Ενδιαφέρομαι</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a><a class="υπογράμμιση" href="/el/contact/#booking"><span>Κλείστε επίσκεψη</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div><details class="μονάδα__περισσότερα"><summary><span>Περισσότερα για την κατοικία</span><i aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h16M10 2v16" fill="none" stroke="currentColor" stroke-width="1"/></svg></i></summary><p>Δύο επίπεδα με τρία υπνοδωμάτια: υπνοδωμάτιο με en-suite μπάνιο στον 4ο όροφο και τα άλλα δύο στον 5ο, μια ισορροπημένη διάταξη για οικογένεια. Ενεργειακό τζάκι και ιδιωτικό δώμα 42 m² με κολυμβητική πισίνα.</p></details>
+          </div>
+        </div>
+        <div class="μονάδες__φυλλάδια"><a class="υπογράμμιση φυλλάδιο" href="/brochure/Sachtouri_44-46_Chalandri_Presentation-NEW.pdf" download><span>Φυλλάδιο (ΕΛ) · PDF</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v13m-6-6 6 6 6-6M5 20h14" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div>
+      </div>
+    </aside>
+      <div class="έργο__κύριο">
+        <a class="υπογράμμιση έργο__πίσω" href="/el/projects/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>Όλα τα έργα</span></a>
+
+        <section class="περιγραφή" data-τόνος="ανοιχτό" aria-labelledby="perigrafi-t">
+          <h2 class="περιγραφή__τίτλος" id="perigrafi-t" data-αποκάλυψη>Πέντε κατοικίες, πέντε διαφορετικές κατόψεις.</h2>
+          <div class="περιγραφή__κείμενο" data-αποκάλυψη><p>Η Σαχτούρη 44–46 είναι νέο κτίριο κατοικιών στο Χαλάνδρι, στα βόρεια προάστια της Αθήνας. Καθεμία από τις πέντε κατοικίες του βασίζεται σε διαφορετική σχεδιαστική ιδέα, από ένα διαμέρισμα 62 m² στον πρώτο όροφο ως μια μεζονέτα 138 m² με ιδιωτική πισίνα στο δώμα.</p><p>Η αρχιτεκτονική είναι σύγχρονη και λιτή: γήινοι και γκρι τόνοι, φυσικά υλικά και μεγάλα ανοίγματα που φέρνουν το φως βαθιά μέσα στο σπίτι. Οι κύριοι χώροι έχουν ψηλά ταβάνια. Κάθε κατοικία παραδίδεται με νέες κουζίνες, μπάνια και εγκαταστάσεις, αντλία θερμότητας και ενδοδαπέδια θέρμανση, σε ενεργειακή κλάση Α++.</p><p>Ο υπαίθριος χώρος σχεδιάζεται ως προέκταση του σπιτιού. Οι ευρύχωρες βεράντες και τα μεγάλα ανοίγματα αφήνουν το φυσικό φως να αγγίζει κάθε γωνιά, και οι καταπράσινες βεράντες μαλακώνουν την πόλη γύρω τους. Στον τελευταίο όροφο, η μεζονέτα έχει το δικό της δώμα 42 m² με πισίνα, για χαλάρωση και φιλοξενία με απόλυτη ιδιωτικότητα.</p><p class="περιγραφή__διεύθυνση">Σαχτούρη 44–46, Κάτω Χαλάνδρι 152 32</p></div>
+        </section>
+
+        <section class="στοιχεία" data-τόνος="ανοιχτό" aria-label="Βασικά στοιχεία">
+          <dl class="στοιχεία__λίστα"><div class="στοιχεία__γεγονός"><dt>Κατοικίες</dt><dd>5</dd></div><div class="στοιχεία__γεγονός"><dt>Εσωτερικές επιφάνειες</dt><dd>62–138 m²</dd></div><div class="στοιχεία__γεγονός"><dt>Παράδοση</dt><dd>Δεκ. 2027</dd></div><div class="στοιχεία__γεγονός"><dt>Ενεργειακή κλάση</dt><dd>Α++</dd></div></dl>
+        </section>
+
+        <section class="γκαλερί" data-τόνος="ανοιχτό" aria-labelledby="gallery-t">
+          <h2 class="οπτικά-κρυφό" id="gallery-t">Φωτογραφίες</h2>
+          <ul class="γκαλερί__πλέγμα"><li><button class="γκαλερί__κουμπί" type="button" data-μεγάλη="/assets/projects/chalandri/facade-1536.webp" data-λεζάντα="Η Σαχτούρη 44–46 το σούρουπο: η είσοδος και οι φυτεμένες βεράντες" aria-label="Άνοιγμα εικόνας: Η Σαχτούρη 44–46 το σούρουπο: η είσοδος και οι φυτεμένες βεράντες"><img class="" src="/assets/projects/chalandri/facade-1400.webp" srcset="/assets/projects/chalandri/facade-720.webp 720w, /assets/projects/chalandri/facade-1400.webp 1400w, /assets/projects/chalandri/facade-1536.webp 1536w" sizes="(max-width: 760px) 86vw, 48vw" width="1536" height="1024" alt="Η Σαχτούρη 44–46 το σούρουπο: η είσοδος και οι φυτεμένες βεράντες" loading="lazy" decoding="async"></button></li><li><button class="γκαλερί__κουμπί" type="button" data-μεγάλη="/assets/projects/chalandri/fireplace-1536.webp" data-λεζάντα="Σαλόνι με ενεργειακό τζάκι" aria-label="Άνοιγμα εικόνας: Σαλόνι με ενεργειακό τζάκι"><img class="" src="/assets/projects/chalandri/fireplace-1400.webp" srcset="/assets/projects/chalandri/fireplace-720.webp 720w, /assets/projects/chalandri/fireplace-1400.webp 1400w, /assets/projects/chalandri/fireplace-1536.webp 1536w" sizes="(max-width: 760px) 86vw, 24vw" width="1536" height="1024" alt="Σαλόνι με ενεργειακό τζάκι" loading="lazy" decoding="async"></button></li><li><button class="γκαλερί__κουμπί" type="button" data-μεγάλη="/assets/projects/chalandri/dining-1536.webp" data-λεζάντα="Τραπεζαρία με τοίχο από πηχάκια δρυός" aria-label="Άνοιγμα εικόνας: Τραπεζαρία με τοίχο από πηχάκια δρυός"><img class="" src="/assets/projects/chalandri/dining-1400.webp" srcset="/assets/projects/chalandri/dining-720.webp 720w, /assets/projects/chalandri/dining-1400.webp 1400w, /assets/projects/chalandri/dining-1536.webp 1536w" sizes="(max-width: 760px) 86vw, 24vw" width="1536" height="1024" alt="Τραπεζαρία με τοίχο από πηχάκια δρυός" loading="lazy" decoding="async"></button></li><li><button class="γκαλερί__κουμπί" type="button" data-μεγάλη="/assets/projects/chalandri/kitchen-1536.webp" data-λεζάντα="Κουζίνα με πέτρινο πάγκο" aria-label="Άνοιγμα εικόνας: Κουζίνα με πέτρινο πάγκο"><img class="" src="/assets/projects/chalandri/kitchen-1400.webp" srcset="/assets/projects/chalandri/kitchen-720.webp 720w, /assets/projects/chalandri/kitchen-1400.webp 1400w, /assets/projects/chalandri/kitchen-1536.webp 1536w" sizes="(max-width: 760px) 86vw, 24vw" width="1536" height="1024" alt="Κουζίνα με πέτρινο πάγκο" loading="lazy" decoding="async"></button></li><li><button class="γκαλερί__κουμπί" type="button" data-μεγάλη="/assets/projects/chalandri/bedroom-1536.webp" data-λεζάντα="Κύριο υπνοδωμάτιο" aria-label="Άνοιγμα εικόνας: Κύριο υπνοδωμάτιο"><img class="" src="/assets/projects/chalandri/bedroom-1400.webp" srcset="/assets/projects/chalandri/bedroom-720.webp 720w, /assets/projects/chalandri/bedroom-1400.webp 1400w, /assets/projects/chalandri/bedroom-1536.webp 1536w" sizes="(max-width: 760px) 86vw, 24vw" width="1536" height="1024" alt="Κύριο υπνοδωμάτιο" loading="lazy" decoding="async"></button></li><li><button class="γκαλερί__κουμπί" type="button" data-μεγάλη="/assets/projects/chalandri/bath-1536.webp" data-λεζάντα="Μπάνιο με πέτρινο νιπτήρα" aria-label="Άνοιγμα εικόνας: Μπάνιο με πέτρινο νιπτήρα"><img class="" src="/assets/projects/chalandri/bath-1400.webp" srcset="/assets/projects/chalandri/bath-720.webp 720w, /assets/projects/chalandri/bath-1400.webp 1400w, /assets/projects/chalandri/bath-1536.webp 1536w" sizes="(max-width: 760px) 86vw, 24vw" width="1536" height="1024" alt="Μπάνιο με πέτρινο νιπτήρα" loading="lazy" decoding="async"></button></li><li><button class="γκαλερί__κουμπί" type="button" data-μεγάλη="/assets/projects/chalandri/lounge-1536.webp" data-λεζάντα="Καθιστικό στο δώμα δίπλα στην πισίνα" aria-label="Άνοιγμα εικόνας: Καθιστικό στο δώμα δίπλα στην πισίνα"><img class="" src="/assets/projects/chalandri/lounge-1400.webp" srcset="/assets/projects/chalandri/lounge-720.webp 720w, /assets/projects/chalandri/lounge-1400.webp 1400w, /assets/projects/chalandri/lounge-1536.webp 1536w" sizes="(max-width: 760px) 86vw, 24vw" width="1536" height="1024" alt="Καθιστικό στο δώμα δίπλα στην πισίνα" loading="lazy" decoding="async"></button></li></ul>
+          <p class="γκαλερί__σημείωση">Οι απεικονίσεις είναι ενδεικτικές.</p>
+        </section>
+
+        <section class="προδιαγραφές" data-τόνος="ανοιχτό" aria-labelledby="specs-t">
+          <h2 class="ενότητα-τίτλος" id="specs-t">Προδιαγραφές</h2>
+          <ul class="προδιαγραφές__λίστα"><li>Ενεργειακή κλάση Α++</li><li>Αντλία θερμότητας με ατομική ψύξη και θέρμανση</li><li>Ενδοδαπέδια θέρμανση</li><li>Ενεργειακό τζάκι στις κατοικίες 3ου, 4ου και 5ου ορόφου</li><li>Κουζίνες ανοιχτής διαρρύθμισης</li><li>Μπάνια με premium είδη υγιεινής και επενδύσεις</li><li>Master suites με walk-in closet και en-suite μπάνιο</li><li>Ευρύχωρες βεράντες</li><li>Ιδιωτικό δώμα 42 m² με πισίνα στη μεζονέτα</li><li>Νέες κουζίνες, μπάνια και εγκαταστάσεις</li></ul>
+        </section>
+
+        <section class="τοποθεσία" data-τόνος="ανοιχτό" id="location" aria-labelledby="location-t">
+          <div class="τοποθεσία__κείμενο">
+            <h2 class="ενότητα-τίτλος" id="location-t">Τοποθεσία</h2>
+            <p class="τοποθεσία__διεύθυνση">Σαχτούρη 44–46, Κάτω Χαλάνδρι 152 32</p>
+            <p>Ήσυχη οικιστική γειτονιά στο Κάτω Χαλάνδρι, με άμεση πρόσβαση σε Μεσογείων και Κηφισίας, ανάμεσα σε τρεις σταθμούς της Γραμμής 3 του Μετρό.</p>
+            <table class="αποστάσεις"><tbody><tr><th scope="row">Super market</th><td>200 m</td><td>2′ με τα πόδια</td></tr><tr><th scope="row">4ο Δημοτικό Χαλανδρίου</th><td>260 m</td><td>3′ με τα πόδια</td></tr><tr><th scope="row">Πλατεία Χαλανδρίου</th><td>900 m</td><td>11′ με τα πόδια</td></tr><tr><th scope="row">Μετρό Χολαργός (Γρ. 3)</th><td>1,1 km</td><td>4′ οδικώς</td></tr><tr><th scope="row">Μετρό Αγ. Παρασκευή (Γρ. 3)</th><td>1,4 km</td><td>4′ οδικώς</td></tr><tr><th scope="row">Πάρκο Ρεματιάς</th><td>1,4 km</td><td>4′ οδικώς</td></tr><tr><th scope="row">Νοσοκομείο Υγεία</th><td>1,7 km</td><td>5′ οδικώς</td></tr><tr><th scope="row">Golden Hall</th><td>2,2 km</td><td>7′ οδικώς</td></tr><tr><th scope="row">Μετρό Χαλάνδρι (Γρ. 3)</th><td>2,3 km</td><td>7′ οδικώς</td></tr><tr><th scope="row">ΙΑΣΩ</th><td>2,3 km</td><td>8′ οδικώς</td></tr><tr><th scope="row">ΟΑΚΑ</th><td>2,9 km</td><td>9′ οδικώς</td></tr><tr><th scope="row">The Mall Athens</th><td>3,4 km</td><td>11′ οδικώς</td></tr></tbody></table><p class="αποστάσεις__σημείωση">Αποστάσεις κατά προσέγγιση (ευθεία απόσταση). Χρόνοι ενδεικτικοί, εκτός ωρών αιχμής.</p>
+          </div>
+          <div class="τοποθεσία__χάρτης">
+            <div class="χάρτης" data-χάρτης="https://www.google.com/maps?q=Sachtouri+44%2C+Chalandri+152+32%2C+Greece&amp;output=embed" data-τίτλος="Σαχτούρη 44–46, Χαλάνδρι">
+            <button class="χάρτης__κουμπί" type="button"><span class="υπογράμμιση"><span>Δείτε τον χάρτη</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span><small>Ο χάρτης φορτώνει από το Google Maps.</small></button>
+          </div>
+          <a class="υπογράμμιση χάρτης__έξω" href="https://www.google.com/maps/search/?api=1&amp;query=Sachtouri+44%2C+Chalandri+152+32%2C+Greece" target="_blank" rel="noopener"><span>Άνοιγμα στο Google Maps</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <section class="επαφή-έργου" id="epikoinonia" data-τόνος="ανοιχτό" aria-labelledby="epafi-t">
+      <div class="επαφή-έργου__μέσα">
+        <div class="επαφή-έργου__πλάι" data-αποκάλυψη>
+          <h2 class="επαφή-έργου__τίτλος" id="epafi-t"><span>Επισκεφθείτε το Σαχτούρη 44–46</span> <em>ή ρωτήστε μας ό,τι θέλετε.</em></h2>
+          <p>Αφήστε τα στοιχεία σας. Σας καλούμε μέσα σε μία εργάσιμη.</p>
+          <ul class="επαφή-έργου__στοιχεία">
+            <li><small>Τηλέφωνο</small><a href="tel:+302109761163">+30 210 976 1163</a></li>
+            <li><small>Email</small><a href="mailto:sales@gpdevelopment.gr">sales@gpdevelopment.gr</a></li>
+            <li><small>Γραφείο</small><span>Δημ. Βασιλείου 20, Ψυχικό 154 51<br>Δευ–Παρ, 10:00–18:00</span></li>
+          </ul>
+        </div>
+        <div class="επαφή-έργου__φόρμα" data-αποκάλυψη>
+          <form class="φόρμα" novalidate data-φόρμα>
+            <script type="application/json" class="φόρμα__μηνύματα">{"f_err_req": "Συμπληρώστε αυτό το πεδίο.", "f_err_email": "Γράψτε ένα έγκυρο email.", "f_err_phone": "Γράψτε τουλάχιστον 8 ψηφία.", "f_err_consent": "Αποδεχθείτε την πολιτική απορρήτου.", "f_mail_subject": "Αίτημα από το gpdevelopment.gr", "f_intent": "Με ενδιαφέρει", "f_plot": "Πού βρίσκεται το οικόπεδο;", "f_name": "Ονοματεπώνυμο", "f_phone": "Τηλέφωνο", "f_email": "Email", "f_msg": "Μήνυμα (προαιρετικά)", "f_project": "Έργο:", "f_residence": "Κατοικία:"}</script>
+            <input type="hidden" name="project" value="Σαχτούρη 44–46"><div class="πεδίο πεδίο--λίστα"><label for="f-residence">Ποια κατοικία;</label><select id="f-residence" name="residence"><option value="">Δεν ξέρω ακόμα</option><option value="1ος όροφος · Διαμέρισμα · 62 m²">1ος όροφος · Διαμέρισμα · 62 m²</option><option value="1ος όροφος · Διαμέρισμα · 102 m²">1ος όροφος · Διαμέρισμα · 102 m²</option><option value="2ος όροφος · Διαμέρισμα · 102 m²">2ος όροφος · Διαμέρισμα · 102 m²</option><option value="3ος όροφος · Διαμέρισμα · 124 m²">3ος όροφος · Διαμέρισμα · 124 m²</option><option value="4ος &amp; 5ος όροφος · Μεζονέτα · 138 m²">4ος &amp; 5ος όροφος · Μεζονέτα · 138 m²</option></select></div>
+            <div class="πεδίο"><input id="f-name" name="name" type="text" placeholder=" " autocomplete="name" required><label for="f-name">Ονοματεπώνυμο</label><small class="πεδίο__λάθος"></small></div>
+            <div class="πεδίο"><input id="f-phone" name="phone" type="tel" placeholder=" " autocomplete="tel" inputmode="tel" required><label for="f-phone">Τηλέφωνο</label><small class="πεδίο__λάθος"></small></div>
+            <div class="πεδίο"><input id="f-email" name="email" type="email" placeholder=" " autocomplete="email" required><label for="f-email">Email</label><small class="πεδίο__λάθος"></small></div>
+            <div class="πεδίο"><textarea id="f-msg" name="message" rows="1" placeholder=" "></textarea><label for="f-msg">Μήνυμα (προαιρετικά)</label></div>
+            <label class="συναίνεση"><input type="checkbox" name="consent" required><i aria-hidden="true"></i><span>Συμφωνώ με την επεξεργασία των στοιχείων μου όπως περιγράφεται στην <a href="/el/privacy-policy/">πολιτική απορρήτου</a>.</span></label>
+            <small class="πεδίο__λάθος φόρμα__λάθος-συναίνεσης"></small>
+            <input type="text" name="website" class="φόρμα__παγίδα" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="φόρμα__κάτω">
+              <button class="κουμπί κουμπί--σκούρο φόρμα__αποστολή" type="submit"><span class="κουμπί__ετ">Αποστολή</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></button>
+              <a class="φόρμα__κράτηση" href="tel:+302109761163"><small>ή καλέστε</small><span>+30 210 976 1163</span></a>
+            </div>
+          </form>
+          <div class="φόρμα__ευχαριστώ" hidden tabindex="-1"><h3>Ευχαριστούμε.</h3><p>Λάβαμε το αίτημά σας. Θα σας καλέσουμε μέσα σε μία εργάσιμη.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="υποσέλιδο" data-τόνος="σκούρο">
+    <div class="υποσέλιδο__πάνω">
+      <p class="υποσέλιδο__δήλωση">Σπίτια σχεδιασμένα <em>ένα-ένα.</em></p>
+      <a class="υποσέλιδο__πάνω-κουμπί" href="#main"><span>Επιστροφή στην αρχή</span><svg viewBox="0 0 14 46" aria-hidden="true"><path d="M7 45V1M1 8l6-7 6 7" fill="none" stroke="currentColor"/></svg></a>
+    </div>
+    <div class="υποσέλιδο__πλέγμα">
+      <div class="υποσέλιδο__σήμα"><svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="5.5"><path d="M73.14 22.42 A36 36 0 1 0 86 50"/><path d="M86 50 H50 L32 81.18"/></g></svg><p>GP Real Estate Development<br><span>Real Estate Development · Athens</span></p></div>
+      <div class="υποσέλιδο__στήλη"><h3>Έργα</h3><ul><li><a href="/el/chalandri/">Σαχτούρη · Χαλάνδρι</a></li><li><a href="/el/mareterra/">Mareterra · Γλυφάδα</a></li><li><a href="/el/v5residences/">V5 Residences · Νέο Ψυχικό</a></li></ul></div><div class="υποσέλιδο__στήλη"><h3>Εταιρεία</h3><ul><li><a href="/el/about/">Η εταιρεία</a></li><li><a href="/el/design-build/">Design & Build</a></li><li><a href="/el/antiparochi/">Αντιπαροχή</a></li><li><a href="/el/contact/">Επικοινωνία</a></li></ul></div>
+      <div class="υποσέλιδο__στήλη"><h3>Επικοινωνία</h3><ul>
+        <li><a href="tel:+302109761163">+30 210 976 1163</a></li><li><a href="mailto:sales@gpdevelopment.gr">sales@gpdevelopment.gr</a></li><li>Δημ. Βασιλείου 20, Ψυχικό 154 51</li><li>Δευ–Παρ, 10:00–18:00</li></ul></div>
+    </div>
+    <div class="υποσέλιδο__λέξη" aria-hidden="true">GP Development</div>
+    <div class="υποσέλιδο__βάση">
+      <span>© 2026 GP Real Estate Development. Με την επιφύλαξη παντός δικαιώματος.</span>
+      <a href="/el/privacy-policy/">Πολιτική απορρήτου</a>
+    </div>
+  </footer>
+
+  <dialog class="προβολή" aria-label="Φωτογραφίες: Σαχτούρη 44–46">
+    <figure class="προβολή__εικόνα"><img alt=""><figcaption><span data-λεζάντα></span><small data-μετρητής></small></figcaption></figure>
+    <button class="προβολή__κλείσιμο" type="button" aria-label="Κλείσιμο"><i></i><i></i></button>
+    <button class="προβολή__βέλος προβολή__βέλος--πίσω" type="button" aria-label="Προηγούμενη εικόνα"><svg viewBox="0 0 46 14" aria-hidden="true"><path d="M46 7H1M8 1 1 7l7 6"/></svg></button>
+    <button class="προβολή__βέλος προβολή__βέλος--εμπρός" type="button" aria-label="Επόμενη εικόνα"><svg viewBox="0 0 46 14" aria-hidden="true"><path d="M0 7h45M38 1l7 6-7 6"/></svg></button>
+  </dialog>
+  <script src="/assets/js/sections.js?v=202611151626" defer></script>
+  <script src="/assets/js/projects.js?v=202611151626" defer></script>
+</body>
+</html>

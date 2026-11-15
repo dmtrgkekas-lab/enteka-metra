@@ -1,0 +1,391 @@
+/* ==========================================================================
+   GP Development — Αρχική
+   Ιδέα: ο επισκέπτης κοιτάει τον ουρανό και «κατεβαίνει» στο σπίτι.
+   Το scroll οδηγεί το timelapse (μέρα → νύχτα), τα γράμματα περνούν πίσω από
+   το σπίτι, και ένα λευκό σύννεφο ενώνει τη νύχτα με το χαρτί της επόμενης ενότητας.
+   ========================================================================== */
+
+/* ---------- Γραμματοσειρές ---------- */
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap; src: url(/assets/fonts/inter-latin-wght-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap; src: url(/assets/fonts/inter-latin-ext-wght-normal.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap; src: url(/assets/fonts/inter-greek-wght-normal.woff2) format("woff2"); unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF; }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap; src: url(/assets/fonts/inter-greek-ext-wght-normal.woff2) format("woff2"); unicode-range: U+1F00-1FFF; }
+@font-face { font-family: "Manrope"; font-style: normal; font-weight: 200 800; font-display: swap; src: url(/assets/fonts/manrope-latin-wght-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Manrope"; font-style: normal; font-weight: 200 800; font-display: swap; src: url(/assets/fonts/manrope-latin-ext-wght-normal.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Manrope"; font-style: normal; font-weight: 200 800; font-display: swap; src: url(/assets/fonts/manrope-greek-wght-normal.woff2) format("woff2"); unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF; }
+
+/* ---------- Σύστημα ---------- */
+/* Διάταξη: μία μεγάλη sticky σκηνή (ουρανός → σπίτι → σύννεφο), μετά ενότητες σε χαρτί με κεντρικό άξονα. */
+:root {
+  --χαρτί: #f4f1ec;
+  --ασβέστης: #e6e1d8;
+  --λευκό: #ffffff;
+  --γραφίτης: #1e1c1a;
+  --γκρι: #6b655d;
+  --γκρι-ανοιχτό: #a59d92;
+  --φως: #f0c47e;
+  --φως-έντονο: #ffe0ad;
+  --διαθέσιμο: #3f8a5c;   /* πράσινο διαθεσιμότητας (ίδιο σε αρχική και έργα) */
+  --γραμμή: rgba(30, 28, 26, .14);
+
+  --διάκενο-τίτλων: .012em;   /* Manrope 350: ελαφρώς ανοιχτό, ενιαίο σε όλους τους τίτλους */
+  --σερίφ: "Manrope", "Helvetica Neue", Arial, system-ui, sans-serif;   /* τίτλοι */
+  --σώμα: "Inter", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --καμπύλη: cubic-bezier(.22, 1, .36, 1);
+  --κεφαλίδα: 76px;
+  --περιθώριο: clamp(20px, 4.5vw, 72px);
+
+  /* Χρώματα ουρανού: τα ενημερώνει το JS ανάλογα με το καρέ του timelapse */
+  --ουρανός-ζενίθ: #6c99df;
+  --ουρανός-ορίζοντας: #b1cffb;
+  --έδαφος: #727377;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scrollbar-width: none; }
+/* Χωρίς ορατή μπάρα κύλισης· το scroll (τροχός, αφή, πληκτρολόγιο) δουλεύει κανονικά */
+html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+body { margin: 0; background: var(--χαρτί); color: var(--γραφίτης); font-family: var(--σώμα); font-weight: 250; font-size: clamp(1rem, .96rem + .2vw, 1.12rem); line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+h1, h2, h3, p, dl, dd, ul, ol, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+img, svg, canvas { display: block; max-width: 100%; }
+em { font-style: normal; }
+b, strong { font-weight: 500; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+::selection { background: var(--γραφίτης); color: var(--χαρτί); }
+.οπτικά-κρυφό { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.παράκαμψη { position: fixed; left: 16px; top: -100px; z-index: 200; background: var(--γραφίτης); color: #fff; padding: 10px 16px; }
+.παράκαμψη:focus { top: 16px; }
+
+/* ---------- Κεφαλίδα: προσαρμόζεται πάντα στην επιφάνεια από κάτω ----------
+   Η JS (sections.js) διαβάζει τον «τόνο» της επιφάνειας κάτω από την κεφαλίδα (data-τόνος)
+   και ορίζει data-τόνος στην κεφαλίδα: «ανοιχτό» → σκούρα γράμματα, «σκούρο» → ανοιχτά.
+   Μόλις φύγουμε από την κορυφή, ένα απαλό θολό φόντο (χωρίς σκληρή άκρη) κρατά την αντίθεση
+   ακόμη και πάνω σε φωτογραφίες. */
+.κεφαλίδα { --κ-χρώμα: var(--γραφίτης); --κ-φόντο: rgba(244, 241, 236, .5); --κ-γραμμή: rgba(30, 28, 26, .1);
+  position: fixed; inset: 0 0 auto; z-index: 50; padding-top: env(safe-area-inset-top, 0px); color: var(--κ-χρώμα); transition: color .9s var(--καμπύλη), transform .6s var(--καμπύλη); }
+.κεφαλίδα[data-τόνος="σκούρο"] { --κ-χρώμα: #f4f1ec; --κ-φόντο: rgba(14, 14, 17, .38); --κ-γραμμή: rgba(244, 241, 236, .12); }
+.κεφαλίδα::before { content: ""; position: absolute; inset: 0 0 -18px; z-index: -1; background: var(--κ-φόντο); -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%); mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%);
+  opacity: .55; transition: opacity .6s var(--καμπύλη), background-color .6s var(--καμπύλη); pointer-events: none; }
+.κεφαλίδα.με-φόντο::before { opacity: 1; }
+.κεφαλίδα.is-hidden { transform: translateY(calc(-100% - 28px)); }
+.κεφαλίδα__μέσα { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: var(--κεφαλίδα); max-width: 1680px; margin-inline: auto; padding-left: max(var(--περιθώριο), env(safe-area-inset-left, 0px)); padding-right: max(var(--περιθώριο), env(safe-area-inset-right, 0px)); }
+.λογότυπο { display: inline-flex; align-items: center; gap: 12px; }
+.λογότυπο svg { width: 36px; height: 36px; }
+.λογότυπο b { font-family: var(--σερίφ); font-weight: 400; font-size: 1.4rem; letter-spacing: .04em; line-height: 1; }
+.λογότυπο small { font-size: .56rem; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; line-height: 1.45; padding-left: 12px; border-left: 1px solid currentColor; opacity: .85; }
+.πλοήγηση ul { display: flex; gap: clamp(18px, 2.4vw, 40px); }
+.πλοήγηση a, .γλώσσα { font-size: .72rem; font-weight: 450; letter-spacing: .18em; text-transform: uppercase; padding-block: 8px; position: relative; }
+.πλοήγηση a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 2px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: 100% 50%; transition: transform .5s var(--καμπύλη); }
+.πλοήγηση a:hover::after { transform: scaleX(1); transform-origin: 0 50%; }
+.κεφαλίδα__δεξιά { display: flex; align-items: center; gap: 22px; }
+/* Εισαγωγή (πρώτη επίσκεψη): το λογότυπο σχεδιάζεται στο κέντρο και μετά πάει στη θέση του.
+   Μέχρι να αναλάβει το script, το λογότυπο και η υπόλοιπη κεφαλίδα μένουν κρυφά. */
+.πλοήγηση, .κεφαλίδα__δεξιά { transition: opacity 1s var(--καμπύλη); }
+.εισαγωγή .κεφαλίδα::before, .εισαγωγή .πλοήγηση, .εισαγωγή .κεφαλίδα__δεξιά { opacity: 0; }
+.εισαγωγή .πλοήγηση, .εισαγωγή .κεφαλίδα__δεξιά { pointer-events: none; }
+.εισαγωγή .λογότυπο { visibility: hidden; }
+.εισαγωγή .λογότυπο.σε-εισαγωγή { visibility: visible; will-change: transform; transform-origin: 50% 50%;
+  transform: translate(var(--εισ-x, 0px), var(--εισ-y, 0px)) scale(var(--εισ-k, 1)); }
+/* Αρχική κατάσταση: το σχέδιο και το κείμενο τα ζωντανεύει το inline script (Web Animations) */
+.εισαγωγή .λογότυπο.σε-εισαγωγή path { stroke-dasharray: 240; stroke-dashoffset: 240; }
+.εισαγωγή .λογότυπο.σε-εισαγωγή b { opacity: 0; }
+.εισαγωγή .λογότυπο.σε-εισαγωγή small { clip-path: inset(0 100% 0 0); }
+/* Λευκό φόντο με μαύρο λογότυπο· σβήνει καθώς το λογότυπο πηγαίνει στη θέση του */
+.εισαγωγή .κεφαλίδα { color: #141414; }
+.εισαγωγή-πέπλο { position: fixed; inset: 0; z-index: 49; background: #fff; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 1s var(--καμπύλη), visibility 0s 1s; }
+.εισαγωγή .εισαγωγή-πέπλο { opacity: 1; visibility: visible; transition: none; }
+.κεφαλίδα .κουμπί { min-height: 2.75rem; }
+
+/* Εικονίδιο μενού: τρεις μακριές, λεπτές γραμμές */
+.μενού-κουμπί { display: none; position: relative; width: 48px; height: 44px; margin-right: -8px; }
+.μενού-κουμπί i { position: absolute; left: 8px; right: 8px; height: 1px; background: currentColor; transition: transform .55s var(--καμπύλη), opacity .3s, top .55s var(--καμπύλη); }
+.μενού-κουμπί i:nth-child(1) { top: 14px; }
+.μενού-κουμπί i:nth-child(2) { top: 21.5px; }
+.μενού-κουμπί i:nth-child(3) { top: 29px; }
+.μενού-κουμπί:hover i:nth-child(2) { transform: scaleX(.72); transform-origin: 100% 50%; }
+.μενού-κουμπί[aria-expanded="true"] i:nth-child(1) { top: 21.5px; transform: rotate(35deg); }
+.μενού-κουμπί[aria-expanded="true"] i:nth-child(2) { opacity: 0; }
+.μενού-κουμπί[aria-expanded="true"] i:nth-child(3) { top: 21.5px; transform: rotate(-35deg); }
+
+/* Μενού κινητού: πλήρης οθόνη σε χαρτί, μεγάλα λεπτά γράμματα */
+.μενού { position: fixed; inset: 0; z-index: 49; display: grid; grid-template-rows: minmax(0, 1fr) auto; padding: calc(var(--κεφαλίδα) + env(safe-area-inset-top, 0px) + 24px) max(var(--περιθώριο), 20px) max(28px, env(safe-area-inset-bottom, 0px)); background: var(--χαρτί); color: var(--γραφίτης); overflow-y: auto; overscroll-behavior: contain;
+  clip-path: inset(0 0 100% 0); transition: clip-path .7s var(--καμπύλη); }
+.μενού.is-open { clip-path: inset(0 0 0 0); }
+.μενού__πλοήγηση ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--γραμμή); }
+.μενού__πλοήγηση li { border-bottom: 1px solid var(--γραμμή); overflow: hidden; }
+.μενού__πλοήγηση a { display: flex; align-items: baseline; padding: 18px 0; font-family: var(--σερίφ); font-weight: 350; font-size: clamp(1.7rem, 1.2rem + 3vw, 2.6rem); letter-spacing: var(--διάκενο-τίτλων); line-height: 1.1; transform: translateY(105%); transition: transform .8s var(--καμπύλη); }
+.μενού.is-open .μενού__πλοήγηση a { transform: none; }
+.μενού.is-open li:nth-child(2) a { transition-delay: .05s; } .μενού.is-open li:nth-child(3) a { transition-delay: .1s; }
+.μενού.is-open li:nth-child(4) a { transition-delay: .15s; } .μενού.is-open li:nth-child(5) a { transition-delay: .2s; }
+.μενού__κάτω { display: grid; gap: 22px; padding-top: 34px; opacity: 0; transition: opacity .6s .25s; }
+.μενού.is-open .μενού__κάτω { opacity: 1; }
+.μενού__κάτω p { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: .9rem; color: var(--γκρι); }
+.μενού__κάτω p a:hover { color: var(--γραφίτης); }
+.μενού-ανοιχτό .κεφαλίδα { color: var(--γραφίτης); }
+.μενού-ανοιχτό .κεφαλίδα::before { opacity: 0; }
+
+/* ---------- Κουμπιά: «γραμμές σχεδίου» ----------
+   Ορθογώνιο με τριχοειδή περίγραμμα, όπου οι γραμμές «περνούν» λίγο πέρα από τις γωνίες,
+   όπως σε αρχιτεκτονικό σκίτσο. Στο hover οι γραμμές κλείνουν ακριβώς στη γωνία και
+   το κελί του βέλους ανάβει σαν παράθυρο. */
+.κουμπί { --κ-υπέρβαση: 7px; --κ-φως: currentColor; position: relative; isolation: isolate; display: inline-grid; grid-template-columns: auto 3rem; align-items: stretch; min-height: 3rem; font-family: var(--σώμα); font-size: .68rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; line-height: 1.2; white-space: nowrap; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.κουμπί::before, .κουμπί::after { content: ""; position: absolute; pointer-events: none; transition: inset .55s var(--καμπύλη), opacity .4s; }
+.κουμπί::before { inset: 0 calc(var(--κ-υπέρβαση) * -1); border-block: 1px solid currentColor; }
+.κουμπί::after { inset: calc(var(--κ-υπέρβαση) * -1) 0; border-inline: 1px solid currentColor; }
+.κουμπί__ετ { display: flex; align-items: center; padding: .8rem 1.3rem; }
+.κουμπί__δ { position: relative; display: grid; place-items: center; overflow: hidden; }
+.κουμπί__δ::before { content: ""; position: absolute; left: 0; top: 22%; bottom: 22%; width: 1px; background: currentColor; opacity: .5; transition: top .55s var(--καμπύλη), bottom .55s var(--καμπύλη), opacity .4s; }
+.κουμπί__δ::after { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--κ-φως); opacity: .1; transform: scaleY(0); transform-origin: 50% 100%; transition: transform .55s var(--καμπύλη); }
+.κουμπί__δ i { display: none; }
+.κουμπί svg { position: relative; width: 17px; height: 17px; transition: transform .55s var(--καμπύλη), color .3s; }
+.κουμπί svg path { stroke-width: 1.1; }
+@media (hover: hover) {
+  .κουμπί:hover::before, .κουμπί:hover::after { inset: 0; }
+  .κουμπί:hover .κουμπί__δ::before { top: 0; bottom: 0; opacity: 1; }
+  .κουμπί:hover .κουμπί__δ::after { transform: scaleY(1); }
+  .κουμπί:hover svg { transform: translateX(3px); }
+}
+.κουμπί:active .κουμπί__δ::after { transform: scaleY(1); }
+.κουμπί:focus-visible { outline-offset: 10px; }
+/* Σκούρο: γεμάτο μπλοκ γραφίτη, οι γραμμές του σχεδίου ξεχειλίζουν σε γραφίτη */
+.κουμπί--σκούρο { color: var(--χαρτί); min-height: 3.25rem; grid-template-columns: auto 3.25rem; font-size: .72rem; }
+.κουμπί--σκούρο::before, .κουμπί--σκούρο::after { border-color: var(--γραφίτης); }
+.κουμπί--σκούρο .κουμπί__ετ, .κουμπί--σκούρο .κουμπί__δ { background: var(--γραφίτης); }
+.κουμπί--σκούρο .κουμπί__ετ { padding: .9rem 1.6rem; }
+.κουμπί--σκούρο .κουμπί__δ::before { background: rgba(244, 241, 236, .3); opacity: 1; }
+.κουμπί--σκούρο .κουμπί__δ::after { z-index: 0; }
+
+/* ==========================================================================
+   ΣΚΗΝΗ ΟΥΡΑΝΟΥ
+   ========================================================================== */
+.ουρανός { position: relative; height: 600vh; height: 600svh; background: var(--χαρτί); }
+/* Κινητό (ίδιο όριο με το κινητό() του home.js): η πρώτη σκηνή τελειώνει σε ~2 κινήσεις αντί για 3,5.
+   Ίδια καρέ και ίδιες φάσεις, απλώς σε μικρότερη διαδρομή. */
+@media (max-width: 759px), (max-aspect-ratio: 9/10) { .ουρανός { height: 385vh; height: 385svh; } }
+/* Καρφωμένες σκηνές: ύψος = η μεγαλύτερη οθόνη (χωρίς τη γραμμή διευθύνσεων του κινητού), ώστε όταν αυτή κρύβεται
+   στο scroll να μη φαίνεται λωρίδα της επόμενης ενότητας από κάτω */
+.ουρανός__sticky { position: sticky; top: 0; height: 100vh; height: 100lvh; overflow: hidden; isolation: isolate; }
+
+/* Ο ουρανός πίσω απ' όλα: ζενίθ πάνω, ορίζοντας κάτω (κοιτάμε ψηλά) */
+.ουρανός__φόντο { position: absolute; inset: 0; z-index: 0; background:
+  radial-gradient(120% 70% at 50% 120%, var(--ουρανός-ορίζοντας) 0%, transparent 70%),
+  linear-gradient(180deg, var(--ουρανός-ζενίθ) 0%, var(--ουρανός-ορίζοντας) 78%); }
+/* Ψηλά στον ουρανό: η αρχή της σελίδας, πριν φανούν τα δέντρα. Πιο βαθύ μπλε πάνω, το χρώμα
+   της κορυφής της φωτογραφίας κάτω, ώστε η φωτογραφία να «βγαίνει» από μέσα του χωρίς ραφή. */
+.ουρανός__ύψος { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--ουρανός-ζενίθ) 62%, #183a7d) 0%, var(--ουρανός-ζενίθ) 82%); will-change: transform, opacity; }
+/* Απαλά σύννεφα που περνούν αργά: ο ουρανός δεν είναι ποτέ εντελώς ακίνητος */
+.ουρανός__ύψος img { position: absolute; width: min(1100px, 95vw); height: auto; opacity: .55; animation: gp-σύννεφο 46s ease-in-out infinite alternate; }
+.ουρανός__ύψος img:nth-child(1) { left: -12%; top: 14%; }
+.ουρανός__ύψος img:nth-child(2) { right: -18%; top: 42%; opacity: .4; animation-duration: 58s; animation-direction: alternate-reverse; }
+.ουρανός__ύψος img:nth-child(3) { left: 18%; top: 72%; opacity: .32; animation-duration: 64s; }
+@keyframes gp-σύννεφο { from { transform: translate3d(-4vw, 0, 0); } to { transform: translate3d(6vw, 0, 0); } }
+/* Έδαφος κάτω από το βίντεο (ορατό κυρίως στο κινητό) */
+.ουρανός__έδαφος { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; height: 100%; transform: scaleY(0); transform-origin: 50% 100%; will-change: transform; background: linear-gradient(180deg, var(--έδαφος) 0%, color-mix(in srgb, var(--έδαφος) 55%, #0c0c0d) 100%); }
+
+/* Τα δύο αντίγραφα του timelapse: πίσω (ολόκληρο) και μπροστά (μόνο το σπίτι) */
+/* Καμβάδες στο μέγεθος της οθόνης: η θέση και το ζουμ της εικόνας ζωγραφίζονται μέσα τους (home.js) */
+.σκηνή { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.σκηνή canvas { width: 100%; height: 100%; }
+.σκηνή--μπροστά { z-index: 3; visibility: hidden; }
+
+/* Ο τίτλος ζει ανάμεσα στα δύο αντίγραφα */
+.τίτλος { position: absolute; left: 50%; top: 0; z-index: 2; width: max-content; max-width: 92vw; text-align: center; color: #fffdf8; transform: translate(-50%, -50%); will-change: transform, opacity; pointer-events: none; }
+.τίτλος h1 { font-family: var(--σερίφ); font-weight: 350; font-size: var(--τίτλος-μέγεθος, 9vw); line-height: .9; letter-spacing: var(--διάκενο-τίτλων); text-shadow: 0 2px 30px rgba(40, 60, 100, .18); }
+.τίτλος h1 span { display: block; }
+.τίτλος h1 .τίτλος__πόλη { display: flex; font-family: var(--σώμα); line-height: 1; align-items: center; justify-content: center; gap: 18px; margin-top: calc(var(--τίτλος-μέγεθος, 9vw) * .2); font-size: max(.7rem, calc(var(--τίτλος-μέγεθος, 9vw) * .11)); font-weight: 500; letter-spacing: .42em; text-transform: uppercase; }
+.τίτλος__πόλη::before, .τίτλος__πόλη::after { content: ""; width: 3.2em; height: 1px; background: currentColor; opacity: .7; }
+.τίτλος__πόλη { padding-left: .42em; }
+
+/* Σύννεφο που ενώνει τη νύχτα με το χαρτί */
+.σύννεφο { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+/* Σμήνος: ξεχωριστά σύννεφα που μπαίνουν από κάτω, αριστερά και δεξιά (θέσεις στο home.js).
+   Ζωγραφίζονται όλα σε έναν καμβά· οι εικόνες είναι μόνο η πηγή τους. Με 22 ξεχωριστές εικόνες
+   (22 στρώματα GPU) τα σύννεφα τρεμόπαιζαν στο scroll του κινητού. */
+.σύννεφο img { display: none; }
+.σύννεφο__καμβάς { position: absolute; inset: 0; width: 100%; height: 100%; visibility: hidden; }
+/* Το λευκό της επόμενης ενότητας: ανεβαίνει ΠΙΣΩ από τα σύννεφα (δεν σβήνει ποτέ προς τα μέσα),
+   με το πάνω άκρο κρυμμένο μέσα τους. Τα σύννεφα κάθονται πάνω του και ανεβαίνουν μαζί του με το scroll. */
+.σύννεφο__βάση { position: absolute; inset: 0; background: var(--χαρτί); visibility: hidden; will-change: transform;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 12vh); mask-image: linear-gradient(180deg, transparent 0, #000 12vh); }
+
+/* Χωρίς JS: στατική εκδοχή */
+.no-js .ουρανός { height: auto; }
+.no-js .ουρανός__sticky { position: relative; height: auto; aspect-ratio: 1600 / 947; }
+.no-js .σκηνή { inset: 0; width: 100%; height: 100%; background: url(/assets/seq/v4/d/060.webp) center bottom / cover; }
+.no-js .ουρανός__ύψος, .no-js .σκηνή--μπροστά, .no-js .σύννεφο { display: none; }
+.no-js .τίτλος { top: 40%; }
+
+/* ==========================================================================
+   ΕΜΕΙΣ — λίγα λόγια, πολύ αέρας
+   ========================================================================== */
+.εμείς { position: relative; background: var(--χαρτί); padding-block: clamp(24px, 3vw, 44px) clamp(110px, 14vw, 220px); padding-left: max(var(--περιθώριο), env(safe-area-inset-left, 0px)); padding-right: max(var(--περιθώριο), env(safe-area-inset-right, 0px)); overflow: hidden; }
+.εμείς__σήμα { width: 44px; height: 44px; margin: 0 auto clamp(24px, 2.6vw, 40px); color: var(--γραφίτης); }
+.εμείς__σήμα path { stroke-dasharray: 240; stroke-dashoffset: var(--σχεδίαση, 240); }
+
+/* Η δήλωση: οι λέξεις «ανάβουν» με το scroll, με μικρές εικόνες ανάμεσα */
+.δήλωση { max-width: 21ch; margin-inline: auto; text-align: center; font-family: var(--σερίφ); font-weight: 350; font-size: clamp(2rem, 1.1rem + 3.6vw, 5.2rem); line-height: 1.12; letter-spacing: var(--διάκενο-τίτλων); text-wrap: balance; }
+.δήλωση .λ { opacity: var(--α, .14); transition: opacity .2s linear; }
+.δήλωση em { font-style: normal; }
+.no-js .δήλωση .λ, .χωρίς-κίνηση .δήλωση .λ { --α: 1; }
+
+/* Γεγονότα: μια λωρίδα σαν πινακίδα έργου. Οι αριθμοί «γυρίζουν» σαν μετρητής (home.js) και
+   το τελευταίο κελί είναι ζωντανό: διαθέσιμες κατοικίες τώρα, από τα δεδομένα των έργων. */
+.γεγονότα { display: grid; grid-template-columns: minmax(0, 1.15fr) repeat(2, minmax(0, 1fr)) minmax(0, 1.25fr); max-width: 1320px; margin: clamp(90px, 11vw, 170px) auto 0; border-block: 1px solid var(--γραμμή); }
+.γεγονός { position: relative; display: grid; align-content: start; gap: 16px; padding: clamp(26px, 3vw, 44px) clamp(18px, 2.4vw, 40px) clamp(26px, 3vw, 40px); text-align: left; }
+.γεγονός + .γεγονός { border-left: 1px solid var(--γραμμή); }
+/* Γραμμή που σχεδιάζεται πάνω από κάθε κελί όσο «φορτώνει» ο αριθμός */
+.γεγονός::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--γραφίτης); transform: scaleX(0); transform-origin: 0 50%; transition: transform 1.2s cubic-bezier(.65, 0, .35, 1); }
+.γεγονότα.is-in .γεγονός::before { transform: scaleX(1); }
+.γεγονότα.is-in .γεγονός:nth-child(2)::before { transition-delay: .16s; } .γεγονότα.is-in .γεγονός:nth-child(3)::before { transition-delay: .32s; } .γεγονότα.is-in .γεγονός:nth-child(4)::before { transition-delay: .48s; }
+/* Οι ετικέτες μπαίνουν απαλά μαζί με τη γραμμή */
+.γεγονότα.αναμονή .γεγονός > :not(dd) { opacity: 0; transform: translateY(12px); transition: opacity .9s var(--καμπύλη), transform .9s var(--καμπύλη); }
+.γεγονότα.is-in .γεγονός > :not(dd) { opacity: 1; transform: none; transition-delay: .35s; }
+.γεγονός dd { order: -1; display: flex; align-items: baseline; font-family: var(--σερίφ); font-size: clamp(3rem, 1.9rem + 3.3vw, 5.8rem); line-height: .95; letter-spacing: -.01em; font-variant-numeric: lining-nums proportional-nums; font-weight: 300; }
+.γεγονός dt { font-size: .68rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--γραφίτης); max-width: 22ch; line-height: 1.5; }
+/* Μετρητής: κάθε ψηφίο είναι μια στήλη 0–9 που κυλά στη θέση της */
+.μετρητής { display: inline-flex; }
+.μετρητής__ψηφίο { display: inline-block; height: 1em; overflow: hidden; line-height: 1; }
+.μετρητής__στήλη { display: flex; flex-direction: column; transform: translate3d(0, calc(var(--τ, 0) * -1em), 0); transition: transform 1.6s cubic-bezier(.16, 1, .3, 1); }
+.μετρητής__στήλη span { display: block; height: 1em; text-align: center; }
+.μετρητής__σύμβολο { display: inline-block; line-height: 1; }
+/* Ζωντανό κελί: σε χαρτί πιο φωτεινό, με πράσινη ένδειξη και σύνδεσμο */
+.γεγονός--ζωντανό { background: rgba(255, 255, 255, .55); }
+.γεγονός__ζωντανά { display: inline-flex; align-items: center; gap: 9px; font-size: .6rem; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; color: var(--διαθέσιμο); }
+.γεγονός__ζωντανά i { position: relative; width: 7px; height: 7px; border-radius: 50%; background: var(--διαθέσιμο); }
+.γεγονός__ζωντανά i::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 1px solid var(--διαθέσιμο); opacity: 0; animation: gp-παλμός 2.4s ease-out infinite; }
+@keyframes gp-παλμός { 0% { transform: scale(.4); opacity: .8; } 100% { transform: scale(1.6); opacity: 0; } }
+.γεγονός--ζωντανό .υπογράμμιση { margin-top: 4px; justify-self: start; }
+.γεγονός--ζωντανό { grid-template-rows: auto auto auto 1fr; }
+.γεγονός--ζωντανό > .γεγονός__ζωντανά { order: -2; }
+.εμείς__κάτω { display: flex; justify-content: center; margin-top: clamp(72px, 9vw, 130px); }
+
+/* ---------- Κινητό ---------- */
+@media (max-width: 1100px) {
+  .πλοήγηση, .κεφαλίδα__cta { display: none; }
+  .μενού-κουμπί { display: block; }
+}
+@media (min-width: 1101px) { .μενού { display: none !important; } }
+@media (max-width: 760px) {
+  :root { --κεφαλίδα: 64px; }
+  .λογότυπο small { display: none; }
+  .γεγονότα { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .γεγονός:nth-child(3) { border-left: 0; }
+  .γεγονός:nth-child(n+3) { border-top: 1px solid var(--γραμμή); }
+  .γεγονός dd { font-size: clamp(2.6rem, 1.6rem + 6vw, 3.6rem); }
+  .τίτλος__πόλη::before, .τίτλος__πόλη::after { width: 1.6em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Οθόνη φόρτωσης χωρίς κίνηση: το λογότυπο φαίνεται ολόκληρο από την αρχή */
+  .εισαγωγή .λογότυπο.σε-εισαγωγή path { stroke-dasharray: none; stroke-dashoffset: 0; }
+  .εισαγωγή .λογότυπο.σε-εισαγωγή b { opacity: 1; }
+  .εισαγωγή .λογότυπο.σε-εισαγωγή small { clip-path: none; }
+  .ουρανός__ύψος img, .γεγονός__ζωντανά i::after { animation: none; }
+  .μετρητής__στήλη { transition: none; }
+}
+
+/* ==========================================================================
+   ΝΥΧΤΑ — τα τρία κτίρια με τα σπίτια που ανάβουν
+   ========================================================================== */
+@property --νύχτα-πάνω { syntax: "<color>"; inherits: true; initial-value: #121527; }
+@property --νύχτα-κάτω { syntax: "<color>"; inherits: true; initial-value: #121115; }
+
+.νύχτα { position: relative; background: var(--νύχτα-κάτω); color: #f4efe6; transition: --νύχτα-πάνω 1.2s var(--καμπύλη), --νύχτα-κάτω 1.2s var(--καμπύλη); }
+/* Σούρουπο: το χαρτί του «Εμείς» βυθίζεται στη νύχτα */
+/* Σούρουπο: πιο ψηλό και με «ομαλή» (eased) διαβάθμιση, ώστε η μετάβαση στη νύχτα να μη φαίνεται */
+.νύχτα__δύση { height: clamp(320px, 62vh, 680px); margin-bottom: -1px; background: linear-gradient(180deg,
+  var(--χαρτί) 0%, #ece6de 8%, #ddd5ca 16%, #c6beb5 25%, #a9a29d 34%, #8a8589 43%, #6b6a75 52%, #4f5164 61%, #3a3d53 70%,
+  color-mix(in srgb, #2c3043 60%, var(--νύχτα-πάνω)) 80%, color-mix(in srgb, #2c3043 25%, var(--νύχτα-πάνω)) 90%, var(--νύχτα-πάνω) 100%); }
+.νύχτα__σκηνή { position: relative; height: 100vh; height: 100svh; min-height: 620px; overflow: hidden; isolation: isolate;
+  background: radial-gradient(90% 60% at 50% 42%, color-mix(in srgb, var(--νύχτα-πάνω) 80%, #3b4a72) 0%, transparent 70%),
+              linear-gradient(180deg, var(--νύχτα-πάνω) 0%, var(--νύχτα-πάνω) 45%, var(--νύχτα-κάτω) 100%); }
+
+.νύχτα__κτίρια { position: absolute; inset: 0; z-index: 1; }
+/* Σκιά πάνω/κάτω ώστε τα κείμενα να διαβάζονται χωρίς κουτιά */
+.νύχτα__σκηνή::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(180deg, var(--νύχτα-πάνω) 0%, color-mix(in srgb, var(--νύχτα-πάνω) 60%, transparent) 9%, transparent 22%, transparent 70%, color-mix(in srgb, var(--νύχτα-κάτω) 92%, transparent) 94%, var(--νύχτα-κάτω) 100%); }
+.κτίριο { position: absolute; inset: 0; will-change: transform, opacity, filter; }
+.κτίριο__σκηνή { position: absolute;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%), linear-gradient(180deg, transparent 0, #000 9%, #000 88%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%), linear-gradient(180deg, transparent 0, #000 9%, #000 88%, transparent 100%);
+  mask-composite: intersect; }
+.κτίριο__εικόνα { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; user-select: none; -webkit-user-drag: none; }
+.κτίριο__φώτα { position: absolute; inset: 0; pointer-events: none; }
+.κτίριο__φως { position: absolute; display: block; max-width: none; opacity: 0; will-change: opacity; }
+.κτίριο__χάρτης { position: absolute; inset: 0; width: 100%; height: 100%; }
+.κτίριο__περιοχή { fill: transparent; stroke: none; cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent; }
+.κτίριο__περιοχή:focus-visible { stroke: rgba(255, 226, 176, .7); stroke-width: 2; stroke-dasharray: 6 8; }
+
+/* Κεφαλή ενότητας */
+.νύχτα__κεφαλή { position: absolute; z-index: 3; left: 0; right: 0; top: 0; display: flex; justify-content: flex-end; align-items: baseline; gap: 20px;
+  padding: clamp(26px, 4vw, 44px) max(var(--περιθώριο), env(safe-area-inset-right, 0px)) 0 max(var(--περιθώριο), env(safe-area-inset-left, 0px)); pointer-events: none; }
+.νύχτα__οδηγία { font-size: .66rem; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: rgba(244, 239, 230, .55); text-align: right; white-space: nowrap; line-height: 1.7; }
+
+/* Έλεγχοι: δύο λεπτά βελάκια και το όνομα του έργου ανάμεσα */
+.νύχτα__έλεγχοι { position: absolute; z-index: 3; left: 50%; bottom: max(30px, env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: clamp(18px, 4vw, 56px); width: min(720px, calc(100% - 2 * var(--περιθώριο))); }
+.νύχτα__όνομα { display: grid; justify-items: center; gap: 6px; text-align: center; min-width: 0; overflow: hidden; }
+.νύχτα__όνομα b { font-family: var(--σερίφ); font-weight: 350; font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.6rem); line-height: 1.05; letter-spacing: var(--διάκενο-τίτλων); white-space: nowrap; }
+.νύχτα__όνομα span { font-family: var(--σερίφ); font-style: normal; font-size: clamp(.95rem, .9rem + .2vw, 1.08rem); color: rgba(244, 239, 230, .62); font-weight: 350; }
+.νύχτα__όνομα a { display: grid; justify-items: center; gap: 6px; }
+.νύχτα__όνομα a:hover b { color: #ffe2b0; }
+.βέλος-έργου { width: 64px; height: 44px; display: grid; place-items: center; color: rgba(244, 239, 230, .78); transition: color .4s; }
+.βέλος-έργου svg { width: 46px; height: 14px; overflow: visible; transition: transform .6s var(--καμπύλη); }
+.βέλος-έργου path { fill: none; stroke: currentColor; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.βέλος-έργου:hover { color: #fff; }
+.βέλος-έργου[data-επόμενο]:hover svg { transform: translateX(6px) scaleX(1.18); }
+.βέλος-έργου[data-προηγούμενο]:hover svg { transform: translateX(-6px) scaleX(1.18); }
+
+/* Ετικέτα διαθεσιμότητας: χωρίς κουτί, κρέμεται πάνω από το σπίτι με μια λεπτή γραμμή φωτός */
+.φωτο-ετικέτα { position: absolute; z-index: 4; left: 0; top: 0; pointer-events: none; will-change: transform; }
+.φωτο-ετικέτα__σώμα { position: relative; display: grid; justify-items: start; gap: 4px; text-align: left; padding: 10px 0; pointer-events: none; width: max-content; max-width: min(42vw, 300px); }
+.φωτο-ετικέτα.is-left .φωτο-ετικέτα__σώμα { justify-items: end; text-align: right; }
+.φωτο-ετικέτα__σώμα::before { content: ""; position: absolute; inset: -22% -26%; z-index: -1; background: radial-gradient(closest-side, rgba(7, 8, 12, .62), rgba(7, 8, 12, .32) 55%, transparent); filter: blur(4px); }
+/* Οριζόντια γραμμή: φωτεινή στην πλευρά της ετικέτας, σβήνει προς την κατοικία */
+.φωτο-ετικέτα__γραμμή { position: absolute; right: calc(100% + 6px); height: 1px; transform: translateY(-.5px); background: linear-gradient(to left, rgba(255, 226, 176, .85), rgba(255, 226, 176, 0)); }
+.φωτο-ετικέτα.is-left .φωτο-ετικέτα__γραμμή { right: auto; left: calc(100% + 6px); background: linear-gradient(to right, rgba(255, 226, 176, .85), rgba(255, 226, 176, 0)); }
+.φωτο-ετικέτα__επίπεδο { font-size: .6rem; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; color: rgba(244, 239, 230, .62); }
+.φωτο-ετικέτα__όνομα { font-family: var(--σερίφ); font-weight: 350; font-size: clamp(1.5rem, 1.2rem + 1vw, 2.2rem); line-height: 1.05; letter-spacing: var(--διάκενο-τίτλων); color: #fbf6ee; text-shadow: 0 2px 18px rgba(0, 0, 0, .55); }
+.φωτο-ετικέτα__κατάσταση { font-family: var(--σερίφ); font-style: normal; font-size: 1.02rem; color: #f3d6a8; text-shadow: 0 0 18px rgba(255, 200, 120, .45); font-weight: 350; }
+.φωτο-ετικέτα.is-sold .φωτο-ετικέτα__κατάσταση { color: rgba(214, 220, 232, .72); text-shadow: none; }
+.φωτο-ετικέτα__σύνδεσμος { pointer-events: auto; display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; padding: 6px 4px; font-size: .64rem; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; color: #f4efe6; }
+.φωτο-ετικέτα__σύνδεσμος span { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 3px; transition: background-size .5s var(--καμπύλη); }
+.φωτο-ετικέτα__σύνδεσμος:hover span { background-size: 0 1px; background-position: 100% 100%; }
+.φωτο-ετικέτα__σύνδεσμος svg { width: 14px; height: 14px; transition: transform .5s var(--καμπύλη); }
+.φωτο-ετικέτα__σύνδεσμος:hover svg { transform: translateX(4px); }
+
+@media (max-width: 760px) {
+  .νύχτα__κεφαλή { flex-direction: column; align-items: center; text-align: center; gap: 10px; padding-top: 30px; }
+  .νύχτα__οδηγία { text-align: center; max-width: none; letter-spacing: .2em; white-space: normal; }
+  .νύχτα__έλεγχοι { gap: 8px; width: calc(100% - 24px); bottom: calc(max(22px, env(safe-area-inset-bottom, 0px)) + 18px); }
+  .βέλος-έργου { width: 52px; }
+  .βέλος-έργου svg { width: 34px; }
+  .νύχτα__όνομα b { font-size: 1.55rem; }
+}
+.no-js .νύχτα { display: none; }
+
+/* ==========================================================================
+   Μετάβαση ανάμεσα στις σελίδες (όλες οι σελίδες φορτώνουν αυτό το αρχείο)
+   Κύριος τρόπος: View Transitions ανάμεσα σε έγγραφα (Chrome, Edge, Safari): η παλιά σελίδα
+   σβήνει ανεβαίνοντας λίγο, η νέα έρχεται από κάτω. Δεν καθυστερεί τη φόρτωση της νέας σελίδας.
+   Εναλλακτικά (π.χ. Firefox): η κλάση «μετάβαση-js» μπαίνει από το inline script στο <head>
+   και το sections.js σβήνει τη σελίδα πριν φύγει.
+   ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root) { animation: gp-σελίδα-φεύγει .42s cubic-bezier(.55, 0, .75, .3) both; }
+  ::view-transition-new(root) { animation: gp-σελίδα-έρχεται .8s cubic-bezier(.22, 1, .36, 1) .1s both; }
+}
+@keyframes gp-σελίδα-φεύγει { to { opacity: 0; transform: translateY(-14px); } }
+@keyframes gp-σελίδα-έρχεται { from { opacity: 0; transform: translateY(18px); } }
+/* Εναλλακτικός τρόπος: μόνο opacity στο body (όχι transform, για να μη χαλάσουν τα position: fixed) */
+.μετάβαση-js body { animation: gp-σελίδα-εμφάνιση .7s cubic-bezier(.22, 1, .36, 1) backwards; }
+.μετάβαση-js.σελίδα-φεύγει body { opacity: 0; transition: opacity .34s cubic-bezier(.55, 0, .75, .3); }
+@keyframes gp-σελίδα-εμφάνιση { from { opacity: 0; } }
