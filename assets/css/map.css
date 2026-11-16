@@ -1,0 +1,87 @@
+/* ==========================================================================
+   Τα κτίριά μας στην Αττική — τρισδιάστατος σκούρος χάρτης (map.js)
+   Η ενότητα «κολλάει» στην οθόνη όσο τη διασχίζει κανείς: σύννεφα ανοίγουν, η κάμερα
+   κατεβαίνει στην Αττική, και στο τέλος τα σύννεφα ξανακλείνουν πριν συνεχίσει η σελίδα.
+   ========================================================================== */
+.χάρτης-ενότητα { --νύχτα: #0d0f13; --χ-κείμενο: #eee9e0; --χ-αχνό: rgba(238, 233, 224, .58); --χ-γραμμή: rgba(238, 233, 224, .14); --κίτρινο: #f2c14e;
+  position: relative; height: 300vh; height: 300svh; background: var(--χαρτί); }
+.χάρτης-ενότητα__σκηνή { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; isolation: isolate; background: var(--νύχτα); color: var(--χ-κείμενο); }
+.χάρτης-ενότητα__καμβάς { position: absolute; inset: 0; }
+.χάρτης-ενότητα__καμβάς canvas { display: block; width: 100%; height: 100%; outline: none; }
+.χάρτης-ενότητα__καμβάς::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(120% 95% at 50% 55%, rgba(13, 15, 19, 0) 55%, rgba(13, 15, 19, .85) 100%); }
+
+/* Κεφαλή και λίστα: εμφανίζονται όταν ανοίξουν τα σύννεφα */
+.χάρτης-ενότητα__κεφαλή, .χάρτης-ενότητα__λίστα { opacity: var(--χ-ui, 0); transform: translate3d(0, calc((1 - var(--χ-ui, 0)) * 16px), 0); }
+.χάρτης-ενότητα__κεφαλή { position: absolute; z-index: 3; top: calc(var(--κεφαλίδα) + clamp(12px, 3vh, 36px)); left: max(var(--περιθώριο), 20px); right: max(var(--περιθώριο), 20px);
+  display: flex; justify-content: space-between; align-items: start; gap: 24px; pointer-events: none; }
+.χάρτης-ενότητα__τίτλος { font-family: var(--σερίφ); font-weight: 300; font-size: clamp(2rem, 1.1rem + 2.8vw, 4rem); line-height: 1.02; letter-spacing: -.02em; color: var(--χ-κείμενο); }
+.χάρτης-ενότητα__οδηγία { max-width: 28ch; font-size: .8rem; line-height: 1.55; color: var(--χ-αχνό); text-align: right; }
+.χάρτης-ενότητα .για-αφή { display: none; }
+@media (hover: none) and (pointer: coarse) { .χάρτης-ενότητα .για-ποντίκι { display: none; } .χάρτης-ενότητα .για-αφή { display: inline; } }
+
+.χάρτης-ενότητα__λίστα { position: absolute; z-index: 3; left: max(var(--περιθώριο), 20px); bottom: max(28px, env(safe-area-inset-bottom)); display: grid; gap: 2px; list-style: none; margin: 0; padding: 0; }
+.χάρτης-ενότητα__λίστα a { display: grid; grid-template-columns: 10px auto; align-items: baseline; column-gap: 14px; padding: 7px 0; color: inherit; text-decoration: none; }
+.χάρτης-ενότητα__λίστα i { width: 7px; height: 7px; border-radius: 50%; background: var(--κίτρινο); box-shadow: 0 0 10px 2px rgba(242, 193, 78, .5); transform: translateY(-1px); }
+.χάρτης-ενότητα__λίστα b { font-family: var(--σερίφ); font-weight: 400; font-size: 1.05rem; transition: color .4s; }
+.χάρτης-ενότητα__λίστα small { grid-column: 2; font-size: .64rem; letter-spacing: .16em; text-transform: uppercase; color: var(--χ-αχνό); }
+.χάρτης-ενότητα__λίστα a:hover b, .χάρτης-ενότητα__λίστα a.είναι-ενεργό b, .χάρτης-ενότητα__λίστα a:focus-visible b { color: var(--κίτρινο); }
+
+/* Πινέζες και τοπωνύμια (θέση από το map.js) */
+.χάρτης-ενότητα__πινέζες { position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: var(--χ-ui, 0); }
+.χάρτης-ενότητα .πινέζα { position: absolute; left: 0; top: 0; pointer-events: var(--χ-δείκτης, none); color: var(--χ-κείμενο); text-decoration: none; will-change: transform; transform: translate3d(var(--x, -999px), var(--y, -999px), 0); }
+.πινέζα__κουκκίδα { position: absolute; left: -9px; top: -9px; width: 18px; height: 18px; border-radius: 50%; background: var(--κίτρινο);
+  box-shadow: 0 0 0 3px rgba(13, 15, 19, .7), 0 0 22px 6px rgba(242, 193, 78, .55); transition: transform .5s var(--καμπύλη); }
+.πινέζα__κουκκίδα::before, .πινέζα__κουκκίδα::after { content: ""; position: absolute; inset: -2px; border-radius: 50%; border: 1px solid rgba(242, 193, 78, .8); animation: χ-παλμός 2.6s cubic-bezier(.2, .6, .3, 1) infinite; }
+.πινέζα__κουκκίδα::after { animation-delay: 1.3s; }
+@keyframes χ-παλμός { from { transform: scale(1); opacity: .9; } to { transform: scale(3.4); opacity: 0; } }
+.χάρτης-ενότητα .πινέζα::before { content: ""; position: absolute; left: -24px; top: -24px; width: 48px; height: 48px; border-radius: 50%; }
+.πινέζα__ετικέτα { position: absolute; left: 20px; top: -13px; width: max-content; display: grid; gap: 3px; padding: 7px 12px 8px; white-space: nowrap; background: rgba(13, 15, 19, .72); border: 1px solid var(--χ-γραμμή);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: background .4s, border-color .4s; }
+.πινέζα__όνομα { font-family: var(--σερίφ); font-size: .92rem; font-weight: 400; }
+.πινέζα__περιοχή { font-size: .6rem; letter-spacing: .16em; text-transform: uppercase; color: var(--χ-αχνό); }
+.πινέζα__κάρτα { display: grid; grid-template-rows: 0fr; width: 0; overflow: hidden; transition: grid-template-rows .6s var(--καμπύλη), width .6s var(--καμπύλη); }
+.πινέζα__κάρτα > span { min-height: 0; overflow: hidden; display: grid; gap: 8px; }
+.πινέζα__κάρτα img { display: block; width: 220px; height: 130px; object-fit: cover; margin-top: 8px; }
+.πινέζα__κατάσταση { display: flex; align-items: center; gap: 8px; font-size: .7rem; color: var(--χ-αχνό); }
+.πινέζα__κατάσταση::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #5bbf82; }
+.πινέζα--πωλήθηκε .πινέζα__κατάσταση::before { background: rgba(238, 233, 224, .4); }
+.πινέζα__δες { font-size: .78rem; color: var(--κίτρινο); }
+.χάρτης-ενότητα .πινέζα:hover, .χάρτης-ενότητα .πινέζα:focus-visible, .χάρτης-ενότητα .πινέζα.είναι-ενεργό { z-index: 2; outline: none; }
+.πινέζα:hover .πινέζα__κουκκίδα, .πινέζα:focus-visible .πινέζα__κουκκίδα, .πινέζα.είναι-ενεργό .πινέζα__κουκκίδα { transform: scale(1.25); }
+.πινέζα:hover .πινέζα__ετικέτα, .πινέζα:focus-visible .πινέζα__ετικέτα, .πινέζα.είναι-ενεργό .πινέζα__ετικέτα { background: rgba(13, 15, 19, .92); border-color: rgba(242, 193, 78, .5); }
+@media (hover: hover) {
+  .πινέζα:hover .πινέζα__κάρτα, .πινέζα:focus-visible .πινέζα__κάρτα, .πινέζα.είναι-ενεργό .πινέζα__κάρτα { grid-template-rows: 1fr; width: 220px; }
+}
+.πινέζα.αριστερά .πινέζα__ετικέτα { left: auto; right: 20px; text-align: right; }
+.πινέζα.αριστερά .πινέζα__κατάσταση { justify-content: flex-end; }
+.πινέζα.πάνω .πινέζα__ετικέτα { top: auto; bottom: -13px; display: flex; flex-direction: column-reverse; }
+.πινέζα.πάνω .πινέζα__κάρτα > span { padding-bottom: 8px; }
+.χάρτης-ενότητα .τόπος { position: absolute; left: 0; top: 0; transform: translate3d(var(--x, -999px), var(--y, -999px), 0) translate(-50%, -50%); font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(238, 233, 224, .42); white-space: nowrap; pointer-events: none; }
+.τόπος--βουνό { color: rgba(238, 233, 224, .3); letter-spacing: .3em; }
+.τόπος--θάλασσα { color: rgba(140, 160, 190, .35); letter-spacing: .4em; }
+
+/* Σύννεφα στο χρώμα της σελίδας: ανοίγουν προς τα πλάγια στην αρχή, ξανακλείνουν στο τέλος */
+.χάρτης-ενότητα__νέφη { position: absolute; inset: -12%; z-index: 4; pointer-events: none; }
+.χάρτης-ενότητα__νέφη::before { content: ""; position: absolute; inset: 0; background: var(--χαρτί); opacity: var(--χ-πέπλο, 1); }
+.χάρτης-ενότητα__νέφη img { position: absolute; left: var(--α); top: var(--β); width: calc(var(--π) * 1%); max-width: none; height: auto; opacity: var(--χ-νέφη, 1); will-change: transform, opacity;
+  transform: translate3d(calc(var(--χ-άνοιγμα, 0) * var(--φορά-x, 0) * 60vw), 0, 0) scale(calc(1 + var(--χ-άνοιγμα, 0) * .35)); }
+
+@media (max-width: 760px) {
+  .χάρτης-ενότητα { height: 260svh; }
+  .χάρτης-ενότητα__κεφαλή { flex-direction: column; gap: 10px; }
+  .χάρτης-ενότητα__οδηγία { text-align: left; }
+  .χάρτης-ενότητα__λίστα { right: 20px; grid-template-columns: repeat(3, auto); justify-content: space-between; column-gap: 12px; }
+  .χάρτης-ενότητα__λίστα a { column-gap: 8px; }
+  .χάρτης-ενότητα__λίστα b { font-size: .8rem; white-space: nowrap; }
+  .χάρτης-ενότητα__λίστα small { display: none; }
+  .πινέζα__όνομα { font-size: .82rem; }
+  .χάρτης-ενότητα__νέφη img { width: calc(var(--π) * 2.4%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .χάρτης-ενότητα { height: auto; }
+  .χάρτης-ενότητα__σκηνή { position: relative; }
+  .χάρτης-ενότητα__νέφη { display: none; }
+  .χάρτης-ενότητα { --χ-ui: 1; --χ-δείκτης: auto; }
+  .πινέζα__κουκκίδα::before, .πινέζα__κουκκίδα::after { animation: none; }
+}
