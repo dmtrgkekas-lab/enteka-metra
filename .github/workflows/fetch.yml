@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           mkdir -p _fetch/out
-          while read -r name url; do [ -n "$name" ] && curl -fsSL -o "_fetch/out/$name" "$url"; done < _fetch/list.txt
+          while read -r name url; do [ -n "$name" ] && { curl -fsSL --retry 5 --retry-all-errors --retry-delay 20 --max-time 400 -o "_fetch/out/$name" "$url" || echo "FAILED $name"; }; done < _fetch/list.txt
           ls -la _fetch/out
       - run: |
           git config user.name "fetch-bot"; git config user.email "fetch-bot@users.noreply.github.com"
