@@ -8,7 +8,7 @@
    ========================================================================== */
 
 /* ---------- 1. Ήρωας */
-.σχετικά--νέα .σχ-ήρωας { display: block; height: 230vh; height: 230svh; min-height: 0; overflow: visible; background: var(--χαρτί); }
+.σχετικά--νέα .σχ-ήρωας { display: block; height: 240vh; height: 240svh; min-height: 0; overflow: visible; background: var(--χαρτί); }
 .σχετικά--νέα .σχ-ήρωας::after { content: none; }
 .σχ-ήρωας__σκηνή { --τ-μέγεθος: clamp(4.2rem, 1rem + 13.5vw, 15.5rem); position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; isolation: isolate;
   display: grid; grid-template-rows: auto 1fr; align-content: start;
@@ -24,15 +24,18 @@
 /* Το σπίτι μετριέται με το ύψος της οθόνης (το πολύ ~56% του ύψους), ώστε να μην καλύπτει ποτέ τον τίτλο στο άνοιγμα */
 .σχετικά--νέα .σχ-ήρωας__εικόνα { position: absolute; left: 50%; bottom: -2vh; bottom: -2svh; z-index: 2; width: min(64vw, 76vh, 1100px); width: min(64vw, 76svh, 1100px); margin: 0; justify-self: auto; left: 53%;
   transform: translate3d(-50%, var(--άνοδος, 0px), 0); }
-/* Σύννεφα κάτω από το σπίτι που ανεβαίνουν (πιο γρήγορα από τα γράμματα) και σκεπάζουν την οθόνη πριν την επόμενη ενότητα */
-.σχ-ήρωας__ανάβαση { position: absolute; left: 0; right: 0; top: 0; z-index: 3; height: 200%; pointer-events: none; will-change: transform;
-  transform: translate3d(0, calc(40% * (1 - var(--ν, 0)) - 50% * var(--ν, 0)), 0); }
-.σχ-ήρωας__νεφέλες { position: relative; height: 34%; }
-.σχ-ήρωας__νεφέλες img { position: absolute; max-width: none; height: auto; opacity: .96; }
-.σχ-ήρωας__νεφέλες img:nth-child(odd) { animation: σχ-ρεύμα 50s ease-in-out infinite alternate; }
-.σχ-ήρωας__νεφέλες img:nth-child(even) { animation: σχ-ρεύμα 64s ease-in-out infinite alternate-reverse; }
-.σχ-ήρωας__γέμισμα { height: 66%; margin-top: -9%; background: linear-gradient(180deg, rgba(244, 241, 236, 0) 0%, rgba(244, 241, 236, .95) 4%, var(--χαρτί) 7%); }
-@keyframes σχ-ρεύμα { from { translate: -4vw 0; } to { translate: 4vw 0; } }
+/* Σύννεφα κάτω από το σπίτι: μια πυκνή «τράπεζα» που ανεβαίνει πιο γρήγορα από τα γράμματα και τα σκεπάζει.
+   Η θέση της (--ν-y, σε px) υπολογίζεται στο about.js από το ύψος της οθόνης, ώστε να δουλεύει ίδια παντού. */
+.σχ-ήρωας__ανάβαση { position: absolute; left: -12vw; right: -12vw; top: 0; z-index: 3; height: 300vh; pointer-events: none; will-change: transform;
+  transform: translate3d(0, var(--ν-y, 86vh), 0); }
+.σχ-ήρωας__νεφέλες { position: relative; height: 62vmax;
+  background: linear-gradient(180deg, rgba(246, 244, 240, 0) 0%, rgba(246, 244, 240, 0) 14%, rgba(246, 244, 240, .78) 38%, var(--χαρτί) 62%); }
+.σχ-ήρωας__νεφέλες img { position: absolute; left: var(--α); top: var(--β); width: calc(var(--π) * 1vmax); max-width: none; height: auto; opacity: .97; }
+.σχ-ήρωας__νεφέλες img:nth-child(3n + 1) { animation: σχ-ρεύμα 46s ease-in-out infinite alternate; }
+.σχ-ήρωας__νεφέλες img:nth-child(3n + 2) { animation: σχ-ρεύμα 60s ease-in-out infinite alternate-reverse; }
+.σχ-ήρωας__νεφέλες img:nth-child(3n) { animation: σχ-ρεύμα 74s ease-in-out infinite alternate; }
+.σχ-ήρωας__γέμισμα { height: calc(100% - 62vmax); margin-top: -1px; background: var(--χαρτί); }
+@keyframes σχ-ρεύμα { from { translate: -3vw 0; } to { translate: 3vw 0; } }
 /* χωρίς την παλιά σκίαση στο κάτω μέρος */
 .σχετικά--νέα .σχ-ήρωας__σκηνή::after { content: none; }
 
@@ -42,7 +45,7 @@
 
 /* ---------- 3. Άνοιγμα: η ενότητα πάνω του ανεβαίνει σαν φύλλο χαρτιού και αποκαλύπτει το βίντεο, που ήδη περιμένει από κάτω.
    Το βίντεο έρχεται ήρεμα σε θέση (λίγο ξεζουμάρισμα, φωτίζει) και μετά εμφανίζεται ο τίτλος. */
-.σχετικά--νέα .σχ-δήλωση { position: relative; z-index: 2; background: var(--χαρτί); box-shadow: 0 40px 80px -30px rgba(20, 18, 16, .28); }
+.σχετικά--νέα .σχ-δήλωση { position: relative; z-index: 2; min-height: 100vh; min-height: 100svh; display: grid; align-content: center; background: var(--χαρτί); box-shadow: 0 40px 80px -30px rgba(20, 18, 16, .28); }
 .σχ-άνοιγμα { position: relative; z-index: 1; height: 260vh; height: 260svh; margin-top: -100vh; margin-top: -100svh; background: var(--γραφίτης); }
 .σχ-άνοιγμα__σκηνή { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; }
 .σχ-άνοιγμα__εικόνα { position: absolute; inset: 0; margin: 0; }
@@ -88,7 +91,6 @@
   .σχετικά--νέα .σχ-ήρωας { height: 200svh; }
   .σχ-ήρωας__σκηνή { --τ-μέγεθος: clamp(3.4rem, 1rem + 15vw, 6.4rem); }
   .σχετικά--νέα .σχ-ήρωας__εικόνα { width: min(118vw, 66vh); width: min(118vw, 66svh); bottom: 2svh; left: 58%; }
-  .σχ-ήρωας__νεφέλες img { width: 150% !important; }
   .σχ-άνοιγμα { height: 230svh; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -109,3 +111,7 @@
 .σχ-αρχές__εικόνα .σχ-βίντεο { transform: scale(1.1); transition: opacity 1s var(--καμπύλη), transform 1.8s var(--καμπύλη); }
 .σχ-αρχές__εικόνα.είναι-ενεργή .σχ-βίντεο { transform: scale(1); }
 @media (prefers-reduced-motion: reduce) { .σχ-βίντεο { display: none; } }
+
+/* Η δήλωση καλύπτει όλο το πλάτος (το βίντεο από κάτω δεν φαίνεται στα πλάγια) */
+.σχετικά--νέα .σχ-δήλωση::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; z-index: -1; width: 100vw; transform: translateX(-50%); background: var(--χαρτί); }
+.σχετικά--νέα .σχ-δήλωση { isolation: isolate; }
