@@ -148,7 +148,7 @@
     const κινητό = window.matchMedia('(max-width: 960px)');
     let ενεργό = 0, ορατή = false;
     const παίξε = (β, ναι) => {
-      if (!β) return;
+      if (!β || β.tagName !== 'VIDEO') return;   // φωτογραφίες: τίποτα να παίξει
       if (ναι && !μειωμένηΚίνηση) {
         if (β.preload === 'none') { β.preload = 'auto'; β.load(); }
         const υ = β.play(); if (υ && υ.catch) υ.catch(() => {});

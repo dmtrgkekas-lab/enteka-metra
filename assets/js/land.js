@@ -155,3 +155,24 @@
   σκηνές.forEach(μέγεθος);
   requestAnimationFrame(βρόχος);
 })();
+
+/* Φωτογραφίες ζωής: ήπια παράλλαξη μέσα στο κάδρο τους (η φωτογραφία κινείται λίγο πιο αργά από τη σελίδα) */
+(() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const εικόνες = [...document.querySelectorAll('[data-γη-παράλλαξη]')];
+  if (!εικόνες.length) return;
+  let αναμονή = false;
+  const ενημέρωση = () => {
+    αναμονή = false;
+    const h = innerHeight;
+    εικόνες.forEach((im) => {
+      const κ = im.parentElement.getBoundingClientRect();
+      if (κ.bottom < 0 || κ.top > h) return;
+      const t = (κ.top + κ.height / 2 - h / 2) / (h / 2 + κ.height / 2);   // -1 … 1
+      im.style.setProperty('--π-y', (t * κ.height * 0.06).toFixed(1) + 'px');
+    });
+  };
+  addEventListener('scroll', () => { if (!αναμονή) { αναμονή = true; requestAnimationFrame(ενημέρωση); } }, { passive: true });
+  addEventListener('resize', ενημέρωση);
+  ενημέρωση();
+})();

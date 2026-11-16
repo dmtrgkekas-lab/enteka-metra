@@ -17,14 +17,16 @@
 .σχ-ήρωας__σκηνή::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: var(--δύση, 0);
   background: linear-gradient(180deg, #8d9db6 0%, #c9b7ad 34%, #ecd2b8 56%, #f4ece2 78%, var(--χαρτί) 100%); }
 .σχ-ήρωας__σκηνή .σχ-ήρωας__νέφη { transform: translate3d(calc(var(--ρεύμα, 0) * -8vw), 0, 0); }
-.σχ-ήρωας__σκηνή .σχ-ήρωας__τίτλος { --τ-μέγεθος: inherit; font-size: var(--τ-μέγεθος); }
+/* Ο τίτλος κλιμακώνεται και με το ύψος της οθόνης, ώστε σε φαρδιές-χαμηλές οθόνες να μένει χώρος ανάμεσα σε τίτλο και σπίτι */
+.σχ-ήρωας__σκηνή .σχ-ήρωας__τίτλος { --τ-μέγεθος: inherit; font-size: min(var(--τ-μέγεθος), 19vh); font-size: min(var(--τ-μέγεθος), 19svh); margin-top: calc(var(--κεφαλίδα) + clamp(12px, 4vh, 48px)); }
 /* Το σπίτι στο κέντρο· ο τίτλος βυθίζεται πίσω του */
 .σχετικά--νέα .σχ-ήρωας__τίτλος { text-align: center; justify-self: center; transform: translate3d(0, var(--βύθιση, 0px), 0); }
-.σχετικά--νέα .σχ-ήρωας__εικόνα { position: absolute; left: 50%; bottom: -4vh; z-index: 2; width: min(66vw, 1060px); margin: 0; justify-self: auto;
+/* Το σπίτι μετριέται με το ύψος της οθόνης (το πολύ ~56% του ύψους), ώστε να μην καλύπτει ποτέ τον τίτλο στο άνοιγμα */
+.σχετικά--νέα .σχ-ήρωας__εικόνα { position: absolute; left: 50%; bottom: -2vh; bottom: -2svh; z-index: 2; width: min(64vw, 76vh, 1100px); width: min(64vw, 76svh, 1100px); margin: 0; justify-self: auto; left: 53%;
   transform: translate3d(-50%, var(--άνοδος, 0px), 0); }
 /* Σύννεφα κάτω από το σπίτι που ανεβαίνουν (πιο γρήγορα από τα γράμματα) και σκεπάζουν την οθόνη πριν την επόμενη ενότητα */
 .σχ-ήρωας__ανάβαση { position: absolute; left: 0; right: 0; top: 0; z-index: 3; height: 200%; pointer-events: none; will-change: transform;
-  transform: translate3d(0, calc(78% * 0.5 * (1 - var(--ν, 0)) * 2 - var(--ν, 0) * 50%), 0); }
+  transform: translate3d(0, calc(40% * (1 - var(--ν, 0)) - 50% * var(--ν, 0)), 0); }
 .σχ-ήρωας__νεφέλες { position: relative; height: 34%; }
 .σχ-ήρωας__νεφέλες img { position: absolute; max-width: none; height: auto; opacity: .96; }
 .σχ-ήρωας__νεφέλες img:nth-child(odd) { animation: σχ-ρεύμα 50s ease-in-out infinite alternate; }
@@ -78,10 +80,14 @@
   .σχ-αρχή { min-height: 48svh; }
   .σχ-αρχή:first-child { min-height: 40svh; padding-top: 40px; }
 }
+/* Κάθετες οθόνες (tablet): το σπίτι μεγαλύτερο, για να γεμίζει τον χώρο κάτω από τον τίτλο */
+@media (min-width: 761px) and (max-aspect-ratio: 4/5) {
+  .σχετικά--νέα .σχ-ήρωας__εικόνα { width: min(90vw, 62vh); width: min(90vw, 62svh); left: 56%; }
+}
 @media (max-width: 760px) {
   .σχετικά--νέα .σχ-ήρωας { height: 200svh; }
   .σχ-ήρωας__σκηνή { --τ-μέγεθος: clamp(3.4rem, 1rem + 15vw, 6.4rem); }
-  .σχετικά--νέα .σχ-ήρωας__εικόνα { width: 118vw; bottom: 4vh; left: 60%; }
+  .σχετικά--νέα .σχ-ήρωας__εικόνα { width: min(118vw, 66vh); width: min(118vw, 66svh); bottom: 2svh; left: 58%; }
   .σχ-ήρωας__νεφέλες img { width: 150% !important; }
   .σχ-άνοιγμα { height: 230svh; }
 }
