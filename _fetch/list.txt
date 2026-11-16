@@ -1,2 +1,1 @@
-iso-hero.mp4 https://d8j0ntlcm91z4.cloudfront.net/user_3GqmWHOacTQukBMBWW3wyErLnYD/hf_20261116_114029_9c728aa6-06db-43a5-9095-94a3449891bd.mp4
-top-hero.mp4 https://d8j0ntlcm91z4.cloudfront.net/user_3GqmWHOacTQukBMBWW3wyErLnYD/hf_20261116_114050_f4bbeea7-6982-43c8-abf4-1ff28b4da049.mp4
+night.png https://d8j0ntlcm91z4.cloudfront.net/user_3GqmWHOacTQukBMBWW3wyErLnYD/hf_20261116_123754_cb7ed68c-01d6-4e5b-b60c-fc2f630d85b8.png
