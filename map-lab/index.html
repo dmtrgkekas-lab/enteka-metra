@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Χάρτης έργων — πρωτότυπο | GP Real Estate Development</title>
+  <meta name="robots" content="noindex">
+  <style>
+    /* Γραμματοσειρές του σάιτ */
+    @font-face { font-family: Manrope; src: url(/assets/fonts/manrope-greek-wght-normal.woff2) format("woff2"); font-weight: 200 800; unicode-range: U+0370-03FF, U+1F00-1FFF; font-display: swap; }
+    @font-face { font-family: Manrope; src: url(/assets/fonts/manrope-latin-wght-normal.woff2) format("woff2"); font-weight: 200 800; font-display: swap; }
+    @font-face { font-family: Inter; src: url(/assets/fonts/inter-greek-wght-normal.woff2) format("woff2"); font-weight: 100 900; unicode-range: U+0370-03FF, U+1F00-1FFF; font-display: swap; }
+    @font-face { font-family: Inter; src: url(/assets/fonts/inter-latin-wght-normal.woff2) format("woff2"); font-weight: 100 900; font-display: swap; }
+
+    :root { --νύχτα: #0d0f13; --κείμενο: #eee9e0; --αχνό: rgba(238, 233, 224, .58); --γραμμή: rgba(238, 233, 224, .14); --κίτρινο: #f2c14e; --καμπύλη: cubic-bezier(.22, 1, .36, 1); }
+    * { box-sizing: border-box; margin: 0; }
+    html, body { height: 100%; background: var(--νύχτα); color: var(--κείμενο); font-family: Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    body { overflow: hidden; }
+
+    /* Ο χάρτης γεμίζει την οθόνη */
+    .χάρτης { position: fixed; inset: 0; }
+    .χάρτης canvas { display: block; width: 100%; height: 100%; outline: none; touch-action: none; }
+    /* Βινιέτα: οι άκρες σβήνουν στο σκοτάδι */
+    .χάρτης::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(120% 95% at 50% 55%, rgba(13, 15, 19, 0) 55%, rgba(13, 15, 19, .85) 100%); }
+
+    /* Κεφαλή: τίτλος και σύντομη οδηγία */
+    .κεφαλή { position: fixed; z-index: 3; top: max(28px, env(safe-area-inset-top)); left: clamp(20px, 4vw, 64px); right: clamp(20px, 4vw, 64px); display: flex; justify-content: space-between; align-items: start; gap: 24px; pointer-events: none; }
+    .κεφαλή__πάνω { font-size: .66rem; letter-spacing: .24em; text-transform: uppercase; color: var(--αχνό); }
+    .κεφαλή h1 { margin-top: 12px; font-family: Manrope, sans-serif; font-weight: 300; font-size: clamp(1.8rem, 1.1rem + 2.4vw, 3.4rem); line-height: 1.02; letter-spacing: -.02em; }
+    .κεφαλή__οδηγία { max-width: 26ch; font-size: .8rem; line-height: 1.55; color: var(--αχνό); text-align: right; }
+
+    /* Λίστα έργων κάτω αριστερά: και πλοήγηση στον χάρτη */
+    .λίστα { position: fixed; z-index: 3; left: clamp(20px, 4vw, 64px); bottom: max(28px, env(safe-area-inset-bottom)); display: grid; gap: 2px; list-style: none; padding: 0; }
+    .λίστα a { display: grid; grid-template-columns: 10px auto; align-items: baseline; column-gap: 14px; padding: 8px 0; color: inherit; text-decoration: none; }
+    .λίστα i { width: 7px; height: 7px; border-radius: 50%; background: var(--κίτρινο); box-shadow: 0 0 10px 2px rgba(242, 193, 78, .5); transform: translateY(-1px); }
+    .λίστα b { font-family: Manrope, sans-serif; font-weight: 400; font-size: 1.05rem; transition: color .4s; }
+    .λίστα small { grid-column: 2; font-size: .64rem; letter-spacing: .16em; text-transform: uppercase; color: var(--αχνό); }
+    .λίστα a:hover b, .λίστα a.είναι-ενεργό b { color: var(--κίτρινο); }
+
+    /* Πινέζες: πραγματικοί σύνδεσμοι πάνω από τον καμβά, στη θέση κάθε έργου */
+    .πινέζες { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
+    .πινέζα { position: absolute; left: 0; top: 0; pointer-events: auto; color: var(--κείμενο); text-decoration: none; will-change: transform; transform: translate3d(var(--x, -999px), var(--y, -999px), 0); }
+    .πινέζα__κουκκίδα { position: absolute; left: -9px; top: -9px; width: 18px; height: 18px; border-radius: 50%; background: var(--κίτρινο);
+      box-shadow: 0 0 0 3px rgba(13, 15, 19, .7), 0 0 22px 6px rgba(242, 193, 78, .55); transition: transform .5s var(--καμπύλη); }
+    .πινέζα__κουκκίδα::before, .πινέζα__κουκκίδα::after { content: ""; position: absolute; inset: -2px; border-radius: 50%; border: 1px solid rgba(242, 193, 78, .8); animation: παλμός 2.6s cubic-bezier(.2, .6, .3, 1) infinite; }
+    .πινέζα__κουκκίδα::after { animation-delay: 1.3s; }
+    @keyframes παλμός { from { transform: scale(1); opacity: .9; } to { transform: scale(3.4); opacity: 0; } }
+    /* μεγαλύτερη περιοχή αφής */
+    .πινέζα::before { content: ""; position: absolute; left: -24px; top: -24px; width: 48px; height: 48px; border-radius: 50%; }
+    .πινέζα__ετικέτα { position: absolute; left: 20px; top: -13px; width: max-content; display: grid; gap: 3px; padding: 7px 12px 8px; white-space: nowrap; background: rgba(13, 15, 19, .72); border: 1px solid var(--γραμμή);
+      -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: background .4s, border-color .4s; }
+    .πινέζα__όνομα { font-family: Manrope, sans-serif; font-size: .92rem; font-weight: 400; }
+    .πινέζα__περιοχή { font-size: .6rem; letter-spacing: .16em; text-transform: uppercase; color: var(--αχνό); }
+    /* Κάρτα που ανοίγει στο πέρασμα: φωτογραφία, κατάσταση, «Δείτε το έργο» */
+    .πινέζα__κάρτα { display: grid; grid-template-rows: 0fr; width: 0; overflow: hidden; transition: grid-template-rows .6s var(--καμπύλη), width .6s var(--καμπύλη); }
+    .πινέζα__κάρτα > span { min-height: 0; overflow: hidden; display: grid; gap: 8px; }
+    .πινέζα__κάρτα img { display: block; width: 220px; height: 130px; object-fit: cover; margin-top: 8px; }
+    .πινέζα__κατάσταση { display: flex; align-items: center; gap: 8px; font-size: .7rem; color: var(--αχνό); }
+    .πινέζα__κατάσταση::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #5bbf82; }
+    .πινέζα--πωλήθηκε .πινέζα__κατάσταση::before { background: rgba(238, 233, 224, .4); }
+    .πινέζα__δες { font-size: .78rem; color: var(--κίτρινο); }
+    .πινέζα:hover, .πινέζα:focus-visible, .πινέζα.είναι-ενεργό { z-index: 2; }
+    .πινέζα:hover .πινέζα__κουκκίδα, .πινέζα:focus-visible .πινέζα__κουκκίδα, .πινέζα.είναι-ενεργό .πινέζα__κουκκίδα { transform: scale(1.25); }
+    .πινέζα:hover .πινέζα__ετικέτα, .πινέζα:focus-visible .πινέζα__ετικέτα, .πινέζα.είναι-ενεργό .πινέζα__ετικέτα { background: rgba(13, 15, 19, .92); border-color: rgba(242, 193, 78, .5); }
+    .πινέζα:hover .πινέζα__κάρτα, .πινέζα:focus-visible .πινέζα__κάρτα, .πινέζα.είναι-ενεργό .πινέζα__κάρτα { grid-template-rows: 1fr; width: 220px; }
+    @media (max-width: 760px) { .πινέζα:hover .πινέζα__κάρτα, .πινέζα.είναι-ενεργό .πινέζα__κάρτα { width: 180px; } }
+    .πινέζα:focus-visible { outline: none; }
+    /* Η πινέζα που βλέπει δεξιά/αριστερά ανάλογα με τη θέση της στην οθόνη */
+    .πινέζα.αριστερά .πινέζα__ετικέτα { left: auto; right: 20px; text-align: right; }
+    .πινέζα.αριστερά .πινέζα__κατάσταση { justify-content: flex-end; }
+    /* κοντά στο κάτω μέρος της οθόνης η κάρτα ανοίγει προς τα πάνω */
+    .πινέζα.πάνω .πινέζα__ετικέτα { top: auto; bottom: -13px; display: flex; flex-direction: column-reverse; }
+    .πινέζα.πάνω .πινέζα__κάρτα > span { padding-bottom: 8px; }
+
+    /* Τοπωνύμια: αχνά, για προσανατολισμό */
+    .τόπος { position: absolute; left: 0; top: 0; transform: translate3d(var(--x, -999px), var(--y, -999px), 0) translate(-50%, -50%); font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(238, 233, 224, .42); white-space: nowrap; pointer-events: none; }
+    .τόπος--βουνό { font-style: normal; color: rgba(238, 233, 224, .3); letter-spacing: .3em; }
+    .τόπος--θάλασσα { color: rgba(140, 160, 190, .35); letter-spacing: .4em; }
+
+    .φόρτωση { position: fixed; inset: 0; z-index: 5; display: grid; place-items: center; background: var(--νύχτα); font-size: .66rem; letter-spacing: .24em; text-transform: uppercase; color: var(--αχνό); transition: opacity 1s, visibility 0s 1s; }
+    .έτοιμο .φόρτωση { opacity: 0; visibility: hidden; }
+
+    @media (max-width: 760px) {
+      .κεφαλή { flex-direction: column; gap: 10px; }
+      .κεφαλή__οδηγία { text-align: left; }
+      .πινέζα__κάρτα img { width: 180px; height: 104px; }
+      .λίστα { right: 20px; grid-template-columns: repeat(3, auto); justify-content: space-between; column-gap: 12px; }
+      .λίστα a { column-gap: 8px; }
+      .λίστα b { font-size: .8rem; white-space: nowrap; }
+      .λίστα small { display: none; }
+      .πινέζα__όνομα { font-size: .82rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { .πινέζα__κουκκίδα::before, .πινέζα__κουκκίδα::after { animation: none; } }
+  </style>
+  <script type="importmap">{ "imports": { "three": "./three.module.min.js" } }</script>
+</head>
+<body>
+  <div class="φόρτωση" aria-hidden="true">Αττική</div>
+  <div class="χάρτης" id="xartis" role="img" aria-label="Τρισδιάστατος χάρτης της Αττικής με τα κτίρια της GP Real Estate Development"></div>
+  <header class="κεφαλή">
+    <div>
+      <p class="κεφαλή__πάνω">GP Real Estate Development</p>
+      <h1>Τα κτίριά μας<br>στην Αττική.</h1>
+    </div>
+    <p class="κεφαλή__οδηγία">Σύρετε για να γυρίσετε τον χάρτη. Πατήστε ένα κίτρινο σημείο για να δείτε το έργο.</p>
+  </header>
+  <div class="πινέζες" id="pinezes"></div>
+  <ul class="λίστα" id="lista"></ul>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from './jsm/OrbitControls.js';
+
+    // Πού οδηγεί κάθε έργο (στο preview της GP)
+    const ΒΑΣΗ = '/el/';
+    const ΜΕΙΩΜΕΝΗ = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const ΚΙΝΗΤΟ = matchMedia('(max-width: 760px)').matches;
+
+    const meta = await (await fetch('./attica-meta.json')).json();
+    const ΥΨΟΣ_Χ = 2.4;           // κάθετη υπερβολή του ανάγλυφου
+    const W = meta.kmx, D = meta.kmy, N = meta.N;
+
+    // ---------- Υψόμετρα από το PNG (R,G = 16 bit)
+    const εικόνα = await new Promise((r) => { const im = new Image(); im.onload = () => r(im); im.src = './attica-height.png'; });
+    const καμβάςΥψών = document.createElement('canvas'); καμβάςΥψών.width = καμβάςΥψών.height = N;
+    const c2 = καμβάςΥψών.getContext('2d', { willReadFrequently: true }); c2.drawImage(εικόνα, 0, 0);
+    const δ = c2.getImageData(0, 0, N, N).data;
+    const υψόμετρο = new Float32Array(N * N);
+    for (let i = 0; i < N * N; i++) υψόμετρο[i] = (δ[i * 4] * 256 + δ[i * 4 + 1]) / 40 - 100;
+    const ύψοςΣε = (fx, fy) => {   // fx, fy: 0–1 πάνω στον χάρτη
+      const x = Math.min(N - 1, Math.max(0, fx * (N - 1))), y = Math.min(N - 1, Math.max(0, fy * (N - 1)));
+      const x0 = Math.floor(x), y0 = Math.floor(y), x1 = Math.min(N - 1, x0 + 1), y1 = Math.min(N - 1, y0 + 1), tx = x - x0, ty = y - y0;
+      const a = υψόμετρο[y0 * N + x0], b = υψόμετρο[y0 * N + x1], c = υψόμετρο[y1 * N + x0], d = υψόμετρο[y1 * N + x1];
+      return (a * (1 - tx) + b * tx) * (1 - ty) + (c * (1 - tx) + d * tx) * ty;
+    };
+    const σε3Δ = (fx, fy, πάνω = 0) => new THREE.Vector3((fx - 0.5) * W, Math.max(0, ύψοςΣε(fx, fy)) / 1000 * ΥΨΟΣ_Χ + πάνω, (fy - 0.5) * D);
+
+    // ---------- Σκηνή
+    const δοχείο = document.getElementById('xartis');
+    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, ΚΙΝΗΤΟ ? 2 : 1.75));
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.setClearColor(0x0d0f13, 1);
+    δοχείο.appendChild(renderer.domElement);
+    const σκηνή = new THREE.Scene();
+    σκηνή.fog = new THREE.Fog(0x0d0f13, 55, 125);
+    const κάμερα = new THREE.PerspectiveCamera(ΚΙΝΗΤΟ ? 44 : 34, innerWidth / innerHeight, 0.1, 400);
+
+    // ---------- Έδαφος: πλέγμα με το ανάγλυφο
+    const ΒΗΜΑ = ΚΙΝΗΤΟ ? 2 : 1;                  // στο κινητό μισή πυκνότητα
+    const Ν = Math.floor((N - 1) / ΒΗΜΑ) + 1;
+    const γεωμετρία = new THREE.PlaneGeometry(W, D, Ν - 1, Ν - 1);
+    γεωμετρία.rotateX(-Math.PI / 2);
+    const θέσεις = γεωμετρία.attributes.position;
+    const υψ = new Float32Array(θέσεις.count);
+    for (let j = 0; j < Ν; j++) for (let i = 0; i < Ν; i++) {
+      const k = j * Ν + i, e = υψόμετρο[Math.min(N - 1, j * ΒΗΜΑ) * N + Math.min(N - 1, i * ΒΗΜΑ)];
+      υψ[k] = e;
+      θέσεις.setY(k, e > 0.5 ? e / 1000 * ΥΨΟΣ_Χ : -0.06);
+    }
+    γεωμετρία.setAttribute('aElev', new THREE.BufferAttribute(υψ, 1));
+    γεωμετρία.computeVertexNormals();
+
+    // Σκούρο ανάγλυφο, ισοϋψείς ανά 100 μ. σε αχνό χρυσό, φωτεινή γραμμή ακτής
+    const υλικόΕδάφους = new THREE.ShaderMaterial({
+      uniforms: { uLight: { value: new THREE.Vector3(-0.55, 0.75, -0.35).normalize() }, uFog: { value: new THREE.Color(0x0d0f13) }, uNear: { value: 55 }, uFar: { value: 125 } },
+      vertexShader: `
+        attribute float aElev;
+        varying float vElev; varying vec3 vNorm; varying float vDist; varying vec2 vUv;
+        void main() {
+          vElev = aElev; vNorm = normal; vUv = uv;
+          vec4 mv = modelViewMatrix * vec4(position, 1.0);
+          vDist = -mv.z;
+          gl_Position = projectionMatrix * mv;
+        }`,
+      fragmentShader: `
+        uniform vec3 uLight; uniform vec3 uFog; uniform float uNear; uniform float uFar;
+        varying float vElev; varying vec3 vNorm; varying float vDist; varying vec2 vUv;
+        void main() {
+          if (vElev <= 0.5) discard;
+          vec3 n = normalize(vNorm);
+          float diff = clamp(dot(n, uLight), 0.0, 1.0);
+          vec3 low = vec3(0.090, 0.098, 0.112), high = vec3(0.205, 0.205, 0.215);
+          vec3 col = mix(low, high, smoothstep(0.0, 1100.0, vElev));
+          col *= 0.55 + 0.85 * diff;
+          col += vec3(0.02, 0.022, 0.03) * (1.0 - diff);
+          float e = vElev / 100.0, w = fwidth(e);
+          float line = 1.0 - smoothstep(0.0, w * 1.2, abs(fract(e - 0.5) - 0.5));
+          col = mix(col, vec3(0.83, 0.68, 0.40), line * 0.16 * smoothstep(40.0, 160.0, vElev));
+          float coast = 1.0 - smoothstep(0.5, 9.0, vElev);
+          col = mix(col, vec3(0.86, 0.72, 0.46), coast * 0.32);
+          float edge = smoothstep(0.0, 0.12, min(min(vUv.x, 1.0 - vUv.x), min(vUv.y, 1.0 - vUv.y)));
+          col = mix(uFog, col, edge);
+          gl_FragColor = vec4(mix(col, uFog, smoothstep(uNear, uFar, vDist)), 1.0);
+        }`,
+      extensions: { derivatives: true },
+    });
+    σκηνή.add(new THREE.Mesh(γεωμετρία, υλικόΕδάφους));
+
+    // Θάλασσα: σκούρο μπλε-μαύρο, πιο φωτεινό κοντά στην ακτή μέσω μιας απαλής ακτινωτής λάμψης
+    const θάλασσα = new THREE.Mesh(new THREE.PlaneGeometry(W * 3, D * 3), new THREE.ShaderMaterial({
+      uniforms: { uFog: { value: new THREE.Color(0x0d0f13) }, uNear: { value: 55 }, uFar: { value: 125 } },
+      vertexShader: `varying vec2 vPos; varying float vDist; void main(){ vPos = position.xy; vec4 mv = modelViewMatrix * vec4(position,1.0); vDist = -mv.z; gl_Position = projectionMatrix * mv; }`,
+      fragmentShader: `uniform vec3 uFog; uniform float uNear; uniform float uFar; varying vec2 vPos; varying float vDist;
+        void main(){ vec3 c = mix(uFog, vec3(0.045, 0.058, 0.080) + vec3(0.02, 0.03, 0.045) * (1.0 - smoothstep(0.0, 30.0, length(vPos))), 1.0 - smoothstep(22.0, 40.0, length(vPos)));
+          gl_FragColor = vec4(mix(c, uFog, smoothstep(uNear, uFar, vDist)), 1.0); }`,
+    }));
+    θάλασσα.rotation.x = -Math.PI / 2; θάλασσα.position.y = -0.02;
+    σκηνή.add(θάλασσα);
+
+    // ---------- Ακτίνες φωτός πάνω από κάθε έργο (κίτρινες, προσθετικές)
+    const υλικόΑκτίνας = new THREE.ShaderMaterial({
+      transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+      uniforms: { uTime: { value: 0 } },
+      vertexShader: `varying float vY; void main(){ vY = uv.y; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
+      fragmentShader: `uniform float uTime; varying float vY; void main(){ float a = pow(1.0 - vY, 2.2) * (0.75 + 0.25 * sin(uTime * 2.0)); gl_FragColor = vec4(vec3(0.95, 0.76, 0.31) * a, a); }`,
+    });
+    const υλικόΛάμψης = new THREE.SpriteMaterial({ map: (() => {
+      const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d');
+      const r = g.createRadialGradient(64, 64, 0, 64, 64, 64); r.addColorStop(0, 'rgba(242,193,78,0.9)'); r.addColorStop(0.25, 'rgba(242,193,78,0.35)'); r.addColorStop(1, 'rgba(242,193,78,0)');
+      g.fillStyle = r; g.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(c); })(), blending: THREE.AdditiveBlending, depthWrite: false, transparent: true });
+
+    const έργα = meta['έργα'].map((έ) => {
+      const βάση = σε3Δ(έ['θέση'][0], έ['θέση'][1]);
+      const ακτίνα = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 3.2, 8, 1, true), υλικόΑκτίνας);
+      ακτίνα.position.copy(βάση).add(new THREE.Vector3(0, 1.6, 0));
+      σκηνή.add(ακτίνα);
+      const λάμψη = new THREE.Sprite(υλικόΛάμψης); λάμψη.scale.set(2.4, 2.4, 1); λάμψη.position.copy(βάση).add(new THREE.Vector3(0, 0.05, 0));
+      σκηνή.add(λάμψη);
+      return { ...έ, βάση, κορυφή: βάση.clone().add(new THREE.Vector3(0, 0.25, 0)) };
+    });
+
+    // ---------- Πινέζες (HTML σύνδεσμοι) και λίστα
+    const πινέζες = document.getElementById('pinezes'), λίστα = document.getElementById('lista');
+    έργα.forEach((έ) => {
+      const href = ΒΑΣΗ + έ.slug + '/';
+      const a = document.createElement('a');
+      a.className = 'πινέζα' + (έ['κατάσταση'] === 'Πωλήθηκε' ? ' πινέζα--πωλήθηκε' : '');
+      a.href = href;
+      a.setAttribute('aria-label', `${έ['όνομα']}, ${έ['περιοχή']} — ${έ['κατάσταση']}`);
+      a.innerHTML = `<span class="πινέζα__κουκκίδα"></span>
+        <span class="πινέζα__ετικέτα"><span class="πινέζα__όνομα">${έ['όνομα']}</span><span class="πινέζα__περιοχή">${έ['περιοχή']}</span>
+          <span class="πινέζα__κάρτα"><span><img src="/assets/projects/${έ.slug}/cover-960.webp" alt="" loading="lazy" decoding="async">
+            <span class="πινέζα__κατάσταση">${έ['κατάσταση']}</span><span class="πινέζα__δες">Δείτε το έργο →</span></span></span></span>`;
+      πινέζες.appendChild(a); έ.πινέζα = a;
+      const li = document.createElement('li');
+      li.innerHTML = `<a href="${href}"><i></i><b>${έ['όνομα']}</b><small>${έ['περιοχή']}</small></a>`;
+      const σύνδεσμος = li.firstChild;
+      σύνδεσμος.addEventListener('mouseenter', () => { εστίαση(έ); a.classList.add('είναι-ενεργό'); });
+      σύνδεσμος.addEventListener('mouseleave', () => { a.classList.remove('είναι-ενεργό'); });
+      a.addEventListener('mouseenter', () => σύνδεσμος.classList.add('είναι-ενεργό'));
+      a.addEventListener('mouseleave', () => σύνδεσμος.classList.remove('είναι-ενεργό'));
+      λίστα.appendChild(li);
+    });
+    const τόποι = meta['τοπωνύμια'].map((τ) => {
+      const s = document.createElement('span'); s.className = 'τόπος τόπος--' + τ['είδος']; s.textContent = τ['όνομα']; πινέζες.appendChild(s);
+      return { στοιχείο: s, θέση: σε3Δ(τ['θέση'][0], τ['θέση'][1], τ['είδος'] === 'βουνό' ? 0.5 : 0.1) };
+    });
+
+    // ---------- Κάμερα και έλεγχος
+    const στόχος = σε3Δ(0.545, 0.53);     // ανάμεσα στα τρία έργα
+    const έλεγχος = new OrbitControls(κάμερα, renderer.domElement);
+    έλεγχος.enableDamping = true; έλεγχος.dampingFactor = 0.07;
+    έλεγχος.minDistance = 9; έλεγχος.maxDistance = 70;
+    έλεγχος.minPolarAngle = 0.25; έλεγχος.maxPolarAngle = 1.2;
+    έλεγχος.enablePan = true; έλεγχος.screenSpacePanning = false;
+    έλεγχος.rotateSpeed = 0.55; έλεγχος.zoomSpeed = 0.7;
+    έλεγχος.target.copy(στόχος);
+    const ΤΕΛΙΚΗ = new THREE.Vector3(στόχος.x - 14, ΚΙΝΗΤΟ ? 30 : 22, στόχος.z + 30);
+    const ΑΡΧΙΚΗ = new THREE.Vector3(στόχος.x, 95, στόχος.z + 6);
+    κάμερα.position.copy(ΜΕΙΩΜΕΝΗ ? ΤΕΛΙΚΗ : ΑΡΧΙΚΗ);
+    κάμερα.lookAt(στόχος);
+
+    // Περιορισμός του στόχου μέσα στην Αττική (να μη «φεύγει» ο χάρτης)
+    const ΟΡΙΟ = new THREE.Box3(new THREE.Vector3(-W * 0.38, 0, -D * 0.38), new THREE.Vector3(W * 0.38, 2, D * 0.38));
+    έλεγχος.addEventListener('change', () => { ΟΡΙΟ.clampPoint(έλεγχος.target, έλεγχος.target); });
+
+    // Ομαλή μετάβαση της κάμερας προς ένα έργο (από τη λίστα)
+    let πτήση = null;
+    const εστίαση = (έ) => {
+      if (ΜΕΙΩΜΕΝΗ) return;
+      const νέοςΣτόχος = έ.βάση.clone();
+      const κατεύθυνση = κάμερα.position.clone().sub(έλεγχος.target).setLength(26);
+      πτήση = { t: 0, απόΘ: κάμερα.position.clone(), απόΣ: έλεγχος.target.clone(), προςΣ: νέοςΣτόχος, προςΘ: νέοςΣτόχος.clone().add(κατεύθυνση) };
+    };
+    // Εισαγωγή: από ψηλά, η κάμερα κατεβαίνει σε πλάγια θέα
+    let εισαγωγή = ΜΕΙΩΜΕΝΗ ? null : { t: 0 };
+    έλεγχος.addEventListener('start', () => { πτήση = null; εισαγωγή = null; });
+    const ομαλό = (t) => 1 - Math.pow(1 - t, 3);
+
+    // ---------- Βρόχος
+    const π = new THREE.Vector3();
+    const ρολόι = new THREE.Clock();
+    const προβολή = (v) => { π.copy(v).project(κάμερα); return [(π.x + 1) / 2 * innerWidth, (1 - π.y) / 2 * innerHeight, π.z]; };
+    function καρέ() {
+      const dt = Math.min(0.05, ρολόι.getDelta());
+      υλικόΑκτίνας.uniforms.uTime.value += dt;
+      if (εισαγωγή) {
+        εισαγωγή.t = Math.min(1, εισαγωγή.t + dt / 3.2);
+        κάμερα.position.lerpVectors(ΑΡΧΙΚΗ, ΤΕΛΙΚΗ, ομαλό(εισαγωγή.t));
+        if (εισαγωγή.t >= 1) εισαγωγή = null;
+      } else if (πτήση) {
+        πτήση.t = Math.min(1, πτήση.t + dt / 1.4);
+        const k = ομαλό(πτήση.t);
+        έλεγχος.target.lerpVectors(πτήση.απόΣ, πτήση.προςΣ, k);
+        κάμερα.position.lerpVectors(πτήση.απόΘ, πτήση.προςΘ, k);
+        if (πτήση.t >= 1) πτήση = null;
+      }
+      έλεγχος.update();
+      renderer.render(σκηνή, κάμερα);
+      // πινέζες και τοπωνύμια ακολουθούν τον χάρτη
+      έργα.forEach((έ) => {
+        const [x, y, z] = προβολή(έ.κορυφή);
+        const εκτός = z > 1 || x < -40 || x > innerWidth + 40 || y < -40 || y > innerHeight + 40;
+        έ.πινέζα.style.setProperty('--x', (εκτός ? -999 : x).toFixed(1) + 'px');
+        έ.πινέζα.style.setProperty('--y', (εκτός ? -999 : y).toFixed(1) + 'px');
+        // προτιμώμενη πλευρά, που αλλάζει μόνο αν η ετικέτα δεν χωράει στην οθόνη
+        const προτίμηση = έ.slug === 'v5residences' ? 'αριστερά' : 'δεξιά';
+        const αριστερά = προτίμηση === 'αριστερά' ? x > 250 : x > innerWidth - 250;
+        έ.πινέζα.classList.toggle('αριστερά', αριστερά);
+        έ.πινέζα.classList.toggle('πάνω', y > innerHeight - 280);
+      });
+      τόποι.forEach((τ) => {
+        const [x, y, z] = προβολή(τ.θέση);
+        τ.στοιχείο.style.setProperty('--x', (z > 1 ? -999 : x).toFixed(1) + 'px');
+        τ.στοιχείο.style.setProperty('--y', (z > 1 ? -999 : y).toFixed(1) + 'px');
+      });
+      requestAnimationFrame(καρέ);
+    }
+    addEventListener('resize', () => { κάμερα.aspect = innerWidth / innerHeight; κάμερα.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+    document.documentElement.classList.add('έτοιμο');
+    requestAnimationFrame(καρέ);
+  </script>
+</body>
+</html>
