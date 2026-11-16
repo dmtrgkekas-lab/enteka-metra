@@ -25,15 +25,15 @@
   <link rel="preload" href="/assets/fonts/manrope-greek-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-greek-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="/assets/projects/about/building-1600.webp" imagesrcset="/assets/projects/about/building-900.webp 900w, /assets/projects/about/building-1600.webp 1600w" imagesizes="(max-width: 760px) 132vw, 70vw" fetchpriority="high">
-  <link rel="stylesheet" href="/assets/css/about.css?v=202611162228">
-  <link rel="stylesheet" href="/assets/css/home.css?v=202611162228">
-  <link rel="stylesheet" href="/assets/css/sections.css?v=202611162228">
-  <link rel="stylesheet" href="/assets/css/projects.css?v=202611162228">
+  <link rel="stylesheet" href="/assets/css/about.css?v=202611162243">
+  <link rel="stylesheet" href="/assets/css/home.css?v=202611162243">
+  <link rel="stylesheet" href="/assets/css/sections.css?v=202611162243">
+  <link rel="stylesheet" href="/assets/css/projects.css?v=202611162243">
   <script>document.documentElement.classList.replace('no-js', 'js'); if (!('onpagereveal' in window) && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('μετάβαση-js');</script>
   <script>(function () {
     var Ο = 'project-image', ΚΛ = 'gp-vt-εικόνα', ρ = document.documentElement;
     function εικόναΓια(διαδρομή) {
-      var σ = document.querySelector('.κάρτα-έργου__σύνδεσμος[href="' + διαδρομή + '"]');
+      var σ = document.querySelector('.κάρτα-έργου__σύνδεσμος[href="' + διαδρομή + '"], .μικρό-έργο a[href="' + διαδρομή + '"]');
       return σ && σ.querySelector('img');
     }
     // Κανένα όνομα από προηγούμενη μετάβαση: η σελίδα μπορεί να επιστρέψει από την cache του browser
@@ -87,7 +87,7 @@
       ε.viewTransition.finished.then(καθάρισε, καθάρισε);
     });
   })();</script>
-  <script type="speculationrules">{"prerender": [{"where": {"selector_matches": ".κάρτα-έργου__σύνδεσμος"}, "eagerness": "moderate"}]}</script>
+  <script type="speculationrules">{"prerender": [{"where": {"selector_matches": ".κάρτα-έργου__σύνδεσμος, .μικρό-έργο a"}, "eagerness": "moderate"}]}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "AboutPage", "@id": "https://gpdevelopment.gr/el/about/#webpage", "url": "https://gpdevelopment.gr/el/about/", "name": "Η Εταιρεία: Ανάπτυξη Ακινήτων στην Αθήνα | GP Development", "description": "Η GP Real Estate Development είναι οικογενειακή εταιρεία ανάπτυξης ακινήτων στο Νέο Ψυχικό, με 30+ χρόνια συνολικής εμπειρίας. Κάθε έργο είναι Α++.", "inLanguage": "el", "isPartOf": {"@id": "https://gpdevelopment.gr/#website"}, "about": {"@id": "https://gpdevelopment.gr/#organization"}, "mainEntity": {"@id": "https://gpdevelopment.gr/#organization"}, "breadcrumb": {"@id": "https://gpdevelopment.gr/el/about/#breadcrumb"}, "primaryImageOfPage": "https://gpdevelopment.gr/assets/projects/about/corner-1600.webp"}, {"@type": "BreadcrumbList", "@id": "https://gpdevelopment.gr/el/about/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Αρχική", "item": "https://gpdevelopment.gr/el/"}, {"@type": "ListItem", "position": 2, "name": "Η εταιρεία", "item": "https://gpdevelopment.gr/el/about/"}]}]}</script>
 </head>
 <body>
@@ -216,8 +216,8 @@
   </footer>
 
 <script src="/assets/js/vendor/lenis.min.js" defer></script>
-<script src="/assets/js/about.js?v=202611162228" defer></script>
-  <script src="/assets/js/sections.js?v=202611162228" defer></script>
-  <script src="/assets/js/projects.js?v=202611162228" defer></script>
+<script src="/assets/js/about.js?v=202611162243" defer></script>
+  <script src="/assets/js/sections.js?v=202611162243" defer></script>
+  <script src="/assets/js/projects.js?v=202611162243" defer></script>
 </body>
 </html>

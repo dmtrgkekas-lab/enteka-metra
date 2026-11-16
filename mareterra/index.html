@@ -25,14 +25,14 @@
   <link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="/assets/projects/mareterra/cover-1600.webp" imagesrcset="/assets/projects/mareterra/cover-960.webp 960w, /assets/projects/mareterra/cover-1600.webp 1600w" imagesizes="100vw" fetchpriority="high">
-  <link rel="stylesheet" href="/assets/css/home.css?v=202611162228">
-  <link rel="stylesheet" href="/assets/css/sections.css?v=202611162228">
-  <link rel="stylesheet" href="/assets/css/projects.css?v=202611162228">
+  <link rel="stylesheet" href="/assets/css/home.css?v=202611162243">
+  <link rel="stylesheet" href="/assets/css/sections.css?v=202611162243">
+  <link rel="stylesheet" href="/assets/css/projects.css?v=202611162243">
   <script>document.documentElement.classList.replace('no-js', 'js'); if (!('onpagereveal' in window) && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('μετάβαση-js');</script>
   <script>(function () {
     var Ο = 'project-image', ΚΛ = 'gp-vt-εικόνα', ρ = document.documentElement;
     function εικόναΓια(διαδρομή) {
-      var σ = document.querySelector('.κάρτα-έργου__σύνδεσμος[href="' + διαδρομή + '"]');
+      var σ = document.querySelector('.κάρτα-έργου__σύνδεσμος[href="' + διαδρομή + '"], .μικρό-έργο a[href="' + διαδρομή + '"]');
       return σ && σ.querySelector('img');
     }
     // Κανένα όνομα από προηγούμενη μετάβαση: η σελίδα μπορεί να επιστρέψει από την cache του browser
@@ -86,7 +86,7 @@
       ε.viewTransition.finished.then(καθάρισε, καθάρισε);
     });
   })();</script>
-  <script type="speculationrules">{"prerender": [{"where": {"selector_matches": ".κάρτα-έργου__σύνδεσμος"}, "eagerness": "moderate"}]}</script>
+  <script type="speculationrules">{"prerender": [{"where": {"selector_matches": ".κάρτα-έργου__σύνδεσμος, .μικρό-έργο a"}, "eagerness": "moderate"}]}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://gpdevelopment.gr/mareterra/#webpage", "url": "https://gpdevelopment.gr/mareterra/", "name": "Mareterra: New Homes Near the Golf in Glyfada | GP Development", "description": "Six A++ maisonettes, duplexes and penthouses 250 m from Glyfada Golf Course, with private pools, sea views and two-car garages.", "inLanguage": "en", "isPartOf": {"@id": "https://gpdevelopment.gr/#website"}, "publisher": {"@id": "https://gpdevelopment.gr/#organization"}, "about": {"@id": "https://gpdevelopment.gr/mareterra/#place"}, "breadcrumb": {"@id": "https://gpdevelopment.gr/mareterra/#breadcrumb"}, "primaryImageOfPage": "https://gpdevelopment.gr/assets/projects/mareterra/cover-1600.webp"}, {"@type": "BreadcrumbList", "@id": "https://gpdevelopment.gr/mareterra/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://gpdevelopment.gr/"}, {"@type": "ListItem", "position": 2, "name": "Projects", "item": "https://gpdevelopment.gr/projects/"}, {"@type": "ListItem", "position": 3, "name": "Mareterra", "item": "https://gpdevelopment.gr/mareterra/"}]}, {"@type": "ApartmentComplex", "@id": "https://gpdevelopment.gr/mareterra/#place", "name": "Mareterra", "description": "Six A++ maisonettes, duplexes and penthouses 250 m from Glyfada Golf Course, with private pools, sea views and two-car garages.", "url": "https://gpdevelopment.gr/mareterra/", "image": ["https://gpdevelopment.gr/assets/projects/mareterra/cover-1600.webp", "https://gpdevelopment.gr/assets/projects/mareterra/sunset-1280.webp", "https://gpdevelopment.gr/assets/projects/mareterra/rooftop-1700.webp", "https://gpdevelopment.gr/assets/projects/mareterra/living-1700.webp"], "address": {"@type": "PostalAddress", "streetAddress": "Saki Karagiorga 77 & Lykourgou", "addressLocality": "Glyfada", "addressRegion": "Attica", "addressCountry": "GR"}, "numberOfAccommodationUnits": 6, "numberOfAvailableAccommodationUnits": 6, "containsPlace": [{"@type": "Accommodation", "name": "Maisonette I & II · Semi-basement, ground & 1st floor · 192 m²", "floorSize": {"@type": "QuantitativeValue", "value": 192, "unitCode": "MTK"}, "numberOfBedrooms": 3, "numberOfBathroomsTotal": 3}, {"@type": "Accommodation", "name": "Duplex I & II · 2nd & 3rd floor · 162 m²", "floorSize": {"@type": "QuantitativeValue", "value": 162, "unitCode": "MTK"}, "numberOfBedrooms": 3, "numberOfBathroomsTotal": 3}, {"@type": "Accommodation", "name": "Penthouse I & II · 4th & 5th floor · 144 m²", "floorSize": {"@type": "QuantitativeValue", "value": 144, "unitCode": "MTK"}, "numberOfBedrooms": 3, "numberOfBathroomsTotal": 3}]}]}</script>
 </head>
 <body>
@@ -250,7 +250,7 @@
     <button class="προβολή__βέλος προβολή__βέλος--πίσω" type="button" aria-label="Previous image"><svg viewBox="0 0 46 14" aria-hidden="true"><path d="M46 7H1M8 1 1 7l7 6"/></svg></button>
     <button class="προβολή__βέλος προβολή__βέλος--εμπρός" type="button" aria-label="Next image"><svg viewBox="0 0 46 14" aria-hidden="true"><path d="M0 7h45M38 1l7 6-7 6"/></svg></button>
   </dialog>
-  <script src="/assets/js/sections.js?v=202611162228" defer></script>
-  <script src="/assets/js/projects.js?v=202611162228" defer></script>
+  <script src="/assets/js/sections.js?v=202611162243" defer></script>
+  <script src="/assets/js/projects.js?v=202611162243" defer></script>
 </body>
 </html>

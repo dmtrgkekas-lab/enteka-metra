@@ -24,14 +24,14 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preload" href="/assets/fonts/manrope-greek-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-greek-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/home.css?v=202611162228">
-  <link rel="stylesheet" href="/assets/css/sections.css?v=202611162228">
-  <link rel="stylesheet" href="/assets/css/projects.css?v=202611162228">
+  <link rel="stylesheet" href="/assets/css/home.css?v=202611162243">
+  <link rel="stylesheet" href="/assets/css/sections.css?v=202611162243">
+  <link rel="stylesheet" href="/assets/css/projects.css?v=202611162243">
   <script>document.documentElement.classList.replace('no-js', 'js'); if (!('onpagereveal' in window) && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('μετάβαση-js');</script>
   <script>(function () {
     var Ο = 'project-image', ΚΛ = 'gp-vt-εικόνα', ρ = document.documentElement;
     function εικόναΓια(διαδρομή) {
-      var σ = document.querySelector('.κάρτα-έργου__σύνδεσμος[href="' + διαδρομή + '"]');
+      var σ = document.querySelector('.κάρτα-έργου__σύνδεσμος[href="' + διαδρομή + '"], .μικρό-έργο a[href="' + διαδρομή + '"]');
       return σ && σ.querySelector('img');
     }
     // Κανένα όνομα από προηγούμενη μετάβαση: η σελίδα μπορεί να επιστρέψει από την cache του browser
@@ -85,7 +85,7 @@
       ε.viewTransition.finished.then(καθάρισε, καθάρισε);
     });
   })();</script>
-  <script type="speculationrules">{"prerender": [{"where": {"selector_matches": ".κάρτα-έργου__σύνδεσμος"}, "eagerness": "moderate"}]}</script>
+  <script type="speculationrules">{"prerender": [{"where": {"selector_matches": ".κάρτα-έργου__σύνδεσμος, .μικρό-έργο a"}, "eagerness": "moderate"}]}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "ContactPage", "@id": "https://gpdevelopment.gr/el/contact/#webpage", "url": "https://gpdevelopment.gr/el/contact/", "name": "Επικοινωνία | Κλείστε Επίσκεψη | GP Real Estate Development", "description": "Καλέστε στο 210 976 1163, στείλτε email στο sales@gpdevelopment.gr ή ένα μήνυμα. Γραφείο: Δημ. Βασιλείου 20, Ψυχικό, Δευτέρα–Παρασκευή 10:00–18:00.", "inLanguage": "el", "isPartOf": {"@id": "https://gpdevelopment.gr/#website"}, "about": {"@id": "https://gpdevelopment.gr/#organization"}, "breadcrumb": {"@id": "https://gpdevelopment.gr/el/contact/#breadcrumb"}}, {"@type": "BreadcrumbList", "@id": "https://gpdevelopment.gr/el/contact/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Αρχική", "item": "https://gpdevelopment.gr/el/"}, {"@type": "ListItem", "position": 2, "name": "Επικοινωνία", "item": "https://gpdevelopment.gr/el/contact/"}]}, {"@id": "https://gpdevelopment.gr/#organization", "contactPoint": {"@type": "ContactPoint", "contactType": "sales", "telephone": "+30 210 976 1163", "email": "sales@gpdevelopment.gr", "availableLanguage": ["en", "el"], "hoursAvailable": {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "10:00", "closes": "18:00"}}}]}</script>
 </head>
 <body>
@@ -182,7 +182,7 @@
   </footer>
 
 
-  <script src="/assets/js/sections.js?v=202611162228" defer></script>
-  <script src="/assets/js/projects.js?v=202611162228" defer></script>
+  <script src="/assets/js/sections.js?v=202611162243" defer></script>
+  <script src="/assets/js/projects.js?v=202611162243" defer></script>
 </body>
 </html>

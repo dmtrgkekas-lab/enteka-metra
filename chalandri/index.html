@@ -25,14 +25,14 @@
   <link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="/assets/projects/chalandri/cover-1536.webp" imagesrcset="/assets/projects/chalandri/cover-960.webp 960w, /assets/projects/chalandri/cover-1536.webp 1536w" imagesizes="100vw" fetchpriority="high">
-  <link rel="stylesheet" href="/assets/css/home.css?v=202611162228">
-  <link rel="stylesheet" href="/assets/css/sections.css?v=202611162228">
-  <link rel="stylesheet" href="/assets/css/projects.css?v=202611162228">
+  <link rel="stylesheet" href="/assets/css/home.css?v=202611162243">
+  <link rel="stylesheet" href="/assets/css/sections.css?v=202611162243">
+  <link rel="stylesheet" href="/assets/css/projects.css?v=202611162243">
   <script>document.documentElement.classList.replace('no-js', 'js'); if (!('onpagereveal' in window) && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('μετάβαση-js');</script>
   <script>(function () {
     var Ο = 'project-image', ΚΛ = 'gp-vt-εικόνα', ρ = document.documentElement;
     function εικόναΓια(διαδρομή) {
-      var σ = document.querySelector('.κάρτα-έργου__σύνδεσμος[href="' + διαδρομή + '"]');
+      var σ = document.querySelector('.κάρτα-έργου__σύνδεσμος[href="' + διαδρομή + '"], .μικρό-έργο a[href="' + διαδρομή + '"]');
       return σ && σ.querySelector('img');
     }
     // Κανένα όνομα από προηγούμενη μετάβαση: η σελίδα μπορεί να επιστρέψει από την cache του browser
@@ -86,7 +86,7 @@
       ε.viewTransition.finished.then(καθάρισε, καθάρισε);
     });
   })();</script>
-  <script type="speculationrules">{"prerender": [{"where": {"selector_matches": ".κάρτα-έργου__σύνδεσμος"}, "eagerness": "moderate"}]}</script>
+  <script type="speculationrules">{"prerender": [{"where": {"selector_matches": ".κάρτα-έργου__σύνδεσμος, .μικρό-έργο a"}, "eagerness": "moderate"}]}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://gpdevelopment.gr/chalandri/#webpage", "url": "https://gpdevelopment.gr/chalandri/", "name": "Sachtouri 44–46: New Apartments in Chalandri | GP Development", "description": "Five new A++ homes from 62 to 138 m² at Sachtouri 44–46, Chalandri, including a maisonette with a private rooftop pool. Completion December 2027.", "inLanguage": "en", "isPartOf": {"@id": "https://gpdevelopment.gr/#website"}, "publisher": {"@id": "https://gpdevelopment.gr/#organization"}, "about": {"@id": "https://gpdevelopment.gr/chalandri/#place"}, "breadcrumb": {"@id": "https://gpdevelopment.gr/chalandri/#breadcrumb"}, "primaryImageOfPage": "https://gpdevelopment.gr/assets/projects/chalandri/cover-1536.webp"}, {"@type": "BreadcrumbList", "@id": "https://gpdevelopment.gr/chalandri/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://gpdevelopment.gr/"}, {"@type": "ListItem", "position": 2, "name": "Projects", "item": "https://gpdevelopment.gr/projects/"}, {"@type": "ListItem", "position": 3, "name": "Sachtouri 44–46", "item": "https://gpdevelopment.gr/chalandri/"}]}, {"@type": "ApartmentComplex", "@id": "https://gpdevelopment.gr/chalandri/#place", "name": "Sachtouri 44–46", "description": "Five new A++ homes from 62 to 138 m² at Sachtouri 44–46, Chalandri, including a maisonette with a private rooftop pool. Completion December 2027.", "url": "https://gpdevelopment.gr/chalandri/", "image": ["https://gpdevelopment.gr/assets/projects/chalandri/cover-1536.webp", "https://gpdevelopment.gr/assets/projects/chalandri/facade-1536.webp", "https://gpdevelopment.gr/assets/projects/chalandri/fireplace-1536.webp", "https://gpdevelopment.gr/assets/projects/chalandri/dining-1536.webp"], "address": {"@type": "PostalAddress", "streetAddress": "Sachtouri 44–46", "addressLocality": "Chalandri", "postalCode": "152 32", "addressRegion": "Attica", "addressCountry": "GR"}, "numberOfAccommodationUnits": 5, "numberOfAvailableAccommodationUnits": 5, "containsPlace": [{"@type": "Accommodation", "name": "1st floor · Apartment · 62 m²", "floorSize": {"@type": "QuantitativeValue", "value": 62, "unitCode": "MTK"}, "numberOfBedrooms": 1}, {"@type": "Accommodation", "name": "1st floor · Apartment · 102 m²", "floorSize": {"@type": "QuantitativeValue", "value": 102, "unitCode": "MTK"}, "numberOfBedrooms": 2}, {"@type": "Accommodation", "name": "2nd floor · Apartment · 102 m²", "floorSize": {"@type": "QuantitativeValue", "value": 102, "unitCode": "MTK"}, "numberOfBedrooms": 2}, {"@type": "Accommodation", "name": "3rd floor · Apartment · 124 m²", "floorSize": {"@type": "QuantitativeValue", "value": 124, "unitCode": "MTK"}, "numberOfBedrooms": 3}, {"@type": "Accommodation", "name": "4th & 5th floor · Maisonette · 138 m²", "floorSize": {"@type": "QuantitativeValue", "value": 138, "unitCode": "MTK"}, "numberOfBedrooms": 3}]}]}</script>
 </head>
 <body>
@@ -258,7 +258,7 @@
     <button class="προβολή__βέλος προβολή__βέλος--πίσω" type="button" aria-label="Previous image"><svg viewBox="0 0 46 14" aria-hidden="true"><path d="M46 7H1M8 1 1 7l7 6"/></svg></button>
     <button class="προβολή__βέλος προβολή__βέλος--εμπρός" type="button" aria-label="Next image"><svg viewBox="0 0 46 14" aria-hidden="true"><path d="M0 7h45M38 1l7 6-7 6"/></svg></button>
   </dialog>
-  <script src="/assets/js/sections.js?v=202611162228" defer></script>
-  <script src="/assets/js/projects.js?v=202611162228" defer></script>
+  <script src="/assets/js/sections.js?v=202611162243" defer></script>
+  <script src="/assets/js/projects.js?v=202611162243" defer></script>
 </body>
 </html>

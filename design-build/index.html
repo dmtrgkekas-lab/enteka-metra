@@ -25,14 +25,14 @@
   <link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="/assets/services/iso-poster.webp" fetchpriority="high">
-  <link rel="stylesheet" href="/assets/css/home.css?v=202611162228">
-  <link rel="stylesheet" href="/assets/css/sections.css?v=202611162228">
-  <link rel="stylesheet" href="/assets/css/projects.css?v=202611162228">
+  <link rel="stylesheet" href="/assets/css/home.css?v=202611162243">
+  <link rel="stylesheet" href="/assets/css/sections.css?v=202611162243">
+  <link rel="stylesheet" href="/assets/css/projects.css?v=202611162243">
   <script>document.documentElement.classList.replace('no-js', 'js'); if (!('onpagereveal' in window) && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('μετάβαση-js');</script>
   <script>(function () {
     var Ο = 'project-image', ΚΛ = 'gp-vt-εικόνα', ρ = document.documentElement;
     function εικόναΓια(διαδρομή) {
-      var σ = document.querySelector('.κάρτα-έργου__σύνδεσμος[href="' + διαδρομή + '"]');
+      var σ = document.querySelector('.κάρτα-έργου__σύνδεσμος[href="' + διαδρομή + '"], .μικρό-έργο a[href="' + διαδρομή + '"]');
       return σ && σ.querySelector('img');
     }
     // Κανένα όνομα από προηγούμενη μετάβαση: η σελίδα μπορεί να επιστρέψει από την cache του browser
@@ -86,7 +86,7 @@
       ε.viewTransition.finished.then(καθάρισε, καθάρισε);
     });
   })();</script>
-  <script type="speculationrules">{"prerender": [{"where": {"selector_matches": ".κάρτα-έργου__σύνδεσμος"}, "eagerness": "moderate"}]}</script>
+  <script type="speculationrules">{"prerender": [{"where": {"selector_matches": ".κάρτα-έργου__σύνδεσμος, .μικρό-έργο a"}, "eagerness": "moderate"}]}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://gpdevelopment.gr/design-build/#webpage", "url": "https://gpdevelopment.gr/design-build/", "name": "Design & Build in Athens: one team from first drawing to keys | GP Development", "description": "GP designs and builds residential buildings in Athens with one team: in-house architect, permits, construction and handover, every home rated A++. For our own projects and for owners who want to build on their plot.", "inLanguage": "en", "isPartOf": {"@id": "https://gpdevelopment.gr/#website"}, "about": {"@id": "https://gpdevelopment.gr/design-build/#service"}, "breadcrumb": {"@id": "https://gpdevelopment.gr/design-build/#breadcrumb"}, "primaryImageOfPage": "https://gpdevelopment.gr/assets/services/iso-1600.webp"}, {"@type": "Service", "@id": "https://gpdevelopment.gr/design-build/#service", "name": "Design & Build", "serviceType": "Design & Build", "description": "We design and build every GP building ourselves. Our in-house architect draws each home, the same team takes it through permits and construction, and we stay with you after handover. If you own a plot and want to build on it, we can do the same for you.", "provider": {"@id": "https://gpdevelopment.gr/#organization"}, "areaServed": ["Athens", "Northern suburbs of Athens", "Glyfada"]}, {"@type": "FAQPage", "@id": "https://gpdevelopment.gr/design-build/#faq", "mainEntity": [{"@type": "Question", "name": "What is design & build?", "acceptedAnswer": {"@type": "Answer", "text": "Design & build means that one company handles both the design and the construction of a building. At GP, our in-house architect designs the building and the same team takes it through permits, construction and handover, so you have one point of contact from the first drawing to the keys."}}, {"@type": "Question", "name": "Can GP design and build on my own plot?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Tell us where the plot is and what you would like to build, and we will tell you plainly what can be built there. If you would rather not fund the construction yourself, antiparochi may suit you better."}}, {"@type": "Question", "name": "Who designs the homes?", "acceptedAnswer": {"@type": "Answer", "text": "Our in-house architect. Each home is designed on its own, instead of one floor plan repeated across the building."}}, {"@type": "Question", "name": "Which energy class do your buildings reach?", "acceptedAnswer": {"@type": "Answer", "text": "Every project we build is rated energy class A++, with a heat pump, underfloor heating and high insulation."}}, {"@type": "Question", "name": "Where do you build?", "acceptedAnswer": {"@type": "Answer", "text": "Mainly in the northern suburbs of Athens and in Glyfada. Our buildings so far are in Neo Psychiko, Chalandri and Glyfada."}}]}, {"@type": "BreadcrumbList", "@id": "https://gpdevelopment.gr/design-build/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://gpdevelopment.gr/"}, {"@type": "ListItem", "position": 2, "name": "Design & Build", "item": "https://gpdevelopment.gr/design-build/"}]}]}</script>
 </head>
 <body>
@@ -111,15 +111,11 @@
     </div>
   </div>
   <main id="main" class="υπηρεσία υπηρεσία--design-build">
-    <section class="υπ-ήρωας υπ-ήρωας--βίντεο" data-τόνος="σκούρο" aria-hidden="true" data-υπ-ομίχλη>
+    <section class="υπ-ήρωας υπ-ήρωας--βίντεο" data-τόνος="σκούρο">
       <video class="υπ-ήρωας__βίντεο" autoplay muted loop playsinline preload="auto" poster="/assets/services/iso-poster.webp" aria-hidden="true" data-βίντεο-ήρωα>
         <source src="/assets/services/iso-hero.mp4" type="video/mp4">
       </video>
-      <div class="υπ-ήρωας__ομίχλη" aria-hidden="true">
-        <img src="/assets/clouds/wisp-0-soft.webp" alt="" width="1400" height="455" loading="eager" decoding="async">
-        <img src="/assets/clouds/wisp-1-soft.webp" alt="" width="1400" height="455" loading="eager" decoding="async">
-        <img src="/assets/clouds/wisp-0-soft.webp" alt="" width="1400" height="455" loading="eager" decoding="async">
-      </div>
+      <p class="υπ-ήρωας__σημείωση">Sachtouri 44–46, Chalandri. Designed and built by GP.</p>
     </section>
     <section class="υπ-εισαγωγή" data-τόνος="ανοιχτό" aria-labelledby="yp-t">
       <div class="υπ-εισαγωγή__σώμα">
@@ -265,7 +261,7 @@
   </footer>
 
 
-  <script src="/assets/js/sections.js?v=202611162228" defer></script>
-  <script src="/assets/js/projects.js?v=202611162228" defer></script>
+  <script src="/assets/js/sections.js?v=202611162243" defer></script>
+  <script src="/assets/js/projects.js?v=202611162243" defer></script>
 </body>
 </html>

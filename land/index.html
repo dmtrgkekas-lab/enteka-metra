@@ -25,15 +25,15 @@
   <link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="/assets/land/dn-day.webp" fetchpriority="high">
-  <link rel="stylesheet" href="/assets/css/land.css?v=202611162228">
-  <link rel="stylesheet" href="/assets/css/home.css?v=202611162228">
-  <link rel="stylesheet" href="/assets/css/sections.css?v=202611162228">
-  <link rel="stylesheet" href="/assets/css/projects.css?v=202611162228">
+  <link rel="stylesheet" href="/assets/css/land.css?v=202611162243">
+  <link rel="stylesheet" href="/assets/css/home.css?v=202611162243">
+  <link rel="stylesheet" href="/assets/css/sections.css?v=202611162243">
+  <link rel="stylesheet" href="/assets/css/projects.css?v=202611162243">
   <script>document.documentElement.classList.replace('no-js', 'js'); if (!('onpagereveal' in window) && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('μετάβαση-js');</script>
   <script>(function () {
     var Ο = 'project-image', ΚΛ = 'gp-vt-εικόνα', ρ = document.documentElement;
     function εικόναΓια(διαδρομή) {
-      var σ = document.querySelector('.κάρτα-έργου__σύνδεσμος[href="' + διαδρομή + '"]');
+      var σ = document.querySelector('.κάρτα-έργου__σύνδεσμος[href="' + διαδρομή + '"], .μικρό-έργο a[href="' + διαδρομή + '"]');
       return σ && σ.querySelector('img');
     }
     // Κανένα όνομα από προηγούμενη μετάβαση: η σελίδα μπορεί να επιστρέψει από την cache του browser
@@ -87,7 +87,7 @@
       ε.viewTransition.finished.then(καθάρισε, καθάρισε);
     });
   })();</script>
-  <script type="speculationrules">{"prerender": [{"where": {"selector_matches": ".κάρτα-έργου__σύνδεσμος"}, "eagerness": "moderate"}]}</script>
+  <script type="speculationrules">{"prerender": [{"where": {"selector_matches": ".κάρτα-έργου__σύνδεσμος, .μικρό-έργο a"}, "eagerness": "moderate"}]}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://gpdevelopment.gr/land/#webpage", "url": "https://gpdevelopment.gr/land/", "name": "We buy land in Athens | Northern suburbs & Glyfada | GP Real Estate Development", "description": "GP buys plots in the northern suburbs of Athens and in Glyfada. Tell us where your plot is and we come back with a plain answer and a clear next step.", "inLanguage": "en", "isPartOf": {"@id": "https://gpdevelopment.gr/#website"}, "about": {"@id": "https://gpdevelopment.gr/land/#service"}, "breadcrumb": {"@id": "https://gpdevelopment.gr/land/#breadcrumb"}, "primaryImageOfPage": "https://gpdevelopment.gr/assets/land/dn-day.webp"}, {"@type": "Service", "@id": "https://gpdevelopment.gr/land/#service", "name": "Land & antiparochi", "serviceType": "Antiparochi", "description": "GP buys plots in the northern suburbs of Athens and in Glyfada. Tell us where your plot is and roughly how large, and we come back with a plain answer and a clear next step.", "provider": {"@id": "https://gpdevelopment.gr/#organization"}, "areaServed": ["Athens", "Northern suburbs of Athens", "Glyfada"]}, {"@type": "FAQPage", "@id": "https://gpdevelopment.gr/land/#faq", "mainEntity": [{"@type": "Question", "name": "Do you buy land?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. GP buys plots outright."}}, {"@type": "Question", "name": "In which areas are you looking for plots?", "acceptedAnswer": {"@type": "Answer", "text": "Mainly in the northern suburbs of Athens and in Glyfada."}}, {"@type": "Question", "name": "Do you do antiparochi?", "acceptedAnswer": {"@type": "Answer", "text": "Antiparochi is done with the construction company. Tell us about your plot through the form on this page and we will tell you how it can move forward."}}, {"@type": "Question", "name": "What do you need to know about the plot?", "acceptedAnswer": {"@type": "Answer", "text": "To start, only where it is and roughly how large. Anything else you have helps."}}, {"@type": "Question", "name": "How do I start?", "acceptedAnswer": {"@type": "Answer", "text": "Send us the location and approximate size of the plot through the form on this page, or call +30 210 976 1163."}}]}, {"@type": "BreadcrumbList", "@id": "https://gpdevelopment.gr/land/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://gpdevelopment.gr/"}, {"@type": "ListItem", "position": 2, "name": "Land & antiparochi", "item": "https://gpdevelopment.gr/land/"}]}]}</script>
 </head>
 <body>
@@ -270,8 +270,8 @@
   </footer>
 
 <script src="/assets/js/vendor/lenis.min.js" defer></script>
-<script src="/assets/js/land.js?v=202611162228" defer></script>
-  <script src="/assets/js/sections.js?v=202611162228" defer></script>
-  <script src="/assets/js/projects.js?v=202611162228" defer></script>
+<script src="/assets/js/land.js?v=202611162243" defer></script>
+  <script src="/assets/js/sections.js?v=202611162243" defer></script>
+  <script src="/assets/js/projects.js?v=202611162243" defer></script>
 </body>
 </html>
