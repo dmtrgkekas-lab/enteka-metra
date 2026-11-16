@@ -7,7 +7,7 @@
   background: var(--νύχτα); }
 
 /* ---------- Σκηνές ουρανού (άνοιγμα και κλείσιμο) */
-.γη-σκηνή { position: relative; height: 460vh; height: 460svh; background: var(--νύχτα); }
+.γη-σκηνή { position: relative; height: 420vh; height: 420svh; background: var(--νύχτα); }
 .γη-σκηνή--κλείσιμο { height: 320vh; height: 320svh; }
 .γη-σκηνή__κάδρο { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; isolation: isolate; color: #fffdf8; }
 .γη-σκηνή__αφίσα, .γη-σκηνή__καμβάς { position: absolute; inset: 0; z-index: -4; width: 100%; height: 100%; object-fit: cover; }
@@ -116,7 +116,7 @@
   .γη-έργο__εικόνα { aspect-ratio: 4 / 3; }
 }
 @media (max-width: 760px) {
-  .γη-σκηνή { height: 380svh; }
+  .γη-σκηνή { height: 360svh; }
   .γη-σκηνή--κλείσιμο { height: 260svh; }
   .γη-σκηνή__κάτω { grid-template-columns: minmax(0, 1fr); gap: 18px; }
   .γη-σύννεφο { width: 170% !important; }
