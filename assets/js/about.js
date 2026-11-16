@@ -15,11 +15,22 @@
   const στοιχείαΑρχών = αρχές ? [...αρχές.querySelectorAll('[data-σχ-αρχή]')] : [];
   const εικόνεςΑρχών = αρχές ? [...αρχές.querySelectorAll('[data-σχ-εικόνα]')] : [];
   let ενεργή = 0;
+  // Ζωντανές φωτογραφίες: κάθε βίντεο φορτώνει όταν χρειαστεί και παίζει μόνο όσο φαίνεται
+  const παίξε = (β, ναι) => {
+    if (!β || μειωμένηΚίνηση) return;
+    if (ναι) {
+      if (β.preload === 'none') { β.preload = 'auto'; β.load(); }
+      if (!β.dataset.έτοιμο) { β.dataset.έτοιμο = '1'; β.addEventListener('playing', () => β.classList.add('παίζει'), { once: true }); }
+      const υ = β.play(); if (υ && υ.catch) υ.catch(() => {});
+    } else if (!β.paused) β.pause();
+  };
+  const βίντεοΑρχής = (k) => εικόνεςΑρχών[k] && εικόνεςΑρχών[k].querySelector('video');
+  let αρχέςΟρατές = false;
   const ενεργοποίησε = (i) => {
     if (i === ενεργή) return;
     ενεργή = i;
     στοιχείαΑρχών.forEach((λ, k) => λ.classList.toggle('είναι-ενεργή', k === i));
-    εικόνεςΑρχών.forEach((ε, k) => ε.classList.toggle('είναι-ενεργή', k === i));
+    εικόνεςΑρχών.forEach((ε, k) => { ε.classList.toggle('είναι-ενεργή', k === i); παίξε(βίντεοΑρχής(k), αρχέςΟρατές && k === i); });
   };
 
   // Οι εικόνες των αρχών είναι κρυμμένες πίσω από clip-path: φορτώνονται όλες μαζί πριν φτάσει η ενότητα
@@ -47,6 +58,7 @@
   const λέξεις = λέξειςΚουτί ? [...λέξειςΚουτί.children] : [];
   const άνοιγμα = document.querySelector('[data-σχ-άνοιγμα]');
   const σκηνήΑνοίγματος = άνοιγμα && άνοιγμα.querySelector('.σχ-άνοιγμα__σκηνή');
+  const βίντεοΑνοίγματος = άνοιγμα && άνοιγμα.querySelector('video');
 
   const ενημέρωση = () => {
     const h = innerHeight;
@@ -82,6 +94,15 @@
         σ.setProperty('--ι-σκ', ομαλό(0.5, 0.75, p).toFixed(3));
         σ.setProperty('--ι-τ', ομαλό(0.55, 0.8, p).toFixed(3));
       }
+    }
+    if (αρχές) {
+      const r = αρχές.getBoundingClientRect();
+      const ορατές = r.bottom > 0 && r.top < h;
+      if (ορατές !== αρχέςΟρατές) { αρχέςΟρατές = ορατές; παίξε(βίντεοΑρχής(ενεργή), ορατές); }
+    }
+    if (άνοιγμα) {
+      const r = άνοιγμα.getBoundingClientRect();
+      παίξε(βίντεοΑνοίγματος, r.bottom > 0 && r.top < h * 1.2);
     }
     if (στοιχείαΑρχών.length) {
       const κέντρο = h * 0.55;
