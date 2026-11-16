@@ -76,7 +76,9 @@
   .χάρτης-ενότητα__λίστα b { font-size: .8rem; white-space: nowrap; }
   .χάρτης-ενότητα__λίστα small { display: none; }
   .πινέζα__όνομα { font-size: .82rem; }
-  .χάρτης-ενότητα__νέφη img { width: calc(var(--π) * 2.4%); }
+  /* κινητό: λιγότερα σύννεφα και χωρίς μεγέθυνση, για ομαλό scroll */
+  .χάρτης-ενότητα__νέφη img { width: calc(var(--π) * 2.4%); transform: translate3d(calc(var(--χ-άνοιγμα, 0) * var(--φορά-x, 0) * 110vw), 0, 0); }
+  .χάρτης-ενότητα__νέφη img:nth-child(n + 7) { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .χάρτης-ενότητα { height: auto; }
@@ -90,3 +92,6 @@
 .χάρτης-ενότητα__πηγές { position: absolute; z-index: 3; right: max(var(--περιθώριο), 20px); bottom: max(28px, env(safe-area-inset-bottom)); font-size: .58rem; letter-spacing: .08em; color: rgba(238, 233, 224, .4); opacity: var(--χ-ui, 0); }
 .χάρτης-ενότητα__πηγές a { color: inherit; pointer-events: var(--χ-δείκτης, none); }
 @media (max-width: 760px) { .χάρτης-ενότητα__πηγές { right: auto; left: 20px; bottom: calc(max(28px, env(safe-area-inset-bottom)) + 44px); } }
+
+/* Αφή: το κάθετο σύρσιμο κάνει scroll, το οριζόντιο γυρίζει τον χάρτη (map.js) */
+@media (hover: none) and (pointer: coarse) { .χάρτης-ενότητα__σκηνή, .χάρτης-ενότητα__σκηνή * { touch-action: pan-y; } }

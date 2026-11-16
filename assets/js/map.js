@@ -16,19 +16,22 @@ if (ενότητα) {
   const πρόοδος = () => { const r = ενότητα.getBoundingClientRect(); return Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - innerHeight))); };
 
   // ---------- Σύννεφα και εμφάνιση στοιχείων με το scroll (δουλεύει και πριν φορτώσει ο χάρτης)
-  let p = 0;
+  let p = 0, άνοιγμαΤώρα = 0;
+  const νέφη = ενότητα.querySelector('.χάρτης-ενότητα__νέφη');
+  const προηγούμενα = {};
+  const βάλε = (στοιχείο, όνομα, τιμή) => { if (προηγούμενα[όνομα] !== τιμή) { προηγούμενα[όνομα] = τιμή; στοιχείο.style.setProperty(όνομα, τιμή); } };
   const σύννεφα = () => {
     p = μειωμένη ? 0.5 : πρόοδος();
     const άνοιγμα = ομαλό(0.02, 0.28, p) * (1 - ομαλό(0.8, 0.98, p));   // 0 κλειστά · 1 ανοιχτά
-    const σ = σκηνήΕνότητας.style;
-    σ.setProperty('--χ-άνοιγμα', άνοιγμα.toFixed(3));
-    // τα σύννεφα μένουν λευκά και πυκνά όσο απομακρύνονται (χωρίς γκρίζα θολούρα πάνω στο σκοτάδι)·
-    // το πέπλο χαρτιού φεύγει νωρίς, ώστε ο χάρτης να φαίνεται στα κενά τους
-    σ.setProperty('--χ-νέφη', (1 - ομαλό(0.72, 1, άνοιγμα)).toFixed(3));
-    σ.setProperty('--χ-πέπλο', (1 - ομαλό(0.0, 0.32, άνοιγμα)).toFixed(3));
+    άνοιγμαΤώρα = άνοιγμα;
+    // τα σύννεφα μένουν λευκά και πυκνά όσο απομακρύνονται· το πέπλο χαρτιού φεύγει νωρίς
+    βάλε(νέφη, '--χ-άνοιγμα', άνοιγμα.toFixed(3));
+    βάλε(νέφη, '--χ-νέφη', (1 - ομαλό(0.72, 1, άνοιγμα)).toFixed(2));
+    βάλε(νέφη, '--χ-πέπλο', (1 - ομαλό(0.0, 0.32, άνοιγμα)).toFixed(2));
+    νέφη.style.visibility = άνοιγμα > 0.995 ? 'hidden' : 'visible';
     const ui = ομαλό(0.6, 1, άνοιγμα);
-    σ.setProperty('--χ-ui', ui.toFixed(3));
-    σ.setProperty('--χ-δείκτης', ui > 0.6 ? 'auto' : 'none');
+    βάλε(σκηνήΕνότητας, '--χ-ui', ui.toFixed(2));
+    βάλε(σκηνήΕνότητας, '--χ-δείκτης', ui > 0.6 ? 'auto' : 'none');
   };
   if (μειωμένη) σύννεφα();
   else {
@@ -72,7 +75,7 @@ if (ενότητα) {
     // ---------- Σκηνή
     const δοχείο = ενότητα.querySelector('.χάρτης-ενότητα__καμβάς');
     const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
-    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, ΚΙΝΗΤΟ ? 2 : 1.75));
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, ΚΙΝΗΤΟ ? 1.5 : 1.75));
     const μέγεθος = () => { renderer.setSize(δοχείο.clientWidth, δοχείο.clientHeight); κάμερα.aspect = δοχείο.clientWidth / δοχείο.clientHeight; κάμερα.updateProjectionMatrix(); };
     renderer.setClearColor(0x05070b, 1);
     δοχείο.appendChild(renderer.domElement);
@@ -202,6 +205,23 @@ if (ενότητα) {
     let ελεύθερη = false;
     έλεγχος.addEventListener('start', () => { ελεύθερη = true; });
     κάμερα.position.copy(ΑΡΧΙΚΗ); κάμερα.lookAt(στόχος);
+    let ορμή = 0;
+    const γύρισε = (γωνία) => { const μ = κάμερα.position.clone().sub(έλεγχος.target); μ.applyAxisAngle(new THREE.Vector3(0, 1, 0), γωνία); κάμερα.position.copy(έλεγχος.target).add(μ); κάμερα.lookAt(έλεγχος.target); };
+    if (αφή) {
+      let δάχτυλο = null, xΠριν = 0;
+      const κ = σκηνήΕνότητας;                              // όλη η σκηνή (και πάνω από τις ετικέτες)
+      κ.addEventListener('pointerdown', (ε) => { if (ε.pointerType !== 'touch' || !ε.isPrimary) return; δάχτυλο = ε.pointerId; xΠριν = ε.clientX; ορμή = 0; });
+      κ.addEventListener('pointermove', (ε) => {
+        if (ε.pointerId !== δάχτυλο) return;
+        const dx = ε.clientX - xΠριν; xΠριν = ε.clientX;
+        if (άνοιγμαΤώρα < 0.9) return;                      // μόνο όταν ο χάρτης είναι ανοιχτός
+        ελεύθερη = true; ορμή = -dx * 0.0042; γύρισε(ορμή);
+      });
+      const άφησε = (ε) => { if (ε.pointerId === δάχτυλο) δάχτυλο = null; };
+      κ.addEventListener('pointerup', άφησε); κ.addEventListener('pointercancel', άφησε);
+      // όσο το δάχτυλο δεν σέρνει, ο χάρτης συνεχίζει λίγο με τη φόρα του
+      setInterval(() => { if (δάχτυλο === null && Math.abs(ορμή) > 0.0004) { ορμή *= 0.92; γύρισε(ορμή); } }, 16);
+    }
 
     // Λίστα: στο πέρασμα του ποντικιού φωτίζει την πινέζα
     ενότητα.querySelectorAll('[data-έργο]').forEach((λ) => {
@@ -226,14 +246,21 @@ if (ενότητα) {
         κάμερα.position.lerpVectors(ΑΡΧΙΚΗ, ΤΕΛΙΚΗ, t);
         κάμερα.lookAt(έλεγχος.target);
       }
-      έλεγχος.update();
+      if (!αφή) έλεγχος.update();
+      if (άνοιγμαΤώρα < 0.01 && !μειωμένη) { requestAnimationFrame(καρέ); return; }
       renderer.render(σκηνή, κάμερα);
       const w = δοχείο.clientWidth, h = δοχείο.clientHeight;
-      έργα.forEach((έ) => {
-        const [x, y, z] = προβολή(έ.κορυφή), εκτός = z > 1 || x < -40 || x > w + 40 || y < -40 || y > h + 40;
+      const οθόνη = έργα.map((έ) => προβολή(έ.κορυφή));
+      έργα.forEach((έ, i) => {
+        const [x, y, z] = οθόνη[i], εκτός = z > 1 || x < -40 || x > w + 40 || y < -40 || y > h + 40;
         έ.a.style.setProperty('--x', (εκτός ? -999 : x).toFixed(1) + 'px');
         έ.a.style.setProperty('--y', (εκτός ? -999 : y).toFixed(1) + 'px');
-        έ.a.classList.toggle('αριστερά', έ.πλευρά === 'αριστερά' ? x > 250 : x > w - 250);
+        // η ετικέτα βγαίνει μακριά από το κοντινότερο γειτονικό σημείο, και πάντα μέσα στην οθόνη
+        let αριστερά = x > w - 250;
+        οθόνη.forEach(([x2, y2], k) => { if (k !== i && Math.abs(y2 - y) < 70 && Math.abs(x2 - x) < 260) αριστερά = x < x2; });
+        if (x > w - 170) αριστερά = true;
+        if (x < 170) αριστερά = false;
+        έ.a.classList.toggle('αριστερά', αριστερά);
         έ.a.classList.toggle('πάνω', y > h - 280);
       });
       τόποι.forEach((τ) => { const [x, y, z] = προβολή(τ.θ); τ.s.style.setProperty('--x', (z > 1 ? -999 : x).toFixed(1) + 'px'); τ.s.style.setProperty('--y', (z > 1 ? -999 : y).toFixed(1) + 'px'); });
@@ -246,7 +273,7 @@ if (ενότητα) {
     ξεκίναΒρόχο();
   };
   if ('IntersectionObserver' in window) {
-    const ιο = new IntersectionObserver((ε) => { if (ε[0].isIntersecting) { ιο.disconnect(); ξεκίνα().catch(() => {}); } }, { rootMargin: '150% 0px' });
+    const ιο = new IntersectionObserver((ε) => { if (ε[0].isIntersecting) { ιο.disconnect(); ξεκίνα().catch((σφάλμα) => console.error("χάρτης:", σφάλμα)); } }, { rootMargin: '150% 0px' });
     ιο.observe(ενότητα);
   } else ξεκίνα().catch(() => {});
 }
