@@ -1,0 +1,23 @@
+name: fetch-roads
+on:
+  push:
+    paths: ['_fetch/roads.txt']
+permissions:
+  contents: write
+jobs:
+  roads:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq osmium-tool
+          curl -fsSL --retry 3 -o greece.osm.pbf https://download.geofabrik.de/europe/greece-latest.osm.pbf
+          osmium extract --bbox 23.40,37.68,24.08,38.26 -o attica.osm.pbf greece.osm.pbf
+          osmium tags-filter -o roads.osm.pbf attica.osm.pbf w/highway=motorway,trunk,primary,secondary,tertiary,motorway_link,trunk_link,primary_link,secondary_link,tertiary_link,residential,unclassified,living_street,pedestrian
+          echo '{"attributes":{},"linear_tags":true,"area_tags":false,"include_tags":["highway"]}' > cfg.json
+          osmium export -c cfg.json -f geojsonseq -x print_record_separator=false --geometry-types=linestring -o roads.geojsonseq roads.osm.pbf
+          mkdir -p _fetch/out && gzip -9 -c roads.geojsonseq > _fetch/out/roads.geojsonseq.gz
+          ls -la _fetch/out/roads.geojsonseq.gz
+      - run: |
+          git config user.name "fetch-bot"; git config user.email "fetch-bot@users.noreply.github.com"
+          git add _fetch/out/roads.geojsonseq.gz && git commit -m "Fetched roads" && git pull --rebase -q && git push
