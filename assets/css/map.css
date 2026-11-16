@@ -3,7 +3,7 @@
    Η ενότητα «κολλάει» στην οθόνη όσο τη διασχίζει κανείς: σύννεφα ανοίγουν, η κάμερα
    κατεβαίνει στην Αττική, και στο τέλος τα σύννεφα ξανακλείνουν πριν συνεχίσει η σελίδα.
    ========================================================================== */
-.χάρτης-ενότητα { --νύχτα: #0d0f13; --χ-κείμενο: #eee9e0; --χ-αχνό: rgba(238, 233, 224, .58); --χ-γραμμή: rgba(238, 233, 224, .14); --κίτρινο: #f2c14e;
+.χάρτης-ενότητα { --νύχτα: #05070b; --χ-κείμενο: #eee9e0; --χ-αχνό: rgba(238, 233, 224, .58); --χ-γραμμή: rgba(238, 233, 224, .14); --κίτρινο: #f2c14e;
   position: relative; height: 300vh; height: 300svh; background: var(--χαρτί); }
 .χάρτης-ενότητα__σκηνή { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; isolation: isolate; background: var(--νύχτα); color: var(--χ-κείμενο); }
 .χάρτης-ενότητα__καμβάς { position: absolute; inset: 0; }
@@ -85,3 +85,8 @@
   .χάρτης-ενότητα { --χ-ui: 1; --χ-δείκτης: auto; }
   .πινέζα__κουκκίδα::before, .πινέζα__κουκκίδα::after { animation: none; }
 }
+
+/* Πηγές δεδομένων (υποχρεωτική αναφορά για OpenStreetMap) */
+.χάρτης-ενότητα__πηγές { position: absolute; z-index: 3; right: max(var(--περιθώριο), 20px); bottom: max(28px, env(safe-area-inset-bottom)); font-size: .58rem; letter-spacing: .08em; color: rgba(238, 233, 224, .4); opacity: var(--χ-ui, 0); }
+.χάρτης-ενότητα__πηγές a { color: inherit; pointer-events: var(--χ-δείκτης, none); }
+@media (max-width: 760px) { .χάρτης-ενότητα__πηγές { right: auto; left: 20px; bottom: calc(max(28px, env(safe-area-inset-bottom)) + 44px); } }

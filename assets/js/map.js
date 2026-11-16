@@ -1,6 +1,7 @@
 /* ==========================================================================
    Τα κτίριά μας στην Αττική — τρισδιάστατος χάρτης (three.js, αυτο-φιλοξενούμενο)
-   - Το ανάγλυφο έρχεται από /assets/map/attica-height.png (512×512, υψόμετρο σε R,G = 16 bit).
+   - Νυχτερινή Αττική από ψηλά: πραγματικό ανάγλυφο (SRTM) και φώτα πάνω στο πραγματικό οδικό δίκτυο
+     (OpenStreetMap), ψημένα από το src-tools/map_bake.py στο /assets/map/.
    - Οι πινέζες και τα τοπωνύμια είναι HTML (map_section.py)· εδώ μόνο ακολουθούν τον χάρτη.
    - Scroll (η ενότητα «κολλάει»): σύννεφα ανοίγουν → η κάμερα κατεβαίνει → ελεύθερη περιήγηση
      → σύννεφα ξανακλείνουν. Ο three.js φορτώνει μόνο όταν η ενότητα πλησιάσει.
@@ -43,13 +44,18 @@ if (ενότητα) {
     const THREE = await import('./vendor/three.module.min.js');
     const { OrbitControls } = await import('./vendor/OrbitControls.js');
     const ΚΙΝΗΤΟ = innerWidth < 760;
-    const ΟΡΙΑ = { kmx: 59.675, kmy: 64.131, N: 512 };
-    const W = ΟΡΙΑ.kmx, D = ΟΡΙΑ.kmy, N = ΟΡΙΑ.N, ΥΨΟΣ_Χ = 2.4;
+    const W = 59.675, D = 64.131, N = 512, ΥΨΟΣ_Χ = 2.0;
+    const ΚΑΜΠΥΛΗ = 0.0011;                    // καμπυλότητα: το έδαφος «γέρνει» προς τον ορίζοντα
 
-    // Υψόμετρα
-    const εικόνα = await new Promise((r, λ) => { const im = new Image(); im.onload = () => r(im); im.onerror = λ; im.src = '/assets/map/attica-height.png'; });
+    // ---------- Δεδομένα: υψόμετρο, ανάγλυφο (normal map + μάσκα στεριάς), φώτα της πόλης
+    const εικόνα = (src) => new Promise((r, λ) => { const im = new Image(); im.onload = () => r(im); im.onerror = λ; im.src = src; });
+    const υφή = (im, χρώμα) => { const t = new THREE.Texture(im); t.flipY = false; t.generateMipmaps = true; t.minFilter = THREE.LinearMipmapLinearFilter; t.magFilter = THREE.LinearFilter;
+      t.colorSpace = THREE.NoColorSpace; t.anisotropy = 8; t.needsUpdate = true; return t; };
+    const [εικΎψους, εικΑνάγλυφου, εικΦώτων] = await Promise.all([
+      εικόνα('/assets/map/attica-height.png'), εικόνα('/assets/map/attica-normal.webp'),
+      εικόνα(ΚΙΝΗΤΟ ? '/assets/map/attica-lights-2048.webp' : '/assets/map/attica-lights.webp')]);
     const κ = document.createElement('canvas'); κ.width = κ.height = N;
-    const c2 = κ.getContext('2d', { willReadFrequently: true }); c2.drawImage(εικόνα, 0, 0);
+    const c2 = κ.getContext('2d', { willReadFrequently: true }); c2.drawImage(εικΎψους, 0, 0);
     const δ = c2.getImageData(0, 0, N, N).data;
     const υψόμετρο = new Float32Array(N * N);
     for (let i = 0; i < N * N; i++) υψόμετρο[i] = (δ[i * 4] * 256 + δ[i * 4 + 1]) / 40 - 100;
@@ -59,101 +65,138 @@ if (ενότητα) {
       const a = υψόμετρο[y0 * N + x0], b = υψόμετρο[y0 * N + x1], c = υψόμετρο[y1 * N + x0], d = υψόμετρο[y1 * N + x1];
       return (a * (1 - tx) + b * tx) * (1 - ty) + (c * (1 - tx) + d * tx) * ty;
     };
-    const σε3Δ = (fx, fy, πάνω = 0) => new THREE.Vector3((fx - 0.5) * W, Math.max(0, ύψοςΣε(fx, fy)) / 1000 * ΥΨΟΣ_Χ + πάνω, (fy - 0.5) * D);
+    const ΚΕΝΤΡΟ = [(0.545 - 0.5) * W, (0.53 - 0.5) * D];
+    const πτώση = (x, z) => ΚΑΜΠΥΛΗ * ((x - ΚΕΝΤΡΟ[0]) ** 2 + (z - ΚΕΝΤΡΟ[1]) ** 2);
+    const σε3Δ = (fx, fy, πάνω = 0) => { const x = (fx - 0.5) * W, z = (fy - 0.5) * D; return new THREE.Vector3(x, Math.max(0, ύψοςΣε(fx, fy)) / 1000 * ΥΨΟΣ_Χ + πάνω - πτώση(x, z), z); };
 
-    // Σκηνή
+    // ---------- Σκηνή
     const δοχείο = ενότητα.querySelector('.χάρτης-ενότητα__καμβάς');
     const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
     renderer.setPixelRatio(Math.min(devicePixelRatio || 1, ΚΙΝΗΤΟ ? 2 : 1.75));
     const μέγεθος = () => { renderer.setSize(δοχείο.clientWidth, δοχείο.clientHeight); κάμερα.aspect = δοχείο.clientWidth / δοχείο.clientHeight; κάμερα.updateProjectionMatrix(); };
-    renderer.setClearColor(0x0d0f13, 1);
+    renderer.setClearColor(0x05070b, 1);
     δοχείο.appendChild(renderer.domElement);
     const σκηνή = new THREE.Scene();
-    const κάμερα = new THREE.PerspectiveCamera(ΚΙΝΗΤΟ ? 44 : 34, 1, 0.1, 400);
+    const κάμερα = new THREE.PerspectiveCamera(ΚΙΝΗΤΟ ? 46 : 36, 1, 0.1, 600);
     μέγεθος();
 
-    // Έδαφος
-    const ΒΗΜΑ = ΚΙΝΗΤΟ ? 2 : 1, Ν = Math.floor((N - 1) / ΒΗΜΑ) + 1;
+    // ---------- Έδαφος και θάλασσα: ένα πλέγμα με το πραγματικό ανάγλυφο
+    const Ν = ΚΙΝΗΤΟ ? 256 : 512, ΒΗΜΑ = (N - 1) / (Ν - 1);
     const γεωμετρία = new THREE.PlaneGeometry(W, D, Ν - 1, Ν - 1);
     γεωμετρία.rotateX(-Math.PI / 2);
-    const θέσεις = γεωμετρία.attributes.position, υψ = new Float32Array(θέσεις.count);
+    const θέσεις = γεωμετρία.attributes.position;
     for (let j = 0; j < Ν; j++) for (let i = 0; i < Ν; i++) {
-      const k = j * Ν + i, e = υψόμετρο[Math.min(N - 1, j * ΒΗΜΑ) * N + Math.min(N - 1, i * ΒΗΜΑ)];
-      υψ[k] = e; θέσεις.setY(k, e > 0.5 ? e / 1000 * ΥΨΟΣ_Χ : -0.06);
+      const k = j * Ν + i, e = υψόμετρο[Math.round(j * ΒΗΜΑ) * N + Math.round(i * ΒΗΜΑ)];
+      θέσεις.setY(k, Math.max(0, e) / 1000 * ΥΨΟΣ_Χ - πτώση(θέσεις.getX(k), θέσεις.getZ(k)));
     }
-    γεωμετρία.setAttribute('aElev', new THREE.BufferAttribute(υψ, 1));
-    γεωμετρία.computeVertexNormals();
-    const ΟΜΙΧΛΗ = { uFog: { value: new THREE.Color(0x0d0f13) }, uNear: { value: 55 }, uFar: { value: 125 } };
-    σκηνή.add(new THREE.Mesh(γεωμετρία, new THREE.ShaderMaterial({
-      uniforms: { uLight: { value: new THREE.Vector3(-0.55, 0.75, -0.35).normalize() }, ...ΟΜΙΧΛΗ },
+    const ΚΟΙΝΑ = { uFog: { value: new THREE.Color(0x05070b) }, uTime: { value: 0 } };
+    const υλικόΕδάφους = new THREE.ShaderMaterial({
+      uniforms: { ...ΚΟΙΝΑ, uNormal: { value: υφή(εικΑνάγλυφου) }, uLights: { value: υφή(εικΦώτων) }, uMoon: { value: new THREE.Vector3(-0.45, 0.62, -0.64).normalize() }, uCam: { value: new THREE.Vector3() } },
       vertexShader: `
-        attribute float aElev;
-        varying float vElev; varying vec3 vNorm; varying float vDist; varying vec2 vUv;
-        void main() {
-          vElev = aElev; vNorm = normal; vUv = uv;
-          vec4 mv = modelViewMatrix * vec4(position, 1.0);
-          vDist = -mv.z;
-          gl_Position = projectionMatrix * mv;
-        }`,
+        varying vec2 vUv; varying vec3 vWorld;
+        void main() { vUv = uv; vUv.y = 1.0 - vUv.y; vec4 w = modelMatrix * vec4(position, 1.0); vWorld = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }`,
       fragmentShader: `
-        uniform vec3 uLight; uniform vec3 uFog; uniform float uNear; uniform float uFar;
-        varying float vElev; varying vec3 vNorm; varying float vDist; varying vec2 vUv;
+        precision highp float;
+        uniform sampler2D uNormal; uniform sampler2D uLights; uniform vec3 uMoon; uniform vec3 uCam; uniform vec3 uFog; uniform float uTime;
+        varying vec2 vUv; varying vec3 vWorld;
+        float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+        float noise(vec2 p) { vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
+          return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x), mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y); }
         void main() {
-          if (vElev <= 0.5) discard;
-          vec3 n = normalize(vNorm);
-          float diff = clamp(dot(n, uLight), 0.0, 1.0);
-          vec3 col = mix(vec3(0.090, 0.098, 0.112), vec3(0.205, 0.205, 0.215), smoothstep(0.0, 1100.0, vElev));
-          col *= 0.55 + 0.85 * diff;
-          col += vec3(0.02, 0.022, 0.03) * (1.0 - diff);
-          float e = vElev / 100.0, w = fwidth(e);
-          float line = 1.0 - smoothstep(0.0, w * 1.2, abs(fract(e - 0.5) - 0.5));
-          col = mix(col, vec3(0.83, 0.68, 0.40), line * 0.16 * smoothstep(40.0, 160.0, vElev));
-          col = mix(col, vec3(0.86, 0.72, 0.46), (1.0 - smoothstep(0.5, 9.0, vElev)) * 0.32);
-          float edge = smoothstep(0.0, 0.12, min(min(vUv.x, 1.0 - vUv.x), min(vUv.y, 1.0 - vUv.y)));
+          vec4 nm = texture2D(uNormal, vUv);
+          float land = smoothstep(0.35, 0.65, nm.a);
+          vec3 n = normalize(nm.rgb * 2.0 - 1.0);
+          vec3 L = texture2D(uLights, vUv).rgb;
+          float glowWide = texture2D(uLights, vUv, 5.0).b;
+          vec3 V = normalize(uCam - vWorld);
+          float dist = length(uCam - vWorld);
+
+          // --- steria: skoteino edafos sto feggarofoto
+          float diff = clamp(dot(n, uMoon), 0.0, 1.0);
+          float slope = 1.0 - n.y;
+          vec3 albedo = mix(vec3(0.050, 0.058, 0.070), vec3(0.030, 0.040, 0.042), smoothstep(0.02, 0.22, slope));
+          albedo *= 0.85 + 0.3 * noise(vUv * 900.0);
+          vec3 ground = albedo * (0.30 + 1.9 * diff) * vec3(0.72, 0.85, 1.12);
+          ground += albedo * vec3(1.0, 0.62, 0.30) * L.b * 1.3;                      // i poli fotizei to edafos
+
+          // --- fota: dromoi geitonias (zesto natrio), megaloi dromoi (pio lefko), lampsi
+          float tw = 0.72 + 0.56 * hash(floor(vUv * 4096.0));
+          float flick = 0.94 + 0.06 * sin(uTime * 3.0 + hash(floor(vUv * 1024.0)) * 40.0);
+          vec3 lights = vec3(1.0, 0.60, 0.26) * L.g * (0.55 + 0.95 * L.b) * 1.5 * tw * flick
+                      + vec3(1.0, 0.80, 0.52) * L.r * 2.2
+                      + vec3(1.0, 0.50, 0.18) * L.b * L.b * 0.16;
+          vec3 landCol = ground + lights;
+
+          // --- thalassa: skoteini, me antanaklasi tis lampsis tis polis kai tou feggariou
+          vec2 wv = vWorld.xz * 1.6 + vec2(uTime * 0.05, uTime * 0.03);
+          vec3 wn = normalize(vec3((noise(wv) - 0.5) * 0.35, 1.0, (noise(wv + 17.0) - 0.5) * 0.35));
+          float fres = pow(1.0 - clamp(dot(wn, V), 0.0, 1.0), 4.0);
+          float spec = pow(clamp(dot(reflect(-uMoon, wn), V), 0.0, 1.0), 90.0);
+          vec3 sea = vec3(0.012, 0.020, 0.034) + vec3(0.05, 0.075, 0.12) * fres
+                   + vec3(0.55, 0.62, 0.75) * spec * 0.35
+                   + vec3(1.0, 0.52, 0.20) * glowWide * (0.22 + 0.5 * fres);
+
+          vec3 col = mix(sea, landCol, land);
+          // --- atmosfaira: omichli apostasis kai fotorypansi pano apo tin poli
+          float fog = 1.0 - exp(-dist * 0.0105);
+          vec3 haze = uFog + vec3(0.16, 0.085, 0.035) * glowWide;
+          col = mix(col, haze, fog * 0.85);
+          // sbisimo stis akres tou charti
+          float edge = smoothstep(0.0, 0.10, min(min(vUv.x, 1.0 - vUv.x), min(vUv.y, 1.0 - vUv.y)));
           col = mix(uFog, col, edge);
-          gl_FragColor = vec4(mix(col, uFog, smoothstep(uNear, uFar, vDist)), 1.0);
+          col = 1.0 - exp(-col * 1.35);                                              // tone mapping
+          gl_FragColor = vec4(pow(col, vec3(0.92)), 1.0);
+        }`,
+    });
+    σκηνή.add(new THREE.Mesh(γεωμετρία, υλικόΕδάφους));
+
+    // ---------- Ουρανός: σκοτάδι με αχνή λάμψη στον ορίζοντα και αστέρια
+    σκηνή.add(new THREE.Mesh(new THREE.SphereGeometry(400, 32, 16), new THREE.ShaderMaterial({
+      side: THREE.BackSide, depthWrite: false, uniforms: { ...ΚΟΙΝΑ },
+      vertexShader: `varying vec3 vDir; void main(){ vDir = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
+      fragmentShader: `
+        precision highp float; uniform vec3 uFog; varying vec3 vDir;
+        float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+        void main() {
+          float h = clamp(vDir.y, -1.0, 1.0);
+          vec3 col = mix(uFog, vec3(0.020, 0.030, 0.055), smoothstep(-0.05, 0.5, h));
+          col += vec3(0.10, 0.055, 0.03) * exp(-abs(h) * 14.0);                      // lampsi orizonta
+          vec2 g = vec2(atan(vDir.z, vDir.x) * 180.0, h * 260.0);
+          float s = hash(floor(g)); col += vec3(0.8, 0.85, 1.0) * step(0.9965, s) * smoothstep(0.03, 0.25, h) * (0.4 + 0.6 * hash(floor(g) + 3.0));
+          gl_FragColor = vec4(col, 1.0);
         }`,
     })));
-    const θάλασσα = new THREE.Mesh(new THREE.PlaneGeometry(W * 3, D * 3), new THREE.ShaderMaterial({
-      uniforms: { ...ΟΜΙΧΛΗ },
-      vertexShader: `varying vec2 vPos; varying float vDist; void main(){ vPos = position.xy; vec4 mv = modelViewMatrix * vec4(position,1.0); vDist = -mv.z; gl_Position = projectionMatrix * mv; }`,
-      fragmentShader: `uniform vec3 uFog; uniform float uNear; uniform float uFar; varying vec2 vPos; varying float vDist;
-        void main(){ vec3 c = mix(uFog, vec3(0.045, 0.058, 0.080) + vec3(0.02, 0.03, 0.045) * (1.0 - smoothstep(0.0, 30.0, length(vPos))), 1.0 - smoothstep(22.0, 40.0, length(vPos)));
-          gl_FragColor = vec4(mix(c, uFog, smoothstep(uNear, uFar, vDist)), 1.0); }`,
-    }));
-    θάλασσα.rotation.x = -Math.PI / 2; θάλασσα.position.y = -0.02;
-    σκηνή.add(θάλασσα);
 
-    // Ακτίνες φωτός και λάμψη πάνω από τα έργα
+    // ---------- Δέσμες φωτός και λάμψη πάνω από τα έργα
     const υλικόΑκτίνας = new THREE.ShaderMaterial({
-      transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, uniforms: { uTime: { value: 0 } },
+      transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, uniforms: { uTime: ΚΟΙΝΑ.uTime },
       vertexShader: `varying float vY; void main(){ vY = uv.y; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
-      fragmentShader: `uniform float uTime; varying float vY; void main(){ float a = pow(1.0 - vY, 2.2) * (0.75 + 0.25 * sin(uTime * 2.0)); gl_FragColor = vec4(vec3(0.95, 0.76, 0.31) * a, a); }`,
+      fragmentShader: `uniform float uTime; varying float vY; void main(){ float a = pow(1.0 - vY, 2.4) * (0.8 + 0.2 * sin(uTime * 2.0)); gl_FragColor = vec4(vec3(1.0, 0.80, 0.34) * a, a); }`,
     });
     const υλικόΛάμψης = new THREE.SpriteMaterial({ map: (() => {
       const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d');
-      const r = g.createRadialGradient(64, 64, 0, 64, 64, 64); r.addColorStop(0, 'rgba(242,193,78,0.9)'); r.addColorStop(0.25, 'rgba(242,193,78,0.35)'); r.addColorStop(1, 'rgba(242,193,78,0)');
+      const r = g.createRadialGradient(64, 64, 0, 64, 64, 64); r.addColorStop(0, 'rgba(255,214,110,1)'); r.addColorStop(0.2, 'rgba(250,196,80,0.45)'); r.addColorStop(1, 'rgba(242,193,78,0)');
       g.fillStyle = r; g.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(c); })(), blending: THREE.AdditiveBlending, depthWrite: false, transparent: true });
     const θέση = (el) => el.getAttribute('data-θέση').split(' ').map(Number);
     const έργα = [...ενότητα.querySelectorAll('.πινέζα')].map((a) => {
       const [fx, fy] = θέση(a), βάση = σε3Δ(fx, fy);
-      const ακτίνα = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 3.2, 8, 1, true), υλικόΑκτίνας);
-      ακτίνα.position.copy(βάση).add(new THREE.Vector3(0, 1.6, 0)); σκηνή.add(ακτίνα);
-      const λάμψη = new THREE.Sprite(υλικόΛάμψης); λάμψη.scale.set(2.4, 2.4, 1); λάμψη.position.copy(βάση).add(new THREE.Vector3(0, 0.05, 0)); σκηνή.add(λάμψη);
+      const ακτίνα = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 3.4, 8, 1, true), υλικόΑκτίνας);
+      ακτίνα.position.copy(βάση).add(new THREE.Vector3(0, 1.7, 0)); σκηνή.add(ακτίνα);
+      const λάμψη = new THREE.Sprite(υλικόΛάμψης); λάμψη.scale.set(2.0, 2.0, 1); λάμψη.position.copy(βάση).add(new THREE.Vector3(0, 0.06, 0)); σκηνή.add(λάμψη);
       return { a, βάση, κορυφή: βάση.clone().add(new THREE.Vector3(0, 0.25, 0)), πλευρά: a.getAttribute('data-πλευρά'), slug: a.getAttribute('href') };
     });
     const τόποι = [...ενότητα.querySelectorAll('.τόπος')].map((s) => { const [fx, fy] = θέση(s); return { s, θ: σε3Δ(fx, fy, s.dataset.είδος === 'βουνό' ? 0.5 : 0.1) }; });
 
-    // Κάμερα: η κάθοδος ακολουθεί το scroll ως τη στιγμή που ο επισκέπτης πιάσει τον χάρτη
+    // ---------- Κάμερα: σαν από αεροπλάνο. Η κάθοδος ακολουθεί το scroll ως τη στιγμή που ο επισκέπτης πιάσει τον χάρτη
     const στόχος = σε3Δ(0.545, 0.53);
-    const ΤΕΛΙΚΗ = new THREE.Vector3(στόχος.x - 14, ΚΙΝΗΤΟ ? 30 : 22, στόχος.z + 30);
-    const ΑΡΧΙΚΗ = new THREE.Vector3(στόχος.x, 95, στόχος.z + 6);
+    const ΤΕΛΙΚΗ = new THREE.Vector3(στόχος.x - 15, ΚΙΝΗΤΟ ? 26 : 15, στόχος.z + (ΚΙΝΗΤΟ ? 30 : 29));
+    const ΑΡΧΙΚΗ = new THREE.Vector3(στόχος.x - 2, 92, στόχος.z + 10);
     const έλεγχος = new OrbitControls(κάμερα, renderer.domElement);
     έλεγχος.enableDamping = true; έλεγχος.dampingFactor = 0.07;
     έλεγχος.enableZoom = false;                       // ο τροχός κάνει scroll στη σελίδα
     έλεγχος.enablePan = false;
     έλεγχος.enableRotate = !αφή;                      // στην αφή, το δάχτυλο κάνει scroll· οι πινέζες πατιούνται
-    έλεγχος.minPolarAngle = 0.25; έλεγχος.maxPolarAngle = 1.2; έλεγχος.rotateSpeed = 0.55;
+    έλεγχος.minPolarAngle = 0.3; έλεγχος.maxPolarAngle = 1.25; έλεγχος.rotateSpeed = 0.5;
     έλεγχος.target.copy(στόχος);
     renderer.domElement.style.touchAction = αφή ? 'pan-y' : 'none';
     let ελεύθερη = false;
@@ -177,7 +220,7 @@ if (ενότητα) {
     const καρέ = () => {
       if (!ορατή) { τρέχει = false; return; }
       const dt = Math.min(0.05, ρολόι.getDelta());
-      υλικόΑκτίνας.uniforms.uTime.value += dt;
+      ΚΟΙΝΑ.uTime.value += dt; υλικόΕδάφους.uniforms.uCam.value.copy(κάμερα.position);
       if (!ελεύθερη) {
         const t = μειωμένη ? 1 : ομαλό(0.06, 0.42, p);
         κάμερα.position.lerpVectors(ΑΡΧΙΚΗ, ΤΕΛΙΚΗ, t);
