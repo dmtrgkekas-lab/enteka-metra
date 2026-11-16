@@ -462,6 +462,17 @@ html:has(.προβολή[open]) { overflow: hidden; }
 .υπ-ήρωας__κείμενο { max-width: 62ch; font-size: clamp(1rem, .95rem + .25vw, 1.15rem); color: rgba(255, 253, 248, .9); }
 .υπ-ήρωας__ενέργειες { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 30px; }
 .υπ-ήρωας .κουμπί { --κ-χρώμα: #fffdf8; color: #fffdf8; }
+/* Design & Build: ήρωας μόνο με βίντεο — κρατάμε μόνο τη σκίαση πάνω, για να διαβάζεται η κεφαλίδα */
+.υπ-ήρωας--βίντεο::after { background: linear-gradient(180deg, rgba(18, 16, 14, .45) 0%, rgba(18, 16, 14, 0) 24%); }
+
+/* Εισαγωγή κάτω από το βίντεο: τίτλος σε μεγάλη τυπογραφία αριστερά, κείμενο δεξιά */
+.υπ-εισαγωγή { max-width: 1680px; margin-inline: auto; padding: clamp(80px, 9vw, 150px) max(var(--περιθώριο), 16px) clamp(40px, 5vw, 80px); }
+.υπ-εισαγωγή__πάνω { font-size: .66rem; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; color: var(--γκρι); }
+.υπ-εισαγωγή__σώμα { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: end; gap: 28px clamp(32px, 6vw, 120px); margin-top: clamp(20px, 2.4vw, 36px); padding-top: clamp(24px, 2.6vw, 40px); border-top: 1px solid var(--γραμμή); }
+.υπ-εισαγωγή__τίτλος { font-family: var(--σερίφ); font-weight: 300; font-size: clamp(2.4rem, 1.2rem + 3.6vw, 5.6rem); line-height: 1; letter-spacing: -.02em; max-width: 16ch; text-wrap: balance; }
+.υπ-εισαγωγή__κείμενο { max-width: 52ch; font-size: clamp(1rem, .95rem + .25vw, 1.15rem); color: var(--κείμενο-σκούρο); }
+.υπ-εισαγωγή + .υπ-αρχές { padding-top: clamp(40px, 5vw, 80px); }
+@media (max-width: 960px) { .υπ-εισαγωγή__σώμα { grid-template-columns: minmax(0, 1fr); } }
 
 /* Σκηνή σχεδίου: η γραμμή χάραξης περνά από δεξιά προς τα αριστερά· αριστερά της μένει το σχέδιο,
    δεξιά της φαίνεται το κτίριο (όπως οι ετικέτες «Σχέδιο — Κτίριο» από κάτω) */

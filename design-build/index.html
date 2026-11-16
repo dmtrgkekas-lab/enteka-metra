@@ -25,9 +25,9 @@
   <link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="/assets/services/iso-poster.webp" fetchpriority="high">
-  <link rel="stylesheet" href="/assets/css/home.css?v=202611161542">
-  <link rel="stylesheet" href="/assets/css/sections.css?v=202611161542">
-  <link rel="stylesheet" href="/assets/css/projects.css?v=202611161542">
+  <link rel="stylesheet" href="/assets/css/home.css?v=202611161601">
+  <link rel="stylesheet" href="/assets/css/sections.css?v=202611161601">
+  <link rel="stylesheet" href="/assets/css/projects.css?v=202611161601">
   <script>document.documentElement.classList.replace('no-js', 'js'); if (!('onpagereveal' in window) && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('μετάβαση-js');</script>
   <script>(function () {
     var Ο = 'project-image', ΚΛ = 'gp-vt-εικόνα', ρ = document.documentElement;
@@ -111,34 +111,19 @@
     </div>
   </div>
   <main id="main" class="υπηρεσία υπηρεσία--design-build">
-    <section class="υπ-ήρωας" data-τόνος="σκούρο" aria-labelledby="yp-t">
+    <section class="υπ-ήρωας υπ-ήρωας--βίντεο" data-τόνος="σκούρο" aria-hidden="true">
       <video class="υπ-ήρωας__βίντεο" autoplay muted loop playsinline preload="auto" poster="/assets/services/iso-poster.webp" aria-hidden="true" data-βίντεο-ήρωα>
         <source src="/assets/services/iso-hero.mp4" type="video/mp4">
       </video>
-      <div class="υπ-ήρωας__μέσα">
-        <p class="υπ-ήρωας__πάνω">Design &amp; Build · Athens</p>
-        <h1 class="υπ-ήρωας__τίτλος" id="yp-t"><span>Design &amp; Build.</span> <span>One team, from the first line to the keys.</span></h1>
-        <div class="υπ-ήρωας__κάτω">
-          <p class="υπ-ήρωας__κείμενο">We design and build every GP building ourselves. Our in-house architect draws each home, the same team takes it through permits and construction, and we stay with you after handover. If you own a plot and want to build on it, we can do the same for you.</p>
-          <div class="υπ-ήρωας__ενέργειες">
-            <a class="κουμπί " href="#epikoinonia"><span class="κουμπί__ετ">Talk about your plot</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
-            <a class="ήρωας__τηλ" href="tel:+302109761163"><small>Call</small><span>+30 210 976 1163</span></a>
-          </div>
-        </div>
+    </section>
+    <section class="υπ-εισαγωγή" data-τόνος="ανοιχτό" aria-labelledby="yp-t">
+      <p class="υπ-εισαγωγή__πάνω" data-αποκάλυψη>Design &amp; Build · Athens</p>
+      <div class="υπ-εισαγωγή__σώμα">
+        <h1 class="υπ-εισαγωγή__τίτλος" id="yp-t" data-αποκάλυψη>One team, from the first line to the keys.</h1>
+        <p class="υπ-εισαγωγή__κείμενο" data-αποκάλυψη>We design and build every GP building ourselves. Our in-house architect draws each home, the same team takes it through permits and construction, and we stay with you after handover. If you own a plot and want to build on it, we can do the same for you.</p>
       </div>
     </section>
 
-    <section class="σχέδιο" data-σχέδιο aria-label="Sachtouri 44–46 in Chalandri, isometric view of the entrance garden and terraces">
-      <div class="σχέδιο__σκηνή">
-        <figure class="σχέδιο__κάδρο" style="--λόγος: 1.3333">
-          <img class="σχέδιο__κτίριο" src="/assets/services/iso-1600.webp" srcset="/assets/services/iso-960.webp 960w, /assets/services/iso-1600.webp 1600w, /assets/services/iso-2400.webp 2400w" sizes="(max-width: 760px) 100vw, 86vw" width="2400" height="1800" alt="Sachtouri 44–46 in Chalandri, isometric view of the entrance garden and terraces" loading="lazy" decoding="async">
-          <div class="σχέδιο__χαρτί" aria-hidden="true"><img src="/assets/services/iso-sketch-1600.webp" srcset="/assets/services/iso-sketch-960.webp 960w, /assets/services/iso-sketch-1600.webp 1600w, /assets/services/iso-sketch-2400.webp 2400w" sizes="(max-width: 760px) 100vw, 86vw" width="2400" height="1800" alt="" loading="lazy" decoding="async"></div>
-          <i class="σχέδιο__χάραξη" aria-hidden="true"></i>
-        </figure>
-        <p class="σχέδιο__ετικέτες" aria-hidden="true"><span>The drawing</span><i></i><span>The building</span></p>
-        <p class="σχέδιο__λεζάντα">Sachtouri 44–46, Chalandri. Scroll to see the drawing become the building.</p>
-      </div>
-    </section>
 
     <section class="υπ-αρχές" data-τόνος="ανοιχτό" aria-labelledby="arxes-t">
       <h2 class="ενότητα-τίτλος" id="arxes-t">Why one team.</h2>
@@ -259,7 +244,7 @@
   </footer>
 
 
-  <script src="/assets/js/sections.js?v=202611161542" defer></script>
-  <script src="/assets/js/projects.js?v=202611161542" defer></script>
+  <script src="/assets/js/sections.js?v=202611161601" defer></script>
+  <script src="/assets/js/projects.js?v=202611161601" defer></script>
 </body>
 </html>
