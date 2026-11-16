@@ -25,7 +25,6 @@
   if (προβολή && κουμπιά.length && typeof προβολή.showModal === 'function') {
     const img = προβολή.querySelector('img');
     const λεζάντα = προβολή.querySelector('[data-λεζάντα]');
-    const μετρητής = προβολή.querySelector('[data-μετρητής]');
     let τρέχουσα = 0, επιστροφή = null;
     const δείξε = (i) => {
       τρέχουσα = (i + κουμπιά.length) % κουμπιά.length;
@@ -33,7 +32,6 @@
       img.src = κ.dataset.μεγάλη;
       img.alt = κ.dataset.λεζάντα;
       λεζάντα.textContent = κ.dataset.λεζάντα;
-      μετρητής.textContent = `${String(τρέχουσα + 1).padStart(2, '0')} / ${String(κουμπιά.length).padStart(2, '0')}`;
       // Προφόρτωση της επόμενης
       const επ = κουμπιά[(τρέχουσα + 1) % κουμπιά.length];
       if (επ) { const π = new Image(); π.src = επ.dataset.μεγάλη; }
@@ -142,8 +140,8 @@
       αναμονή = false;
       const r = βύθιση.getBoundingClientRect();
       const π = Math.min(1, Math.max(0, -r.top / r.height));
-      τίτλος.style.setProperty('--βύθιση', (π * r.height * 0.42).toFixed(1) + 'px');
-      κτίριο.style.setProperty('--άνοδος', (-π * r.height * 0.1).toFixed(1) + 'px');
+      τίτλος.style.setProperty('--βύθιση', (π * r.height * 0.6).toFixed(1) + 'px');
+      κτίριο.style.setProperty('--άνοδος', (-π * r.height * 0.16).toFixed(1) + 'px');
     };
     const σύντομα = () => { if (!αναμονή) { αναμονή = true; requestAnimationFrame(ενημέρωση); } };
     window.addEventListener('scroll', σύντομα, { passive: true });

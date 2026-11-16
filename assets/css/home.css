@@ -77,14 +77,21 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .κεφαλίδα.με-φόντο::before { opacity: 1; }
 .κεφαλίδα.is-hidden { transform: translateY(calc(-100% - 28px)); }
 .κεφαλίδα__μέσα { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: var(--κεφαλίδα); max-width: 1680px; margin-inline: auto; padding-left: max(var(--περιθώριο), env(safe-area-inset-left, 0px)); padding-right: max(var(--περιθώριο), env(safe-area-inset-right, 0px)); }
-.λογότυπο { display: inline-flex; align-items: center; gap: 12px; }
-.λογότυπο svg { width: 36px; height: 36px; }
-.λογότυπο b { font-family: var(--σερίφ); font-weight: 400; font-size: 1.4rem; letter-spacing: .04em; line-height: 1; }
-.λογότυπο small { font-size: .56rem; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; line-height: 1.45; padding-left: 12px; border-left: 1px solid currentColor; opacity: .85; }
+/* Λογότυπο όπως στο gpdevelopment.gr: το σήμα αριστερά, «GP REAL ESTATE / DEVELOPMENT» σε δύο ίσες γραμμές */
+.λογότυπο { display: inline-grid; grid-template-columns: auto auto; column-gap: 11px; align-items: center; }
+.λογότυπο svg { grid-row: span 2; width: 36px; height: 36px; }
+.λογότυπο b, .λογότυπο small { font-family: var(--σερίφ); font-size: .7rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; line-height: 1.12; white-space: nowrap; }
+.λογότυπο b { align-self: end; }
+.λογότυπο small { align-self: start; font-size: .7rem; }
+/* Μενού: στο hover το κείμενο «γράφεται» από αριστερά προς τα δεξιά (αποκάλυψη με clip-path στο εσωτερικό span,
+   ώστε ο σύνδεσμος να κρατά όλη την επιφάνεια για το hover). */
 .πλοήγηση ul { display: flex; gap: clamp(18px, 2.4vw, 40px); }
 .πλοήγηση a, .γλώσσα { font-size: .72rem; font-weight: 450; letter-spacing: .18em; text-transform: uppercase; padding-block: 8px; position: relative; }
-.πλοήγηση a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 2px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: 100% 50%; transition: transform .5s var(--καμπύλη); }
-.πλοήγηση a:hover::after { transform: scaleX(1); transform-origin: 0 50%; }
+.πλοήγηση a { display: inline-block; }
+.πλοήγηση a span { display: inline-block; }
+.πλοήγηση a:hover span, .πλοήγηση a:focus-visible span { animation: gp-γραφή .65s cubic-bezier(.45, 0, .2, 1) both; }
+@keyframes gp-γραφή { from { clip-path: inset(-20% 100% -20% 0); } to { clip-path: inset(-20% 0 -20% 0); } }
+@media (prefers-reduced-motion: reduce) { .πλοήγηση a:hover span, .πλοήγηση a:focus-visible span { animation: none; } }
 .κεφαλίδα__δεξιά { display: flex; align-items: center; gap: 22px; }
 /* Εισαγωγή (πρώτη επίσκεψη): το λογότυπο σχεδιάζεται στο κέντρο και μετά πάει στη θέση του.
    Μέχρι να αναλάβει το script, το λογότυπο και η υπόλοιπη κεφαλίδα μένουν κρυφά. */
@@ -276,7 +283,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 @media (min-width: 1101px) { .μενού { display: none !important; } }
 @media (max-width: 760px) {
   :root { --κεφαλίδα: 64px; }
-  .λογότυπο small { display: none; }
+  .λογότυπο svg { width: 32px; height: 32px; }
+  .λογότυπο b, .λογότυπο small { font-size: .62rem; }
   .γεγονότα { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .γεγονός:nth-child(3) { border-left: 0; }
   .γεγονός:nth-child(n+3) { border-top: 1px solid var(--γραμμή); }

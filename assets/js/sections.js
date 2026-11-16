@@ -140,28 +140,20 @@
   const τρόπος = document.querySelector('.τρόπος');
   if (τρόπος) {
     const στοιχεία = [...τρόπος.querySelectorAll('.ακορντεόν__στοιχείο')];
-    const εικόνες = [...τρόπος.querySelectorAll('.πλαίσιο__εικόνα')];
-    const δείξεΕικόνα = (κλειδί) => {
-      const νέα = εικόνες.find((e) => e.dataset.κλειδί === κλειδί);
-      if (!νέα || νέα.classList.contains('is-active')) return;
-      εικόνες.forEach((e) => e.classList.toggle('is-active', e === νέα));
-    };
+    // Οι εικόνες είναι μια ταινία που κυλά συνεχώς μόνο με CSS (sections.css), ανεξάρτητα από τα στοιχεία.
     στοιχεία.forEach((σ, i) => {
       const κουμπί = σ.querySelector('button');
-      // Η εικόνα αλλάζει ήδη στο πάτημα (pointerdown), πριν καν ολοκληρωθεί το click
-      κουμπί.addEventListener('pointerdown', (ev) => { if (ev.button === 0 && !σ.classList.contains('is-open')) δείξεΕικόνα(σ.dataset.εικόνα); });
       κουμπί.addEventListener('click', () => {
         const ήτανΑνοιχτό = σ.classList.contains('is-open');
         στοιχεία.forEach((ά) => { ά.classList.remove('is-open'); ά.querySelector('button').setAttribute('aria-expanded', 'false'); });
         if (!ήτανΑνοιχτό) {
           σ.classList.add('is-open'); κουμπί.setAttribute('aria-expanded', 'true');
-          δείξεΕικόνα(σ.dataset.εικόνα);
         }
       });
     });
     if (έχειGSAP) {
       gsap.from(στοιχεία, { opacity: 0, y: 26, duration: 1, ease: 'power3.out', stagger: 0.08, scrollTrigger: { trigger: '.ακορντεόν', start: 'top 82%', toggleActions: 'play none none none' } });
-      gsap.from('.πλαίσιο__μέσα', { clipPath: 'inset(18% 10% 18% 10% round 22px)', duration: 1.6, ease: 'power4.out', scrollTrigger: { trigger: '.πλαίσιο', start: 'top 80%', toggleActions: 'play none none none' } });
+      gsap.from('.πλαίσιο__μέσα', { clipPath: 'inset(14% 12% 14% 12%)', duration: 1.6, ease: 'power4.out', scrollTrigger: { trigger: '.πλαίσιο', start: 'top 80%', toggleActions: 'play none none none' } });
     }
   }
 
@@ -515,9 +507,7 @@
     }
   }
 
-  /* ---------- Υποσέλιδο: «Πίσω στον ουρανό» ---------- */
-  const πάνω = document.querySelector('.υποσέλιδο__πάνω-κουμπί');
-  if (πάνω) πάνω.addEventListener('click', (ev) => { ev.preventDefault(); μετάβασηΣε(0, 4); });
+  /* ---------- Υποσέλιδο ---------- */
   if (έχειGSAP) gsap.from('.υποσέλιδο__δήλωση, .υποσέλιδο__πλέγμα > *', { opacity: 0, y: 24, duration: 1.1, ease: 'power3.out', stagger: .08, scrollTrigger: { trigger: '.υποσέλιδο', start: 'top 80%', toggleActions: 'play none none none' } });
 
   // Οι θέσεις των ScrollTrigger αλλάζουν όταν φορτώνουν εικόνες/γραμματοσειρές

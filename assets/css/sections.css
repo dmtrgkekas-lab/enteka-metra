@@ -51,9 +51,10 @@
 .αφετηρίες__κτίριο { position: relative; margin: clamp(-30px, -2vw, 0px) 0 0; width: min(1180px, 72vw); }
 .αφετηρίες__κτίριο img { width: 100%; height: auto; will-change: transform; transform-origin: 30% 100%; }
 .αφετηρίες__κτίριο::after { content: ""; position: absolute; left: -10vw; right: -30vw; bottom: -2px; height: 42%; background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .85) 55%, var(--λευκό)); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); -webkit-mask-image: linear-gradient(180deg, transparent, #000 40%); mask-image: linear-gradient(180deg, transparent, #000 40%); pointer-events: none; }
-.αφετηρίες__κτίριο figcaption { position: absolute; z-index: 2; left: calc(100% + clamp(12px, 3vw, 48px)); bottom: 40%; display: grid; gap: 4px; width: max-content; }
-.αφετηρίες__κτίριο figcaption b { font-family: var(--σερίφ); font-weight: 350; font-size: clamp(1.2rem, 1rem + .6vw, 1.6rem); letter-spacing: var(--διάκενο-τίτλων); }
-.αφετηρίες__κτίριο figcaption span { font-family: var(--σερίφ); font-style: normal; color: var(--γκρι); font-size: .98rem; font-weight: 350; }
+/* Μία φράση δίπλα στο κτίριο, με τη λεπτή γραμμή από πάνω */
+.αφετηρίες__κτίριο figcaption { position: absolute; z-index: 2; left: calc(100% + clamp(12px, 3vw, 48px)); bottom: 40%; display: grid; width: max-content; }
+.αφετηρίες__κτίριο figcaption small { max-width: 26ch; margin-top: 12px; font-size: .9rem; line-height: 1.55; color: var(--γκρι); }
+.αφετηρίες__κτίριο figcaption span { max-width: 15ch; font-family: var(--σερίφ); font-weight: 350; font-size: clamp(1.2rem, 1rem + .6vw, 1.6rem); line-height: 1.25; letter-spacing: var(--διάκενο-τίτλων); text-wrap: balance; }
 .αφετηρίες__κτίριο figcaption::before { content: ""; width: 34px; height: 1px; margin-bottom: 12px; background: var(--γραφίτης); }
 
 /* ==========================================================================
@@ -88,14 +89,18 @@
 .ακορντεόν__κινητό { display: none; }
 
 /* Πλαίσιο εικόνας: η νέα εικόνα «ανεβαίνει» πάνω από την προηγούμενη */
-/* Αψίδα: το κάδρο κόβεται σαν αρχιτεκτονικό άνοιγμα (ημικύκλιο πάνω, ίσια βάση).
-   Μια λεπτή γραμμή «σχεδίου» ακολουθεί το περίγραμμα σε απόσταση, όπως οι γραμμές των κουμπιών. */
-.πλαίσιο { position: sticky; top: calc(var(--κεφαλίδα) + 28px); width: min(100%, 520px); justify-self: center; }
-.πλαίσιο::after { content: ""; position: absolute; inset: -12px -12px 0; border: 1px solid var(--γραμμή); border-bottom: 0; border-radius: 999px 999px 0 0; pointer-events: none; }
-.πλαίσιο__μέσα { position: relative; aspect-ratio: 4 / 5.2; border-radius: 999px 999px 0 0; overflow: hidden; background: var(--ασβέστης); transform: translateZ(0); }
-/* Η εικόνα αλλάζει αμέσως: σύντομο crossfade (όλες είναι ήδη φορτωμένες) και απαλό «κάθισμα» */
-.πλαίσιο__εικόνα { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.025); transition: opacity .28s ease-out, transform 1.2s var(--καμπύλη); }
-.πλαίσιο__εικόνα.is-active { z-index: 2; opacity: 1; transform: scale(1); }
+/* Ορθογώνιο κάδρο με «γραμμές σχεδίου»: τριχοειδές περίγραμμα σε απόσταση, όπου οι γραμμές περνούν
+   πέρα από τις γωνίες, όπως σε αρχιτεκτονικό σκίτσο (ίδια γλώσσα με τα κουμπιά). */
+.πλαίσιο { position: sticky; top: calc(var(--κεφαλίδα) + 40px); width: min(100%, 520px); justify-self: center; }
+.πλαίσιο::before, .πλαίσιο::after { content: ""; position: absolute; pointer-events: none; }
+.πλαίσιο::before { inset: -14px -34px; border-block: 1px solid var(--γραμμή); }
+.πλαίσιο::after { inset: -34px -14px; border-inline: 1px solid var(--γραμμή); }
+.πλαίσιο__μέσα { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--λευκό); transform: translateZ(0); container-type: inline-size; }
+/* Ταινία εικόνων: κυλά συνεχώς από δεξιά προς τα αριστερά, με λίγο λευκό ανάμεσα. Η σειρά υπάρχει δύο φορές,
+   άρα η μετακίνηση κατά -50% καταλήγει ακριβώς στην αρχή (συνεχής βρόχος). Κάθε εικόνα έχει το πλάτος του κάδρου. */
+.πλαίσιο__ταινία { --κενό: 14px; display: flex; width: max-content; height: 100%; animation: gp-ταινία 45s linear infinite; will-change: transform; }
+.πλαίσιο__εικόνα { flex: 0 0 auto; width: 100cqw; height: 100%; margin-right: var(--κενό); object-fit: cover; }
+@keyframes gp-ταινία { to { transform: translate3d(-50%, 0, 0); } }
 .πλαίσιο__εικόνα[data-κλειδί="energy"] { object-position: 50% 40%; }
 
 /* ==========================================================================
@@ -215,10 +220,6 @@
 .υποσέλιδο__πάνω { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; max-width: 1560px; margin-inline: auto; padding-bottom: clamp(50px, 6vw, 90px); border-bottom: 1px solid rgba(241, 236, 227, .14); }
 .υποσέλιδο__δήλωση { font-family: var(--σερίφ); font-size: clamp(2.4rem, 1.3rem + 4.2vw, 6.4rem); line-height: 1; letter-spacing: var(--διάκενο-τίτλων); font-weight: 350; }
 .υποσέλιδο__δήλωση em { display: block; }
-.υποσέλιδο__πάνω-κουμπί { display: grid; justify-items: center; gap: 14px; font-size: .62rem; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: rgba(241, 236, 227, .7); white-space: nowrap; transition: color .4s; }
-.υποσέλιδο__πάνω-κουμπί svg { width: 14px; height: 46px; transition: transform .6s var(--καμπύλη); }
-.υποσέλιδο__πάνω-κουμπί:hover { color: #fff; }
-.υποσέλιδο__πάνω-κουμπί:hover svg { transform: translateY(-6px); }
 .υποσέλιδο__πλέγμα { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)); gap: 40px; max-width: 1560px; margin: clamp(46px, 5vw, 80px) auto 0; }
 .υποσέλιδο__σήμα { display: grid; gap: 18px; align-content: start; }
 .υποσέλιδο__σήμα svg { width: 42px; height: 42px; }
@@ -230,7 +231,10 @@
 .υποσέλιδο__στήλη a:hover { background-size: 100% 1px; color: #fff; }
 .υποσέλιδο__λέξη { margin: clamp(40px, 6vw, 90px) calc(var(--περιθώριο) * -1) 0; font-family: var(--σερίφ); font-size: clamp(3rem, 10.4vw, 12.6rem); line-height: .86; letter-spacing: var(--διάκενο-τίτλων); text-align: center; white-space: nowrap; color: transparent; background: linear-gradient(180deg, rgba(241, 236, 227, .16), rgba(241, 236, 227, .02) 85%); -webkit-background-clip: text; background-clip: text; user-select: none; font-weight: 350; }
 .υποσέλιδο__βάση { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 30px; max-width: 1560px; margin: 26px auto 0; padding-top: 22px; border-top: 1px solid rgba(241, 236, 227, .12); font-size: .74rem; color: rgba(241, 236, 227, .5); }
+.υποσέλιδο__βάση a { transition: color .3s; }
 .υποσέλιδο__βάση a:hover { color: #fff; }
+.υποσέλιδο__σύνδεσμοι { display: flex; flex-wrap: wrap; gap: 8px 30px; }
+.υποσέλιδο__σύνδεσμοι span a { color: rgba(241, 236, 227, .78); }
 
 /* ==========================================================================
    Responsive
@@ -242,7 +246,7 @@
 @media (max-width: 960px) {
   .τρόπος__πλέγμα { grid-template-columns: minmax(0, 1fr); }
   .πλαίσιο { display: none; }
-  .ακορντεόν__κινητό { display: block; width: min(100%, 440px); margin: 6px 0 22px; aspect-ratio: 5 / 4; border-radius: 50% 50% 0 0 / 40% 40% 0 0; overflow: hidden; background: var(--ασβέστης); transform: translateZ(0); }
+  .ακορντεόν__κινητό { display: block; width: min(100%, 440px); margin: 6px 0 22px; aspect-ratio: 5 / 4; overflow: hidden; background: var(--ασβέστης); transform: translateZ(0); }
   .ακορντεόν__κινητό img { width: 100%; height: 100%; object-fit: cover; }
   .ερωτήσεις { grid-template-columns: minmax(0, 1fr); gap: 36px; }
   .ερωτήσεις__πλάι { position: static; }
@@ -253,7 +257,9 @@
   .αφετηρίες__καρτέλα { padding: .8rem .3rem; font-size: .6rem; letter-spacing: .1em; white-space: normal; line-height: 1.3; }
   .αφετηρίες__κείμενο { min-height: 5em; }
   .αφετηρίες__κτίριο { width: 128vw; margin: 10px 0 0 -10vw; }
-  .αφετηρίες__κτίριο figcaption { left: auto; right: calc(18vw + 20px); bottom: 6%; text-align: right; justify-items: end; }
+  /* Κινητό: η φράση κάτω από το κτίριο (όχι πάνω στη στέγη), στοιχισμένη δεξιά με το περιθώριο */
+  .αφετηρίες__κτίριο { margin-bottom: 170px; }
+  .αφετηρίες__κτίριο figcaption { left: auto; right: calc(18vw + var(--περιθώριο)); top: calc(100% - 10px); bottom: auto; text-align: right; justify-items: end; }
   .ακορντεόν button { grid-template-columns: minmax(0, 1fr) 18px; }
   .φόρμα__σειρά { grid-template-columns: minmax(0, 1fr); gap: 14px; }
   .τσιπ-σειρά { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -269,7 +275,8 @@
   .υποσέλιδο__λέξη { font-size: 10.6vw; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .πλαίσιο__εικόνα, .ακορντεόν__πάνελ, .ακορντεόν__μέσα, .κάψουλα__δείκτης, .μενού, .μενού__πλοήγηση a { transition: none !important; }
+  .πλαίσιο__ταινία { animation: none; }
+  .ακορντεόν__πάνελ, .ακορντεόν__μέσα, .κάψουλα__δείκτης, .μενού, .μενού__πλοήγηση a { transition: none !important; }
   .επαφή__κάρτα { --εμφ: 1 !important; filter: none !important; }
 }
 /* Χωρίς JS: η άνοδος γίνεται στατική εικόνα και η φόρμα φαίνεται κανονικά */
