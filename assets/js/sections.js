@@ -15,6 +15,8 @@
   const περιορισμός = (v, a, b) => Math.min(b, Math.max(a, v));
   const ομαλό = (a, b, v) => { const t = περιορισμός((v - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
   if (έχειGSAP) gsap.registerPlugin(ScrollTrigger);
+  // Ο επισκέπτης μπήκε στο σάιτ: η οθόνη φόρτωσης της αρχικής δεν ξαναπαίζει σε αυτή την καρτέλα
+  try { sessionStorage.setItem('gp-μέσα', '1'); } catch (ε) {}
 
   /* Ομαλή μετακίνηση (με Lenis όταν υπάρχει) */
   const μετάβασηΣε = (στόχος, διάρκεια = 1.6) => {
@@ -140,7 +142,22 @@
   const τρόπος = document.querySelector('.τρόπος');
   if (τρόπος) {
     const στοιχεία = [...τρόπος.querySelectorAll('.ακορντεόν__στοιχείο')];
-    // Οι εικόνες είναι μια ταινία που κυλά συνεχώς μόνο με CSS (sections.css), ανεξάρτητα από τα στοιχεία.
+    // Ένα βίντεο για κάθε απάντηση: στο πλαίσιο (υπολογιστής) ή μέσα στην απάντηση (κινητό).
+    // Παίζει μόνο το βίντεο της ανοιχτής απάντησης και μόνο όσο η ενότητα φαίνεται.
+    const βίντεοΠλαισίου = [...τρόπος.querySelectorAll('.πλαίσιο__βίντεο')];
+    const κινητό = window.matchMedia('(max-width: 960px)');
+    let ενεργό = 0, ορατή = false;
+    const παίξε = (β, ναι) => {
+      if (!β) return;
+      if (ναι && !μειωμένηΚίνηση) {
+        if (β.preload === 'none') { β.preload = 'auto'; β.load(); }
+        const υ = β.play(); if (υ && υ.catch) υ.catch(() => {});
+      } else if (!β.paused) β.pause();
+    };
+    const ενημέρωσεΒίντεο = () => {
+      βίντεοΠλαισίου.forEach((β, i) => { β.classList.toggle('είναι-ενεργό', i === ενεργό); παίξε(β, ορατή && !κινητό.matches && i === ενεργό); });
+      στοιχεία.forEach((σ, i) => παίξε(σ.querySelector('.ακορντεόν__βίντεο'), ορατή && κινητό.matches && i === ενεργό && σ.classList.contains('is-open')));
+    };
     στοιχεία.forEach((σ, i) => {
       const κουμπί = σ.querySelector('button');
       κουμπί.addEventListener('click', () => {
@@ -148,9 +165,15 @@
         στοιχεία.forEach((ά) => { ά.classList.remove('is-open'); ά.querySelector('button').setAttribute('aria-expanded', 'false'); });
         if (!ήτανΑνοιχτό) {
           σ.classList.add('is-open'); κουμπί.setAttribute('aria-expanded', 'true');
+          ενεργό = i;   // όταν κλείνει, μένει το τελευταίο βίντεο στο πλαίσιο
         }
+        ενημέρωσεΒίντεο();
       });
     });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((ε) => { ορατή = ε[0].isIntersecting; ενημέρωσεΒίντεο(); }, { rootMargin: '20% 0px' }).observe(τρόπος);
+    }
+    κινητό.addEventListener && κινητό.addEventListener('change', ενημέρωσεΒίντεο);
     if (έχειGSAP) {
       gsap.from(στοιχεία, { opacity: 0, y: 26, duration: 1, ease: 'power3.out', stagger: 0.08, scrollTrigger: { trigger: '.ακορντεόν', start: 'top 82%', toggleActions: 'play none none none' } });
       gsap.from('.πλαίσιο__μέσα', { clipPath: 'inset(14% 12% 14% 12%)', duration: 1.6, ease: 'power4.out', scrollTrigger: { trigger: '.πλαίσιο', start: 'top 80%', toggleActions: 'play none none none' } });

@@ -8,7 +8,7 @@
 (() => {
   'use strict';
   const Φ = window.gpΦόρτωση;
-  if (!Φ) return;
+  if (!Φ || Φ.παράλειψη) return;
   Φ.ανέλαβε = true;
 
   const όλεςΟιΕικόνες = () => [...document.querySelectorAll('img')].map((im) => {

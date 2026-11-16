@@ -553,3 +553,46 @@ html:has(.προβολή[open]) { overflow: hidden; }
   .σχέδιο { height: auto; }
   .σχέδιο__σκηνή { position: static; height: auto; padding-block: 60px; }
 }
+
+/* ==========================================================================
+   Design & Build — λευκή ομίχλη στο τέλος του βίντεο και «Δύο σπίτια, δύο κατόψεις»
+   ========================================================================== */
+/* Το βίντεο σβήνει προς τα κάτω στο χρώμα της σελίδας· από πάνω μια ομίχλη σαν σύννεφα που ανεβαίνει με το scroll */
+.υπ-ήρωας--βίντεο { background: var(--χαρτί); }
+.υπ-ήρωας--βίντεο .υπ-ήρωας__βίντεο { -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 62%, rgba(0, 0, 0, .55) 82%, transparent 100%); mask-image: linear-gradient(180deg, #000 0%, #000 62%, rgba(0, 0, 0, .55) 82%, transparent 100%); }
+.υπ-ήρωας__ομίχλη { position: absolute; left: 0; right: 0; bottom: -1px; z-index: 1; height: calc(36% + var(--ομ-άνοδος, 0) * 34%); pointer-events: none; overflow: hidden;
+  background: linear-gradient(180deg, rgba(244, 241, 236, 0) 0%, rgba(244, 241, 236, .45) 45%, rgba(244, 241, 236, .9) 80%, var(--χαρτί) 100%); }
+.υπ-ήρωας__ομίχλη img { position: absolute; width: max(120vw, 1300px); max-width: none; height: auto; opacity: .95; will-change: transform;
+  transform: translate3d(0, calc(var(--ομ-άνοδος, 0) * -18%), 0); }
+.υπ-ήρωας__ομίχλη img:nth-child(1) { left: -35%; top: 6%; animation: υπ-ρεύμα 48s linear infinite alternate; }
+.υπ-ήρωας__ομίχλη img:nth-child(2) { left: 5%; top: 28%; opacity: .8; animation: υπ-ρεύμα 62s linear infinite alternate-reverse; }
+.υπ-ήρωας__ομίχλη img:nth-child(3) { left: -60%; top: 48%; animation: υπ-ρεύμα 74s linear infinite alternate; }
+@keyframes υπ-ρεύμα { from { translate: -10vw 0; } to { translate: 10vw 0; } }
+.υπ-ήρωας--βίντεο + .υπ-εισαγωγή { position: relative; z-index: 1; padding-top: clamp(40px, 5vw, 90px); }
+
+/* Δύο σπίτια: δύο ζωντανά εσωτερικά δίπλα-δίπλα· στο πέρασμα του ποντικιού το ένα ανοίγει και το άλλο στενεύει */
+.δύο-σπίτια { max-width: 1680px; margin-inline: auto; padding: clamp(70px, 9vw, 140px) max(var(--περιθώριο), 16px); }
+.δύο-σπίτια__κεφαλή { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 20px 60px; }
+.δύο-σπίτια__κεφαλή p { max-width: 46ch; color: var(--κείμενο-σκούρο); }
+.δύο-σπίτια__πλέγμα { display: flex; gap: clamp(12px, 1.6vw, 24px); margin-top: clamp(36px, 5vw, 70px); height: min(76vh, 780px); height: min(76svh, 780px); }
+.δύο-σπίτια__σπίτι { position: relative; flex: 1 1 0; min-width: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 16px; color: inherit; text-decoration: none; transition: flex-grow 1.1s var(--καμπύλη); }
+.δύο-σπίτια__πλέγμα:hover .δύο-σπίτια__σπίτι { flex-grow: .72; }
+.δύο-σπίτια__πλέγμα .δύο-σπίτια__σπίτι:hover, .δύο-σπίτια__σπίτι:focus-visible { flex-grow: 1.38; }
+.δύο-σπίτια__κάδρο { position: relative; display: block; overflow: hidden; background: var(--ασβέστης); }
+.δύο-σπίτια__κάδρο video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.04); transition: transform 1.6s var(--καμπύλη); }
+.δύο-σπίτια__σπίτι:hover video { transform: scale(1); }
+.δύο-σπίτια__λεζάντα { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; }
+.δύο-σπίτια__όνομα { font-family: var(--σερίφ); font-weight: 350; font-size: clamp(1.2rem, 1rem + .6vw, 1.6rem); }
+.δύο-σπίτια__περιοχή { font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--γκρι); }
+.δύο-σπίτια__δες { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; font-size: .78rem; color: var(--κείμενο-σκούρο); opacity: 0; transform: translateX(-6px); transition: opacity .6s, transform .6s var(--καμπύλη); }
+.δύο-σπίτια__δες svg { width: 16px; height: 16px; }
+.δύο-σπίτια__σπίτι:hover .δύο-σπίτια__δες, .δύο-σπίτια__σπίτι:focus-visible .δύο-σπίτια__δες { opacity: 1; transform: none; }
+@media (max-width: 860px) {
+  .δύο-σπίτια__πλέγμα { flex-direction: column; height: auto; gap: 40px; }
+  .δύο-σπίτια__κάδρο { aspect-ratio: 4 / 3; }
+  .δύο-σπίτια__δες { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .υπ-ήρωας__ομίχλη img { animation: none; }
+  .δύο-σπίτια__σπίτι { transition: none; }
+}

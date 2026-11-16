@@ -205,3 +205,33 @@
     });
   });
 })();
+
+/* Design & Build: η ομίχλη στο κάτω μέρος του βίντεο ανεβαίνει με το scroll,
+   και τα δύο εσωτερικά παίζουν μόνο όσο φαίνονται. */
+(() => {
+  const μειωμένηΚίνηση = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ήρωας = document.querySelector('[data-υπ-ομίχλη]');
+  if (ήρωας && !μειωμένηΚίνηση) {
+    const ομίχλη = ήρωας.querySelector('.υπ-ήρωας__ομίχλη');
+    let αναμονή = false;
+    const ενημέρωση = () => {
+      αναμονή = false;
+      const r = ήρωας.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height)));
+      ομίχλη.style.setProperty('--ομ-άνοδος', (p * p * (3 - 2 * p)).toFixed(3));
+    };
+    addEventListener('scroll', () => { if (!αναμονή) { αναμονή = true; requestAnimationFrame(ενημέρωση); } }, { passive: true });
+    ενημέρωση();
+  }
+  const βίντεο = [...document.querySelectorAll('[data-δύο-βίντεο]')];
+  if (βίντεο.length && !μειωμένηΚίνηση && 'IntersectionObserver' in window) {
+    const ιο = new IntersectionObserver((εγγραφές) => εγγραφές.forEach((ε) => {
+      const β = ε.target;
+      if (ε.isIntersecting) {
+        if (β.preload === 'none') { β.preload = 'auto'; β.load(); }
+        const υ = β.play(); if (υ && υ.catch) υ.catch(() => {});
+      } else if (!β.paused) β.pause();
+    }), { rootMargin: '10% 0px' });
+    βίντεο.forEach((β) => ιο.observe(β));
+  }
+})();

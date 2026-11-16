@@ -25,9 +25,9 @@
   <link rel="preload" href="/assets/seq/meta.json" as="fetch" crossorigin>
   <link rel="preload" href="/assets/seq/v4/lo/000.webp" as="fetch" crossorigin>
   <link rel="preload" href="/assets/seq/masks2/000.webp" as="fetch" crossorigin>
-  <link rel="stylesheet" href="/assets/css/home.css?v=202611161634">
-  <link rel="stylesheet" href="/assets/css/sections.css?v=202611161634">
-  <script>document.documentElement.classList.replace('no-js', 'js'); document.documentElement.classList.add('εισαγωγή'); if (!('onpagereveal' in window) && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('μετάβαση-js');</script>
+  <link rel="stylesheet" href="/assets/css/home.css?v=202611162114">
+  <link rel="stylesheet" href="/assets/css/sections.css?v=202611162114">
+  <script>document.documentElement.classList.replace('no-js', 'js'); try { if (!sessionStorage.getItem('gp-μέσα')) document.documentElement.classList.add('εισαγωγή'); } catch (ε) { document.documentElement.classList.add('εισαγωγή'); } if (!('onpagereveal' in window) && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('μετάβαση-js');</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": ["HomeAndConstructionBusiness", "Organization"], "@id": "https://gpdevelopment.gr/#organization", "name": "GP Real Estate Development", "alternateName": "GP Development", "url": "https://gpdevelopment.gr/", "logo": "https://gpdevelopment.gr/apple-touch-icon.png", "telephone": "+30 210 976 1163", "email": "sales@gpdevelopment.gr", "address": {"@type": "PostalAddress", "streetAddress": "Dim. Vasiliou 20", "addressLocality": "Psychiko", "postalCode": "154 51", "addressRegion": "Attica", "addressCountry": "GR"}, "areaServed": ["Athens", "Neo Psychiko", "Chalandri", "Glyfada"], "description": "Real estate development and investment company in Psychiko, Athens. Designs and builds A++ residential buildings in Neo Psychiko, Chalandri and Glyfada."}, {"@type": "WebSite", "@id": "https://gpdevelopment.gr/#website", "url": "https://gpdevelopment.gr/", "name": "GP Real Estate Development", "inLanguage": ["en", "el"]}, {"@type": "WebPage", "url": "https://gpdevelopment.gr/", "name": "Real Estate Development in Athens | GP Real Estate Development", "inLanguage": "en", "about": {"@id": "https://gpdevelopment.gr/#organization"}}, {"@type": "FAQPage", "inLanguage": "en", "mainEntity": [{"@type": "Question", "name": "Which developer builds new homes in Neo Psychiko, Chalandri and Glyfada?", "acceptedAnswer": {"@type": "Answer", "text": "GP Real Estate Development, a family real estate development and investment company based in Psychiko, Athens, with more than 30 years of combined experience. Its projects are V5 Residences in Neo Psychiko (sold out), Sachtouri 44–46 in Chalandri and Mareterra in Glyfada."}}, {"@type": "Question", "name": "Are there new-build apartments for sale in Chalandri?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Sachtouri 44–46 is a new A++ building in the centre of Chalandri with apartments and two maisonettes, each designed around its own concept. Every home has a heat pump, underfloor heating and new kitchens and bathrooms; the top-floor maisonette has a private rooftop pool."}}, {"@type": "Question", "name": "What homes does Mareterra in Glyfada offer?", "acceptedAnswer": {"@type": "Answer", "text": "Mareterra, at Saki Karagiorga 77 & Lykourgou, is 250 metres from the Glyfada Golf Course. It has 192 m² maisonettes with a private garden and pool, 162 m² duplexes with sea views and 144 m² duplex penthouses with a 40 m² rooftop and private pool. Every home has a two-car garage and storage."}}, {"@type": "Question", "name": "What does energy class A++ mean for a new home?", "acceptedAnswer": {"@type": "Answer", "text": "A++ is the top rating of the Greek energy performance certificate (PEA). In practice it means very low energy needs for heating and cooling. Every GP project is rated A++ and uses heat pumps, underfloor heating and high insulation."}}, {"@type": "Question", "name": "Do you buy land?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. GP buys plots, mainly in the northern suburbs of Athens and in Glyfada. Antiparochi is done with the construction company. Tell us about your plot through the form and we will tell you how it can move forward."}}, {"@type": "Question", "name": "Can I buy a home in Athens from abroad?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We work with buyers abroad in English and Greek, hold online meetings and guide you through the steps of the purchase together with your lawyer."}}, {"@type": "Question", "name": "Do you work with real estate agents?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Agents can send us their client’s request through the form on this page, and we reply with floor plans and availability for our current projects."}}, {"@type": "Question", "name": "How can I visit a property?", "acceptedAnswer": {"@type": "Answer", "text": "Call +30 210 976 1163, email sales@gpdevelopment.gr or use the form below. Our office is at Dim. Vasiliou 20, Psychiko, open Monday to Friday, 10:00–18:00."}}]}]}</script>
 </head>
 <body>
@@ -47,6 +47,8 @@
   </header>
   <script>(function () {
     var ρ = document.documentElement, λ = document.querySelector('.κεφαλίδα .λογότυπο');
+    // Ήδη μέσα στο σάιτ (sessionStorage, sections.js): καμία οθόνη φόρτωσης, η σελίδα ξεκινά αμέσως
+    if (!ρ.classList.contains('εισαγωγή')) { window.gpΦόρτωση = { εργασίες: [], add: function () {}, έτοιμο: function () {}, ανέλαβε: true, παράλειψη: true }; return; }
     var χ = 0, ψ = 0;
     // Στο κέντρο της οθόνης, και ξανά σε κάθε αλλαγή μεγέθους. Το scale δεν μετακινεί το κέντρο του
     // λογότυπου (transform-origin στη μέση), άρα αρκεί να διορθώσουμε τη μετατόπιση κατά όσο απέχει.
@@ -204,11 +206,11 @@
       </header>
       <div class="τρόπος__πλέγμα">
         <ul class="ακορντεόν">
-          <li class="ακορντεόν__στοιχείο" data-εικόνα="design">
-            <h3><button type="button" aria-expanded="false" aria-controls="tropos-design" id="tropos-design-k"><span class="ακορντεόν__τίτλος">Every home, its own floor plan</span><i class="ακορντεόν__σύμβολο" aria-hidden="true"></i></button></h3>
+          <li class="ακορντεόν__στοιχείο is-open" data-εικόνα="design">
+            <h3><button type="button" aria-expanded="true" aria-controls="tropos-design" id="tropos-design-k"><span class="ακορντεόν__τίτλος">Every home, its own floor plan</span><i class="ακορντεόν__σύμβολο" aria-hidden="true"></i></button></h3>
             <div class="ακορντεόν__πάνελ" id="tropos-design" role="region" aria-labelledby="tropos-design-k">
               <div class="ακορντεόν__μέσα">
-                <figure class="ακορντεόν__κινητό"><img src="/assets/img/acc/design-760.webp" alt="" width="760" height="506" loading="lazy" decoding="async"></figure>
+                <figure class="ακορντεόν__κινητό"><video class="ακορντεόν__βίντεο" muted loop playsinline preload="none" poster="/assets/img/acc/design-760.webp" data-κλειδί="design" aria-hidden="true"><source src="/assets/about/tropos-2.mp4" type="video/mp4"></video></figure>
                 <p>Our in-house architect designs each residence individually instead of repeating one plan across the building. We start from light, orientation and storage, and design around the way a family actually lives.</p>
               </div>
             </div>
@@ -217,7 +219,7 @@
             <h3><button type="button" aria-expanded="false" aria-controls="tropos-materials" id="tropos-materials-k"><span class="ακορντεόν__τίτλος">Materials you can touch</span><i class="ακορντεόν__σύμβολο" aria-hidden="true"></i></button></h3>
             <div class="ακορντεόν__πάνελ" id="tropos-materials" role="region" aria-labelledby="tropos-materials-k">
               <div class="ακορντεόν__μέσα">
-                <figure class="ακορντεόν__κινητό"><img src="/assets/img/acc/materials-760.webp" alt="" width="760" height="506" loading="lazy" decoding="async"></figure>
+                <figure class="ακορντεόν__κινητό"><video class="ακορντεόν__βίντεο" muted loop playsinline preload="none" poster="/assets/img/acc/materials-760.webp" data-κλειδί="materials" aria-hidden="true"><source src="/assets/about/tropos-4.mp4" type="video/mp4"></video></figure>
                 <p>Stone, wood and quality sanitary ware from Greek and European producers. We choose materials that age well, so the home still feels right decades from now.</p>
               </div>
             </div>
@@ -226,7 +228,7 @@
             <h3><button type="button" aria-expanded="false" aria-controls="tropos-energy" id="tropos-energy-k"><span class="ακορντεόν__τίτλος">A++ as the starting point</span><i class="ακορντεόν__σύμβολο" aria-hidden="true"></i></button></h3>
             <div class="ακορντεόν__πάνελ" id="tropos-energy" role="region" aria-labelledby="tropos-energy-k">
               <div class="ακορντεόν__μέσα">
-                <figure class="ακορντεόν__κινητό"><img src="/assets/img/acc/energy-760.webp" alt="" width="760" height="506" loading="lazy" decoding="async"></figure>
+                <figure class="ακορντεόν__κινητό"><video class="ακορντεόν__βίντεο" muted loop playsinline preload="none" poster="/assets/img/acc/energy-760.webp" data-κλειδί="energy" aria-hidden="true"><source src="/assets/about/tropos-3.mp4" type="video/mp4"></video></figure>
                 <p>Every project is rated energy class A++: a heat pump for heating and cooling, underfloor heating and high insulation. At Mareterra we added net metering photovoltaics, a 12 cm thermal façade and EV charging.</p>
               </div>
             </div>
@@ -235,7 +237,7 @@
             <h3><button type="button" aria-expanded="false" aria-controls="tropos-outdoor" id="tropos-outdoor-k"><span class="ακορντεόν__τίτλος">Outdoors, as a room</span><i class="ακορντεόν__σύμβολο" aria-hidden="true"></i></button></h3>
             <div class="ακορντεόν__πάνελ" id="tropos-outdoor" role="region" aria-labelledby="tropos-outdoor-k">
               <div class="ακορντεόν__μέσα">
-                <figure class="ακορντεόν__κινητό"><img src="/assets/img/acc/outdoor-760.webp" alt="" width="760" height="506" loading="lazy" decoding="async"></figure>
+                <figure class="ακορντεόν__κινητό"><video class="ακορντεόν__βίντεο" muted loop playsinline preload="none" poster="/assets/img/acc/outdoor-760.webp" data-κλειδί="outdoor" aria-hidden="true"><source src="/assets/about/tropos-5.mp4" type="video/mp4"></video></figure>
                 <p>Large, well-oriented terraces, gardens on the ground floor and private pools in selected maisonettes and penthouses. We design the outdoor space with the same care as the living room.</p>
               </div>
             </div>
@@ -244,14 +246,14 @@
             <h3><button type="button" aria-expanded="false" aria-controls="tropos-handover" id="tropos-handover-k"><span class="ακορντεόν__τίτλος">One team, to the keys</span><i class="ακορντεόν__σύμβολο" aria-hidden="true"></i></button></h3>
             <div class="ακορντεόν__πάνελ" id="tropos-handover" role="region" aria-labelledby="tropos-handover-k">
               <div class="ακορντεόν__μέσα">
-                <figure class="ακορντεόν__κινητό"><img src="/assets/img/acc/handover-760.webp" alt="" width="760" height="506" loading="lazy" decoding="async"></figure>
+                <figure class="ακορντεόν__κινητό"><video class="ακορντεόν__βίντεο" muted loop playsinline preload="none" poster="/assets/img/acc/handover-760.webp" data-κλειδί="handover" aria-hidden="true"><source src="/assets/video/handover.mp4" type="video/mp4"></video></figure>
                 <p>From buying the plot to handing over the keys, the same people design, build and keep you informed. After handover we walk you through every system of the home and remain the people you call.</p>
               </div>
             </div>
           </li>
         </ul>
         <div class="πλαίσιο" aria-hidden="true">
-          <div class="πλαίσιο__μέσα"><div class="πλαίσιο__ταινία"><img class="πλαίσιο__εικόνα" data-κλειδί="design" src="/assets/img/acc/design-1400.webp" srcset="/assets/img/acc/design-760.webp 760w, /assets/img/acc/design-1400.webp 1200w" sizes="(max-width: 960px) 100vw, 520px" alt="" loading="lazy" decoding="async"><img class="πλαίσιο__εικόνα" data-κλειδί="materials" src="/assets/img/acc/materials-1400.webp" srcset="/assets/img/acc/materials-760.webp 760w, /assets/img/acc/materials-1400.webp 1200w" sizes="(max-width: 960px) 100vw, 520px" alt="" loading="lazy" decoding="async"><img class="πλαίσιο__εικόνα" data-κλειδί="energy" src="/assets/img/acc/energy-1400.webp" srcset="/assets/img/acc/energy-760.webp 760w, /assets/img/acc/energy-1400.webp 1200w" sizes="(max-width: 960px) 100vw, 520px" alt="" loading="lazy" decoding="async"><img class="πλαίσιο__εικόνα" data-κλειδί="outdoor" src="/assets/img/acc/outdoor-1400.webp" srcset="/assets/img/acc/outdoor-760.webp 760w, /assets/img/acc/outdoor-1400.webp 1200w" sizes="(max-width: 960px) 100vw, 520px" alt="" loading="lazy" decoding="async"><img class="πλαίσιο__εικόνα" data-κλειδί="handover" src="/assets/img/acc/handover-1400.webp" srcset="/assets/img/acc/handover-760.webp 760w, /assets/img/acc/handover-1400.webp 1200w" sizes="(max-width: 960px) 100vw, 520px" alt="" loading="lazy" decoding="async"><img class="πλαίσιο__εικόνα" data-κλειδί="design" src="/assets/img/acc/design-1400.webp" srcset="/assets/img/acc/design-760.webp 760w, /assets/img/acc/design-1400.webp 1200w" sizes="(max-width: 960px) 100vw, 520px" alt="" loading="lazy" decoding="async"><img class="πλαίσιο__εικόνα" data-κλειδί="materials" src="/assets/img/acc/materials-1400.webp" srcset="/assets/img/acc/materials-760.webp 760w, /assets/img/acc/materials-1400.webp 1200w" sizes="(max-width: 960px) 100vw, 520px" alt="" loading="lazy" decoding="async"><img class="πλαίσιο__εικόνα" data-κλειδί="energy" src="/assets/img/acc/energy-1400.webp" srcset="/assets/img/acc/energy-760.webp 760w, /assets/img/acc/energy-1400.webp 1200w" sizes="(max-width: 960px) 100vw, 520px" alt="" loading="lazy" decoding="async"><img class="πλαίσιο__εικόνα" data-κλειδί="outdoor" src="/assets/img/acc/outdoor-1400.webp" srcset="/assets/img/acc/outdoor-760.webp 760w, /assets/img/acc/outdoor-1400.webp 1200w" sizes="(max-width: 960px) 100vw, 520px" alt="" loading="lazy" decoding="async"><img class="πλαίσιο__εικόνα" data-κλειδί="handover" src="/assets/img/acc/handover-1400.webp" srcset="/assets/img/acc/handover-760.webp 760w, /assets/img/acc/handover-1400.webp 1200w" sizes="(max-width: 960px) 100vw, 520px" alt="" loading="lazy" decoding="async"></div></div>
+          <div class="πλαίσιο__μέσα"><video class="πλαίσιο__βίντεο είναι-ενεργό" muted loop playsinline preload="none" poster="/assets/img/acc/design-760.webp" data-κλειδί="design" aria-hidden="true"><source src="/assets/about/tropos-2.mp4" type="video/mp4"></video><video class="πλαίσιο__βίντεο" muted loop playsinline preload="none" poster="/assets/img/acc/materials-760.webp" data-κλειδί="materials" aria-hidden="true"><source src="/assets/about/tropos-4.mp4" type="video/mp4"></video><video class="πλαίσιο__βίντεο" muted loop playsinline preload="none" poster="/assets/img/acc/energy-760.webp" data-κλειδί="energy" aria-hidden="true"><source src="/assets/about/tropos-3.mp4" type="video/mp4"></video><video class="πλαίσιο__βίντεο" muted loop playsinline preload="none" poster="/assets/img/acc/outdoor-760.webp" data-κλειδί="outdoor" aria-hidden="true"><source src="/assets/about/tropos-5.mp4" type="video/mp4"></video><video class="πλαίσιο__βίντεο" muted loop playsinline preload="none" poster="/assets/img/acc/handover-760.webp" data-κλειδί="handover" aria-hidden="true"><source src="/assets/video/handover.mp4" type="video/mp4"></video></div>
         </div>
       </div>
     </section>
@@ -370,10 +372,10 @@
   <script src="/assets/js/vendor/gsap.min.js" defer></script>
   <script src="/assets/js/vendor/ScrollTrigger.min.js" defer></script>
   <script src="/assets/js/vendor/lenis.min.js" defer></script>
-  <script src="/assets/js/frames.js?v=202611161634" defer></script>
-  <script src="/assets/js/home.js?v=202611161634" defer></script>
-  <script src="/assets/js/night.js?v=202611161634" defer></script>
-  <script src="/assets/js/intro.js?v=202611161634" defer></script>
-  <script src="/assets/js/sections.js?v=202611161634" defer></script>
+  <script src="/assets/js/frames.js?v=202611162114" defer></script>
+  <script src="/assets/js/home.js?v=202611162114" defer></script>
+  <script src="/assets/js/night.js?v=202611162114" defer></script>
+  <script src="/assets/js/intro.js?v=202611162114" defer></script>
+  <script src="/assets/js/sections.js?v=202611162114" defer></script>
 </body>
 </html>

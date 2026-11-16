@@ -98,6 +98,9 @@
 .πλαίσιο__μέσα { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--λευκό); transform: translateZ(0); container-type: inline-size; }
 /* Ταινία εικόνων: κυλά συνεχώς από δεξιά προς τα αριστερά, με λίγο λευκό ανάμεσα. Η σειρά υπάρχει δύο φορές,
    άρα η μετακίνηση κατά -50% καταλήγει ακριβώς στην αρχή (συνεχής βρόχος). Κάθε εικόνα έχει το πλάτος του κάδρου. */
+.πλαίσιο__βίντεο { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.06); transition: opacity 1s var(--καμπύλη), transform 1.6s var(--καμπύλη); }
+.πλαίσιο__βίντεο.είναι-ενεργό { opacity: 1; transform: none; }
+.ακορντεόν__βίντεο { display: block; width: 100%; height: 100%; object-fit: cover; }
 .πλαίσιο__ταινία { --κενό: 14px; display: flex; width: max-content; height: 100%; animation: gp-ταινία 45s linear infinite; will-change: transform; }
 .πλαίσιο__εικόνα { flex: 0 0 auto; width: 100cqw; height: 100%; margin-right: var(--κενό); object-fit: cover; }
 @keyframes gp-ταινία { to { transform: translate3d(-50%, 0, 0); } }
@@ -247,7 +250,7 @@
   .τρόπος__πλέγμα { grid-template-columns: minmax(0, 1fr); }
   .πλαίσιο { display: none; }
   .ακορντεόν__κινητό { display: block; width: min(100%, 440px); margin: 6px 0 22px; aspect-ratio: 5 / 4; overflow: hidden; background: var(--ασβέστης); transform: translateZ(0); }
-  .ακορντεόν__κινητό img { width: 100%; height: 100%; object-fit: cover; }
+  .ακορντεόν__κινητό img, .ακορντεόν__κινητό video { width: 100%; height: 100%; object-fit: cover; }
   .ερωτήσεις { grid-template-columns: minmax(0, 1fr); gap: 36px; }
   .ερωτήσεις__πλάι { position: static; }
 }
