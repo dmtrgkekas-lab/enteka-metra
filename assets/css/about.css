@@ -19,12 +19,12 @@
 .σχ-ήρωας__σκηνή .σχ-ήρωας__νέφη { transform: translate3d(calc(var(--ρεύμα, 0) * -8vw), 0, 0); }
 .σχ-ήρωας__σκηνή .σχ-ήρωας__τίτλος { --τ-μέγεθος: inherit; font-size: var(--τ-μέγεθος); }
 /* Οριζόντια λωρίδα ομίχλης: θολώνει ό,τι περνά από πίσω, από τη μία άκρη της οθόνης στην άλλη */
-.σχ-ήρωας__λωρίδα { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; height: var(--λωρίδα-ύψος, 44%); pointer-events: none; overflow: hidden;
-  -webkit-backdrop-filter: blur(18px) saturate(1.05); backdrop-filter: blur(18px) saturate(1.05);
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 34%, #000 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 34%, #000 100%);
-  background: linear-gradient(180deg, rgba(244, 241, 236, 0) 0%, rgba(244, 241, 236, .38) 40%, rgba(244, 241, 236, .82) 78%, var(--χαρτί) 100%); }
+.σχ-ήρωας__λωρίδα { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; height: var(--λωρίδα-ύψος, 24%); pointer-events: none; overflow: hidden;
+  -webkit-backdrop-filter: blur(14px) saturate(1.05); backdrop-filter: blur(14px) saturate(1.05);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 45%, #000 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 45%, #000 100%);
+  background: linear-gradient(180deg, rgba(244, 241, 236, 0) 0%, rgba(244, 241, 236, .3) 45%, rgba(244, 241, 236, .78) 82%, var(--χαρτί) 100%); }
 /* Τζολίπες ομίχλης που κυλούν οριζόντια μέσα στη λωρίδα */
-.σχ-ήρωας__λωρίδα img { position: absolute; top: 18%; width: max(120vw, 1300px); max-width: none; height: auto; opacity: .9; will-change: transform;
+.σχ-ήρωας__λωρίδα img { position: absolute; top: 10%; height: auto; width: max(120vw, 1300px); max-width: none; height: auto; opacity: .9; will-change: transform;
   transform: translate3d(calc(var(--ρεύμα, 0) * 14vw), 0, 0); }
 .σχ-ήρωας__λωρίδα img:nth-child(1) { left: -40%; animation: σχ-ρεύμα 46s linear infinite alternate; }
 .σχ-ήρωας__λωρίδα img:nth-child(2) { left: 10%; top: 36%; opacity: .75; animation: σχ-ρεύμα 58s linear infinite alternate-reverse; }
@@ -35,13 +35,17 @@
 .σχ-λέξεις span { opacity: .14; transition: opacity .5s var(--καμπύλη); }
 .σχ-λέξεις span.είναι-αναμμένη { opacity: 1; }
 
-/* ---------- 3. Άνοιγμα: από παράθυρο σε ολόκληρη οθόνη */
-.σχ-άνοιγμα { position: relative; height: 240vh; height: 240svh; background: var(--χαρτί); }
-.σχ-άνοιγμα__σκηνή { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; }
-.σχ-άνοιγμα__εικόνα { position: absolute; inset: 0; margin: 0; clip-path: inset(var(--ι-κ, 22%) var(--ι-π, 30%) round var(--ι-γ, 2px)); will-change: clip-path; }
-.σχ-άνοιγμα__εικόνα img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; transform: scale(var(--ι-κλ, 1.18)); will-change: transform; }
+/* ---------- 3. Άνοιγμα: περσίδες. Κάθετα πηχάκια στο χρώμα του χαρτιού γυρίζουν ένα-ένα και ανοίγουν,
+   όπως οι περσίδες της πρόσοψης του V5, και από πίσω φαίνεται το βίντεο. */
+.σχ-άνοιγμα { position: relative; height: 230vh; height: 230svh; background: var(--χαρτί); }
+.σχ-άνοιγμα__σκηνή { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; background: var(--γραφίτης); }
+.σχ-άνοιγμα__εικόνα { position: absolute; inset: 0; margin: 0; }
+.σχ-άνοιγμα__εικόνα img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; transform: scale(var(--ι-κλ, 1.14)); will-change: transform; }
 .σχ-άνοιγμα__εικόνα::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12, 12, 15, .1), rgba(12, 12, 15, .5)); opacity: var(--ι-σκ, 0); }
-.σχ-άνοιγμα__τίτλος { position: relative; z-index: 1; color: #fffdf8; font-family: var(--σερίφ); font-weight: 300; font-size: clamp(3rem, 1rem + 8vw, 10rem); line-height: .95; letter-spacing: -.03em; text-align: center;
+.σχ-περσίδες { position: absolute; inset: 0; z-index: 1; display: grid; grid-template-columns: repeat(var(--πλήθος, 12), 1fr); perspective: 1400px; pointer-events: none; }
+.σχ-περσίδα { background: linear-gradient(90deg, #e6e0d6 0%, #f4f1ec 45%, #efebe4 80%, #ddd6cb 100%); transform-origin: 50% 50%;
+  transform: rotateY(calc(var(--γ, 0) * 88deg)); opacity: var(--γ-α, 1); backface-visibility: hidden; will-change: transform, opacity; }
+.σχ-άνοιγμα__τίτλος { position: relative; z-index: 2; color: #fffdf8; font-family: var(--σερίφ); font-weight: 300; font-size: clamp(3rem, 1rem + 8vw, 10rem); line-height: .95; letter-spacing: -.03em; text-align: center;
   text-shadow: 0 2px 40px rgba(10, 10, 12, .35); opacity: var(--ι-τ, 0); transform: translate3d(0, calc((1 - var(--ι-τ, 0)) * 40px), 0); }
 
 /* ---------- Ποιοι είμαστε: κείμενο */
@@ -83,7 +87,7 @@
   .σχετικά--νέα .σχ-ήρωας, .σχ-άνοιγμα { height: auto; }
   .σχ-ήρωας__σκηνή, .σχ-άνοιγμα__σκηνή { position: relative; }
   .σχ-άνοιγμα__σκηνή { height: 80svh; }
-  .σχ-άνοιγμα__εικόνα { clip-path: none; } .σχ-άνοιγμα__εικόνα img { transform: none; }
+  .σχ-περσίδες { display: none; } .σχ-άνοιγμα__εικόνα img { transform: none; }
   .σχ-άνοιγμα__τίτλος { --ι-τ: 1; }
   .σχ-λέξεις span { opacity: 1; }
   .σχ-ήρωας__λωρίδα img { animation: none; }
@@ -93,7 +97,7 @@
 /* ---------- Ζωντανές φωτογραφίες (Kling): το βίντεο απλώνεται πάνω στην εικόνα όταν είναι έτοιμο */
 .σχ-βίντεο { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s var(--καμπύλη); pointer-events: none; }
 .σχ-βίντεο.παίζει { opacity: 1; }
-.σχ-άνοιγμα__εικόνα .σχ-βίντεο { transform: scale(var(--ι-κλ, 1.18)); }
+.σχ-άνοιγμα__εικόνα .σχ-βίντεο { transform: scale(var(--ι-κλ, 1.14)); }
 .σχ-αρχές__εικόνα .σχ-βίντεο { transform: scale(1.1); transition: opacity 1s var(--καμπύλη), transform 1.8s var(--καμπύλη); }
 .σχ-αρχές__εικόνα.είναι-ενεργή .σχ-βίντεο { transform: scale(1); }
 @media (prefers-reduced-motion: reduce) { .σχ-βίντεο { display: none; } }

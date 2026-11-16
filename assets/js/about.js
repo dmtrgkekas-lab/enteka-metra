@@ -59,6 +59,7 @@
   const άνοιγμα = document.querySelector('[data-σχ-άνοιγμα]');
   const σκηνήΑνοίγματος = άνοιγμα && άνοιγμα.querySelector('.σχ-άνοιγμα__σκηνή');
   const βίντεοΑνοίγματος = άνοιγμα && άνοιγμα.querySelector('video');
+  const περσίδες = άνοιγμα ? [...άνοιγμα.querySelectorAll('.σχ-περσίδα')] : [];
 
   const ενημέρωση = () => {
     const h = innerHeight;
@@ -70,7 +71,7 @@
         κτίριο.style.setProperty('--άνοδος', (-ομαλό(0, 1, p) * h * 0.22).toFixed(1) + 'px');
         σκηνήΉρωα.style.setProperty('--ρεύμα', (p * 2 - 1).toFixed(3));
         σκηνήΉρωα.style.setProperty('--δύση', (ομαλό(0.1, 0.9, p) * 0.85).toFixed(3));
-        σκηνήΉρωα.style.setProperty('--λωρίδα-ύψος', (44 + ομαλό(0.45, 1, p) * 30).toFixed(1) + '%');
+        σκηνήΉρωα.style.setProperty('--λωρίδα-ύψος', (24 + ομαλό(0.5, 1, p) * 10).toFixed(1) + '%');
       }
     }
     if (λέξεις.length) {
@@ -84,13 +85,16 @@
       const r = άνοιγμα.getBoundingClientRect();
       if (r.bottom > 0 && r.top < h) {
         const p = πρόοδος(άνοιγμα);
-        const t = ομαλό(0, 0.62, p);
         const σ = σκηνήΑνοίγματος.style;
-        const κινητό = innerWidth < 760;
-        σ.setProperty('--ι-κ', ((1 - t) * (κινητό ? 18 : 22)).toFixed(2) + '%');
-        σ.setProperty('--ι-π', ((1 - t) * (κινητό ? 10 : 30)).toFixed(2) + '%');
-        σ.setProperty('--ι-γ', ((1 - t) * 4).toFixed(1) + 'px');
-        σ.setProperty('--ι-κλ', (1.18 - 0.18 * t).toFixed(4));
+        // Οι περσίδες γυρίζουν με μικρή καθυστέρηση η καθεμία, από αριστερά προς τα δεξιά
+        περσίδες.forEach((π, k) => {
+          const αρχή = 0.04 + (k / Math.max(1, περσίδες.length - 1)) * 0.28;
+          const γ = ομαλό(αρχή, αρχή + 0.22, p);
+          π.style.setProperty('--γ', γ.toFixed(3));
+          // στο τέλος της περιστροφής σβήνουν, ώστε να μη μένουν λεπτές γραμμές
+          π.style.setProperty('--γ-α', (1 - ομαλό(0.72, 0.98, γ)).toFixed(3));
+        });
+        σ.setProperty('--ι-κλ', (1.14 - 0.14 * ομαλό(0, 0.7, p)).toFixed(4));
         σ.setProperty('--ι-σκ', ομαλό(0.5, 0.75, p).toFixed(3));
         σ.setProperty('--ι-τ', ομαλό(0.55, 0.8, p).toFixed(3));
       }
