@@ -1,2 +1,2 @@
-iso-2-4k.png https://d8j0ntlcm91z4.cloudfront.net/user_3GqmWHOacTQukBMBWW3wyErLnYD/hf_20261116_102414_696510ae-b764-49cc-94ae-4b7d12160a7d.png
-top-view-4k.png https://d8j0ntlcm91z4.cloudfront.net/user_3GqmWHOacTQukBMBWW3wyErLnYD/hf_20261116_102413_14b8cbcf-e6b4-4d15-af1a-d09bd2668ed1.png
+iso-hero.mp4 https://d8j0ntlcm91z4.cloudfront.net/user_3GqmWHOacTQukBMBWW3wyErLnYD/hf_20261116_114029_9c728aa6-06db-43a5-9095-94a3449891bd.mp4
+top-hero.mp4 https://d8j0ntlcm91z4.cloudfront.net/user_3GqmWHOacTQukBMBWW3wyErLnYD/hf_20261116_114050_f4bbeea7-6982-43c8-abf4-1ff28b4da049.mp4
