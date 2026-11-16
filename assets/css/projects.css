@@ -457,3 +457,105 @@ html:has(.προβολή[open]) { overflow: hidden; }
   .επ-κράτηση { padding: 24px 18px; }
   .ημερολόγιο { height: 560px; }
 }
+
+/* ==========================================================================
+   Design & Build · Αντιπαροχή (σελίδες υπηρεσιών)
+   Ίδια γλώσσα με «Η εταιρεία»: ουρανός που λιώνει σε χαρτί, μεγάλη τυπογραφία, γραμμές σχεδίου.
+   ========================================================================== */
+.υπηρεσία { background: var(--χαρτί); }
+.υπ-ήρωας { position: relative; isolation: isolate; overflow: hidden; display: grid; align-items: end; min-height: 88vh; min-height: 88svh;
+  background: linear-gradient(180deg, #dfe8f4 0%, #edf1f5 34%, #f7f6f2 70%, var(--χαρτί) 100%); }
+.υπ-ήρωας__νέφη { position: absolute; inset: 0; z-index: -1; pointer-events: none; -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 40%, transparent 80%); mask-image: linear-gradient(180deg, #000 0%, #000 40%, transparent 80%); }
+.υπ-ήρωας__νέφη img { position: absolute; width: max(110vw, 1100px); max-width: none; height: auto; opacity: .8; animation: gp-σύννεφο 56s ease-in-out infinite alternate; }
+.υπ-ήρωας__νέφη img:nth-child(1) { left: -24%; top: 2%; }
+.υπ-ήρωας__νέφη img:nth-child(2) { right: -34%; top: 22%; opacity: .55; animation-duration: 70s; animation-direction: alternate-reverse; }
+.υπ-ήρωας__μέσα { width: 100%; max-width: 1680px; margin-inline: auto; padding: calc(var(--κεφαλίδα) + clamp(40px, 6vw, 90px)) max(var(--περιθώριο), 16px) clamp(48px, 6vw, 90px); display: grid; gap: clamp(18px, 2vw, 28px); }
+.υπ-ήρωας__πάνω { font-size: .66rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--γκρι); }
+.υπ-ήρωας__τίτλος { font-family: var(--σερίφ); font-weight: 300; font-size: clamp(2.9rem, 1.2rem + 6.4vw, 8.4rem); line-height: .98; letter-spacing: -.02em; color: var(--γραφίτης); max-width: 15ch; text-wrap: balance; }
+.υπ-ήρωας__τίτλος span { display: block; }
+.υπ-ήρωας__τίτλος span + span { margin-top: .18em; font-size: .44em; line-height: 1.12; letter-spacing: var(--διάκενο-τίτλων); max-width: 24ch; }
+.υπ-ήρωας__κάτω { display: grid; grid-template-columns: minmax(0, 1.3fr) auto; align-items: end; gap: 28px clamp(32px, 6vw, 120px); margin-top: clamp(8px, 2vw, 26px); padding-top: clamp(22px, 2.4vw, 34px); border-top: 1px solid var(--γραμμή); }
+.υπ-ήρωας__κείμενο { max-width: 60ch; font-size: clamp(1rem, .95rem + .25vw, 1.18rem); color: var(--κείμενο-σκούρο); }
+.υπ-ήρωας__ενέργειες { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 30px; }
+.υπ-ήρωας .ήρωας__τηλ { color: var(--γραφίτης); }
+
+/* Σκηνή σχεδίου: η γραμμή χάραξης περνά από δεξιά προς τα αριστερά· αριστερά της μένει το σχέδιο,
+   δεξιά της φαίνεται το κτίριο (όπως οι ετικέτες «Σχέδιο — Κτίριο» από κάτω) */
+.σχέδιο { position: relative; height: 250vh; height: 250svh; }
+.σχέδιο__σκηνή { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; place-items: center; align-content: center; gap: 18px; padding: calc(var(--κεφαλίδα) + 12px) max(var(--περιθώριο), 16px) 24px; }
+.σχέδιο__κάδρο { --π: 0; position: relative; width: min(100%, 1560px, calc((100svh - var(--κεφαλίδα) - 120px) * var(--λόγος))); aspect-ratio: var(--λόγος); margin: 0; overflow: hidden; background: var(--ασβέστης); }
+.σχέδιο__κτίριο, .σχέδιο__χαρτί img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.σχέδιο__κτίριο { transform: scale(calc(1.04 - var(--π) * .04)); transform-origin: 50% 60%; }
+.σχέδιο__χαρτί { position: absolute; inset: 0; background: var(--χαρτί); clip-path: inset(0 calc(var(--π) * 100%) 0 0); }
+.σχέδιο__χαρτί::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(30, 28, 26, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(30, 28, 26, .045) 1px, transparent 1px); background-size: 48px 48px; pointer-events: none; }
+.σχέδιο__χαρτί img { mix-blend-mode: multiply; }
+/* Η γραμμή χάραξης: μια λεπτή κάθετη γραμμή που περνά από το κάδρο σαν το χάρακα του σχεδιαστή */
+.σχέδιο__χάραξη { position: absolute; top: -1px; bottom: -1px; left: calc((1 - var(--π)) * 100%); width: 1px; background: var(--γραφίτης); opacity: calc(min(1, var(--π) * 12) * min(1, (1 - var(--π)) * 12)); }
+.σχέδιο__χάραξη::before, .σχέδιο__χάραξη::after { content: ""; position: absolute; left: -4px; width: 9px; height: 1px; background: var(--γραφίτης); }
+.σχέδιο__χάραξη::before { top: 0; } .σχέδιο__χάραξη::after { bottom: 0; }
+.σχέδιο__ετικέτες { display: grid; grid-template-columns: auto minmax(60px, 220px) auto; align-items: center; gap: 16px; font-size: .64rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; }
+.σχέδιο__ετικέτες i { height: 1px; background: var(--γραμμή); position: relative; }
+.σχέδιο__ετικέτες i::after { content: ""; position: absolute; inset: 0; background: var(--γραφίτης); transform: scaleX(var(--π, 0)); transform-origin: 0 50%; }
+.σχέδιο__λεζάντα { max-width: 60ch; text-align: center; font-size: .86rem; color: var(--γκρι); }
+
+/* Αρχές: τρεις στήλες με αρίθμηση */
+.υπ-αρχές { max-width: 1680px; margin-inline: auto; padding: clamp(80px, 9vw, 150px) max(var(--περιθώριο), 16px) clamp(70px, 8vw, 130px); }
+.υπ-αρχές__λίστα { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 3vw, 56px); margin-top: clamp(36px, 4vw, 64px); }
+.υπ-αρχή { display: grid; align-content: start; gap: 14px; padding-top: 22px; border-top: 1px solid var(--γραφίτης); }
+.υπ-αρχή__αρ { font-size: .7rem; font-weight: 500; letter-spacing: .2em; color: var(--γκρι); font-variant-numeric: tabular-nums; }
+.υπ-αρχή h3 { font-family: var(--σερίφ); font-weight: 350; font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.3rem); line-height: 1.1; letter-spacing: var(--διάκενο-τίτλων); }
+.υπ-αρχή p { max-width: 46ch; color: var(--κείμενο-σκούρο); }
+
+/* Δύο δρόμοι (αντιπαροχή / αγορά) */
+.δρόμοι { max-width: 1680px; margin-inline: auto; padding: clamp(80px, 9vw, 150px) max(var(--περιθώριο), 16px) 0; }
+.δρόμοι + .υπ-αρχές { padding-top: clamp(70px, 8vw, 120px); }
+.δρόμοι__πλέγμα { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(18px, 2vw, 32px); margin-top: clamp(32px, 4vw, 56px); }
+.δρόμος { position: relative; display: grid; align-content: start; gap: 16px; padding: clamp(28px, 3vw, 48px); background: var(--φως-χαρτί); border: 1px solid var(--γραμμή); }
+.δρόμος__αρ { font-family: var(--σερίφ); font-weight: 300; font-size: clamp(3.4rem, 2.4rem + 3vw, 6rem); line-height: .9; color: var(--γραμμή); }
+.δρόμος h3 { font-family: var(--σερίφ); font-weight: 350; font-size: clamp(1.7rem, 1.2rem + 1.4vw, 2.6rem); line-height: 1.05; letter-spacing: var(--διάκενο-τίτλων); }
+.δρόμος p { max-width: 52ch; color: var(--κείμενο-σκούρο); }
+.δρόμος ul { display: grid; gap: 0; margin-top: 8px; }
+.δρόμος li { padding: 12px 0; border-top: 1px solid var(--γραμμή); font-size: .9rem; }
+.δρόμος li::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 12px; border-radius: 50%; background: var(--διαθέσιμο); vertical-align: .12em; }
+
+/* Βήματα: ίδια δομή με το «Πώς δουλεύουμε» της σελίδας «Η εταιρεία» */
+.υπ-βήματα .σχ-τρόπος__πλάι > p { margin-top: -6px; }
+
+/* Έργα / περιοχές: τρεις μικρές κάρτες */
+.υπ-έργα { max-width: 1680px; margin-inline: auto; padding: clamp(70px, 8vw, 130px) max(var(--περιθώριο), 16px); border-top: 1px solid var(--γραμμή); }
+.υπ-έργα__κεφαλή { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: 20px clamp(32px, 6vw, 120px); margin-bottom: clamp(32px, 4vw, 56px); }
+.υπ-έργα__κεφαλή p { max-width: 50ch; color: var(--κείμενο-σκούρο); }
+.υπ-έργα__λίστα { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2vw, 32px); }
+.μικρό-έργο a { position: relative; display: grid; height: 100%; background: var(--φως-χαρτί); border: 1px solid var(--γραμμή); transition: border-color .5s, box-shadow .7s var(--καμπύλη); }
+.μικρό-έργο__εικόνα { display: block; aspect-ratio: 4 / 3; overflow: hidden; background: var(--ασβέστης); }
+.μικρό-έργο__εικόνα img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.6s var(--καμπύλη); }
+.μικρό-έργο__κείμενο { display: grid; gap: 8px; padding: 20px 76px 22px 22px; }
+.μικρό-έργο__περιοχή { font-size: .62rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--γκρι); }
+.μικρό-έργο__όνομα { font-family: var(--σερίφ); font-weight: 350; font-size: clamp(1.35rem, 1.1rem + .6vw, 1.8rem); line-height: 1.05; letter-spacing: var(--διάκενο-τίτλων); }
+.μικρό-έργο .διαθεσιμότητα { font-size: .58rem; }
+.μικρό-έργο__βέλος { position: absolute; right: 18px; bottom: 20px; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--γραμμή); transition: background-color .5s var(--καμπύλη), color .5s, border-color .5s; }
+.μικρό-έργο__βέλος svg { width: 20px; height: 20px; }
+@media (hover: hover) {
+  .μικρό-έργο a:hover { border-color: rgba(30, 28, 26, .28); box-shadow: 0 30px 50px -40px rgba(30, 28, 26, .45); }
+  .μικρό-έργο a:hover img { transform: scale(1.03); }
+  .μικρό-έργο a:hover .μικρό-έργο__βέλος { background: var(--γραφίτης); border-color: var(--γραφίτης); color: var(--χαρτί); }
+}
+.υπ-ερωτήσεις { margin-top: 0; }
+
+@media (max-width: 960px) {
+  .υπ-ήρωας__κάτω, .υπ-έργα__κεφαλή { grid-template-columns: minmax(0, 1fr); }
+  .υπ-αρχές__λίστα, .δρόμοι__πλέγμα, .υπ-έργα__λίστα { grid-template-columns: minmax(0, 1fr); }
+  .υπ-έργα__λίστα { gap: 20px; }
+}
+@media (max-width: 760px) {
+  .υπ-ήρωας { min-height: 80svh; }
+  .σχέδιο { height: 210svh; }
+  .σχέδιο__σκηνή { padding-inline: 0; }
+  .σχέδιο__κάδρο { width: 100%; aspect-ratio: 4 / 5; }
+  .σχέδιο__λεζάντα { padding-inline: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .υπ-ήρωας__νέφη img { animation: none; }
+  .σχέδιο { height: auto; }
+  .σχέδιο__σκηνή { position: static; height: auto; padding-block: 60px; }
+}

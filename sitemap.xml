@@ -84,4 +84,28 @@
     <xhtml:link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/contact/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/contact/"/>
   </url>
+  <url>
+    <loc>https://gpdevelopment.gr/design-build/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/design-build/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/design-build/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/design-build/"/>
+  </url>
+  <url>
+    <loc>https://gpdevelopment.gr/el/design-build/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/design-build/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/design-build/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/design-build/"/>
+  </url>
+  <url>
+    <loc>https://gpdevelopment.gr/land/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/land/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/antiparochi/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/land/"/>
+  </url>
+  <url>
+    <loc>https://gpdevelopment.gr/el/antiparochi/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/land/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/antiparochi/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/land/"/>
+  </url>
 </urlset>

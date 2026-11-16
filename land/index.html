@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Antiparochi in Athens: your plot, built by GP | Northern suburbs &amp; Glyfada</title>
+  <meta name="description" content="Own a plot in the northern suburbs of Athens or in Glyfada? GP works with landowners through antiparochi or an outright purchase, and tells you plainly what can be built and what you receive.">
+  <link rel="canonical" href="https://gpdevelopment.gr/land/">
+  <link rel="alternate" hreflang="en" href="https://gpdevelopment.gr/land/">
+  <link rel="alternate" hreflang="el" href="https://gpdevelopment.gr/el/antiparochi/">
+  <link rel="alternate" hreflang="x-default" href="https://gpdevelopment.gr/land/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GP Real Estate Development">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="Antiparochi in Athens: your plot, built by GP | Northern suburbs &amp; Glyfada">
+  <meta property="og:description" content="Own a plot in the northern suburbs of Athens or in Glyfada? GP works with landowners through antiparochi or an outright purchase, and tells you plainly what can be built and what you receive.">
+  <meta property="og:url" content="https://gpdevelopment.gr/land/">
+  <meta property="og:image" content="https://gpdevelopment.gr/assets/og/gp-home.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#1e1c1a">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/home.css?v=202611161231">
+  <link rel="stylesheet" href="/assets/css/sections.css?v=202611161231">
+  <link rel="stylesheet" href="/assets/css/projects.css?v=202611161231">
+  <script>document.documentElement.classList.replace('no-js', 'js'); if (!('onpagereveal' in window) && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('μετάβαση-js');</script>
+  <script>(function () {
+    var Ο = 'project-image', ΚΛ = 'gp-vt-εικόνα', ρ = document.documentElement;
+    function εικόναΓια(διαδρομή) {
+      var σ = document.querySelector('.κάρτα-έργου__σύνδεσμος[href="' + διαδρομή + '"]');
+      return σ && σ.querySelector('img');
+    }
+    // Κανένα όνομα από προηγούμενη μετάβαση: η σελίδα μπορεί να επιστρέψει από την cache του browser
+    // («Πίσω») με το όνομα ακόμη πάνω της, και δύο ίδια ονόματα ακυρώνουν όλη τη μετάβαση.
+    function καθάρισε() {
+      document.querySelectorAll('img').forEach(function (im) { if (im.style.viewTransitionName) im.style.viewTransitionName = ''; });
+      ρ.classList.remove('vt-παλιά');
+    }
+    // Φεύγοντας: όνομα μόνο στην εικόνα του συνδέσμου που πατήθηκε (αλλιώς μένει ο ήρωας, όταν υπάρχει).
+    // Κρατάμε το σχήμα της, για να διαλέξει η νέα σελίδα ποιο στιγμιότυπο δείχνει όσο μεγαλώνει.
+    addEventListener('pageswap', function (ε) {
+      καθάρισε();
+      if (!ε.viewTransition || !ε.activation || !ε.activation.entry) return;
+      var im = εικόναΓια(new URL(ε.activation.entry.url).pathname), ήρωας = document.querySelector('.ήρωας__εικόνα'), όνομα = im || ήρωας;
+      if (im) {
+        if (ήρωας) ήρωας.style.viewTransitionName = 'none';
+        im.style.viewTransitionName = Ο;
+        // Κάρτα που δεν έχει ολοκληρώσει την εμφάνισή της (γρήγορο scroll και πάτημα): στην τελική κατάσταση
+        // αμέσως, αλλιώς το στιγμιότυπο θα ήταν διάφανο και η εικόνα θα έλειπε από τη μετάβαση
+        var εμφ = im.closest('[data-αποκάλυψη]');
+        if (εμφ) { εμφ.style.transition = 'none'; εμφ.classList.add('is-in'); }
+      }
+      try {
+        if (όνομα) { var r = όνομα.getBoundingClientRect(); sessionStorage.setItem(ΚΛ, JSON.stringify([r.width, r.height, !!im, όνομα.complete && όνομα.naturalWidth > 0])); }
+        else sessionStorage.removeItem(ΚΛ);
+      } catch (x) {}
+      ε.viewTransition.finished.then(καθάρισε, καθάρισε);
+    });
+    addEventListener('pagereveal', function (ε) {
+      καθάρισε();
+      if (!ε.viewTransition) return;
+      var α = window.navigation && navigation.activation, νέα = document.querySelector('.ήρωας__εικόνα');
+      // Στη λίστα με «Πίσω»: η κάρτα του έργου από το οποίο ερχόμαστε
+      if (!νέα && α && α.from && α.navigationType === 'traverse') {
+        νέα = εικόναΓια(new URL(α.from.url).pathname);
+        if (νέα) νέα.style.viewTransitionName = Ο;
+      }
+      // Ποιο στιγμιότυπο μένει από πάνω όσο αλλάζει το σχήμα: όποιο δείχνει περισσότερη φωτογραφία
+      // (σχήμα πιο κοντά στην αναλογία της). Στο κινητό αυτό είναι η κάρτα, στο desktop ο ήρωας.
+      try {
+        var π = JSON.parse(sessionStorage.getItem(ΚΛ) || 'null'); sessionStorage.removeItem(ΚΛ);
+        // Από κάρτα σε σελίδα έργου: η κεφαλίδα δεν εμφανίζεται ούτε στη μετάβαση ούτε μετά
+        if (π && π[2] && νέα && νέα.classList.contains('ήρωας__εικόνα')) ρ.classList.add('κεφαλίδα-κρυφή');
+        if (π && νέα) {
+          var r = νέα.getBoundingClientRect(), φ = (+νέα.getAttribute('width')) / (+νέα.getAttribute('height'));
+          var απόσταση = function (w, h) { return Math.abs(Math.log((w / h) / φ)); };
+          // (μόνο αν η παλιά εικόνα είχε φορτώσει· αλλιώς το στιγμιότυπό της είναι άδειο)
+          if (π[3] && απόσταση(π[0], π[1]) < απόσταση(r.width, r.height)) ρ.classList.add('vt-παλιά');
+        }
+      } catch (x) {}
+      ε.viewTransition.finished.then(καθάρισε, καθάρισε);
+    });
+  })();</script>
+  <script type="speculationrules">{"prerender": [{"where": {"selector_matches": ".κάρτα-έργου__σύνδεσμος"}, "eagerness": "moderate"}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://gpdevelopment.gr/land/#webpage", "url": "https://gpdevelopment.gr/land/", "name": "Antiparochi in Athens: your plot, built by GP | Northern suburbs & Glyfada", "description": "Own a plot in the northern suburbs of Athens or in Glyfada? GP works with landowners through antiparochi or an outright purchase, and tells you plainly what can be built and what you receive.", "inLanguage": "en", "isPartOf": {"@id": "https://gpdevelopment.gr/#website"}, "about": {"@id": "https://gpdevelopment.gr/land/#service"}, "breadcrumb": {"@id": "https://gpdevelopment.gr/land/#breadcrumb"}, "primaryImageOfPage": "https://gpdevelopment.gr/assets/services/top-1600.webp"}, {"@type": "Service", "@id": "https://gpdevelopment.gr/land/#service", "name": "Land & antiparochi", "serviceType": "Land & antiparochi", "description": "Own a plot in the northern suburbs of Athens or in Glyfada? We work with landowners in two ways: antiparochi, where you contribute the plot and receive finished apartments, or an outright purchase. Either way, we tell you plainly what can be built and what you receive.", "provider": {"@id": "https://gpdevelopment.gr/#organization"}, "areaServed": ["Athens", "Northern suburbs of Athens", "Glyfada"]}, {"@type": "FAQPage", "@id": "https://gpdevelopment.gr/land/#faq", "mainEntity": [{"@type": "Question", "name": "What is antiparochi?", "acceptedAnswer": {"@type": "Answer", "text": "Antiparochi is the Greek arrangement in which a landowner contributes a plot to a developer, and in exchange receives an agreed share of the finished building, usually as apartments, without paying for the construction."}}, {"@type": "Question", "name": "How does antiparochi work with GP?", "acceptedAnswer": {"@type": "Answer", "text": "You contribute the plot and we cover the design, the permits and the construction. When the building is finished, you receive an agreed share, usually as finished apartments."}}, {"@type": "Question", "name": "Do you also buy land?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Besides antiparochi, we also buy land outright."}}, {"@type": "Question", "name": "In which areas are you looking for plots?", "acceptedAnswer": {"@type": "Answer", "text": "Mainly in the northern suburbs of Athens and in Glyfada."}}, {"@type": "Question", "name": "How do I start?", "acceptedAnswer": {"@type": "Answer", "text": "Send us the location and approximate size of the plot through the form on this page, or call +30 210 976 1163. We will tell you plainly what can be built and what you receive."}}]}, {"@type": "BreadcrumbList", "@id": "https://gpdevelopment.gr/land/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://gpdevelopment.gr/"}, {"@type": "ListItem", "position": 2, "name": "Land & antiparochi", "item": "https://gpdevelopment.gr/land/"}]}]}</script>
+</head>
+<body>
+  <a class="παράκαμψη" href="#main">Skip to content</a>
+  <header class="κεφαλίδα">
+    <div class="κεφαλίδα__μέσα">
+      <a class="λογότυπο" href="/" aria-label="GP Real Estate Development"><svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="5.5"><path d="M73.14 22.42 A36 36 0 1 0 86 50"/><path d="M86 50 H50 L32 81.18"/></g></svg><b aria-hidden="true">GP</b><small aria-hidden="true">Real Estate<br>Development</small></a>
+      <nav class="πλοήγηση" aria-label="Main"><ul><li><a href="/projects/">Projects</a></li><li><a href="/design-build/">Design & Build</a></li><li><a href="/land/" aria-current="page">Land</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></nav>
+      <div class="κεφαλίδα__δεξιά">
+        <a class="γλώσσα" href="/el/antiparochi/" hreflang="el" title="Ελληνικά">EL</a>
+        <a class="κουμπί κεφαλίδα__cta" href="/contact/#booking"><span class="κουμπί__ετ">Book a visit</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+        <button class="μενού-κουμπί" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menou"><i></i><i></i><i></i></button>
+      </div>
+    </div>
+  </header>
+  
+  <div class="μενού" id="menou" hidden>
+    <nav class="μενού__πλοήγηση" aria-label="Menu"><ol><li><a href="/projects/"><span>Projects</span></a></li><li><a href="/design-build/"><span>Design & Build</span></a></li><li><a href="/land/" aria-current="page"><span>Land</span></a></li><li><a href="/about/"><span>About</span></a></li><li><a href="/contact/"><span>Contact</span></a></li></ol></nav>
+    <div class="μενού__κάτω">
+      <a class="κουμπί κουμπί--σκούρο" href="/contact/#booking"><span class="κουμπί__ετ">Book a visit</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+      <p><a href="tel:+302109761163">+30 210 976 1163</a><a href="mailto:sales@gpdevelopment.gr">sales@gpdevelopment.gr</a><a href="/el/antiparochi/" hreflang="el">Ελληνικά</a></p>
+    </div>
+  </div>
+  <main id="main" class="υπηρεσία υπηρεσία--land">
+    <section class="υπ-ήρωας" data-τόνος="ανοιχτό" aria-labelledby="yp-t">
+      <div class="υπ-ήρωας__νέφη" aria-hidden="true"><img src="/assets/clouds/wisp-0-soft.webp" alt="" width="1400" height="455"><img src="/assets/clouds/wisp-1-soft.webp" alt="" width="1400" height="455"></div>
+      <div class="υπ-ήρωας__μέσα">
+        <nav class="ψίχουλα" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li aria-current="page">Land &amp; antiparochi</li></ol></nav>
+        <p class="υπ-ήρωας__πάνω">Land &amp; antiparochi · Northern suburbs &amp; Glyfada</p>
+        <h1 class="υπ-ήρωας__τίτλος" id="yp-t"><span>Your plot,</span> <span>and what it can become.</span></h1>
+        <div class="υπ-ήρωας__κάτω">
+          <p class="υπ-ήρωας__κείμενο">Own a plot in the northern suburbs of Athens or in Glyfada? We work with landowners in two ways: antiparochi, where you contribute the plot and receive finished apartments, or an outright purchase. Either way, we tell you plainly what can be built and what you receive.</p>
+          <div class="υπ-ήρωας__ενέργειες">
+            <a class="κουμπί κουμπί--σκούρο" href="#epikoinonia"><span class="κουμπί__ετ">Propose your plot</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+            <a class="ήρωας__τηλ" href="tel:+302109761163"><small>Call</small><span>+30 210 976 1163</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="σχέδιο" data-σχέδιο aria-label="Sachtouri 44–46 in Chalandri seen from above: roofs, terraces and gardens of the building on its plot">
+      <div class="σχέδιο__σκηνή">
+        <figure class="σχέδιο__κάδρο" style="--λόγος: 1.7778">
+          <img class="σχέδιο__κτίριο" src="/assets/services/top-1600.webp" srcset="/assets/services/top-960.webp 960w, /assets/services/top-1600.webp 1600w" sizes="(max-width: 760px) 100vw, 86vw" width="1600" height="900" alt="Sachtouri 44–46 in Chalandri seen from above: roofs, terraces and gardens of the building on its plot" loading="lazy" decoding="async">
+          <div class="σχέδιο__χαρτί" aria-hidden="true"><img src="/assets/services/top-sketch-1600.webp" srcset="/assets/services/top-sketch-960.webp 960w, /assets/services/top-sketch-1600.webp 1600w" sizes="(max-width: 760px) 100vw, 86vw" width="1600" height="900" alt="" loading="lazy" decoding="async"></div>
+          <i class="σχέδιο__χάραξη" aria-hidden="true"></i>
+        </figure>
+        <p class="σχέδιο__ετικέτες" aria-hidden="true"><span>The plot</span><i></i><span>The building</span></p>
+        <p class="σχέδιο__λεζάντα">Sachtouri 44–46, Chalandri, seen from above. Scroll to see the plan become the building.</p>
+      </div>
+    </section>
+
+    <section class="δρόμοι" data-τόνος="ανοιχτό" aria-labelledby="dromoi-t">
+      <h2 class="ενότητα-τίτλος" id="dromoi-t">Two ways to work with us.</h2>
+      <div class="δρόμοι__πλέγμα">
+        <article class="δρόμος" data-αποκάλυψη>
+          <span class="δρόμος__αρ" aria-hidden="true">A</span>
+          <h3>Antiparochi</h3><p>You contribute the plot. We cover the design, the permits and the construction. When the building is finished, you receive an agreed share, usually as finished apartments.</p>
+          <ul><li>You keep a share of the building</li><li>Design, permits and construction by GP</li></ul>
+        </article>
+        <article class="δρόμος" data-αποκάλυψη>
+          <span class="δρόμος__αρ" aria-hidden="true">B</span>
+          <h3>Outright purchase</h3><p>If you would rather sell, we also buy land outright. You get a plain answer about the plot, and a simple next step.</p>
+          <ul><li>A plain answer about the plot</li><li>One team to talk to</li></ul>
+        </article>
+      </div>
+    </section>
+    <section class="υπ-αρχές" data-τόνος="ανοιχτό" aria-labelledby="arxes-t">
+      <h2 class="ενότητα-τίτλος" id="arxes-t">What you can expect.</h2>
+      <ol class="υπ-αρχές__λίστα"><li class="υπ-αρχή" data-αποκάλυψη><span class="υπ-αρχή__αρ" aria-hidden="true">01</span><h3>A plain answer</h3><p>We tell you plainly what can be built on your plot and what you receive, so you can decide with the full picture.</p></li><li class="υπ-αρχή" data-αποκάλυψη><span class="υπ-αρχή__αρ" aria-hidden="true">02</span><h3>One team to the keys</h3><p>The same people design, build and keep you informed, from the first look at the plot to the handover of your apartments.</p></li><li class="υπ-αρχή" data-αποκάλυψη><span class="υπ-αρχή__αρ" aria-hidden="true">03</span><h3>Homes worth receiving</h3><p>Your share is built like every GP home: its own floor plan, energy class A++, materials that age well.</p></li></ol>
+    </section>
+    <section class="σχ-τρόπος υπ-βήματα" data-τόνος="ανοιχτό" aria-labelledby="vimata-t">
+      <div class="σχ-τρόπος__πλάι">
+        <h2 class="ενότητα-τίτλος" id="vimata-t">How antiparochi works with GP.</h2>
+        <p>Five steps, from your plot to your keys.</p>
+      </div>
+      <ol class="σχ-τρόπος__λίστα"><li class="αρχή" data-αποκάλυψη><span class="αρχή__αρ" aria-hidden="true">01</span><h3>Tell us about the plot</h3><p>Where it is and roughly how large. The form below or a phone call is enough to start.</p></li><li class="αρχή" data-αποκάλυψη><span class="αρχή__αρ" aria-hidden="true">02</span><h3>We study the plot</h3><p>We look at what can be built there and come back with a plain answer: what the building could be and what you would receive.</p></li><li class="αρχή" data-αποκάλυψη><span class="αρχή__αρ" aria-hidden="true">03</span><h3>Agreement</h3><p>We agree on your share, usually as finished apartments.</p></li><li class="αρχή" data-αποκάλυψη><span class="αρχή__αρ" aria-hidden="true">04</span><h3>Design, permits, construction</h3><p>GP covers the design, the permits and the construction, with the same team throughout.</p></li><li class="αρχή" data-αποκάλυψη><span class="αρχή__αρ" aria-hidden="true">05</span><h3>Your homes</h3><p>When the building is finished, you receive your share: finished homes, built like every GP home.</p></li></ol>
+    </section>
+
+    <section class="υπ-έργα" data-τόνος="ανοιχτό" aria-labelledby="erga-yp-t">
+      <div class="υπ-έργα__κεφαλή"><h2 class="ενότητα-τίτλος" id="erga-yp-t">Where we build.</h2><p>Mainly in the northern suburbs of Athens and in Glyfada. Our buildings so far:</p></div>
+      <ul class="υπ-έργα__λίστα">
+        <li class="μικρό-έργο" data-αποκάλυψη>
+          <a href="/mareterra/">
+            <span class="μικρό-έργο__εικόνα"><img class="" src="/assets/projects/mareterra/cover-960.webp" srcset="/assets/projects/mareterra/cover-960.webp 960w, /assets/projects/mareterra/cover-1600.webp 1600w" sizes="(max-width: 760px) 90vw, 30vw" width="1600" height="860" alt="Mareterra, Glyfada: maisonette garden with private pool" loading="lazy" decoding="async"></span>
+            <span class="μικρό-έργο__κείμενο"><span class="μικρό-έργο__περιοχή">Glyfada</span><span class="μικρό-έργο__όνομα">Mareterra</span><span class="διαθεσιμότητα"><i aria-hidden="true"></i>6 of 6 homes available</span></span>
+            <span class="μικρό-έργο__βέλος" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span>
+          </a>
+        </li>
+        <li class="μικρό-έργο" data-αποκάλυψη>
+          <a href="/chalandri/">
+            <span class="μικρό-έργο__εικόνα"><img class="" src="/assets/projects/chalandri/cover-960.webp" srcset="/assets/projects/chalandri/cover-960.webp 960w, /assets/projects/chalandri/cover-1536.webp 1536w" sizes="(max-width: 760px) 90vw, 30vw" width="1536" height="1024" alt="Sachtouri 44–46, Chalandri: maisonette rooftop with pergola and private pool" loading="lazy" decoding="async"></span>
+            <span class="μικρό-έργο__κείμενο"><span class="μικρό-έργο__περιοχή">Chalandri</span><span class="μικρό-έργο__όνομα">Sachtouri 44–46</span><span class="διαθεσιμότητα"><i aria-hidden="true"></i>5 of 5 homes available</span></span>
+            <span class="μικρό-έργο__βέλος" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span>
+          </a>
+        </li>
+        <li class="μικρό-έργο" data-αποκάλυψη>
+          <a href="/v5residences/">
+            <span class="μικρό-έργο__εικόνα"><img class="" src="/assets/projects/v5residences/cover-960.webp" srcset="/assets/projects/v5residences/cover-960.webp 960w, /assets/projects/v5residences/cover-1066.webp 1066w" sizes="(max-width: 760px) 90vw, 30vw" width="1066" height="1600" alt="V5 Residences by day, Voutieridou 5, Neo Psychiko" loading="lazy" decoding="async"></span>
+            <span class="μικρό-έργο__κείμενο"><span class="μικρό-έργο__περιοχή">Neo Psychiko</span><span class="μικρό-έργο__όνομα">V5 Residences</span><span class="διαθεσιμότητα διαθεσιμότητα--όχι"><i aria-hidden="true"></i>Sold out · 9/9</span></span>
+            <span class="μικρό-έργο__βέλος" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="ερωτήσεις υπ-ερωτήσεις" data-τόνος="ανοιχτό" aria-labelledby="yp-faq-t">
+      <div class="ερωτήσεις__πλάι">
+        <h2 class="ερωτήσεις__τίτλος" id="yp-faq-t"><span>Antiparochi,</span> <span>answered plainly.</span></h2>
+        <p>What landowners ask us most.</p>
+      </div>
+      <div class="ερωτήσεις__λίστα">
+          <details class="ερώτηση" open>
+            <summary><span>What is antiparochi?</span><i aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h16M10 2v16" fill="none" stroke="currentColor" stroke-width="1"/></svg></i></summary>
+            <div class="ερώτηση__απάντηση"><p>Antiparochi is the Greek arrangement in which a landowner contributes a plot to a developer, and in exchange receives an agreed share of the finished building, usually as apartments, without paying for the construction.</p></div>
+          </details>
+          <details class="ερώτηση">
+            <summary><span>How does antiparochi work with GP?</span><i aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h16M10 2v16" fill="none" stroke="currentColor" stroke-width="1"/></svg></i></summary>
+            <div class="ερώτηση__απάντηση"><p>You contribute the plot and we cover the design, the permits and the construction. When the building is finished, you receive an agreed share, usually as finished apartments.</p></div>
+          </details>
+          <details class="ερώτηση">
+            <summary><span>Do you also buy land?</span><i aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h16M10 2v16" fill="none" stroke="currentColor" stroke-width="1"/></svg></i></summary>
+            <div class="ερώτηση__απάντηση"><p>Yes. Besides antiparochi, we also buy land outright.</p></div>
+          </details>
+          <details class="ερώτηση">
+            <summary><span>In which areas are you looking for plots?</span><i aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h16M10 2v16" fill="none" stroke="currentColor" stroke-width="1"/></svg></i></summary>
+            <div class="ερώτηση__απάντηση"><p>Mainly in the northern suburbs of Athens and in Glyfada.</p></div>
+          </details>
+          <details class="ερώτηση">
+            <summary><span>How do I start?</span><i aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h16M10 2v16" fill="none" stroke="currentColor" stroke-width="1"/></svg></i></summary>
+            <div class="ερώτηση__απάντηση"><p>Send us the location and approximate size of the plot through the form on this page, or call +30 210 976 1163. We will tell you plainly what can be built and what you receive.</p></div>
+          </details>
+      </div>
+    </section>
+
+    <section class="επαφή-έργου" id="epikoinonia" data-τόνος="ανοιχτό" aria-labelledby="epafi-t">
+      <div class="επαφή-έργου__μέσα">
+        <div class="επαφή-έργου__πλάι" data-αποκάλυψη>
+          <h2 class="επαφή-έργου__τίτλος" id="epafi-t"><span>Have a plot?</span> <em>Tell us where it is.</em></h2>
+          <p>Leave your details. We call back within one working day.</p>
+          <ul class="επαφή-έργου__στοιχεία">
+            <li><small>Phone</small><a href="tel:+302109761163">+30 210 976 1163</a></li>
+            <li><small>Email</small><a href="mailto:sales@gpdevelopment.gr">sales@gpdevelopment.gr</a></li>
+            <li><small>Office</small><span>Dim. Vasiliou 20, Psychiko 154 51<br>Mon–Fri, 10:00–18:00</span></li>
+          </ul>
+        </div>
+        <div class="επαφή-έργου__φόρμα" data-αποκάλυψη>
+          <form class="φόρμα" novalidate data-φόρμα>
+            <script type="application/json" class="φόρμα__μηνύματα">{"f_err_req": "Please fill in this field.", "f_err_email": "Please enter a valid email.", "f_err_phone": "Please enter at least 8 digits.", "f_err_consent": "Please accept the privacy policy.", "f_mail_subject": "Request from gpdevelopment.gr", "f_intent": "I am interested in", "f_plot": "Where is the plot?", "f_name": "Full name", "f_phone": "Phone", "f_email": "Email", "f_msg": "Message (optional)", "f_project": "Project:", "f_residence": "Home:"}</script>
+            <input type="hidden" name="intent" value="land"><div class="πεδίο"><input id="f-plot" name="plot" type="text" placeholder=" " autocomplete="off"><label for="f-plot">Where is the plot?</label></div>
+            <div class="πεδίο"><input id="f-name" name="name" type="text" placeholder=" " autocomplete="name" required><label for="f-name">Full name</label><small class="πεδίο__λάθος"></small></div>
+            <div class="πεδίο"><input id="f-phone" name="phone" type="tel" placeholder=" " autocomplete="tel" inputmode="tel" required><label for="f-phone">Phone</label><small class="πεδίο__λάθος"></small></div>
+            <div class="πεδίο"><input id="f-email" name="email" type="email" placeholder=" " autocomplete="email" required><label for="f-email">Email</label><small class="πεδίο__λάθος"></small></div>
+            <div class="πεδίο"><textarea id="f-msg" name="message" rows="1" placeholder=" "></textarea><label for="f-msg">Message (optional)</label></div>
+            <label class="συναίνεση"><input type="checkbox" name="consent" required><i aria-hidden="true"></i><span>I agree to the processing of my details as described in the <a href="/privacy-policy/">privacy policy</a>.</span></label>
+            <small class="πεδίο__λάθος φόρμα__λάθος-συναίνεσης"></small>
+            <input type="text" name="website" class="φόρμα__παγίδα" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="φόρμα__κάτω">
+              <button class="κουμπί κουμπί--σκούρο φόρμα__αποστολή" type="submit"><span class="κουμπί__ετ">Send</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></button>
+              <a class="φόρμα__κράτηση" href="tel:+302109761163"><small>or call</small><span>+30 210 976 1163</span></a>
+            </div>
+          </form>
+          <div class="φόρμα__ευχαριστώ" hidden tabindex="-1"><h3>Thank you.</h3><p>Your request is with us. We will call you within one working day.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="υποσέλιδο" data-τόνος="σκούρο">
+    <div class="υποσέλιδο__πάνω">
+      <p class="υποσέλιδο__δήλωση">Homes designed <em>one by one.</em></p>
+      <a class="υποσέλιδο__πάνω-κουμπί" href="#main"><span>Back to top</span><svg viewBox="0 0 14 46" aria-hidden="true"><path d="M7 45V1M1 8l6-7 6 7" fill="none" stroke="currentColor"/></svg></a>
+    </div>
+    <div class="υποσέλιδο__πλέγμα">
+      <div class="υποσέλιδο__σήμα"><svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="5.5"><path d="M73.14 22.42 A36 36 0 1 0 86 50"/><path d="M86 50 H50 L32 81.18"/></g></svg><p>GP Real Estate Development<br><span>Real Estate Development · Athens</span></p></div>
+      <div class="υποσέλιδο__στήλη"><h3>Projects</h3><ul><li><a href="/chalandri/">Sachtouri · Chalandri</a></li><li><a href="/mareterra/">Mareterra · Glyfada</a></li><li><a href="/v5residences/">V5 Residences · Neo Psychiko</a></li></ul></div><div class="υποσέλιδο__στήλη"><h3>Company</h3><ul><li><a href="/about/">About</a></li><li><a href="/design-build/">Design & Build</a></li><li><a href="/land/">Antiparochi</a></li><li><a href="/contact/">Contact</a></li></ul></div>
+      <div class="υποσέλιδο__στήλη"><h3>Contact</h3><ul>
+        <li><a href="tel:+302109761163">+30 210 976 1163</a></li><li><a href="mailto:sales@gpdevelopment.gr">sales@gpdevelopment.gr</a></li><li>Dim. Vasiliou 20, Psychiko 154 51</li><li>Mon–Fri, 10:00–18:00</li></ul></div>
+    </div>
+    <div class="υποσέλιδο__λέξη" aria-hidden="true">GP Development</div>
+    <div class="υποσέλιδο__βάση">
+      <span>© 2026 GP Real Estate Development. All rights reserved.</span>
+      <a href="/privacy-policy/">Privacy policy</a>
+    </div>
+  </footer>
+
+
+  <script src="/assets/js/sections.js?v=202611161231" defer></script>
+  <script src="/assets/js/projects.js?v=202611161231" defer></script>
+</body>
+</html>
