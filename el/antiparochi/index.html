@@ -24,9 +24,10 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preload" href="/assets/fonts/manrope-greek-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-greek-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/home.css?v=202611161231">
-  <link rel="stylesheet" href="/assets/css/sections.css?v=202611161231">
-  <link rel="stylesheet" href="/assets/css/projects.css?v=202611161231">
+  <link rel="preload" as="image" href="/assets/services/top-poster.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/home.css?v=202611161349">
+  <link rel="stylesheet" href="/assets/css/sections.css?v=202611161349">
+  <link rel="stylesheet" href="/assets/css/projects.css?v=202611161349">
   <script>document.documentElement.classList.replace('no-js', 'js'); if (!('onpagereveal' in window) && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('μετάβαση-js');</script>
   <script>(function () {
     var Ο = 'project-image', ΚΛ = 'gp-vt-εικόνα', ρ = document.documentElement;
@@ -110,8 +111,10 @@
     </div>
   </div>
   <main id="main" class="υπηρεσία υπηρεσία--land">
-    <section class="υπ-ήρωας" data-τόνος="ανοιχτό" aria-labelledby="yp-t">
-      <div class="υπ-ήρωας__νέφη" aria-hidden="true"><img src="/assets/clouds/wisp-0-soft.webp" alt="" width="1400" height="455"><img src="/assets/clouds/wisp-1-soft.webp" alt="" width="1400" height="455"></div>
+    <section class="υπ-ήρωας" data-τόνος="σκούρο" aria-labelledby="yp-t">
+      <video class="υπ-ήρωας__βίντεο" autoplay muted loop playsinline preload="auto" poster="/assets/services/top-poster.webp" aria-hidden="true" data-βίντεο-ήρωα>
+        <source src="/assets/services/top-hero.mp4" type="video/mp4">
+      </video>
       <div class="υπ-ήρωας__μέσα">
         <nav class="ψίχουλα" aria-label="Διαδρομή"><ol><li><a href="/el/">Αρχική</a></li><li aria-current="page">Αντιπαροχή</li></ol></nav>
         <p class="υπ-ήρωας__πάνω">Αντιπαροχή &amp; οικόπεδα · Βόρεια προάστια &amp; Γλυφάδα</p>
@@ -119,7 +122,7 @@
         <div class="υπ-ήρωας__κάτω">
           <p class="υπ-ήρωας__κείμενο">Έχετε οικόπεδο στα βόρεια προάστια της Αθήνας ή στη Γλυφάδα; Συνεργαζόμαστε με οικοπεδούχους με δύο τρόπους: με αντιπαροχή, όπου εσείς δίνετε το οικόπεδο και παίρνετε έτοιμα διαμερίσματα, ή με αγορά. Και στις δύο περιπτώσεις σας λέμε απλά τι μπορεί να χτιστεί και τι παίρνετε.</p>
           <div class="υπ-ήρωας__ενέργειες">
-            <a class="κουμπί κουμπί--σκούρο" href="#epikoinonia"><span class="κουμπί__ετ">Προτείνετε το οικόπεδό σας</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+            <a class="κουμπί " href="#epikoinonia"><span class="κουμπί__ετ">Προτείνετε το οικόπεδό σας</span><span class="κουμπί__δ"><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
             <a class="ήρωας__τηλ" href="tel:+302109761163"><small>Καλέστε</small><span>+30 210 976 1163</span></a>
           </div>
         </div>
@@ -128,9 +131,9 @@
 
     <section class="σχέδιο" data-σχέδιο aria-label="Η Σαχτούρη 44–46 στο Χαλάνδρι από ψηλά: δώματα, βεράντες και κήποι του κτιρίου στο οικόπεδό του">
       <div class="σχέδιο__σκηνή">
-        <figure class="σχέδιο__κάδρο" style="--λόγος: 1.7778">
-          <img class="σχέδιο__κτίριο" src="/assets/services/top-1600.webp" srcset="/assets/services/top-960.webp 960w, /assets/services/top-1600.webp 1600w" sizes="(max-width: 760px) 100vw, 86vw" width="1600" height="900" alt="Η Σαχτούρη 44–46 στο Χαλάνδρι από ψηλά: δώματα, βεράντες και κήποι του κτιρίου στο οικόπεδό του" loading="lazy" decoding="async">
-          <div class="σχέδιο__χαρτί" aria-hidden="true"><img src="/assets/services/top-sketch-1600.webp" srcset="/assets/services/top-sketch-960.webp 960w, /assets/services/top-sketch-1600.webp 1600w" sizes="(max-width: 760px) 100vw, 86vw" width="1600" height="900" alt="" loading="lazy" decoding="async"></div>
+        <figure class="σχέδιο__κάδρο" style="--λόγος: 1.7877">
+          <img class="σχέδιο__κτίριο" src="/assets/services/top-1600.webp" srcset="/assets/services/top-960.webp 960w, /assets/services/top-1600.webp 1600w, /assets/services/top-2400.webp 2400w" sizes="(max-width: 760px) 100vw, 86vw" width="2400" height="1343" alt="Η Σαχτούρη 44–46 στο Χαλάνδρι από ψηλά: δώματα, βεράντες και κήποι του κτιρίου στο οικόπεδό του" loading="lazy" decoding="async">
+          <div class="σχέδιο__χαρτί" aria-hidden="true"><img src="/assets/services/top-sketch-1600.webp" srcset="/assets/services/top-sketch-960.webp 960w, /assets/services/top-sketch-1600.webp 1600w, /assets/services/top-sketch-2400.webp 2400w" sizes="(max-width: 760px) 100vw, 86vw" width="2400" height="1343" alt="" loading="lazy" decoding="async"></div>
           <i class="σχέδιο__χάραξη" aria-hidden="true"></i>
         </figure>
         <p class="σχέδιο__ετικέτες" aria-hidden="true"><span>Το οικόπεδο</span><i></i><span>Το κτίριο</span></p>
@@ -273,7 +276,7 @@
   </footer>
 
 
-  <script src="/assets/js/sections.js?v=202611161231" defer></script>
-  <script src="/assets/js/projects.js?v=202611161231" defer></script>
+  <script src="/assets/js/sections.js?v=202611161349" defer></script>
+  <script src="/assets/js/projects.js?v=202611161349" defer></script>
 </body>
 </html>
