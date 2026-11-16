@@ -1,10 +1,6 @@
-q0.png https://d8j0ntlcm91z4.cloudfront.net/user_3GqmWHOacTQukBMBWW3wyErLnYD/hf_20261116_202213_8a0e2a17-1b20-4cc5-b925-3dd360d37439.png
-q1.png https://d8j0ntlcm91z4.cloudfront.net/user_3GqmWHOacTQukBMBWW3wyErLnYD/hf_20261116_202213_84d9b3ca-7658-414f-97b8-18023d23cac4.png
-q2.png https://d8j0ntlcm91z4.cloudfront.net/user_3GqmWHOacTQukBMBWW3wyErLnYD/hf_20261116_202214_70f190a6-7aab-4c6a-be89-cd96df687917.png
-q3.png https://d8j0ntlcm91z4.cloudfront.net/user_3GqmWHOacTQukBMBWW3wyErLnYD/hf_20261116_202215_021e7628-8335-48a6-a9a3-ce0d0b82e2a9.png
-q4.png https://d8j0ntlcm91z4.cloudfront.net/user_3GqmWHOacTQukBMBWW3wyErLnYD/hf_20261116_202215_e2b5cb38-a5b2-4cf9-a56e-3f682d4a79c1.png
-q5.png https://d8j0ntlcm91z4.cloudfront.net/user_3GqmWHOacTQukBMBWW3wyErLnYD/hf_20261116_202214_5e3b5aa2-9ee0-4f12-a816-cea066044981.png
-q6.png https://d8j0ntlcm91z4.cloudfront.net/user_3GqmWHOacTQukBMBWW3wyErLnYD/hf_20261116_202321_a295d2cd-141f-4f7b-afce-14b056e6d65e.png
-q7.png https://d8j0ntlcm91z4.cloudfront.net/user_3GqmWHOacTQukBMBWW3wyErLnYD/hf_20261116_202214_c89a6ee2-ab31-4097-a933-6cdd7ebf6c3a.png
-q8.png https://d8j0ntlcm91z4.cloudfront.net/user_3GqmWHOacTQukBMBWW3wyErLnYD/hf_20261116_202214_b3720944-c792-4b31-bd7d-fee1ce4c592c.png
-q9.png https://d8j0ntlcm91z4.cloudfront.net/user_3GqmWHOacTQukBMBWW3wyErLnYD/hf_20261116_202431_cb0b8e4c-d2dc-4467-b556-aa860d2fc844.png
+geo-chalandri.json https://nominatim.openstreetmap.org/search?street=44+Sachtouri&city=Chalandri&country=Greece&format=json&limit=3
+geo-chalandri2.json https://nominatim.openstreetmap.org/search?q=%CE%A3%CE%B1%CF%87%CF%84%CE%BF%CF%8D%CF%81%CE%B7+44+%CE%A7%CE%B1%CE%BB%CE%AC%CE%BD%CE%B4%CF%81%CE%B9&format=json&limit=3
+geo-psychiko.json https://nominatim.openstreetmap.org/search?street=5+Voutieridou&city=Psychiko&country=Greece&format=json&limit=3
+geo-psychiko2.json https://nominatim.openstreetmap.org/search?q=Voutieridou+Neo+Psychiko&format=json&limit=3
+geo-glyfada.json https://nominatim.openstreetmap.org/search?street=77+Saki+Karagiorga&city=Glyfada&country=Greece&format=json&limit=3
+geo-glyfada2.json https://nominatim.openstreetmap.org/search?q=Saki+Karagiorga+Glyfada&format=json&limit=3
