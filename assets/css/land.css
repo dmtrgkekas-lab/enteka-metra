@@ -1,96 +1,127 @@
 /* ==========================================================================
    Αντιπαροχή (/land/ · /el/antiparochi/) — μόνο για αυτή τη σελίδα
+   Ροή: άνοιγμα (σύννεφα → μέρα → νύχτα) · πληροφορία σε νυχτερινό τόνο ·
+        κλείσιμο (θόλωση σαν σύννεφα → νύχτα → μέρα) · φόρμα · υποσέλιδο
    ========================================================================== */
-.γη { background: var(--χαρτί); }
+.γη { --νύχτα: #16181c; --νύχτα-κείμενο: #eee9e0; --νύχτα-αχνό: rgba(238, 233, 224, .62); --νύχτα-γραμμή: rgba(238, 233, 224, .14); --ζεστό: #f1c79a;
+  background: var(--νύχτα); }
 
-/* ---------- 1. Ήρωας: αχνά σύννεφα με λευκά γράμματα → με το scroll διαλύονται και φαίνεται το οικόπεδο από ψηλά */
-.γη-ήρωας { position: relative; height: 240vh; height: 240svh; background: #8d9aa6; }
-.γη-ήρωας__σκηνή { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; isolation: isolate; color: #fffdf8; }
-.γη-ήρωας__βίντεο { position: absolute; inset: 0; z-index: -3; width: 100%; height: 100%; object-fit: cover; transform: scale(var(--ζουμ, 1.18)); transform-origin: 50% 50%; will-change: transform; }
-/* Σκιά από κάτω για να διαβάζονται τα γράμματα όταν φύγουν τα σύννεφα */
-.γη-ήρωας__σκηνή::after { content: ""; position: absolute; inset: 0; z-index: -2; pointer-events: none; opacity: var(--σκιά, 0);
-  background: linear-gradient(180deg, rgba(18, 16, 14, .38) 0%, rgba(18, 16, 14, 0) 26%, rgba(18, 16, 14, 0) 46%, rgba(18, 16, 14, .7) 100%); }
-/* Αχνή ομίχλη: ο ουρανός πάνω από τα σύννεφα, λίγο μπλε-γκρι ώστε τα λευκά γράμματα να ξεχωρίζουν */
-.γη-ήρωας__ομίχλη { position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: var(--ομίχλη, 1);
-  background: radial-gradient(120% 90% at 50% 40%, rgba(222, 229, 237, .86) 0%, rgba(188, 200, 213, .88) 55%, rgba(150, 166, 182, .92) 100%); -webkit-backdrop-filter: blur(var(--θάμπωμα, 10px)); backdrop-filter: blur(var(--θάμπωμα, 10px)); }
-.γη-ήρωας__σύννεφα { position: absolute; inset: -10%; pointer-events: none; }
-.γη-σύννεφο { position: absolute; max-width: none; height: auto; opacity: .92; will-change: transform, opacity; -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%); mask-image: radial-gradient(closest-side, #000 55%, transparent 100%); }
-/* Τίτλος: λευκός, στο κέντρο, πάνω στα σύννεφα */
-.γη-ήρωας__τίτλος-κουτί { position: absolute; inset: 0; display: grid; place-items: center; padding: var(--κεφαλίδα) max(var(--περιθώριο), 16px) 0; text-align: center; pointer-events: none; }
-.γη-ήρωας__τίτλος { font-family: var(--σερίφ); font-weight: 300; font-size: clamp(3.2rem, 1rem + 8.4vw, 11.5rem); line-height: .92; letter-spacing: -.03em; text-wrap: balance;
+/* ---------- Σκηνές ουρανού (άνοιγμα και κλείσιμο) */
+.γη-σκηνή { position: relative; height: 460vh; height: 460svh; background: var(--νύχτα); }
+.γη-σκηνή--κλείσιμο { height: 320vh; height: 320svh; }
+.γη-σκηνή__κάδρο { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; isolation: isolate; color: #fffdf8; }
+.γη-σκηνή__αφίσα, .γη-σκηνή__καμβάς { position: absolute; inset: 0; z-index: -4; width: 100%; height: 100%; object-fit: cover; }
+.γη-σκηνή__καμβάς { opacity: 0; transition: opacity .5s ease; }
+.γη-σκηνή.είναι-έτοιμο .γη-σκηνή__καμβάς { opacity: 1; }
+/* Σκίαση: από πάνω/κάτω για ένωση με το σκούρο φόντο, και για ανάγνωση του κειμένου */
+.γη-σκηνή__κάδρο::before { content: ""; position: absolute; inset: 0; z-index: -3; pointer-events: none;
+  background: linear-gradient(180deg, rgba(22, 24, 28, var(--πάνω-σκιά, 0)) 0%, rgba(22, 24, 28, calc(var(--πάνω-σκιά, 0) * .6)) 40%, rgba(22, 24, 28, 0) 75%); }
+.γη-σκηνή__κάδρο::after { content: ""; position: absolute; inset: 0; z-index: -3; pointer-events: none;
+  background: linear-gradient(180deg, rgba(22, 24, 28, .3) 0%, rgba(22, 24, 28, 0) 24%, rgba(22, 24, 28, 0) 50%, rgba(22, 24, 28, var(--κάτω-σκιά, .55)) 100%); }
+/* Ομίχλη: ο ουρανός μέσα στα σύννεφα — θολώνει ό,τι είναι πίσω */
+.γη-σκηνή__ομίχλη { position: absolute; inset: 0; z-index: -2; pointer-events: none; opacity: var(--ομίχλη, 1);
+  background: radial-gradient(120% 90% at 50% 40%, rgba(222, 229, 237, .86) 0%, rgba(188, 200, 213, .88) 55%, rgba(150, 166, 182, .92) 100%);
+  -webkit-backdrop-filter: blur(var(--θάμπωμα, 10px)); backdrop-filter: blur(var(--θάμπωμα, 10px)); }
+/* Στο κλείσιμο: ελαφριά θόλωση, πιο διάφανη και πιο σκούρα, γιατί έρχεται από τη νύχτα */
+.γη-σκηνή--κλείσιμο .γη-σκηνή__ομίχλη { background: radial-gradient(120% 90% at 50% 45%, rgba(150, 160, 178, .32) 0%, rgba(96, 106, 124, .4) 60%, rgba(40, 44, 52, .55) 100%); }
+.γη-σκηνή__σύννεφα { position: absolute; inset: -10%; z-index: -1; pointer-events: none; }
+.γη-σύννεφο { position: absolute; max-width: none; height: auto; opacity: .92; will-change: transform, opacity;
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%); mask-image: radial-gradient(closest-side, #000 55%, transparent 100%); }
+.γη-σκηνή--κλείσιμο .γη-σύννεφο { filter: brightness(.62) saturate(.8); }
+
+/* Τίτλος στα σύννεφα */
+.γη-σκηνή__τίτλος-κουτί { position: absolute; inset: 0; display: grid; place-items: center; padding: var(--κεφαλίδα) max(var(--περιθώριο), 16px) 0; text-align: center; pointer-events: none; }
+.γη-σκηνή__τίτλος { font-family: var(--σερίφ); font-weight: 300; font-size: clamp(3.2rem, 1rem + 8.4vw, 11.5rem); line-height: .92; letter-spacing: -.03em; text-wrap: balance;
   text-shadow: 0 2px 30px rgba(60, 74, 92, .35), 0 1px 3px rgba(60, 74, 92, .25); opacity: var(--τίτλος, 1); transform: translate3d(0, var(--τίτλος-y, 0px), 0) scale(var(--τίτλος-κλίμακα, 1)); will-change: transform, opacity; }
-.γη-ήρωας__τίτλος span { display: block; }
-.γη-ήρωας__τίτλος span + span { margin-top: .2em; font-size: .38em; line-height: 1.1; letter-spacing: var(--διάκενο-τίτλων); }
-/* Κείμενο + ενέργειες: εμφανίζονται όταν καθαρίσει ο ουρανός */
-.γη-ήρωας__κάτω { position: absolute; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: minmax(0, 1.3fr) auto; align-items: end; gap: 26px clamp(32px, 6vw, 120px);
-  width: 100%; max-width: 1680px; margin-inline: auto; padding: 0 max(var(--περιθώριο), 16px) clamp(36px, 5vw, 70px); opacity: var(--κάτω, 0); transform: translate3d(0, calc((1 - var(--κάτω, 0)) * 30px), 0); pointer-events: var(--κάτω-δείκτης, none); text-shadow: 0 1px 20px rgba(12, 12, 15, .35); }
-.γη-ήρωας__κάτω::before { content: ""; position: absolute; left: max(var(--περιθώριο), 16px); right: max(var(--περιθώριο), 16px); top: -28px; height: 1px; background: rgba(255, 253, 248, .35); }
-.γη-ήρωας__κείμενο { max-width: 62ch; font-size: clamp(1rem, .95rem + .25vw, 1.15rem); color: rgba(255, 253, 248, .92); }
-.γη-ήρωας__ενέργειες { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 30px; }
-.γη-ήρωας .ήρωας__τηλ { color: #fffdf8; }
-.γη-ήρωας .κουμπί { color: #fffdf8; }
-@media (max-width: 760px) {
-  .γη-ήρωας { height: 200svh; }
-  .γη-ήρωας__κάτω { grid-template-columns: minmax(0, 1fr); gap: 18px; }
-  .γη-σύννεφο { width: 170% !important; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .γη-ήρωας { height: auto; }
-  .γη-ήρωας__σκηνή { position: relative; }
-  .γη-ήρωας__σύννεφα, .γη-ήρωας__ομίχλη { display: none; }
-  .γη-ήρωας__βίντεο { transform: none; }
-  .γη-ήρωας__κάτω { --κάτω: 1; --κάτω-δείκτης: auto; }
-  .γη-ήρωας__σκηνή::after { opacity: 1; }
-}
+.γη-σκηνή__τίτλος span { display: block; }
+.γη-σκηνή__τίτλος span + span { margin-top: .2em; font-size: .38em; line-height: 1.1; letter-spacing: var(--διάκενο-τίτλων); }
+/* Κείμενο και ενέργειες: στο καθαρό φως, πριν πέσει η νύχτα */
+.γη-σκηνή__κάτω { position: absolute; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: minmax(0, 1.3fr) auto; align-items: end; gap: 26px clamp(32px, 6vw, 120px);
+  width: 100%; max-width: 1680px; margin-inline: auto; padding: 0 max(var(--περιθώριο), 16px) clamp(36px, 5vw, 70px);
+  opacity: var(--κάτω, 0); transform: translate3d(0, calc((1 - var(--κάτω, 0)) * 30px), 0); pointer-events: var(--κάτω-δείκτης, none); text-shadow: 0 1px 20px rgba(12, 12, 15, .35); }
+.γη-σκηνή__κάτω::before { content: ""; position: absolute; left: max(var(--περιθώριο), 16px); right: max(var(--περιθώριο), 16px); top: -28px; height: 1px; background: rgba(255, 253, 248, .35); }
+.γη-σκηνή__κείμενο { max-width: 62ch; font-size: clamp(1rem, .95rem + .25vw, 1.15rem); color: rgba(255, 253, 248, .92); }
+.γη-σκηνή__ενέργειες { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 30px; }
+.γη-σκηνή .ήρωας__τηλ, .γη-σκηνή .κουμπί { color: #fffdf8; }
 
-/* ---------- 2. Ουρανός: μέρα → νύχτα και νύχτα → μέρα, καρέ-καρέ με το scroll */
-.γη-ουρανός { position: relative; height: 320vh; height: 320svh; background: var(--γραφίτης); }
-.γη-ουρανός--μέρα { height: 280vh; height: 280svh; }
-.γη-ουρανός__σκηνή { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; isolation: isolate; color: #fffdf8; }
-.γη-ουρανός__αφίσα, .γη-ουρανός__καμβάς { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
-.γη-ουρανός__καμβάς { opacity: 0; transition: opacity .4s ease; }
-.γη-ουρανός.είναι-έτοιμο .γη-ουρανός__καμβάς { opacity: 1; }
-/* Σκίαση για ανάγνωση + ομαλή ένωση με τη σκούρα ενότητα (κάτω για τη μέρα→νύχτα, πάνω για τη νύχτα→μέρα) */
-.γη-ουρανός__σκηνή::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: linear-gradient(90deg, rgba(14, 14, 16, .62) 0%, rgba(14, 14, 16, .28) 42%, rgba(14, 14, 16, 0) 70%); }
-.γη-ουρανός__κείμενα { position: absolute; inset: 0; display: grid; align-content: center; padding: var(--κεφαλίδα) max(var(--περιθώριο), 16px) 0; max-width: 1680px; margin-inline: auto; }
-.γη-ουρανός__τίτλος, .γη-ουρανός__πάνελ { grid-area: 1 / 1; max-width: 34rem; text-shadow: 0 1px 24px rgba(10, 10, 12, .4); }
-.γη-ουρανός__τίτλος { font-family: var(--σερίφ); font-weight: 300; font-size: clamp(2.4rem, 1.2rem + 4vw, 5.6rem); line-height: 1; letter-spacing: -.025em; text-wrap: balance;
-  opacity: var(--α-τίτλου, 1); transform: translate3d(0, calc((1 - var(--α-τίτλου, 1)) * -24px), 0); }
-.γη-ουρανός__πάνελ { display: grid; gap: 18px; opacity: var(--α, 0); transform: translate3d(0, calc((1 - var(--α, 0)) * 28px), 0); }
-.γη-ουρανός__πάνελ h3 { font-family: var(--σερίφ); font-weight: 300; font-size: clamp(2rem, 1.2rem + 2.6vw, 4rem); line-height: 1.02; letter-spacing: -.02em; }
-.γη-ουρανός__πάνελ p { max-width: 46ch; font-size: clamp(1rem, .95rem + .25vw, 1.15rem); color: rgba(255, 253, 248, .9); }
-.γη-ουρανός__πάνελ::before { content: ""; width: 56px; height: 1px; background: rgba(255, 253, 248, .6); }
-@media (max-width: 760px) {
-  .γη-ουρανός { height: 260svh; }
-  .γη-ουρανός--μέρα { height: 230svh; }
-  .γη-ουρανός__αφίσα, .γη-ουρανός__καμβάς { object-position: 38% 50%; }
-  .γη-ουρανός__σκηνή::after { background: linear-gradient(0deg, rgba(14, 14, 16, .78) 0%, rgba(14, 14, 16, .35) 48%, rgba(14, 14, 16, .1) 100%); }
-  .γη-ουρανός__κείμενα { align-content: end; padding-bottom: 56px; }
-}
+/* ---------- Πληροφορία σε νυχτερινό τόνο */
+.γη-νύχτα { background: var(--νύχτα); color: var(--νύχτα-κείμενο); padding: clamp(40px, 6vw, 90px) max(var(--περιθώριο), 16px) clamp(60px, 8vw, 120px); }
+.γη-ενότητα { max-width: var(--πλάτος); margin-inline: auto; padding-block: clamp(70px, 9vw, 150px); }
+.γη-ενότητα + .γη-ενότητα { border-top: 1px solid var(--νύχτα-γραμμή); }
+.γη-ενότητα__τίτλος { font-family: var(--σερίφ); font-weight: 300; font-size: clamp(2.2rem, 1.2rem + 3vw, 4.4rem); line-height: 1.02; letter-spacing: -.025em; text-wrap: balance; max-width: 18ch; }
+.γη-ενότητα p, .γη-νύχτα li p { color: var(--νύχτα-αχνό); }
+.γη-ενότητα__πλάι { display: grid; gap: 22px; align-content: start; }
+.γη-ενότητα__πλάι p { max-width: 40ch; }
+.γη-ενότητα--πλάι { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(40px, 7vw, 120px); }
+.γη-ενότητα--πλάι .γη-ενότητα__πλάι { position: sticky; top: calc(var(--κεφαλίδα) + 32px); align-self: start; }
+.γη-ενότητα__κεφαλή { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 20px 60px; }
+.γη-ενότητα__κεφαλή p { max-width: 42ch; }
+.γη h3 { font-family: var(--σερίφ); font-weight: 350; font-size: clamp(1.3rem, 1.1rem + .7vw, 1.8rem); line-height: 1.15; letter-spacing: -.01em; color: var(--νύχτα-κείμενο); }
 
-/* ---------- 3. Νύχτα: τα βήματα σε σκούρο φόντο, ζεστό φως που προχωρά στη γραμμή */
-.γη-νύχτα { background: var(--γραφίτης); color: #f3efe7; padding: clamp(90px, 12vw, 180px) max(var(--περιθώριο), 16px); }
-.γη-νύχτα__μέσα { max-width: var(--πλάτος); margin-inline: auto; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(40px, 7vw, 120px); }
-.γη-νύχτα__τίτλος { position: sticky; top: calc(var(--κεφαλίδα) + 28px); align-self: start; font-family: var(--σερίφ); font-weight: 300; font-size: clamp(2.2rem, 1.2rem + 3vw, 4.4rem); line-height: 1.02; letter-spacing: -.025em; text-wrap: balance; }
-.γη-νύχτα__βήματα { position: relative; list-style: none; margin: 0; padding: 0 0 0 34px; display: grid; gap: clamp(46px, 6vw, 80px); }
-/* Η γραμμή και το «φως» που την γεμίζει (--π από land.js) */
-.γη-νύχτα__βήματα::before, .γη-νύχτα__βήματα::after { content: ""; position: absolute; left: 0; top: 6px; bottom: 6px; width: 1px; }
-.γη-νύχτα__βήματα::before { background: rgba(243, 239, 231, .16); }
-.γη-νύχτα__βήματα::after { background: linear-gradient(180deg, rgba(255, 200, 140, 0), #ffc98e 80%, #fff1dc); transform-origin: top; transform: scaleY(var(--π, 0)); box-shadow: 0 0 18px 2px rgba(255, 190, 120, .45); }
-.γη-βήμα { position: relative; display: grid; gap: 12px; }
-.γη-βήμα::before { content: ""; position: absolute; left: -38px; top: .55em; width: 9px; height: 9px; border-radius: 50%; background: var(--γραφίτης); border: 1px solid rgba(243, 239, 231, .35); transition: background .6s ease, box-shadow .6s ease, border-color .6s ease; }
-.γη-βήμα.είναι-αναμμένο::before { background: #ffd6a3; border-color: #ffd6a3; box-shadow: 0 0 0 6px rgba(255, 200, 140, .12), 0 0 24px 6px rgba(255, 190, 120, .5); }
-.γη-βήμα h3 { font-family: var(--σερίφ); font-weight: 350; font-size: clamp(1.35rem, 1.1rem + .8vw, 1.9rem); line-height: 1.15; }
-.γη-βήμα p { max-width: 52ch; color: rgba(243, 239, 231, .72); }
+/* Δύο τρόποι: δύο ισότιμες στήλες, μια λεπτή κάθετη γραμμή ανάμεσα */
+.γη-τρόποι { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: clamp(40px, 6vw, 90px); }
+.γη-τρόπος { display: grid; gap: 18px; align-content: start; padding-right: clamp(24px, 5vw, 90px); }
+.γη-τρόπος + .γη-τρόπος { padding: 0 0 0 clamp(24px, 5vw, 90px); border-left: 1px solid var(--νύχτα-γραμμή); }
+.γη-τρόπος h3 { font-size: clamp(1.8rem, 1.2rem + 1.8vw, 3rem); font-weight: 300; }
+.γη-τρόπος p { max-width: 46ch; }
+.γη-τρόπος ul { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 10px; }
+.γη-τρόπος li { display: flex; gap: 14px; align-items: baseline; font-size: .95rem; }
+.γη-τρόπος li::before { content: ""; flex: none; width: 18px; height: 1px; background: var(--ζεστό); transform: translateY(-.3em); }
+
+/* Βήματα: ήσυχες γραμμές, τίτλος και κείμενο, χωρίς αρίθμηση */
+.γη-γραμμές { list-style: none; margin: 0; padding: 0; }
+.γη-γραμμή { display: grid; gap: 10px; padding: 28px 0; border-top: 1px solid var(--νύχτα-γραμμή); }
+.γη-γραμμή:last-child { border-bottom: 1px solid var(--νύχτα-γραμμή); }
+.γη-γραμμή p { max-width: 52ch; }
+
+/* Τι να περιμένετε: τρεις στήλες */
+.γη-αρχές { list-style: none; margin: clamp(40px, 6vw, 90px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 4vw, 64px); }
+.γη-αρχή { display: grid; gap: 14px; align-content: start; padding-top: 24px; border-top: 1px solid var(--νύχτα-γραμμή); }
+
+/* Πού χτίζουμε: τρία έργα */
+.γη-έργα { list-style: none; margin: clamp(40px, 6vw, 80px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2vw, 32px); }
+.γη-έργο a { display: grid; gap: 16px; color: inherit; text-decoration: none; }
+.γη-έργο__εικόνα { display: block; overflow: hidden; aspect-ratio: 4 / 5; background: #23262b; }
+.γη-έργο__εικόνα img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.01); transition: transform 1.4s var(--καμπύλη), filter 1.4s var(--καμπύλη); filter: brightness(.86); }
+.γη-έργο a:hover img, .γη-έργο a:focus-visible img { transform: scale(1.05); filter: brightness(1); }
+.γη-έργο__κείμενο { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.γη-έργο__όνομα { font-family: var(--σερίφ); font-weight: 350; font-size: 1.25rem; }
+.γη-έργο__περιοχή { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--νύχτα-αχνό); }
+
+/* Ερωτήσεις */
+.γη-ερωτήσεις { display: grid; }
+.γη-ερώτηση { border-top: 1px solid var(--νύχτα-γραμμή); }
+.γη-ερώτηση:last-child { border-bottom: 1px solid var(--νύχτα-γραμμή); }
+.γη-ερώτηση summary { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 24px 0; cursor: pointer; list-style: none; font-family: var(--σερίφ); font-weight: 350; font-size: clamp(1.05rem, 1rem + .3vw, 1.25rem); }
+.γη-ερώτηση summary::-webkit-details-marker { display: none; }
+.γη-ερώτηση summary i { position: relative; flex: none; width: 14px; height: 14px; }
+.γη-ερώτηση summary i::before, .γη-ερώτηση summary i::after { content: ""; position: absolute; left: 0; top: 50%; width: 100%; height: 1px; background: currentColor; transition: transform .5s var(--καμπύλη); }
+.γη-ερώτηση summary i::after { transform: rotate(90deg); }
+.γη-ερώτηση[open] summary i::after { transform: rotate(0); }
+.γη-ερώτηση p { max-width: 60ch; padding: 0 0 26px; }
+.γη-ερώτηση summary:focus-visible { outline: 1px solid var(--ζεστό); outline-offset: 4px; }
+
 @media (max-width: 860px) {
-  .γη-νύχτα__μέσα { grid-template-columns: minmax(0, 1fr); }
-  .γη-νύχτα__τίτλος { position: static; }
+  .γη-ενότητα--πλάι { grid-template-columns: minmax(0, 1fr); }
+  .γη-ενότητα--πλάι .γη-ενότητα__πλάι { position: static; }
+  .γη-τρόποι, .γη-αρχές { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .γη-τρόπος, .γη-τρόπος + .γη-τρόπος { padding: 32px 0; border-left: 0; }
+  .γη-τρόπος + .γη-τρόπος { border-top: 1px solid var(--νύχτα-γραμμή); }
+  .γη-αρχή { padding-block: 24px; }
+  .γη-έργα { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .γη-έργο__εικόνα { aspect-ratio: 4 / 3; }
+}
+@media (max-width: 760px) {
+  .γη-σκηνή { height: 380svh; }
+  .γη-σκηνή--κλείσιμο { height: 260svh; }
+  .γη-σκηνή__κάτω { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .γη-σύννεφο { width: 170% !important; }
+  .γη-σκηνή__αφίσα { object-position: 38% 50%; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .γη-ουρανός { height: auto; }
-  .γη-ουρανός__σκηνή { position: relative; height: auto; min-height: 100svh; }
-  .γη-ουρανός__κείμενα { position: relative; display: grid; gap: 40px; padding-block: 120px; }
-  .γη-ουρανός__τίτλος, .γη-ουρανός__πάνελ { grid-area: auto; --α: 1; --α-τίτλου: 1; }
-  .γη-νύχτα__βήματα::after { transform: none; }
+  .γη-σκηνή, .γη-σκηνή--κλείσιμο { height: auto; }
+  .γη-σκηνή__κάδρο { position: relative; }
+  .γη-σκηνή__σύννεφα, .γη-σκηνή__ομίχλη { display: none; }
+  .γη-σκηνή__κάτω { --κάτω: 1; --κάτω-δείκτης: auto; }
+  .γη-σκηνή--κλείσιμο .γη-σκηνή__κάδρο { height: 70svh; }
 }
